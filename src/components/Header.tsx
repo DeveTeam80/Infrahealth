@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { FaGlobe } from "react-icons/fa";
 import "../styles/header.css";
 import TalkToUsModal from "./TalktoUsModal";
-import { FaGlobe } from "react-icons/fa";
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState<string | null>(null);
@@ -20,9 +21,9 @@ export default function Header() {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
       if (currentScroll > lastScroll && currentScroll > 100) {
-        setHideTopBar(true); // hide on scroll down
+        setHideTopBar(true);
       } else {
-        setHideTopBar(false); // show on scroll up
+        setHideTopBar(false);
       }
       lastScroll = currentScroll;
     };
@@ -32,41 +33,24 @@ export default function Header() {
 
   return (
     <>
-      {/* --- TOP BAR --- */}
       <div
-        className={`container top-bar border-top border-bottom bg-white d-flex align-items-center justify-content-between px-3 py-2 border-bottom ${
+        className={`container top-bar border-top border-bottom bg-white d-flex align-items-center justify-content-between px-3 py-2 ${
           hideTopBar ? "hide" : ""
         }`}
       >
-        {/* Logo */}
         <div className="d-flex align-items-center gap-2">
-          <a href="/">
-            <Image
-              src="/images/logo/logoinfra.png"
-              alt="Infra.Health"
-              width={160}
-              height={50}
-            />
-          </a>
+          <Link href="/" passHref>
+            <Image src="/images/logo/logoinfra.png" alt="Infra.Health" width={160} height={50} />
+          </Link>
         </div>
 
-        {/* Right side */}
         <div className="d-flex align-items-center gap-3">
-          {/* Country Selector */}
           <div
             className="d-flex align-items-center gap-1"
-            style={{
-              border: "1px solid #000",
-              borderRadius: "8px", // adjust the rounding as needed
-              padding: "2px 8px",
-              cursor: "pointer", // optional: to give some spacing inside
-            }}
+            style={{ border: "1px solid #000", borderRadius: "8px", padding: "2px 8px", cursor: "pointer" }}
           >
             <FaGlobe />
-            <select
-              className="form-select form-select-sm border-0"
-              onChange={(e) => console.log(e.target.value)}
-            >
+            <select className="form-select form-select-sm border-0" onChange={(e) => console.log(e.target.value)}>
               <option>India</option>
               <option>USA</option>
               <option>UK</option>
@@ -74,21 +58,15 @@ export default function Header() {
             </select>
           </div>
 
-          {/* Contact Us */}
-          <button
-            type="button"
-            className="btn btn-outline-secondary btn-sm"
-            onClick={() => setModalShow(true)}
-          >
+          <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setModalShow(true)}>
             Talk to Us
           </button>
         </div>
       </div>
+
       <header className="sticky-header">
-        {/* --- NAVBAR --- */}
         <Navbar expand="lg" className="border-top border-bottom bg-white">
           <Container>
-            {/* Left Side Nav */}
             <Nav className="me-auto align-items-center">
               {/* Services */}
               <div
@@ -101,7 +79,6 @@ export default function Header() {
                 </span>
                 {showMenu === "services" && (
                   <div className="megaMenu shadow p-4 bg-white">
-                    {/* <h6 className="mb-3">From vision to execution</h6> */}
                     <Row>
                       <Col>
                         <strong>Consult</strong>
@@ -120,10 +97,8 @@ export default function Header() {
                       </Col>
                     </Row>
                     <hr className="megaDivider" />
-
                     <p className="megaTagline">
-                      From vision to execution, we deliver integrated healthcare
-                      solutions.
+                      From vision to execution, we deliver integrated healthcare solutions.
                     </p>
                   </div>
                 )}
@@ -140,16 +115,11 @@ export default function Header() {
                 </span>
                 {showMenu === "solutions" && (
                   <div className="megaMenu shadow p-4 bg-white">
-                    {/* <h6 className="mb-3">
-                      Tailored infrastructure for healthcare
-                    </h6> */}
                     <Row>
                       <Col>
                         <strong>Medical Institutions & Colleges</strong>
                         <br />
-                        <small>
-                          Building healthcare foundations for the future
-                        </small>
+                        <small>Building healthcare foundations for the future</small>
                       </Col>
                       <Col>
                         <strong>Multispecialty Hospitals</strong>
@@ -159,30 +129,21 @@ export default function Header() {
                       <Col>
                         <strong>Modular Hospitals</strong>
                         <br />
-                        <small>
-                          Rapid, reliable, and scalable healthcare spaces
-                        </small>
+                        <small>Rapid, reliable, and scalable healthcare spaces</small>
                       </Col>
                       <Col>
                         <strong>Government Hospitals</strong>
                         <br />
-                        <small>
-                          Strengthening public health infrastructure
-                        </small>
+                        <small>Strengthening public health infrastructure</small>
                       </Col>
                       <Col>
                         <strong>Facilities</strong>
                         <br />
-                        <small>
-                          End-to-end support for efficient operations
-                        </small>
+                        <small>End-to-end support for efficient operations</small>
                       </Col>
                     </Row>
                     <hr className="megaDivider" />
-
-                    <p className="megaTagline">
-                      Tailored infrastructure for healthcare
-                    </p>
+                    <p className="megaTagline">Tailored infrastructure for healthcare</p>
                   </div>
                 )}
               </div>
@@ -198,21 +159,16 @@ export default function Header() {
                 </span>
                 {showMenu === "products" && (
                   <div className="megaMenu shadow p-4 bg-white">
-                    {/* <h6 className="mb-3">
-                      Engineered innovations for modern healthcare
-                    </h6> */}
                     <Row>
                       <Col>
                         <strong>Modular Operation Theatres</strong>
                         <br />
-                        <small>Precision-built for aseptic excellence</small>
+                        <small>Precision‑built for aseptic excellence</small>
                       </Col>
                       <Col>
                         <strong>Central Sterile Supply Department</strong>
                         <br />
-                        <small>
-                          Streamlined design for uncompromised sterility
-                        </small>
+                        <small>Streamlined design for uncompromised sterility</small>
                       </Col>
                       <Col>
                         <strong>Medical Gas Pipeline Systems</strong>
@@ -222,41 +178,30 @@ export default function Header() {
                       <Col>
                         <strong>Pneumatic Chutes</strong>
                         <br />
-                        <small>
-                          Fast, safe, and efficient material transport
-                        </small>
+                        <small>Fast, safe, and efficient material transport</small>
                       </Col>
                       <Col>
                         <strong>Hospital Furniture</strong>
                         <br />
-                        <small>
-                          Ergonomic solutions for patient comfort and care
-                        </small>
+                        <small>Ergonomic solutions for patient comfort and care</small>
                       </Col>
                       <Col>
                         <strong>Pendants</strong>
                         <br />
-                        <small>
-                          Optimized accessibility for critical equipment
-                        </small>
+                        <small>Optimized accessibility for critical equipment</small>
                       </Col>
                       <Col>
                         <strong>Walls</strong>
                         <br />
-                        <small>
-                          Advanced finishes for infection control and durability
-                        </small>
+                        <small>Advanced finishes for infection control and durability</small>
                       </Col>
-                    </Row>{" "}
+                    </Row>
                     <hr className="megaDivider" />
-                    <p className="megaTagline">
-                      Engineered innovations for modern healthcare
-                    </p>
+                    <p className="megaTagline">Engineered innovations for modern healthcare</p>
                   </div>
                 )}
               </div>
 
-              {/* Simple Links */}
               <Nav.Link href="/finance" className="px-3 py-2">
                 Finance
               </Nav.Link>
@@ -265,27 +210,17 @@ export default function Header() {
               </Nav.Link>
             </Nav>
 
-            {/* Right Side Nav */}
             <Nav className="ms-auto">
-              <Nav.Link href="/about" className="px-3 py-2">
-                About
-              </Nav.Link>
-              <Nav.Link href="/portfolio" className="px-3 py-2">
-                Portfolio
-              </Nav.Link>
-              <Nav.Link href="/careers" className="px-3 py-2">
-                Careers
-              </Nav.Link>
-              <Nav.Link href="/vendors" className="px-3 py-2">
-                Vendors
-              </Nav.Link>
-              <Nav.Link href="/news" className="px-3 py-2">
-                News
-              </Nav.Link>
+              {["about", "portfolio", "careers", "vendors", "news"].map((path) => (
+                <Nav.Link key={path} href={`/${path}`} className="px-3 py-2">
+                  {path.charAt(0).toUpperCase() + path.slice(1)}
+                </Nav.Link>
+              ))}
             </Nav>
           </Container>
         </Navbar>
       </header>
+
       <TalkToUsModal show={modalShow} handleClose={() => setModalShow(false)} />
     </>
   );
