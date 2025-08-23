@@ -1,0 +1,116 @@
+:root {
+  --teal: #3b9c9d;
+}
+
+footer {
+  background: linear-gradient(to top, #002a32, #2c7374);
+  color: #fff;
+  padding: 60px 20px 30px;
+  border-radius: 50px 50px 0 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-logo {
+  flex: 1 1 250px;
+}
+
+.footer-logo img {
+  height: 60px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.footer-logo p {
+  margin: 20px 0;
+  line-height: 1.5;
+  color: white;
+}
+
+.footer-bottom p {
+  color: white;
+}
+
+.social-icons {
+  display: flex;
+}
+
+.social-icons a {
+  display: flex;
+  margin-right: 10px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 16px;
+  transition: 0.3s;
+  width: auto;
+  justify-content: center;
+}
+
+.social-icons a:hover {
+  background: #3b9c9d;
+}
+
+.footer-bottom a {
+  color: var(--solar)!important;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.footer-links {
+  flex: 1 1 150px;
+}
+
+.footer-links h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #fff;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links ul li {
+  margin: 10px 0;
+}
+
+.footer-links ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  text-align: center;
+  color: #ccc;
+  font-size: 14px;
+  position: relative;
+}
+
+.footer-bottom .privacy {
+  background: #3a3a3a;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
