@@ -60,7 +60,7 @@ export default function Home() {
 
     counters.forEach((counter) => observer.observe(counter));
     return () => observer.disconnect();
-  }, []);
+  }, [words.length]);
 
   return (
     <main>

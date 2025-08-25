@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Navbar, Container, Nav, Row, Col } from "react-bootstrap";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { FaGlobe } from "react-icons/fa";
 import "../styles/header.css";
 import TalkToUsModal from "./TalktoUsModal";
 import ReactCountryFlag from "react-country-flag";
@@ -16,7 +15,7 @@ export default function Header() {
   const [modalShow, setModalShow] = useState(false);
   const [country, setCountry] = useState("IN");
 
-  const handleChange = (e:any) => {
+const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCountry(e.target.value);
     console.log(e.target.value);
   };
