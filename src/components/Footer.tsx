@@ -24,7 +24,7 @@ const Footer = () => {
       <Container className="footer-container">
         <Col xs={12} md={4} className="footer-logo mb-4">
           <Link href="/" passHref>
-            <Image src="/images/logo/logoinfra.png" alt="Infra.health logo" width={160} height={50} />
+            <Image src="/images/logo/infrawhite.png" alt="Infra.health logo" width={218} height={60} />
           </Link>
           <p>
             We design, build, and fund tomorrow&apos;s healthcare ecosystems bridging healthcare vision with
@@ -42,7 +42,7 @@ const Footer = () => {
         <Col xs={12} md={2} className="footer-links mb-4">
           <h4>Quick Links</h4>
           <ul>
-            {["Portfolio", "Careers", "Products", "Finance"].map((text, i) => (
+            {["About","Portfolio", "Careers", "Vendors", "Finance", "Invest"].map((text, i) => (
               <li key={i}>
                 <Link href="#" passHref>
                   {text}

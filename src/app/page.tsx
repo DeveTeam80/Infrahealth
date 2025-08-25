@@ -12,60 +12,18 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import { homeData } from "@/data/homeData";
 
 export default function Home() {
-  const words = ["Infrastructure", "Real Estate", "Operations", "Consulting", "Construction", "Finance", "Investments"];
-  const services = [
-    { img: "/images/services/1.jpg", title: "Design and Build" },
-    { img: "/images/services/2.jpg", title: "Project Management Consultancy" },
-    { img: "/images/services/3.jpg", title: "Engineering Procurement Construction (EPC)" },
-    { img: "/images/services/4.jpg", title: "Planning and Design" },
-    { img: "/images/services/5.jpg", title: "Facility Management Services" },
-    { img: "/images/services/6.jpg", title: "Project Feasibility and Investment Advisory" },
-    { img: "/images/services/7.jpg", title: "Regulatory Compliance" },
-  ];
-  const projects = [
-    { id: 1, title: "Multispeciality & Cancer Hospital", image: "/images/projects/proj1.png" },
-    { id: 2, title: "Dr. D.Y. Patil Hospital & Research Center", image: "/images/projects/proj2.png" },
-    { id: 3, title: "Sub‑district Hospital, Kopergaon", image: "/images/projects/proj3.jpg" },
-  ];
-  const testimonialsData = [
-    {
-      name: "Dr. Meera Kapoor",
-      role: "Medical Director, Apex Hospitals",
-      reviews: [
-        "We are incredibly impressed by Infra.Health’s ability to deliver complex healthcare projects with such precision. Their execution was seamless and highly professional.",
-        "From planning to handover, the team was proactive, collaborative, and attentive to every detail. Thank you for enabling us to deliver world‑class infrastructure to our patients.",
-      ],
-    },
-    {
-      name: "Rakesh Menon",
-      role: "Facility Head, Medilink Diagnostics",
-      reviews: [
-        "Infra.Health truly understands the dynamics of healthcare delivery. Their team showed unmatched commitment, ensuring the project was completed on time and fully compliant.",
-        "We are especially grateful for their insights into optimizing patient flow through design. Exceptional experience!",
-      ],
-    },
-    {
-      name: "Dr. Anjali Verma",
-      role: "Founder, UrbanCare Clinics",
-      reviews: [
-        "A big thank you to the Infra.Health team for turning our vision for a modern, modular clinic into reality. The quality of work was outstanding.",
-        "Their understanding of healthcare needs and ability to deliver within tight timelines sets them apart. We look forward to more collaborations in the future.",
-      ],
-    },
-  ];
-  const blogsData = [
-    { img: "/images/blogs/blog1.png", title: "5 Smart Layout Trends in Modern Healthcare Facilities", link: "#" },
-    { img: "/images/blogs/blog2.png", title: "How Infrastructure Impacts Hospital Infection Rates", link: "#" },
-    { img: "/images/blogs/blog3.png", title: "Sustainable Hospital Infrastructure: Why It Matters", link: "#" },
-  ];
-
+  const { words, services, projects, testimonials, blogs } = homeData;
   const [currentWord, setCurrentWord] = useState(0);
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => setCurrentWord((prev) => (prev + 1) % words.length), 2000);
+    const interval = setInterval(
+      () => setCurrentWord((prev) => (prev + 1) % words.length),
+      2000
+    );
     return () => clearInterval(interval);
   }, []);
 
@@ -88,14 +46,17 @@ export default function Home() {
       update();
     };
 
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          runCounter(entry.target as HTMLElement);
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target as HTMLElement);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
     counters.forEach((counter) => observer.observe(counter));
     return () => observer.disconnect();
@@ -114,16 +75,17 @@ export default function Home() {
           </h3>
         </div>
         <div className="hero-bottom-box" aria-hidden="false">
-          <Row className="align‑items‑center w‑100">
-            <Col md={8} className="cta-text">
+          <Row className="d-flex align-items-center w-100">
+            <Col md={10} className="cta-text">
               <h2>Looking to setup your own hospital?</h2>
               <p>
-                Be it a multi‑speciality hospital, general hospital or a medical college or institute,
-                we take care of everything from scoping and designing to building and equipping your hospital
-                for you to operate.
+                Be it a multi‑speciality hospital, general hospital or a medical
+                college or institute, we take care of everything from scoping
+                and designing to building and equipping your hospital for you to
+                operate.
               </p>
             </Col>
-            <Col md={4} className="text‑md‑end text‑center mt‑3 mt‑md‑0">
+            <Col md={2} className="text‑md‑end text‑center mt‑3 mt‑md‑0">
               <button
                 type="button"
                 className="btn btn-outline-secondary btn-sm"
@@ -162,12 +124,20 @@ export default function Home() {
                     5000+
                   </span>
                 </div>
-                <p>Beds Inpatient, Outpatient Medical Office & Support Facilities under Management</p>
+                <p>
+                  Beds Inpatient, Outpatient Medical Office & Support Facilities
+                  under Management
+                </p>
               </div>
             </div>
 
             <div className="about-images">
-              <Image src="/images/hero/home-abt.png" alt="Healthcare Team" width={600} height={400} />
+              <Image
+                src="/images/hero/home-abt.png"
+                alt="Healthcare Team"
+                width={600}
+                height={550}
+              />
             </div>
 
             <div className="about-text">
@@ -176,19 +146,23 @@ export default function Home() {
                 What we <span>do?</span>
               </h3>
               <p>
-                Infra.Health is a dedicated business focused exclusively on providing total life cycle real
-                estate and facility solutions to the healthcare industry in India.
+                Infra.Health is a dedicated business focused exclusively on
+                providing total life cycle real estate and facility solutions to
+                the healthcare industry in India.
               </p>
               <br />
               <p>
-                <strong>Hospitals:</strong> Specialising in modular hospitals, be it 30, 50, 70, 100 bed hospitals
-                and EPC (Engineering, Procurement and Construction) for larger hospitals with higher bed sizes.
-                Get the highest quality without the multi agency hassles all in one place.
+                <strong>Hospitals:</strong> Specialising in modular hospitals,
+                be it 30, 50, 70, 100 bed hospitals and EPC (Engineering,
+                Procurement and Construction) for larger hospitals with higher
+                bed sizes. Get the highest quality without the multi agency
+                hassles all in one place.
                 <br />
                 <br />
-                <strong>Medical Colleges and Institutes:</strong> Thorough understanding of the nuances of
-                designing and building futuristic Medical colleges and Institutes for enabling the future
-                generations to succeed on a global scale.
+                <strong>Medical Colleges and Institutes:</strong> Thorough
+                understanding of the nuances of designing and building
+                futuristic Medical colleges and Institutes for enabling the
+                future generations to succeed on a global scale.
               </p>
               <div className="about-highlights">
                 <div className="started">
@@ -232,8 +206,9 @@ export default function Home() {
                 <Card.Body>
                   <h5>Scalable Hospitals</h5>
                   <p>
-                    We provide hospitals that offer modifications and can be scaled according to requirements.
-                    Customizable models with 30, 50, 70, and 100 bed capacities.
+                    We provide hospitals that offer modifications and can be
+                    scaled according to requirements. Customizable models with
+                    30, 50, 70, and 100 bed capacities.
                   </p>
                 </Card.Body>
               </Card>
@@ -241,8 +216,9 @@ export default function Home() {
                 <Card.Body>
                   <h5>Modular Operation Theatres</h5>
                   <p>
-                    Efficient, economical, and durable theatres with laminar airflow, high quality filters,
-                    and specialized surgical lighting.
+                    Efficient, economical, and durable theatres with laminar
+                    airflow, high quality filters, and specialized surgical
+                    lighting.
                   </p>
                 </Card.Body>
               </Card>
@@ -250,8 +226,8 @@ export default function Home() {
                 <Card.Body>
                   <h5>Energy‑Efficient & Sustainable Systems</h5>
                   <p>
-                    Focused on reducing energy consumption with efficient HVAC, LED lighting, renewable energy,
-                    and waste management.
+                    Focused on reducing energy consumption with efficient HVAC,
+                    LED lighting, renewable energy, and waste management.
                   </p>
                 </Card.Body>
               </Card>
@@ -273,14 +249,26 @@ export default function Home() {
               slidesPerView={3}
               loop
               autoplay={{ delay: 3500, disableOnInteraction: false }}
-              navigation={{ nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }}
-              breakpoints={{ 0: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }}
+              breakpoints={{
+                0: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
               className="mySwiper"
             >
               {services.map((service, idx) => (
                 <SwiperSlide key={idx}>
                   <div className="service-card">
-                    <Image src={service.img} alt={service.title} width={300} height={200} />
+                    <Image
+                      src={service.img}
+                      alt={service.title}
+                      width={300}
+                      height={200}
+                    />
                     <div className="card-overlay">{service.title}</div>
                   </div>
                 </SwiperSlide>
@@ -302,7 +290,12 @@ export default function Home() {
             {projects.map((project) => (
               <Col key={project.id} xs={12} sm={6} md={4}>
                 <div className="card project-card">
-                  <Image src={project.image} alt={project.title} width={400} height={300} />
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={400}
+                    height={300}
+                  />
                   <div className="project-name">
                     <span className="ms-2">{project.title}</span>
                   </div>
@@ -313,7 +306,8 @@ export default function Home() {
           <div className="projects-bottom d-flex justify-content-between">
             <div className="bottom-cta">
               <h3 className="section-title">
-                Let&apos;s Build Your <span className="highlight">Dream Healthcare Facility</span>
+                Let&apos;s Build Your{" "}
+                <span className="highlight">Dream Healthcare Facility</span>
               </h3>
             </div>
             <div className="cta-buttons">
@@ -335,9 +329,13 @@ export default function Home() {
             slidesPerView={3}
             loop
             autoplay={{ delay: 3500, disableOnInteraction: false }}
-            breakpoints={{ 1024: { slidesPerView: 3 }, 768: { slidesPerView: 2 }, 480: { slidesPerView: 1 } }}
+            breakpoints={{
+              1024: { slidesPerView: 3 },
+              768: { slidesPerView: 2 },
+              480: { slidesPerView: 1 },
+            }}
           >
-            {testimonialsData.map((t, i) => (
+            {testimonials.map((t, i) => (
               <SwiperSlide key={i}>
                 <div className="t-card d-flex flex-column justify-content-between">
                   <div>
@@ -363,10 +361,15 @@ export default function Home() {
             Check out <span>Our latest Blogs</span>
           </h2>
           <Row className="justify-content-center g-4">
-            {blogsData.map((blog, i) => (
+            {blogs.map((blog, i) => (
               <Col key={i} xs={12} md={6} lg={4}>
                 <Card className="blog-card h-100 border-0 shadow-sm">
-                  <Image src={blog.img} alt={blog.title} width={400} height={250} />
+                  <Image
+                    src={blog.img}
+                    alt={blog.title}
+                    width={400}
+                    height={250}
+                  />
                   <Card.Body className="card-content">
                     <Card.Title as="h3" className="h6">
                       {blog.title}

@@ -138,6 +138,10 @@
   padding-bottom: 20px;
 }
 
+.counter-box:last-child {
+  border-bottom: none;
+}
+
 .counter-number {
   font-size: 2rem;
   font-weight: 700;
@@ -182,6 +186,7 @@
   padding: 0 0 0 20px;
   border-left: 3px solid #6767672e;
   margin: 10px 0 20px 0;
+  font-weight: 700;
 }
 
 .about-text p {
@@ -195,9 +200,8 @@
   margin: 20px 0;
 }
 
-.about-highlights i {
-  font-size: 30px;
-  margin-right: 5px;
+.about-highlights div h5, .card-body h5 {
+  font-weight:600;
 }
 
 .started {
@@ -308,7 +312,7 @@
 }
 
 /* .section-title span {
-  color: #f26224;
+  color: #e98c46;
 } */
 
 .service-card {
@@ -370,7 +374,7 @@
 .services-slider .swiper-button-prev::after,
 .services-slider .swiper-button-next::after {
   font-size: 22px;
-  color: #f26224;
+  color: #e98c46;
 }
 
 .portfolio-section {
@@ -391,7 +395,7 @@
 }
 
 .portfolio-section .section-title span {
-  color: #f26224;
+  color: #e98c46;
 }
 
 .highlight {
@@ -621,13 +625,13 @@ form select {
 form input:focus,
 form select:focus {
   outline: none;
-  border-color: #f26224;
+  border-color: #e98c46;
   box-shadow: 0 0 5px #9cc7df;
 }
 
 form .btn {
   margin-top: 20px;
-  background-color: #f26224;
+  background-color: #e98c46;
   color: white;
   border: none;
   padding: 12px;
@@ -654,4 +658,24 @@ small {
   max-width: 350px;
   text-align: left;
   transition: transform 0.3s ease;
+}
+
+.services-slider .swiper-button-next::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23f26224' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z'/%3E%3C/svg%3E");
+}
+
+.services-slider .swiper-button-prev::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 36px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23f26224' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z'/%3E%3C/svg%3E");
 }

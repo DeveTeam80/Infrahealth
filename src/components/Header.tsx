@@ -8,11 +8,18 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { FaGlobe } from "react-icons/fa";
 import "../styles/header.css";
 import TalkToUsModal from "./TalktoUsModal";
+import ReactCountryFlag from "react-country-flag";
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState<string | null>(null);
   const [hideTopBar, setHideTopBar] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [country, setCountry] = useState("IN");
+
+  const handleChange = (e:any) => {
+    setCountry(e.target.value);
+    console.log(e.target.value);
+  };
   const handleMouseEnter = (menu: string) => setShowMenu(menu);
   const handleMouseLeave = () => setShowMenu(null);
 
@@ -40,25 +47,47 @@ export default function Header() {
       >
         <div className="d-flex align-items-center gap-2">
           <Link href="/" passHref>
-            <Image src="/images/logo/logoinfra.png" alt="Infra.Health" width={160} height={50} />
+            <Image
+              src="/images/logo/logoinfra.png"
+              alt="Infra.Health"
+              width={218}
+              height={60}
+            />
           </Link>
         </div>
 
         <div className="d-flex align-items-center gap-3">
           <div
             className="d-flex align-items-center gap-1"
-            style={{ border: "1px solid #000", borderRadius: "8px", padding: "2px 8px", cursor: "pointer" }}
+            style={{
+              border: "1px solid #e98c46",
+              borderRadius: "20px",
+              padding: "10px 2px 10px 12px",
+              cursor: "pointer",
+            }}
           >
-            <FaGlobe />
-            <select className="form-select form-select-sm border-0" onChange={(e) => console.log(e.target.value)}>
-              <option>India</option>
-              <option>USA</option>
-              <option>UK</option>
-              <option>UAE</option>
+            <ReactCountryFlag
+              countryCode={country}
+              svg
+              style={{ width: "1.5em", height: "1.5em" }}
+            />
+            <select
+              className="form-select form-select-sm border-0"
+              value={country}
+              onChange={handleChange}
+            >
+              <option value="IN">India</option>
+              <option value="US">USA</option>
+              <option value="GB">UK</option>
+              <option value="AE">UAE</option>
             </select>
           </div>
 
-          <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => setModalShow(true)}>
+          <button
+            type="button"
+            className="btn btn-outline-secondary btn-sm"
+            onClick={() => setModalShow(true)}
+          >
             Talk to Us
           </button>
         </div>
@@ -98,7 +127,8 @@ export default function Header() {
                     </Row>
                     <hr className="megaDivider" />
                     <p className="megaTagline">
-                      From vision to execution, we deliver integrated healthcare solutions.
+                      From vision to execution, we deliver integrated healthcare
+                      solutions.
                     </p>
                   </div>
                 )}
@@ -119,7 +149,9 @@ export default function Header() {
                       <Col>
                         <strong>Medical Institutions & Colleges</strong>
                         <br />
-                        <small>Building healthcare foundations for the future</small>
+                        <small>
+                          Building healthcare foundations for the future
+                        </small>
                       </Col>
                       <Col>
                         <strong>Multispecialty Hospitals</strong>
@@ -129,21 +161,29 @@ export default function Header() {
                       <Col>
                         <strong>Modular Hospitals</strong>
                         <br />
-                        <small>Rapid, reliable, and scalable healthcare spaces</small>
+                        <small>
+                          Rapid, reliable, and scalable healthcare spaces
+                        </small>
                       </Col>
                       <Col>
                         <strong>Government Hospitals</strong>
                         <br />
-                        <small>Strengthening public health infrastructure</small>
+                        <small>
+                          Strengthening public health infrastructure
+                        </small>
                       </Col>
                       <Col>
                         <strong>Facilities</strong>
                         <br />
-                        <small>End-to-end support for efficient operations</small>
+                        <small>
+                          End-to-end support for efficient operations
+                        </small>
                       </Col>
                     </Row>
                     <hr className="megaDivider" />
-                    <p className="megaTagline">Tailored infrastructure for healthcare</p>
+                    <p className="megaTagline">
+                      Tailored infrastructure for healthcare
+                    </p>
                   </div>
                 )}
               </div>
@@ -168,7 +208,9 @@ export default function Header() {
                       <Col>
                         <strong>Central Sterile Supply Department</strong>
                         <br />
-                        <small>Streamlined design for uncompromised sterility</small>
+                        <small>
+                          Streamlined design for uncompromised sterility
+                        </small>
                       </Col>
                       <Col>
                         <strong>Medical Gas Pipeline Systems</strong>
@@ -178,26 +220,36 @@ export default function Header() {
                       <Col>
                         <strong>Pneumatic Chutes</strong>
                         <br />
-                        <small>Fast, safe, and efficient material transport</small>
+                        <small>
+                          Fast, safe, and efficient material transport
+                        </small>
                       </Col>
                       <Col>
                         <strong>Hospital Furniture</strong>
                         <br />
-                        <small>Ergonomic solutions for patient comfort and care</small>
+                        <small>
+                          Ergonomic solutions for patient comfort and care
+                        </small>
                       </Col>
                       <Col>
                         <strong>Pendants</strong>
                         <br />
-                        <small>Optimized accessibility for critical equipment</small>
+                        <small>
+                          Optimized accessibility for critical equipment
+                        </small>
                       </Col>
                       <Col>
                         <strong>Walls</strong>
                         <br />
-                        <small>Advanced finishes for infection control and durability</small>
+                        <small>
+                          Advanced finishes for infection control and durability
+                        </small>
                       </Col>
                     </Row>
                     <hr className="megaDivider" />
-                    <p className="megaTagline">Engineered innovations for modern healthcare</p>
+                    <p className="megaTagline">
+                      Engineered innovations for modern healthcare
+                    </p>
                   </div>
                 )}
               </div>
@@ -211,11 +263,13 @@ export default function Header() {
             </Nav>
 
             <Nav className="ms-auto">
-              {["about", "portfolio", "careers", "vendors", "news"].map((path) => (
-                <Nav.Link key={path} href={`/${path}`} className="px-3 py-2">
-                  {path.charAt(0).toUpperCase() + path.slice(1)}
-                </Nav.Link>
-              ))}
+              {["about", "portfolio", "careers", "vendors", "news"].map(
+                (path) => (
+                  <Nav.Link key={path} href={`/${path}`} className="px-3 py-2">
+                    {path.charAt(0).toUpperCase() + path.slice(1)}
+                  </Nav.Link>
+                )
+              )}
             </Nav>
           </Container>
         </Navbar>
