@@ -27,7 +27,7 @@ const Footer = () => {
             <Image src="/images/logo/infrawhite.png" alt="Infra.health logo" width={218} height={60} />
           </Link>
           <p>
-            We design, build, and fund tomorrow&apos;s healthcare ecosystems bridging healthcare vision with
+            We design, build, operate and fund tomorrow&apos;s healthcare ecosystems bridging healthcare vision with
             execution through strategy, capital, and technology.
           </p>
           <div className="social-icons">
@@ -56,11 +56,9 @@ const Footer = () => {
           <h4>Services</h4>
           <ul>
             {[
-              "Design and Build",
-              "Project Management Consultancy",
-              "Planning and Design",
-              "Facility Management Services",
-              "Regulatory Compliance",
+              "Consult",
+              "Construct",
+              "Operate",
             ].map((text, i) => (
               <li key={i}>
                 <Link href="#" passHref>
@@ -90,7 +88,7 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <p>
-          &copy; {new Date().getFullYear()} Emerway Healthtech Private Limited™
+          &copy; {new Date().getFullYear()} Infra.health | Emerway Healthtech Private Limited™
         </p>
       </div>
 

@@ -15,7 +15,7 @@ export default function Header() {
   const [modalShow, setModalShow] = useState(false);
   const [country, setCountry] = useState("IN");
 
-const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCountry(e.target.value);
     console.log(e.target.value);
   };
@@ -108,80 +108,55 @@ const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
                 {showMenu === "services" && (
                   <div className="megaMenu shadow p-4 bg-white">
                     <Row>
-                      <Col>
+                      {/* CONSULT */}
+                      <Col md={4}>
                         <strong>Consult</strong>
                         <br />
                         <small>Shaping strategies with precision</small>
+                        <ul className="megaList">
+                          <li>Hospital Management Consultancy</li>
+                          <li>Hospital Design</li>
+                          <li>Project Management Consultancy</li>
+                          <li>Equipment Planning & Integration</li>
+                          <li>Public Private Partnership (PPP) Advisory</li>
+                          <li>Hospital ESG Advisory Services</li>
+                          <li>Hospital Green Building Consultancy</li>
+                          <li>Integrated Facility Management Consultancy</li>
+                          <li>Accreditation Advisory</li>
+                        </ul>
                       </Col>
-                      <Col>
+
+                      {/* CONSTRUCT */}
+                      <Col md={4}>
                         <strong>Construct</strong>
                         <br />
                         <small>Bringing ideas to life</small>
+                        <ul className="megaList">
+                          <li>Engineering, Procurement & Construction</li>
+                          <li>Design & Build</li>
+                          <li>Fitout & Retrofit</li>
+                          <li>Specialty Services</li>
+                        </ul>
                       </Col>
-                      <Col>
+
+                      {/* OPERATE */}
+                      <Col md={4}>
                         <strong>Operate</strong>
                         <br />
                         <small>Sustaining excellence in use</small>
+                        <ul className="megaList">
+                          <li>Property Management</li>
+                          <li>Integrated Facility Management Services</li>
+                          <li>Operation & Maintenance</li>
+                          <li>HR Support Services</li>
+                        </ul>
                       </Col>
                     </Row>
+
                     <hr className="megaDivider" />
                     <p className="megaTagline">
                       From vision to execution, we deliver integrated healthcare
                       solutions.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Solutions */}
-              <div
-                className="px-3 py-2"
-                onMouseEnter={() => handleMouseEnter("solutions")}
-                onMouseLeave={handleMouseLeave}
-              >
-                <span className="nav-link">
-                  Solutions <IoMdArrowDropdown />
-                </span>
-                {showMenu === "solutions" && (
-                  <div className="megaMenu shadow p-4 bg-white">
-                    <Row>
-                      <Col>
-                        <strong>Medical Institutions & Colleges</strong>
-                        <br />
-                        <small>
-                          Building healthcare foundations for the future
-                        </small>
-                      </Col>
-                      <Col>
-                        <strong>Multispecialty Hospitals</strong>
-                        <br />
-                        <small>Integrated systems for advanced care</small>
-                      </Col>
-                      <Col>
-                        <strong>Modular Hospitals</strong>
-                        <br />
-                        <small>
-                          Rapid, reliable, and scalable healthcare spaces
-                        </small>
-                      </Col>
-                      <Col>
-                        <strong>Government Hospitals</strong>
-                        <br />
-                        <small>
-                          Strengthening public health infrastructure
-                        </small>
-                      </Col>
-                      <Col>
-                        <strong>Facilities</strong>
-                        <br />
-                        <small>
-                          End-to-end support for efficient operations
-                        </small>
-                      </Col>
-                    </Row>
-                    <hr className="megaDivider" />
-                    <p className="megaTagline">
-                      Tailored infrastructure for healthcare
                     </p>
                   </div>
                 )}
@@ -252,6 +227,63 @@ const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
                   </div>
                 )}
               </div>
+
+              {/* Solutions */}
+              <div
+                className="px-3 py-2"
+                onMouseEnter={() => handleMouseEnter("solutions")}
+                onMouseLeave={handleMouseLeave}
+              >
+                <span className="nav-link">
+                  Solutions <IoMdArrowDropdown />
+                </span>
+                {showMenu === "solutions" && (
+                  <div className="megaMenu shadow p-4 bg-white">
+                    <Row>
+                      <Col>
+                        <strong>Medical Institutions & Colleges</strong>
+                        <br />
+                        <small>
+                          Building healthcare foundations for the future
+                        </small>
+                      </Col>
+                      <Col>
+                        <strong>Multispecialty Hospitals</strong>
+                        <br />
+                        <small>Integrated systems for advanced care</small>
+                      </Col>
+                      <Col>
+                        <strong>Modular Hospitals</strong>
+                        <br />
+                        <small>
+                          Rapid, reliable, and scalable healthcare spaces
+                        </small>
+                      </Col>
+                      <Col>
+                        <strong>Government Hospitals</strong>
+                        <br />
+                        <small>
+                          Strengthening public health infrastructure
+                        </small>
+                      </Col>
+                      <Col>
+                        <strong>Facilities</strong>
+                        <br />
+                        <small>
+                          End-to-end support for efficient operations
+                        </small>
+                      </Col>
+                    </Row>
+                    <hr className="megaDivider" />
+                    <p className="megaTagline">
+                      Tailored infrastructure for healthcare
+                    </p>
+                  </div>
+                )}
+              </div>
+              <Nav.Link href="/finance" className="px-3 py-2">
+                Properties
+              </Nav.Link>
 
               <Nav.Link href="/finance" className="px-3 py-2">
                 Finance

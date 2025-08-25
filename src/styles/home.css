@@ -262,7 +262,7 @@
 }
 
 .why-image {
-  height: 415px;
+  height: 545px;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -678,4 +678,22 @@ small {
   background-repeat: no-repeat;
   background-size: contain;
   background-image: url("data:image/svg+xml,%3Csvg fill='%23f26224' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z'/%3E%3C/svg%3E");
+}
+
+.rotating-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 200px; /* longest word width */
+}
+
+.rotating-wrapper span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.rotating-text{
+  text-align: left;
+    margin-left: 5px;
 }

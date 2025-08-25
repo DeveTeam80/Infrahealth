@@ -13,9 +13,8 @@
 .megaMenu .col {
   flex: unset !important;
   width: 25% !important;
-  height:80px;
+  height: 80px;
 }
-
 
 .megaMenu h6 {
   font-weight: 600;
@@ -23,9 +22,20 @@
   color: var(--teal);
 }
 
-.megaMenu small {
+.megaMenu small,
+.megaList li {
   display: block;
   color: #666;
+  font-size: 0.875em;
+}
+
+.megaList {
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.megaList li {
+  padding-top: 0.5rem;
 }
 
 /* Make header sticky */
@@ -34,7 +44,7 @@
   top: 0;
   z-index: 1050; /* Above dropdowns */
   background: #fff;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 /* Top bar hide effect */
@@ -45,5 +55,3 @@
 .top-bar.hide {
   transform: translateY(-100%);
 }
-
-

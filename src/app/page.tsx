@@ -69,9 +69,11 @@ export default function Home() {
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h3 className="subheading">One‑Stop Solution for</h3>
-          <h3>
-            <span>Healthcare</span>{" "}
-            <span className="rotating-text">{words[currentWord]}</span>
+          <h3 className="d-flex justify-space-evenly">
+            <span>Healthcare </span>{" "}
+            <span className="rotating-wrapper">
+              <span className="rotating-text"> {words[currentWord]}</span>
+            </span>
           </h3>
         </div>
         <div className="hero-bottom-box" aria-hidden="false">
@@ -185,12 +187,11 @@ export default function Home() {
       <section className="why-choose-us py-5">
         <Container>
           <Row className="align-items-start justify-content-between">
+            <p className="section-subtitle">Why Choose Us</p>
+            <h3 className="section-title mb-4">
+              From Concept to Care <span>Building Health,</span> Brick by Brick
+            </h3>
             <Col lg={7} md={12} className="mb-4">
-              <p className="section-subtitle">Why Choose Us</p>
-              <h3 className="section-title mb-4">
-                From Concept to Care <br />
-                <span>Building Health,</span> Brick by Brick
-              </h3>
               <div className="why-image">
                 <Image
                   src="/images/hero/abt.png"
