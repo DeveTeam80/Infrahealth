@@ -51,7 +51,7 @@ export default function Header() {
           hideTopBar ? "hide" : ""
         }`}
       >
-        <div className="d-flex align-items-center gap-2">
+        <div className="d-flex align-items-center gap-2 logo">
           <Link href="/" passHref>
             <Image
               src="/images/logo/logoinfra.png"
@@ -62,7 +62,7 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="d-flex align-items-center gap-3">
+<div className="d-flex align-items-center gap-3 justify-content-between justify-sm-start">
           <div
             className="d-flex align-items-center gap-1"
             style={{
@@ -88,14 +88,15 @@ export default function Header() {
               <option value="AE">UAE</option>
             </select>
           </div>
-
-          <button
-            type="button"
-            className="btn btn-outline-secondary btn-sm"
-            onClick={() => setModalShow(true)}
-          >
-            Talk to Us
-          </button>
+          <div>
+            <button
+              type="button"
+              className="btn btn-outline-secondary btn-sm"
+              onClick={() => setModalShow(true)}
+            >
+              Talk to Us
+            </button>
+          </div>
         </div>
       </div>
 

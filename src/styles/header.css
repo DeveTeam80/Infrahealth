@@ -57,7 +57,10 @@
 }
 
 @media (max-width: 991px) {
-  .top-bar {
+  .top-bar .justify-content-between{
+    width:100%;
+  }
+  .top-bar .logo{
     display: none !important;
   }
   .dropdown-menu {

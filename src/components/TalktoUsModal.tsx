@@ -16,10 +16,9 @@ function TalkToUsModal({
     email: "",
     city: "",
     state: "",
-    speciality: "",
+    requirement: "", // renamed from speciality
   });
 
-  // Correct type for React-Bootstrap Form.Control
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -29,10 +28,35 @@ function TalkToUsModal({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    // send to backend here
+
+    try {
+      const res = await fetch("/api/talktoUs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        alert("✅ Form submitted successfully!");
+        setFormData({
+          title: "Dr",
+          name: "",
+          mobile: "",
+          email: "",
+          city: "",
+          state: "",
+          requirement: "",
+        });
+        handleClose();
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      alert(" Server error. Please try again later.");
+    }
   };
 
   return (
@@ -142,15 +166,31 @@ function TalkToUsModal({
             </Col>
           </Row>
 
+          {/* Requirement Dropdown */}
           <Form.Group>
-            <Form.Label>Speciality (Optional)</Form.Label>
-            <Form.Control
-              type="text"
-              name="speciality"
-              value={formData.speciality}
+            <Form.Label>
+              Services <span style={{ color: "red" }}>*</span>
+            </Form.Label>
+            <Form.Select
+              name="requirement"
+              value={formData.requirement}
               onChange={handleChange}
-              placeholder="Speciality"
-            />
+              required
+            >
+              <option value="">-- Select Requirement --</option>
+              <option value="Hospital infrastructure">
+                Hospital infrastructure
+              </option>
+              <option value="Healthcare consulting">
+                Healthcare consulting
+              </option>
+              <option value="Advisory">Advisory</option>
+              <option value="Products">Products</option>
+              <option value="Medical equipment">Medical equipment</option>
+              <option value="Facility Management">Facility Management</option>
+              <option value="Properties">Properties</option>
+              <option value="Finance">Finance</option>
+            </Form.Select>
           </Form.Group>
 
           <Button className="mt-3" type="submit">
