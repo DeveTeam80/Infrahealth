@@ -55,3 +55,24 @@
 .top-bar.hide {
   transform: translateY(-100%);
 }
+
+@media (max-width: 991px) {
+  .top-bar {
+    display: none !important;
+  }
+  .dropdown-menu {
+    border: none;
+  }
+  .dropdown-menu a,
+  .nav-link:focus,
+  .nav-link:hover {
+    color: #666;
+    font-size: 0.875em;
+  }
+  .dropdown-toggle{
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}

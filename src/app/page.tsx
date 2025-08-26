@@ -135,7 +135,7 @@ export default function Home() {
 
             <div className="about-images">
               <Image
-                src="/images/hero/home-abt.png"
+                src="/images/hero/abt-home.png"
                 alt="Healthcare Team"
                 width={600}
                 height={550}
@@ -326,14 +326,13 @@ export default function Home() {
           </h3>
           <Swiper
             modules={[Autoplay]}
-            spaceBetween={20}
-            slidesPerView={3}
+            // spaceBetween={20}
+            slidesPerView={1} 
             loop
             autoplay={{ delay: 3500, disableOnInteraction: false }}
             breakpoints={{
-              1024: { slidesPerView: 3 },
-              768: { slidesPerView: 2 },
-              480: { slidesPerView: 1 },
+              768: { slidesPerView: 1 }, // tablets
+              1024: { slidesPerView: 3 }, // desktops
             }}
           >
             {testimonials.map((t, i) => (
