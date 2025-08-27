@@ -176,7 +176,7 @@ export default function Home() {
                   <h5 className="ms-2 mb-0">50+ Projects</h5>
                 </div>
               </div>
-              <Link href="/about" className="btn">
+              <Link href="/" className="btn">
                 Know More
               </Link>
             </div>
