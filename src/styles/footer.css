@@ -5,7 +5,7 @@
 footer {
   background: linear-gradient(to top, #002a32, #2c7374);
   color: #fff;
-  padding: 60px 20px 30px;
+  padding: 80px 20px 30px;
   border-radius: 50px 50px 0 0;
 }
 
@@ -60,7 +60,7 @@ footer {
 }
 
 .footer-bottom a {
-  color: var(--solar)!important;
+  color: var(--solar) !important;
   text-decoration: none;
   font-weight: 600;
   font-size: 16px;
@@ -113,4 +113,53 @@ footer {
   padding: 10px 20px;
   border-radius: 15px;
   margin-bottom: 10px;
+}
+
+.footer-cta-banner {
+  background: #e63946; /* brand accent (like red in screenshot) */
+  color: #fff;
+  padding: 30px 20px;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 40px;
+}
+
+.footer-cta-banner h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.footer-cta-banner p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.footer-cta-banner .btn {
+  border-radius: 25px;
+  padding: 10px 25px;
+}
+
+.footer-cta-box {
+  background: var(--teal);
+  color: #fff;
+  border-radius: 16px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto -50px;
+  padding: 20px 28px;
+  display: flex;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .footer-cta-box {
+    text-align: center;
+    padding: 18px;
+  }
 }

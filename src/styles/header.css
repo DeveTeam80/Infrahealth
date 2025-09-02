@@ -56,6 +56,29 @@
   transform: translateY(-100%);
 }
 
+.megaParentList {
+  list-style: none;
+  padding: 0;
+}
+.megaParentList li {
+  padding: 12px 10px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+.megaParentList li.active {
+  border-left: 3px solid #e98c46; 
+  background: #f9f9f9;
+}
+.megaChildren .megaList {
+  list-style: none;
+  padding-left: 20px;
+}
+.megaChildren .megaList li {
+  padding: 6px 0;
+  font-weight: 600;
+}
+
+
 @media (max-width: 991px) {
   .top-bar .justify-content-between{
     width:100%;

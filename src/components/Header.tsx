@@ -15,6 +15,7 @@ export default function Header() {
   const [modalShow, setModalShow] = useState(false);
   const [country, setCountry] = useState("IN");
   const [isMobile, setIsMobile] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("consult");
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCountry(e.target.value);
@@ -62,7 +63,7 @@ export default function Header() {
           </Link>
         </div>
 
-<div className="d-flex align-items-center gap-3 justify-content-between justify-sm-start">
+        <div className="d-flex align-items-center gap-3 justify-content-between justify-sm-start">
           <div
             className="d-flex align-items-center gap-1"
             style={{
@@ -164,48 +165,114 @@ export default function Header() {
                     {showMenu === "services" && (
                       <div className="megaMenu shadow p-4 bg-white">
                         <Row>
-                          {/* CONSULT */}
-                          <Col md={4}>
-                            <strong>Consult</strong>
-                            <br />
-                            <small>Shaping strategies with precision</small>
-                            <ul className="megaList">
-                              <li>Hospital Management Consultancy</li>
-                              <li>Hospital Design</li>
-                              <li>Project Management Consultancy</li>
-                              <li>Equipment Planning & Integration</li>
-                              <li>Public Private Partnership (PPP) Advisory</li>
-                              <li>Hospital ESG Advisory Services</li>
-                              <li>Hospital Green Building Consultancy</li>
-                              <li>Facility Management Consultancy</li>
-                              <li>Accreditation Advisory</li>
+                          {/* LEFT COLUMN (Categories) */}
+                          <Col md={3} className="megaCategories">
+                            <ul className="megaParentList">
+                              <li
+                                onMouseEnter={() =>
+                                  setActiveCategory("consult")
+                                }
+                                className={
+                                  activeCategory === "consult" ? "active" : ""
+                                }
+                              >
+                                <strong>Consult</strong>
+                                <br />
+                                <small>Shaping strategies with precision</small>
+                              </li>
+                              <li
+                                onMouseEnter={() =>
+                                  setActiveCategory("construct")
+                                }
+                                className={
+                                  activeCategory === "construct" ? "active" : ""
+                                }
+                              >
+                                <strong>Construct</strong>
+                                <br />
+                                <small>Bringing ideas to life</small>
+                              </li>
+                              <li
+                                onMouseEnter={() =>
+                                  setActiveCategory("operate")
+                                }
+                                className={
+                                  activeCategory === "operate" ? "active" : ""
+                                }
+                              >
+                                <strong>Operate</strong>
+                                <br />
+                                <small>Sustaining excellence in use</small>
+                              </li>
+                              <li
+                                onMouseEnter={() =>
+                                  setActiveCategory("solution")
+                                }
+                                className={
+                                  activeCategory === "solution" ? "active" : ""
+                                }
+                              >
+                                <strong>Solution</strong>
+                                <br />
+                                <small>
+                                  Tailored infrastructure for healthcare
+                                </small>
+                              </li>
                             </ul>
                           </Col>
 
-                          {/* CONSTRUCT */}
-                          <Col md={4}>
-                            <strong>Construct</strong>
-                            <br />
-                            <small>Bringing ideas to life</small>
-                            <ul className="megaList">
-                              <li>Engineering, Procurement & Construction</li>
-                              <li>Design & Build</li>
-                              <li>Fitout & Retrofit</li>
-                              <li>Specialty Services</li>
-                            </ul>
-                          </Col>
+                          {/* RIGHT COLUMN (Children) */}
+                          <Col md={9} className="megaChildren">
+                            {activeCategory === "consult" && (
+                              // <div className="d-flex justify-content-evenly">
+                                <ul className="megaList">
+                                  <li>Hospital Management Consultancy</li>
+                                  <li>Hospital Design</li>
+                                  <li>Project Management Consultancy</li>
+                                  <li>Equipment Planning & Integration</li>
+                                  <li>
+                                    Public Private Partnership (PPP) Advisory
+                                  </li>
+                                {/* </ul>
+                                <ul className="megaList"> */}
+                                  <li>Hospital ESG Advisory Services</li>
+                                  <li>Hospital Green Building Consultancy</li>
+                                  <li>Facility Management Consultancy</li>
+                                  <li>Accreditation Advisory</li>
+                                </ul>
+                              // </div>
+                            )}
 
-                          {/* OPERATE */}
-                          <Col md={4}>
-                            <strong>Operate</strong>
-                            <br />
-                            <small>Sustaining excellence in use</small>
-                            <ul className="megaList">
-                              <li>Property Management</li>
-                              <li>Integrated Facility Management Services</li>
-                              <li>Operation & Maintenance</li>
-                              <li>HR Support Services</li>
-                            </ul>
+                            {activeCategory === "construct" && (
+                              // <div className=" d-flex justify-content-center">
+                              <ul className="megaList">
+                                <li>Engineering, Procurement & Construction</li>
+                                <li>Design & Build</li>
+                                <li>Fitout & Retrofit</li>
+                                <li>Specialty Services</li>
+                              </ul>
+                              // </div>
+                            )}
+
+                            {activeCategory === "operate" && (
+                              <ul className="megaList d-flex flex-column justify-content-center">
+                                <li>Property Management</li>
+                                <li>Integrated Facility Management Services</li>
+                                <li>Operation & Maintenance</li>
+                                <li>HR Support Services</li>
+                              </ul>
+                            )}
+                            {activeCategory === "solution" && (
+                              // <div className=" d-flex justify-content-center">
+                              <ul className="megaList">
+                                <li>Medical Institutions & Colleges</li>
+                                <li>Multispecialty Hospitals</li>
+                                <li>Modular Hospitals</li>
+                                <li>Government Hospitals</li>
+                                <li>Facilities</li>
+                              </ul>
+                              // </div>
+                            )}
                           </Col>
                         </Row>
 
@@ -311,7 +378,7 @@ export default function Header() {
                 )}
 
                 {/* Solutions */}
-                {isMobile ? (
+                {/* {isMobile ? (
                   <NavDropdown title="Solutions" id="solutions-nav-dropdown">
                     <NavDropdown.Item href="#">
                       Medical Institutions & Colleges
@@ -380,7 +447,7 @@ export default function Header() {
                       </div>
                     )}
                   </div>
-                )}
+                )} */}
                 <Nav.Link href="/finance" className="px-3 py-2">
                   Properties
                 </Nav.Link>

@@ -1,3 +1,10 @@
+export type JourneyTab = {
+  key: string;
+  label: string;
+  title: string;
+  description: string;
+  image: string;
+};
 export interface Service {
   img: string;
   title: string;
@@ -27,6 +34,7 @@ export interface HomeData {
   projects: Project[];
   testimonials: Testimonial[];
   blogs: Blog[];
+  journeyTabs: JourneyTab[]; 
 }
 
 // Export strongly-typed home data
@@ -108,5 +116,58 @@ export const homeData: HomeData = {
     { img: "/images/blogs/blog1.png", title: "5 Smart Layout Trends in Modern Healthcare Facilities", link: "#" },
     { img: "/images/blogs/blog2.png", title: "How Infrastructure Impacts Hospital Infection Rates", link: "#" },
     { img: "/images/blogs/blog3.png", title: "Sustainable Hospital Infrastructure: Why It Matters", link: "#" }
+  ],
+  journeyTabs: [
+    {
+      key: "site-survey",
+      label: "Site Survey",
+      title: "Conduct Site Surveys with Infra.Health",
+      description:
+        "Our office team configures survey needs to be done by the field team via mobile app. The mobile app guides the team to capture spaces, measurements, technical details & observations. Real-time survey details are shared back to office teams for accurate planning.",
+      image: "/images/journey/site-survey.jpg",
+    },
+    {
+      key: "design-management",
+      label: "Design Management",
+      title: "Project Designs Management Workflow",
+      description:
+        "Our designs are approved & managed on Infra.Health’s tech platform, accessible to field teams via mobile app. Field teams can raise issues and ask for clarifications (RFIs). Experience a hassle-free way to manage & iterate designs in real time.",
+      image: "/images/journey/design-management.jpg",
+    },
+    {
+      key: "proposals",
+      label: "Proposals & BOQ",
+      title: "Project Estimates & Budget",
+      description:
+        "Review & manage your list of scope items with quantities and rates. Infra.Health manages proposal approvals, tracks change orders & monitors the project budget—delivering a quick and hassle-free client experience.",
+      image: "/images/journey/proposals.jpg",
+    },
+    {
+      key: "construction",
+      label: "Construction Management",
+      title: "Track Real Progress",
+      description:
+        "Track activity-wise & value-wise progress of work by the field team. Get daily updates on work items, activities, manpower & obstacles through Infra.Health’s integrated monitoring system.",
+      image: "/images/journey/construction.jpg",
+    },
+    {
+      key: "handover",
+      label: "Audit & Handover",
+      title: "Clean Project Closure & Handover",
+      description:
+        "Infra.Health captures all pending issues as a snaglist and tracks their closure. We record joint measurements and finalize billables to ensure a smooth and transparent project closure and handover.",
+      image: "/images/journey/audit-handover.jpg",
+    },
+    {
+      key: "operations",
+      label: "Operations",
+      title: "Seamless Healthcare Facility Operations",
+      description:
+        "Once your healthcare facility is operational, Infra.Health provides end-to-end support to ensure smooth, efficient, and compliant day-to-day functioning. Our operations service focuses on optimizing processes, maintaining quality standards, and enabling hassle-free management.",
+      image: "/images/journey/operations.jpg",
+    },
   ]
 };
+
+
+
