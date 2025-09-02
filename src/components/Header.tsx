@@ -226,19 +226,19 @@ export default function Header() {
                             {activeCategory === "consult" && (
                               // <div className="d-flex justify-content-evenly">
                                 <ul className="megaList">
-                                  <li>Hospital Management Consultancy</li>
-                                  <li>Hospital Design</li>
-                                  <li>Project Management Consultancy</li>
-                                  <li>Equipment Planning & Integration</li>
-                                  <li>
-                                    Public Private Partnership (PPP) Advisory
+                                  <li><strong>Hospital Management Consultancy</strong></li>
+                                  <li><strong>Hospital Design</strong></li>
+                                  <li><strong>Project Management Consultancy</strong></li>
+                                  <li><strong>Equipment Planning & Integration</strong></li>
+                                  <li><strong>
+                                    Public Private Partnership (PPP) Advisory</strong>
                                   </li>
                                 {/* </ul>
                                 <ul className="megaList"> */}
-                                  <li>Hospital ESG Advisory Services</li>
-                                  <li>Hospital Green Building Consultancy</li>
-                                  <li>Facility Management Consultancy</li>
-                                  <li>Accreditation Advisory</li>
+                                  <li><strong>Hospital ESG Advisory Services</strong></li>
+                                  <li><strong>Hospital Green Building Consultancy</strong></li>
+                                  <li><strong>Facility Management Consultancy</strong></li>
+                                  <li><strong>Accreditation Advisory</strong></li>
                                 </ul>
                               // </div>
                             )}
@@ -246,30 +246,30 @@ export default function Header() {
                             {activeCategory === "construct" && (
                               // <div className=" d-flex justify-content-center">
                               <ul className="megaList">
-                                <li>Engineering, Procurement & Construction</li>
-                                <li>Design & Build</li>
-                                <li>Fitout & Retrofit</li>
-                                <li>Specialty Services</li>
+                                <li><strong>Engineering, Procurement & Construction</strong></li>
+                                <li><strong>Design & Build</strong></li>
+                                <li><strong>Fitout & Retrofit</strong></li>
+                                <li><strong>Specialty Services</strong></li>
                               </ul>
                               // </div>
                             )}
 
                             {activeCategory === "operate" && (
                               <ul className="megaList d-flex flex-column justify-content-center">
-                                <li>Property Management</li>
-                                <li>Integrated Facility Management Services</li>
-                                <li>Operation & Maintenance</li>
-                                <li>HR Support Services</li>
+                                <li><strong>Property Management</strong></li>
+                                <li><strong>Integrated Facility Management Services</strong></li>
+                                <li><strong>Operation & Maintenance</strong></li>
+                                <li><strong>HR Support Services</strong></li>
                               </ul>
                             )}
                             {activeCategory === "solution" && (
                               // <div className=" d-flex justify-content-center">
                               <ul className="megaList">
-                                <li>Medical Institutions & Colleges</li>
-                                <li>Multispecialty Hospitals</li>
-                                <li>Modular Hospitals</li>
-                                <li>Government Hospitals</li>
-                                <li>Facilities</li>
+                                <li><strong>Medical Institutions & Colleges</strong></li>
+                                <li><strong>Multispecialty Hospitals</strong></li>
+                                <li><strong>Modular Hospitals</strong></li>
+                                <li><strong>Government Hospitals</strong></li>
+                                <li><strong>Facilities</strong></li>
                               </ul>
                               // </div>
                             )}
