@@ -1,27 +1,23 @@
 .hero {
   position: relative;
-  height: 75vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--white);
-  background-image: url("/images/hero/home-banner.jpg");
-  background-size: cover;
-  background-position: center;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  overflow: visible;
-  z-index: 0;
+  height: 100vh;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crop nicely */
+  z-index: -2; /* behind overlay & content */
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  z-index: 1;
+  background: rgba(0, 0, 0, 0.4); /* dark overlay */
+  z-index: -1;
 }
 
 .hero-content {
@@ -45,7 +41,7 @@
 .hero-bottom-box {
   position: absolute;
   left: 50%;
-  bottom: -40px; /* Pull it slightly out of hero */
+  bottom: -80px; /* Pull it slightly out of hero */
   transform: translateX(-50%);
   background: var(--teal); /* ✅ your teal brand color */
   padding: 20px 28px;
@@ -218,6 +214,10 @@
   text-align: center;
 }
 
+.bg-danger {
+  background-color: #e98c46 !important;
+}
+
 @media (max-width: 992px) {
   .about-grid {
     grid-template-columns: 1fr;
@@ -227,9 +227,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
-    height: 70vh;
-    padding: 60px 16px 140px;
-    background-image: url("/images/hero/mobile-banner.jpg");
+    height: 79vh;
   }
 
   .hero-content h3 {
@@ -238,7 +236,7 @@
 
   .hero-bottom-box {
     flex-direction: column;
-    bottom: -70px;
+    bottom: -200px;
     text-align: center;
     padding: 18px;
   }
@@ -252,7 +250,9 @@
   .counters,
   .about-images,
   .about-text,
-  .counter-box, .about-text .section-subtitle, .about-text h3{
+  .counter-box,
+  .about-text .section-subtitle,
+  .about-text h3 {
     width: 100%;
   }
   .about-text {
@@ -260,6 +260,9 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+  }
+  .about-difference {
+    padding: 140px 0 0;
   }
   /* .why-choose-us .section-title{
     margin-left: 10px;
@@ -273,9 +276,6 @@
   .counter-box p {
     text-align: center;
   }
-  .hero-bottom-box {
-    bottom: -150px;
-  }
   .testimonials .swiper-slide {
     /* margin-left: 25px !important; */
     /* width: 300px !important; */
@@ -285,6 +285,18 @@
   }
   .cta-buttons {
     align-self: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-scroll {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
+  }
+
+  .nav-scroll::-webkit-scrollbar {
+    display: none; /* optional: hide scrollbar */
   }
 }
 

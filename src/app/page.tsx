@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Nav, Button } from "react-bootstrap";
 import { FaTags, FaStore } from "react-icons/fa";
 import "../styles/home.css";
 import TalkToUsModal from "../components/TalktoUsModal";
@@ -15,9 +15,12 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { homeData } from "@/data/homeData";
 
 export default function Home() {
-  const { words, services, projects, testimonials, blogs } = homeData;
+  const { words, services, projects, testimonials, blogs, journeyTabs } =
+    homeData;
   const [currentWord, setCurrentWord] = useState(0);
   const [modalShow, setModalShow] = useState(false);
+  const [activeKey, setActiveKey] = useState(journeyTabs[0].key);
+  const activeTab = journeyTabs.find((tab: any) => tab.key === activeKey)!;
 
   useEffect(() => {
     const interval = setInterval(
@@ -63,11 +66,24 @@ export default function Home() {
   }, [words.length]);
 
   return (
-    <main>
+    <>
       {/* HERO SECTION */}
       <section className="hero" id="hero">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
+        <video className="hero-video" autoPlay muted loop playsInline>
+          <source
+            src="/images/hero/infra-banner.mp4"
+            type="video/mp4"
+            media="(min-width: 768px)"
+          />
+          {/* Mobile video */}
+          <source
+            src="/images/hero/infra-health-mobile.mp4"
+            type="video/mp4"
+            media="(max-width: 767px)"
+          />
+          Your browser does not support the video tag.
+        </video>
+        {/* <div className="hero-content">
           <h3 className="subheading">One‑Stop Solution for</h3>
           <h3 className="d-flex justify-space-evenly">
             <span>Healthcare </span>{" "}
@@ -75,7 +91,7 @@ export default function Home() {
               <span className="rotating-text"> {words[currentWord]}</span>
             </span>
           </h3>
-        </div>
+        </div> */}
         <div className="hero-bottom-box" aria-hidden="false">
           <Row className="d-flex align-items-center w-100">
             <Col md={10} className="cta-text">
@@ -99,6 +115,7 @@ export default function Home() {
           </Row>
         </div>
       </section>
+
       {/* ABOUT SECTION */}
       <section className="about-difference">
         <Container>
@@ -236,6 +253,81 @@ export default function Home() {
           </Row>
         </Container>
       </section>
+      {/* JOURNEY SECTION */}
+      <section className="py-5 bg-light">
+        <Container>
+          {/* Heading */}
+          <Row className="align-items-start justify-content-between">
+            <p className="section-subtitle">How We Do It</p>
+            <h3 className="section-title mb-4">
+              Your journey from <span>Enquiry</span> to <span>Handover</span>
+            </h3>
+          </Row>
+
+          {/* Tabs */}
+          <Row className="justify-content-center mb-5">
+            <Col md="12">
+              <Nav
+                variant="pills"
+                className="nav-scroll gap-2"
+                activeKey={activeKey}
+                onSelect={(k) => setActiveKey(k || journeyTabs[0].key)}
+              >
+                {journeyTabs.map((tab) => (
+                  <Nav.Item key={tab.key} className="flex-shrink-0">
+                    <Nav.Link
+                      eventKey={tab.key}
+                      className={
+                        activeKey === tab.key
+                          ? "bg-danger text-white"
+                          : "bg-white text-dark"
+                      }
+                      style={{
+                        borderRadius: "8px",
+                        fontWeight: 500,
+                        border: "1px solid #e98c46",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {tab.label}
+                    </Nav.Link>
+                  </Nav.Item>
+                ))}
+              </Nav>
+            </Col>
+          </Row>
+
+          {/* Content */}
+          <Row className="align-items-center">
+            <Col md={6} className="mb-3 mb-md-0">
+              <div className="d-flex align-items-center gap-2 mb-3">
+                <h4 className="fw-bold">{activeTab.title}</h4>
+              </div>
+              <p className="text-muted">{activeTab.description}</p>
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-sm"
+                onClick={() => setModalShow(true)}
+              >
+                Contact Us
+              </button>
+            </Col>
+            <Col md={6}>
+              <Swiper spaceBetween={20} slidesPerView={1} loop>
+                <SwiperSlide>
+                  <Image
+                    src={activeTab.image}
+                    alt={activeTab.label}
+                    width={500}
+                    height={350}
+                    className="rounded shadow"
+                  />
+                </SwiperSlide>
+              </Swiper>
+            </Col>
+          </Row>
+        </Container>
+      </section>
       {/* SERVICES SLIDER */}
       <section className="services-slider py-5">
         <Container>
@@ -327,7 +419,7 @@ export default function Home() {
           <Swiper
             modules={[Autoplay]}
             // spaceBetween={20}
-            slidesPerView={1} 
+            slidesPerView={1}
             loop
             autoplay={{ delay: 3500, disableOnInteraction: false }}
             breakpoints={{
@@ -368,7 +460,7 @@ export default function Home() {
                     src={blog.img}
                     alt={blog.title}
                     width={400}
-                    height={250}
+                    height={350}
                   />
                   <Card.Body className="card-content">
                     <Card.Title as="h3" className="h6">
@@ -389,6 +481,6 @@ export default function Home() {
       </section>
 
       <TalkToUsModal show={modalShow} handleClose={() => setModalShow(false)} />
-    </main>
+    </>
   );
 }
