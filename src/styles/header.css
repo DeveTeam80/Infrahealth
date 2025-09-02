@@ -25,8 +25,8 @@
 .megaMenu small,
 .megaList li {
   display: block;
-  color: #666;
-  font-size: 0.875em;
+  /* color: #666; */
+  font-size: 1em;
 }
 
 .megaList {
@@ -59,7 +59,12 @@
 .megaParentList {
   list-style: none;
   padding: 0;
+  margin: 0;
+  border-right: 2px solid #e0e0e0;
+  height: 100%;
 }
+
+
 .megaParentList li {
   padding: 12px 10px;
   cursor: pointer;
@@ -71,12 +76,28 @@
 }
 .megaChildren .megaList {
   list-style: none;
-  padding-left: 20px;
+  padding-left: 0; /* remove default spacing */
+  margin: 0;
 }
+
 .megaChildren .megaList li {
-  padding: 6px 0;
-  font-weight: 600;
+  display: flex; /* align bullet + text */
+  align-items: center; /* vertical alignment */
+  margin-bottom: 8px;
 }
+
+.megaChildren .megaList li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #e98c46; /* brand color */
+  margin-right: 10px; /* spacing between bullet and text */
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+
 
 
 @media (max-width: 991px) {
