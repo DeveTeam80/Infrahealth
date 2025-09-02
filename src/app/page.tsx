@@ -71,20 +71,19 @@ export default function Home() {
     <>
       {/* HERO SECTION */}
       <section className="hero" id="hero">
-        <video className="hero-video" autoPlay muted loop playsInline>
-          <source
-            src="/images/hero/infra-banner.mp4"
-            type="video/mp4"
-            media="(min-width: 768px)"
-          />
-          {/* Mobile video */}
-          <source
-            src="/images/hero/infra-health-mobile.mp4"
-            type="video/mp4"
-            media="(max-width: 767px)"
-          />
-          Your browser does not support the video tag.
-        </video>
+        <div className="video-desktop">
+          <video className="hero-video" autoPlay muted loop playsInline>
+            <source src="/images/hero/infra-banner.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className="video-mobile">
+          <video className="hero-video" autoPlay muted loop playsInline>
+            <source
+              src="/images/hero/infra-health-mobile.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
         {/* <div className="hero-content">
           <h3 className="subheading">One‑Stop Solution for</h3>
           <h3 className="d-flex justify-space-evenly">

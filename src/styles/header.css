@@ -1,3 +1,8 @@
+.top-bar,
+.navbar > .container {
+  max-width: 1400px !important;
+}
+
 .megaMenu {
   position: absolute;
   top: 100%;

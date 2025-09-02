@@ -9,7 +9,10 @@ import {
   FaHandshake,
   FaLeaf,
 } from "react-icons/fa";
-import "../../styles/about.css"; 
+import { FaRobot, FaUsers, FaHospitalUser } from "react-icons/fa";
+import "../../styles/about.css";
+import Image from "next/image";
+import { FaStar } from "react-icons/fa6";
 
 export default function AboutSection() {
   const [visibleCards, setVisibleCards] = useState<{ [key: string]: boolean }>(
@@ -36,25 +39,19 @@ export default function AboutSection() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="hero" id="hero">
-        <div className="heroOverlay"></div>
-        <div className="heroContent">
-          <h3 className="subheading">One-Stop Solution for</h3>
-          <h3>
-            <span>Healthcare Infrastructure</span>
-          </h3>
-        </div>
-      </section>
-
       {/* About */}
-      <section className="about-section">
+      <section className="about-difference">
         <Container>
-          <Row className="about-grid">
-            <Col md={6} className="aboutImages">
-              <img src="/images/home-abt.png" alt="Healthcare Team" />
-            </Col>
-            <Col md={6} className="aboutText">
+          <div className="about-grid">
+            <div className="about-images">
+              <Image
+                src="/images/hero/abt-home.png"
+                alt="Healthcare Team"
+                width={600}
+                height={500}
+              />
+            </div>
+            <div className="about-text">
               <p className="section-subtitle">About Infra.Health</p>
               <h3 className="section-title">
                 Who we <span>are?</span>
@@ -70,51 +67,58 @@ export default function AboutSection() {
                 2,000 beds, Infra.Health collaborates with private healthcare
                 providers, government agencies, and PPP entities to deliver
                 world-class medical infrastructure at a high speed, quality, and
-                cost efficiency.
+                cost efficiency. From setting up hospitals from the ground up to
+                designing state-of-the-art facilities, we provide everything
+                under one roof.
               </p>
               <p>
                 We take pride in ensuring that patients receive world-class care
                 without compromise, and that future healthcare professionals are
-                equipped with the best learning environments.
+                equipped with the best learning environments. With over 50
+                successful projects, we are known for our deep understanding of
+                healthcare needs, timely project delivery, and uncompromising
+                quality standards.
               </p>
               <p>
                 Now expanding globally, Infra.Health brings its expertise to
-                emerging and developed markets worldwide.
+                emerging and developed markets worldwide, powered by FDI,
+                international partnerships, advanced manufacturing, and digital
+                healthcare innovation.
               </p>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </Container>
       </section>
 
       {/* Our Approach */}
-      <section className="ourApproach">
+      <section className="our-approach">
         <Container>
           <p className="section-subtitle">Our Process</p>
           <h2 className="section-title">
             Our Approach to <span>Healthcare Infrastructure</span>
           </h2>
 
-          <Row className="approachGrid">
+          <Row className="approach-grid">
             {[
               {
                 title: "Multidisciplinary Expertise",
-                text: "Our team includes architects, planners, project managers, engineers, chartered accountants, doctors, and more — ensuring every healthcare project is a masterpiece.",
+                text: "Our team includes architects, planners, project managers, engineers, chartered accountants, company secretaries, legal experts, doctors, and medical specialists, working seamlessly to ensure every healthcare project is a masterpiece of design, operational efficiency, and patient care.",
               },
               {
                 title: "World-Class Patient Care",
-                text: "Patients receive uncompromised care. Future professionals are trained in the best environments, backed by 50+ successful projects.",
+                text: "We take pride in ensuring that patients receive world-class care without compromise. Future healthcare professionals are also equipped with the best learning environments, backed by over 50 successful projects delivered with quality and precision.",
               },
               {
                 title: "Client-Centered Execution",
-                text: "Every project begins with understanding client needs. We execute their vision and provide expert consultation for optimal functionality.",
+                text: "Every project begins with a detailed understanding of client requirements. We not only execute their vision but also provide expert consultation for optimal design and functionality at every stage.",
               },
               {
                 title: "Commitment to Excellence",
-                text: "Our engineers oversee planning, resources, and flawless execution. Client satisfaction remains our highest priority.",
+                text: "Our skilled engineers and project managers oversee planning, resource management, and flawless execution. Client satisfaction remains our highest priority, strengthened by long-term relationships, positive testimonials, and continuous improvement.",
               },
             ].map((card, i) => (
               <Col
-                md={6}
+                md={12}
                 key={i}
                 className={`${"approach-card"} ${"scrollReveal"} ${
                   visibleCards[i] ? "visible" : ""
@@ -137,9 +141,9 @@ export default function AboutSection() {
           </h2>
           <Row className="mv-grid">
             <Col
-              md={6}
+              md={12}
               className={`${"mv-card"} ${"scrollReveal"} ${
-                visibleCards[10] ? "visible" : ""
+                visibleCards[0] ? "visible" : ""
               }`}
             >
               <h3>Our Vision</h3>
@@ -150,9 +154,9 @@ export default function AboutSection() {
               </p>
             </Col>
             <Col
-              md={6}
+              md={12}
               className={`${"mv-card"} ${"scrollReveal"} ${
-                visibleCards[11] ? "visible" : ""
+                visibleCards[1] ? "visible" : ""
               }`}
             >
               <h3>Our Mission</h3>
@@ -166,23 +170,87 @@ export default function AboutSection() {
         </Container>
       </section>
 
+      {/* Core Commitments */}
+      <section className="py-5 who-we-are-section">
+        <Container>
+          <Row className="align-items-center">
+            {/* Left Side: Icons */}
+            <Col md={5}>
+              <Image
+                src="/images/about.jpg"
+                alt="Healthcare Team"
+                width={500}
+                height={300}
+                style={{ borderRadius: "12px" }}
+              />
+            </Col>
+
+            <Col md={7} className="ps-md-5 mt-4 mt-md-0">
+              <p className="section-subtitle">Why Choose Us</p>
+              <h2 className="section-title">
+                Our <span>Core Commitments</span>
+              </h2>
+              <ul className="mt-3 core-ul">
+                <li>
+                  Deliver innovative solutions using <strong>AI</strong>,
+                  modular construction, and digital twin technology
+                </li>
+                <li>
+                  Focus on green buildings, <strong>LEED-certified</strong>
+                  energy-efficient medical facilities
+                </li>
+                <li>
+                  Ensure <strong>360° delivery</strong> with a collaborative
+                  team of experts from different disciplines
+                </li>
+                <li>
+                  No compromise in <strong>quality</strong> and standards
+                </li>
+                <li>
+                  Enhance <strong>patient experience</strong> and healthcare
+                  outcomes
+                </li>
+              </ul>
+            </Col>
+          </Row>
+        </Container>
+      </section>
       {/* Core Values */}
       <section className="core-values">
         <Container>
           <p className="section-subtitle">Our Core Values</p>
-          <h3 className="section-title">
+          <h2 className="section-title">
             Our Foundation for Trusted <span>Healthcare Solutions</span>
-          </h3>
-
+          </h2>
           <Row className="features">
             {[
-              { icon: <FaAward />, title: "EXCELLENCE", text: "Setting new benchmarks in healthcare design, construction, and operations" },
-              { icon: <FaLightbulb />, title: "INNOVATION", text: "Modular, digital, and green technologies for superior results" },
-              { icon: <FaBalanceScale />, title: "INTEGRITY", text: "Transparent, ethical, and responsible business practices" },
-              { icon: <FaHandshake />, title: "COLLABORATION", text: "Partnering with stakeholders for shared success" },
-              { icon: <FaLeaf />, title: "SUSTAINABILITY", text: "Building for a greener, healthier future" },
+              {
+                icon: <FaAward />,
+                title: "EXCELLENCE",
+                text: "Setting new benchmarks in healthcare design, construction, and operations",
+              },
+              {
+                icon: <FaLightbulb />,
+                title: "INNOVATION",
+                text: "Modular, digital, and green technologies for superior results",
+              },
+              {
+                icon: <FaBalanceScale />,
+                title: "INTEGRITY",
+                text: "Transparent, ethical, and responsible business practices",
+              },
+              {
+                icon: <FaHandshake />,
+                title: "COLLABORATION",
+                text: "Partnering with stakeholders for shared success",
+              },
+              {
+                icon: <FaLeaf />,
+                title: "SUSTAINABILITY",
+                text: "Building for a greener, healthier future",
+              },
             ].map((val, i) => (
-              <Col key={i} md={4} className="featureCard">
+              <Col key={i} md={3} className="feature-card">
                 <div className="icon">{val.icon}</div>
                 <h3>
                   <span>{val.title}</span>
