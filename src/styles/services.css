@@ -1,0 +1,178 @@
+/* Borrowing general styles from your about.css for consistency */
+.section-subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.section-title {
+    font-weight: 700;
+    color: #212529;
+    /* Dark color for titles */
+    border-left: 3px solid #6767672e;
+    padding: 0 0 0 20px;
+    margin: 10px 0 20px 0;
+}
+
+.section-title span {
+    color: #3b9c9d;
+    /* Main accent teal */
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Component-Specific Styling --- */
+
+/* Left Side Sticky Navigation */
+.sidenav {
+    top: 6rem;
+    /* Adjust based on your header's height */
+    padding-right: 1rem;
+}
+
+.sidenav .nav-link {
+    padding: 0.7rem 1rem;
+    color: #495057;
+    border-right: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0;
+    text-align: left;
+}
+
+.sidenav .nav-link:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+
+.sidenav .nav-link.active {
+    background-color: #f0fdfa;
+    color: #3b9c9d;
+    border-right-color: #3b9c9d;
+    font-weight: 600;
+}
+
+/* Tab styling inspired by your design */
+.service-tabs .nav-link {
+    border: 1px solid #dee2e6;
+    color: #495057;
+    border-radius: 999px !important;
+    /* Pill shape */
+    padding: 0.5rem 1.25rem;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s ease-in-out;
+    background-color: #fff;
+}
+
+.service-tabs .nav-link:hover {
+    background-color: #f8f9fa;
+}
+
+.service-tabs .nav-link.active {
+    background-color: #e98c46;
+    /* Brand Orange */
+    color: white;
+    border-color: #e98c46;
+    font-weight: 500;
+}
+
+/* Main content card styling */
+.service-card {
+    background: #fff;
+    padding: 28px 22px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.service-card p {
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+
+/* List styling for scope/benefits/deliverables */
+.details-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.75rem;
+    text-transform: capitalize;
+}
+
+.details-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.details-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.details-list li svg {
+    color: #e98c46;
+    margin-right: 0.75rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.category-icon {
+    color: #3b9c9d;
+    font-size: 25px;
+}
+
+.value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.value-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: 4px solid #3b9c9d;
+    text-align: center;
+}
+
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.value-card .icon {
+    font-size: 36px;
+    color: #3b9c9d;
+    margin-bottom: 15px;
+}
+
+.value-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.value-card p {
+    font-size: 0.9rem;
+}
+
+.interactive-section .img-fluid {
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
