@@ -1,0 +1,181 @@
+/* Borrowing general styles from your about.css for consistency */
+.section-subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.section-title {
+    font-weight: 700;
+    color: #212529;
+    /* Dark color for titles */
+    border-left: 3px solid #6767672e;
+    padding: 0 0 0 20px;
+    margin: 10px 0 20px 0;
+}
+
+.section-title span {
+    color: #3b9c9d;
+    /* Main accent teal */
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Component-Specific Styling --- */
+
+/* Styles adapted from your existing design for consistency */
+.portfolio-header {
+    max-width: 1920px;
+    margin: 0 auto 3rem auto;
+    text-align: left;
+}
+
+.portfolio-highlights {
+    list-style: none;
+    padding-left: 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.portfolio-highlights li {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.portfolio-highlights .icon {
+    color: #3b9c9d;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.filter-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1rem;
+}
+
+.filter-nav .nav-link {
+    color: #495057;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0;
+    white-space: nowrap;
+    /* Prevent text from wrapping within a link */
+}
+
+.filter-nav .nav-link:hover {
+    border-bottom-color: #e98c46;
+    /* Orange accent on hover */
+}
+
+.filter-nav .nav-link.active {
+    color: #3b9c9d;
+    border-bottom-color: #3b9c9d;
+    /* Teal accent for active */
+}
+
+/* Responsive styles for the filter navigation */
+@media (max-width: 767px) {
+    .filter-nav {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .filter-nav::-webkit-scrollbar {
+        display: none;
+        /* Hide scrollbar for Chrome, Safari, Opera */
+    }
+
+    .filter-nav .nav-item {
+        flex-shrink: 0;
+        /* Prevent nav items from shrinking */
+    }
+}
+
+.portfolio-grid {
+    gap: 1.5rem 0;
+    /* Add vertical gap between rows */
+}
+
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    aspect-ratio: 4 / 3;
+    /* Maintain a consistent aspect ratio */
+    background-color: #f0fdfa;
+}
+
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.project-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1));
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-card-overlay {
+    opacity: 1;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+.project-card-overlay h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+.project-card-overlay p {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+    transition-delay: 0.1s;
+}
+
+.project-card:hover h4,
+.project-card:hover p {
+    transform: translateY(0);
+}
