@@ -545,9 +545,9 @@ export default function Header() {
                 </Nav.Link>
 
                 <Nav.Link
-                  href="/finance"
+                  href="/project-finance"
                   className={`px-3 py-2 ${
-                    pathname === "/finance" ? "active" : ""
+                    pathname === "/project-finance" ? "active" : ""
                   }`}
                 >
                   Project Finance

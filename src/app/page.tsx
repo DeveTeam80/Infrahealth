@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Container, Row, Col, Card, Nav } from "react-bootstrap";
@@ -31,40 +31,40 @@ export default function Home() {
   //   return () => clearInterval(interval);
   // }, []);
 
-  // useEffect(() => {
-  //   const counters = document.querySelectorAll<HTMLElement>(".counter");
-  //   const runCounter = (counter: HTMLElement) => {
-  //     const target = +counter.getAttribute("data-to")!;
-  //     const suffix = counter.getAttribute("data-suffix") || "";
-  //     let count = 0;
-  //     const increment = target / 200;
-  //     const update = () => {
-  //       count += increment;
-  //       if (count < target) {
-  //         counter.textContent = Math.floor(count) + suffix;
-  //         requestAnimationFrame(update);
-  //       } else {
-  //         counter.textContent = target.toLocaleString() + suffix;
-  //       }
-  //     };
-  //     update();
-  //   };
+  useEffect(() => {
+    const counters = document.querySelectorAll<HTMLElement>(".counter");
+    const runCounter = (counter: HTMLElement) => {
+      const target = +counter.getAttribute("data-to")!;
+      const suffix = counter.getAttribute("data-suffix") || "";
+      let count = 0;
+      const increment = target / 200;
+      const update = () => {
+        count += increment;
+        if (count < target) {
+          counter.textContent = Math.floor(count) + suffix;
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = target.toLocaleString() + suffix;
+        }
+      };
+      update();
+    };
 
-  //   const observer = new IntersectionObserver(
-  //     (entries, obs) => {
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           runCounter(entry.target as HTMLElement);
-  //           obs.unobserve(entry.target);
-  //         }
-  //       });
-  //     },
-  //     { threshold: 0.5 }
-  //   );
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target as HTMLElement);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
 
-  //   counters.forEach((counter) => observer.observe(counter));
-  //   return () => observer.disconnect();
-  // }, [words.length]);
+    counters.forEach((counter) => observer.observe(counter));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
