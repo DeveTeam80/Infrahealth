@@ -153,7 +153,7 @@ export default function ConstructPage() {
             improved logistics coordination. Suppliers looking to strengthen
             their presence in the healthcare domain get an opportunity of a
             strategic partnership to deliver excellence together. <br />
-            <br /> Let's Grow Together!
+            <br /> Let&apos;s Grow Together!
           </p>
         </div>
 
