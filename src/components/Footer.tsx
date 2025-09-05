@@ -87,9 +87,9 @@ const Footer = () => {
                 "Project Finance",
               ].map((text, i) => (
                 <li key={i}>
-                  <Link href="#" passHref>
-                    {text}
-                  </Link>
+<Link href={`/${text.toLowerCase().replace(/\s+/g, "-")}`} passHref>
+  {text}
+</Link>
                 </li>
               ))}
             </ul>

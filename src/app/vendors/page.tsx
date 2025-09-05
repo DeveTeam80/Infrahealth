@@ -660,7 +660,7 @@ export default function ConstructPage() {
                       <div className="text-center">
                         <button
                           type="submit"
-                          className="btn btn-outline-secondary btn-lg px-5"
+                          className="btn btn-outline-secondary"
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? (

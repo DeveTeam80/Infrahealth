@@ -35,6 +35,41 @@ export default function AboutSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+    useEffect(() => {
+      const counters = document.querySelectorAll<HTMLElement>(".counter");
+      const runCounter = (counter: HTMLElement) => {
+        const target = +counter.getAttribute("data-to")!;
+        const suffix = counter.getAttribute("data-suffix") || "";
+        let count = 0;
+        const increment = target / 200;
+        const update = () => {
+          count += increment;
+          if (count < target) {
+            counter.textContent = Math.floor(count) + suffix;
+            requestAnimationFrame(update);
+          } else {
+            counter.textContent = target.toLocaleString() + suffix;
+          }
+        };
+        update();
+      };
+  
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              runCounter(entry.target as HTMLElement);
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+  
+      counters.forEach((counter) => observer.observe(counter));
+      return () => observer.disconnect();
+    }, []);
+
   return (
     <>
       {/* About */}
