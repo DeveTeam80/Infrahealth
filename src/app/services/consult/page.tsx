@@ -273,8 +273,8 @@ export default function ConsultPage() {
             <main className="container py-5 mt-4">
                 <div className="text-left mx-auto mb-5 pb-4" style={{ maxWidth: '1920px' }}>
                     <p className="section-subtitle">OUR SERVICES</p>
-                    <h1 className="section-title"><span>Consult</span>ancy</h1>
-                    <p className="lead mt-3 text-muted">
+                    <h3 className="section-title"><span>Consult</span>ancy</h3>
+                    <p className="mt-3 text-muted">
                         With expertise spanning Management, Design, and more, we offer comprehensive healthcare infrastructure solutions to empower providers, governments, and investors worldwide.
                     </p>
                 </div>
@@ -297,19 +297,19 @@ export default function ConsultPage() {
                     <Col lg={9}>
                         <div className="vstack gap-5">
                             <section id="management-consultancy">
-                                <h2>{consultData.management.title}</h2>
+                                <h3>{consultData.management.title}</h3>
                                 <p className="text-muted fs-5">{consultData.management.subtitle}</p>
                                 {createTabbedSection(consultData.management)}
                             </section>
 
                             <section id="hospital-design">
-                                <h2>{consultData.design.title}</h2>
+                                <h3>{consultData.design.title}</h3>
                                 <p className="text-muted fs-5">{consultData.design.subtitle}</p>
                                 {createTabbedSection(consultData.design)}
                             </section>
 
                             <section id="pmc">
-                                <h2>{consultData.pmc.title}</h2>
+                                <h3>{consultData.pmc.title}</h3>
                                 <p className="text-muted fs-5">{consultData.pmc.subtitle}</p>
                                 <div className="service-card">
                                     <DetailSection details={{ stages: consultData.pmc.stages }} />
@@ -317,37 +317,37 @@ export default function ConsultPage() {
                             </section>
 
                             <section id="equipment-planning">
-                                <h2>{consultData.equipment.title}</h2>
+                                <h3>{consultData.equipment.title}</h3>
                                 <p className="text-muted fs-5">{consultData.equipment.subtitle}</p>
                                 {createTabbedSection(consultData.equipment)}
                             </section>
 
                             <section id="ppp-advisory">
-                                <h2>{consultData.ppp.title}</h2>
+                                <h3>{consultData.ppp.title}</h3>
                                 <p className="text-muted fs-5">{consultData.ppp.subtitle}</p>
                                 <div className="service-card"><DetailSection details={consultData.ppp.details} /></div>
                             </section>
 
                             <section id="esg-advisory">
-                                <h2>{consultData.esg.title}</h2>
+                                <h3>{consultData.esg.title}</h3>
                                 <p className="text-muted fs-5">{consultData.esg.subtitle}</p>
                                 <div className="service-card"><DetailSection details={consultData.esg.details} /></div>
                             </section>
 
                             <section id="green-building">
-                                <h2>{consultData.green.title}</h2>
+                                <h3>{consultData.green.title}</h3>
                                 <p className="text-muted fs-5">{consultData.green.subtitle}</p>
                                 <div className="service-card"><DetailSection details={consultData.green.details} /></div>
                             </section>
 
                             <section id="ifm-consultancy">
-                                <h2>{consultData.ifm.title}</h2>
+                                <h3>{consultData.ifm.title}</h3>
                                 <p className="text-muted fs-5">{consultData.ifm.subtitle}</p>
                                 <div className="service-card"><DetailSection details={consultData.ifm.details} /></div>
                             </section>
 
                             <section id="accreditation-advisory">
-                                <h2>{consultData.accreditation.title}</h2>
+                                <h3>{consultData.accreditation.title}</h3>
                                 <p className="text-muted">{consultData.accreditation.subtitle}</p>
                                 <div className="service-card mt-3"><DetailSection details={consultData.accreditation.details} /></div>
                             </section>

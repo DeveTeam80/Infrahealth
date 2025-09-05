@@ -8,8 +8,10 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import "../styles/header.css";
 import TalkToUsModal from "./TalktoUsModal";
 import ReactCountryFlag from "react-country-flag";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   const [showMenu, setShowMenu] = useState<string | null>(null);
   const [hideTopBar, setHideTopBar] = useState(false);
   const [modalShow, setModalShow] = useState(false);
@@ -125,31 +127,31 @@ export default function Header() {
                 {isMobile ? (
                   // Mobile Dropdown
                   <NavDropdown title="Services" id="services-dropdown">
-                    <NavDropdown.Item href="#consult">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Hospital Management Consultancy
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#design">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Hospital Design
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#pmc">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Project Management Consultancy
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#equipment">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Equipment Planning & Integration
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#ppp">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Public Private Partnership (PPP) Advisory
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#esg">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Hospital ESG Advisory Services
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#green">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Hospital Green Building Consultancy
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#facility">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Facility Management Consultancy
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#accreditation">
+                    <NavDropdown.Item as={Link} href="/services/consult">
                       Accreditation Advisory
                     </NavDropdown.Item>
                   </NavDropdown>
@@ -176,9 +178,13 @@ export default function Header() {
                                   activeCategory === "consult" ? "active" : ""
                                 }
                               >
-                                <strong>Consult</strong>
-                                <br />
-                                <small>Shaping strategies with precision</small>
+                                <Link href="/services/consult">
+                                  <strong>Consult</strong>
+                                  <br />
+                                  <small>
+                                    Shaping strategies with precision
+                                  </small>
+                                </Link>
                               </li>
                               <li
                                 onMouseEnter={() =>
@@ -188,9 +194,11 @@ export default function Header() {
                                   activeCategory === "construct" ? "active" : ""
                                 }
                               >
-                                <strong>Construct</strong>
-                                <br />
-                                <small>Bringing ideas to life</small>
+                                <Link href="/services/construct">
+                                  <strong>Construct</strong>
+                                  <br />
+                                  <small>Bringing ideas to life</small>
+                                </Link>
                               </li>
                               <li
                                 onMouseEnter={() =>
@@ -200,9 +208,11 @@ export default function Header() {
                                   activeCategory === "operate" ? "active" : ""
                                 }
                               >
-                                <strong>Operate</strong>
-                                <br />
-                                <small>Sustaining excellence in use</small>
+                                <Link href="/services/operate">
+                                  <strong>Operate</strong>
+                                  <br />
+                                  <small>Sustaining excellence in use</small>
+                                </Link>
                               </li>
                               <li
                                 onMouseEnter={() =>
@@ -212,11 +222,13 @@ export default function Header() {
                                   activeCategory === "solution" ? "active" : ""
                                 }
                               >
-                                <strong>Solution</strong>
-                                <br />
-                                <small>
-                                  Tailored infrastructure for healthcare
-                                </small>
+                                <Link href="/services/solution">
+                                  <strong>Solution</strong>
+                                  <br />
+                                  <small>
+                                    Tailored infrastructure for healthcare
+                                  </small>
+                                </Link>
                               </li>
                             </ul>
                           </Col>
@@ -224,54 +236,153 @@ export default function Header() {
                           {/* RIGHT COLUMN (Children) */}
                           <Col md={9} className="megaChildren">
                             {activeCategory === "consult" && (
-                              // <div className="d-flex justify-content-evenly">
-                                <ul className="megaList">
-                                  <li><strong>Hospital Management Consultancy</strong></li>
-                                  <li><strong>Hospital Design</strong></li>
-                                  <li><strong>Project Management Consultancy</strong></li>
-                                  <li><strong>Equipment Planning & Integration</strong></li>
-                                  <li><strong>
-                                    Public Private Partnership (PPP) Advisory</strong>
-                                  </li>
-                                {/* </ul>
-                                <ul className="megaList"> */}
-                                  <li><strong>Hospital ESG Advisory Services</strong></li>
-                                  <li><strong>Hospital Green Building Consultancy</strong></li>
-                                  <li><strong>Facility Management Consultancy</strong></li>
-                                  <li><strong>Accreditation Advisory</strong></li>
-                                </ul>
-                              // </div>
+                              <ul className="megaList">
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>
+                                      Hospital Management Consultancy
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>Hospital Design</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>
+                                      Project Management Consultancy
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>
+                                      Equipment Planning & Integration
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>
+                                      Public Private Partnership (PPP) Advisory
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>
+                                      Hospital ESG Advisory Services
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>
+                                      Hospital Green Building Consultancy
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>
+                                      Facility Management Consultancy
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/consult">
+                                    <strong>Accreditation Advisory</strong>
+                                  </Link>
+                                </li>
+                              </ul>
                             )}
 
                             {activeCategory === "construct" && (
-                              // <div className=" d-flex justify-content-center">
                               <ul className="megaList">
-                                <li><strong>Engineering, Procurement & Construction</strong></li>
-                                <li><strong>Design & Build</strong></li>
-                                <li><strong>Fitout & Retrofit</strong></li>
-                                <li><strong>Specialty Services</strong></li>
+                                <li>
+                                  <Link href="/services/construct">
+                                    <strong>
+                                      Engineering, Procurement & Construction
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/construct">
+                                    <strong>Design & Build</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/construct">
+                                    <strong>Fitout & Retrofit</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/construct">
+                                    <strong>Specialty Services</strong>
+                                  </Link>
+                                </li>
                               </ul>
-                              // </div>
                             )}
 
                             {activeCategory === "operate" && (
-                              <ul className="megaList d-flex flex-column justify-content-center">
-                                <li><strong>Property Management</strong></li>
-                                <li><strong>Integrated Facility Management Services</strong></li>
-                                <li><strong>Operation & Maintenance</strong></li>
-                                <li><strong>HR Support Services</strong></li>
+                              <ul className="megaList">
+                                <li>
+                                  <Link href="/services/operate">
+                                    <strong>Property Management</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/operate">
+                                    <strong>
+                                      Integrated Facility Management Services
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/operate">
+                                    <strong>Operation & Maintenance</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/operate">
+                                    <strong>HR Support Services</strong>
+                                  </Link>
+                                </li>
                               </ul>
                             )}
+
                             {activeCategory === "solution" && (
-                              // <div className=" d-flex justify-content-center">
                               <ul className="megaList">
-                                <li><strong>Medical Institutions & Colleges</strong></li>
-                                <li><strong>Multispecialty Hospitals</strong></li>
-                                <li><strong>Modular Hospitals</strong></li>
-                                <li><strong>Government Hospitals</strong></li>
-                                <li><strong>Facilities</strong></li>
+                                <li>
+                                  <Link href="/services/solution">
+                                    <strong>
+                                      Medical Institutions & Colleges
+                                    </strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/solution">
+                                    <strong>Multispecialty Hospitals</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/solution">
+                                    <strong>Modular Hospitals</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/solution">
+                                    <strong>Government Hospitals</strong>
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link href="/services/solution">
+                                    <strong>Facilities</strong>
+                                  </Link>
+                                </li>
                               </ul>
-                              // </div>
                             )}
                           </Col>
                         </Row>
@@ -286,26 +397,45 @@ export default function Header() {
                   </div>
                 )}
 
-                {/* Products */}
+                {/* ---------------- Products ---------------- */}
                 {isMobile ? (
                   <NavDropdown title="Products" id="products-nav-dropdown">
-                    <NavDropdown.Item href="#">
+                    <NavDropdown.Item
+                      as={Link}
+                      href="/products/"
+                    >
                       Modular Operation Theatres
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#">
+                    <NavDropdown.Item
+                      as={Link}
+                      href="/products/central-sterile-supply-department"
+                    >
                       Central Sterile Supply Department
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#">
+                    <NavDropdown.Item
+                      as={Link}
+                      href="/products/medical-gas-pipeline-systems"
+                    >
                       Medical Gas Pipeline Systems
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#">
+                    <NavDropdown.Item
+                      as={Link}
+                      href="/products/pneumatic-chutes"
+                    >
                       Pneumatic Chutes
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#">
+                    <NavDropdown.Item
+                      as={Link}
+                      href="/products/hospital-furniture"
+                    >
                       Hospital Furniture
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#">Pendants</NavDropdown.Item>
-                    <NavDropdown.Item href="#">Walls</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} href="/products/pendants">
+                      Pendants
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} href="/products/walls">
+                      Walls
+                    </NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <div
@@ -320,52 +450,68 @@ export default function Header() {
                       <div className="megaMenu shadow p-4 bg-white">
                         <Row>
                           <Col>
-                            <strong>Modular Operation Theatres</strong>
-                            <br />
-                            <small>
-                              Precision‑built for aseptic excellence
-                            </small>
+                            <Link href="/products/">
+                              <strong>Modular Operation Theatres</strong>
+                              <br />
+                              <small>
+                                Precision-built for aseptic excellence
+                              </small>
+                            </Link>
                           </Col>
                           <Col>
-                            <strong>Central Sterile Supply Department</strong>
-                            <br />
-                            <small>
-                              Streamlined design for uncompromised sterility
-                            </small>
+                            <Link href="/products/central-sterile-supply-department">
+                              <strong>Central Sterile Supply Department</strong>
+                              <br />
+                              <small>
+                                Streamlined design for uncompromised sterility
+                              </small>
+                            </Link>
                           </Col>
                           <Col>
-                            <strong>Medical Gas Pipeline Systems</strong>
-                            <br />
-                            <small>Reliable lifelines for critical care</small>
+                            <Link href="/products/medical-gas-pipeline-systems">
+                              <strong>Medical Gas Pipeline Systems</strong>
+                              <br />
+                              <small>
+                                Reliable lifelines for critical care
+                              </small>
+                            </Link>
                           </Col>
                           <Col>
-                            <strong>Pneumatic Chutes</strong>
-                            <br />
-                            <small>
-                              Fast, safe, and efficient material transport
-                            </small>
+                            <Link href="/products/pneumatic-chutes">
+                              <strong>Pneumatic Chutes</strong>
+                              <br />
+                              <small>
+                                Fast, safe, and efficient material transport
+                              </small>
+                            </Link>
                           </Col>
                           <Col>
-                            <strong>Hospital Furniture</strong>
-                            <br />
-                            <small>
-                              Ergonomic solutions for patient comfort and care
-                            </small>
+                            <Link href="/products/medical-furniture-solutions">
+                              <strong>Hospital Furniture</strong>
+                              <br />
+                              <small>
+                                Ergonomic solutions for patient comfort and care
+                              </small>
+                            </Link>
                           </Col>
                           <Col>
-                            <strong>Pendants</strong>
-                            <br />
-                            <small>
-                              Optimized accessibility for critical equipment
-                            </small>
+                            <Link href="/products/pendants">
+                              <strong>Pendants</strong>
+                              <br />
+                              <small>
+                                Optimized accessibility for critical equipment
+                              </small>
+                            </Link>
                           </Col>
                           <Col>
-                            <strong>Walls</strong>
-                            <br />
-                            <small>
-                              Advanced finishes for infection control and
-                              durability
-                            </small>
+                            <Link href="/products/walls">
+                              <strong>Walls</strong>
+                              <br />
+                              <small>
+                                Advanced finishes for infection control and
+                                durability
+                              </small>
+                            </Link>
                           </Col>
                         </Row>
                         <hr className="megaDivider" />
@@ -377,86 +523,22 @@ export default function Header() {
                   </div>
                 )}
 
-                {/* Solutions */}
-                {/* {isMobile ? (
-                  <NavDropdown title="Solutions" id="solutions-nav-dropdown">
-                    <NavDropdown.Item href="#">
-                      Medical Institutions & Colleges
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#">
-                      Multispecialty Hospitals
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#">
-                      Modular Hospitals
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#">
-                      Government Hospitals
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#">Facilities</NavDropdown.Item>
-                  </NavDropdown>
-                ) : (
-                  <div
-                    className="px-3 py-2"
-                    onMouseEnter={() => handleMouseEnter("solutions")}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <span className="nav-link">
-                      Solutions <IoMdArrowDropdown />
-                    </span>
-                    {showMenu === "solutions" && (
-                      <div className="megaMenu shadow p-4 bg-white">
-                        <Row>
-                          <Col>
-                            <strong>Medical Institutions & Colleges</strong>
-                            <br />
-                            <small>
-                              Building healthcare foundations for the future
-                            </small>
-                          </Col>
-                          <Col>
-                            <strong>Multispecialty Hospitals</strong>
-                            <br />
-                            <small>Integrated systems for advanced care</small>
-                          </Col>
-                          <Col>
-                            <strong>Modular Hospitals</strong>
-                            <br />
-                            <small>
-                              Rapid, reliable, and scalable healthcare spaces
-                            </small>
-                          </Col>
-                          <Col>
-                            <strong>Government Hospitals</strong>
-                            <br />
-                            <small>
-                              Strengthening public health infrastructure
-                            </small>
-                          </Col>
-                          <Col>
-                            <strong>Facilities</strong>
-                            <br />
-                            <small>
-                              End-to-end support for efficient operations
-                            </small>
-                          </Col>
-                        </Row>
-                        <hr className="megaDivider" />
-                        <p className="megaTagline">
-                          Tailored infrastructure for healthcare
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )} */}
-                <Nav.Link href="/finance" className="px-3 py-2">
+                <Nav.Link
+                  href="/properties"
+                  className={`px-3 py-2 ${
+                    pathname === "/properties" ? "active" : ""
+                  }`}
+                >
                   Properties
                 </Nav.Link>
 
-                <Nav.Link href="/finance" className="px-3 py-2">
-                  Finance
-                </Nav.Link>
-                <Nav.Link href="/invest" className="px-3 py-2">
-                  Invest
+                <Nav.Link
+                  href="/finance"
+                  className={`px-3 py-2 ${
+                    pathname === "/finance" ? "active" : ""
+                  }`}
+                >
+                  Project Finance
                 </Nav.Link>
               </Nav>
 
@@ -466,7 +548,9 @@ export default function Header() {
                     <Nav.Link
                       key={path}
                       href={`/${path}`}
-                      className="px-3 py-2"
+                      className={`px-3 py-2 ${
+                        pathname === `/${path}` ? "active" : ""
+                      }`}
                     >
                       {path.charAt(0).toUpperCase() + path.slice(1)}
                     </Nav.Link>

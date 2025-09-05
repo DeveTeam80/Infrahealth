@@ -23,7 +23,7 @@ const Footer = () => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <>
-    <div className="footer-cta-box" aria-hidden="false">
+      <div className="footer-cta-box" aria-hidden="false">
         <Row className="d-flex align-items-center w-100">
           <Col md={10} className="cta-text">
             <h2>Looking to setup your own hospital?</h2>
@@ -45,96 +45,114 @@ const Footer = () => {
           </Col>
         </Row>
       </div>
-    <footer className="footer">
-      <Container className="footer-container">
-        <Col xs={12} md={4} className="footer-logo mb-4">
-          <Link href="/" passHref>
-            <Image
-              src="/images/logo/infrawhite.png"
-              alt="Infra.health logo"
-              width={218}
-              height={60}
-            />
-          </Link>
-          <p>
-            We design, build, operate and fund tomorrow&apos;s healthcare
-            ecosystems bridging healthcare vision with execution through
-            strategy, capital, and technology.
-          </p>
-          <div className="social-icons">
-            {[FaLinkedinIn, FaYoutube, FaInstagram, FaFacebookF, FaTwitter].map(
-              (Icon, i) => (
+      <footer className="footer">
+        <Container className="footer-container">
+          <Col xs={12} md={3} className="footer-logo mb-4">
+            <Link href="/" passHref>
+              <Image
+                src="/images/logo/infrawhite.png"
+                alt="Infra.health logo"
+                width={218}
+                height={60}
+              />
+            </Link>
+            <p>
+              We design, build, operate and fund tomorrow&apos;s healthcare
+              ecosystems bridging healthcare vision with execution through
+              strategy, capital, and technology.
+            </p>
+            <div className="social-icons">
+              {[
+                FaLinkedinIn,
+                FaYoutube,
+                FaInstagram,
+                FaFacebookF,
+                FaTwitter,
+              ].map((Icon, i) => (
                 <a key={i} href="#">
                   <Icon />
                 </a>
-              )
-            )}
-          </div>
-        </Col>
+              ))}
+            </div>
+          </Col>
 
-        <Col xs={12} md={2} className="footer-links mb-4">
-          <h4>Quick Links</h4>
-          <ul>
-            {[
-              "About",
-              "Portfolio",
-              "Careers",
-              "Vendors",
-              "Finance",
-              "Invest",
-            ].map((text, i) => (
-              <li key={i}>
-                <Link href="#" passHref>
-                  {text}
-                </Link>
+          <Col xs={12} md={2} className="footer-links mb-4">
+            <h4>Quick Links</h4>
+            <ul>
+              {[
+                "About",
+                "Portfolio",
+                "Careers",
+                "Vendors",
+                "Project Finance",
+              ].map((text, i) => (
+                <li key={i}>
+                  <Link href="#" passHref>
+                    {text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Col>
+
+          <Col xs={12} md={3} className="footer-links mb-4">
+            <h4>Services</h4>
+            <ul>
+              {["Consult", "Construct", "Operate", "Solutions"].map((text, i) => (
+                <li key={i}>
+                  <Link href="#" passHref>
+                    {text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Col>
+
+          <Col xs={12} md={4} className="footer-links mb-4">
+            <h4>Contact Info</h4>
+            <ul>
+              <li>
+                <FaMapMarkerAlt className="me-2" />
+                <a
+                  href="https://maps.app.goo.gl/TCcVZvUNq16BqLPC9"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  506, Supreme Headquarters, Near Tata Motors showroom, Near
+                  Pune Bangalore Highway, Baner, Pune-411045
+                </a>
               </li>
-            ))}
-          </ul>
-        </Col>
-
-        <Col xs={12} md={3} className="footer-links mb-4">
-          <h4>Services</h4>
-          <ul>
-            {["Consult", "Construct", "Operate"].map((text, i) => (
-              <li key={i}>
-                <Link href="#" passHref>
-                  {text}
-                </Link>
+              <li>
+                <FaPhone className="me-2" />
+                <a href="tel:+912045099895">+91 20 45099895</a> 
               </li>
-            ))}
-          </ul>
-        </Col>
+              <li>
+                <FaPhone className="me-2" />
+                <a href="tel:+919028155071">+91 9028155071</a>
+              </li>
+              <li>
+                <FaEnvelope className="me-2" />
+                <a href="mailto:contact@infra.health">contact@infra.health</a>
+              </li>
+            </ul>
+          </Col>
+        </Container>
 
-        <Col xs={12} md={3} className="footer-links mb-4">
-          <h4>Contact Info</h4>
-          <ul>
-            <li>
-              <FaMapMarkerAlt className="me-2" />
-              506, Supreme Headquarters, Near Tata Motors showroom, Near Pune
-              Bangalore Highway, Baner, Pune-411045
-            </li>
-            <li>
-              <FaPhone className="me-2" /> 02045099895
-            </li>
-            <li>
-              <FaEnvelope className="me-2" /> contact@infra.health
-            </li>
-          </ul>
-        </Col>
-      </Container>
+        <div className="footer-bottom">
+          <p>
+            &copy; {new Date().getFullYear()} Infra.health™ | Emerway Healthtech
+            Private Limited
+          </p>
+        </div>
 
-      <div className="footer-bottom">
-        <p>
-          &copy; {new Date().getFullYear()} Infra.health | Emerway Healthtech
-          Private Limited™
-        </p>
-      </div>
-
-      <div className="scroll-top" onClick={scrollToTop}>
-        <FaArrowUp />
-      </div>
-      <TalkToUsModal show={modalShow} handleClose={() => setModalShow(false)} />
-    </footer>
+        <div className="scroll-top" onClick={scrollToTop}>
+          <FaArrowUp />
+        </div>
+        <TalkToUsModal
+          show={modalShow}
+          handleClose={() => setModalShow(false)}
+        />
+      </footer>
     </>
   );
 };

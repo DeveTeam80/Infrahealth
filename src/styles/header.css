@@ -3,6 +3,10 @@
   max-width: 1400px !important;
 }
 
+.nav {
+    justify-content: space-around;
+}
+
 .megaMenu {
   position: absolute;
   top: 100%;
@@ -41,6 +45,14 @@
 
 .megaList li {
   padding-top: 0.5rem;
+}
+
+.megaList li a, .megaParentList li a strong, .megaMenu a strong{
+  color: #222;
+}
+
+.megaParentList li a small, .megaMenu a small{
+  color: #666;
 }
 
 /* Make header sticky */
@@ -100,6 +112,11 @@
   background-color: #e98c46; /* brand color */
   margin-right: 10px; /* spacing between bullet and text */
   flex-shrink: 0; /* prevent shrinking */
+}
+
+.sticky-header .nav-link.active {
+  color: #e98c46 !important;
+  border-bottom: 2px solid #e98c46;
 }
 
 .modal-content {

@@ -63,8 +63,8 @@ export default function PortfolioPage() {
             <main className="container py-5 mt-4">
                 <div className="portfolio-header">
                     <p className="section-subtitle">OUR WORK</p>
-                    <h1 className="section-title">Infra.Health <span>Portfolio</span></h1>
-                    <p className="lead mt-3 text-muted">
+                    <h3 className="section-title">Infra.Health <span>Portfolio</span></h3>
+                    <p className="mt-3 text-muted">
                         Our portfolio reflects a diverse range of healthcare projects across India—spanning academic institutions, public hospitals, specialty centres, and multispecialty hospitals.
                     </p>
                 </div>
