@@ -53,17 +53,17 @@ export default function ConstructPage() {
     const fileInputs =
       form.querySelectorAll<HTMLInputElement>('input[type="file"]');
     const maxSize = 5 * 1024 * 1024; // 5MB
-    for (let input of fileInputs) {
-      if (input?.files?.length) {
-        const file = input.files[0];
-        if (file.size > maxSize) {
-          event.preventDefault();
-          event.stopPropagation();
-          alert(`File size for ${input.id} must be less than 5MB.`);
-          return;
-        }
-      }
+    for (const input of fileInputs) {
+  if (input?.files?.length) {
+    const file = input.files[0];
+    if (file.size > maxSize) {
+      event.preventDefault();
+      event.stopPropagation();
+      alert(`File size for ${input.id} must be less than 5MB.`);
+      return;
     }
+  }
+}
 
     setValidated(true);
   };
