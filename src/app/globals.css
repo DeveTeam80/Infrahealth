@@ -79,3 +79,16 @@ a {
 .scroll-top:hover {
   background: #e98c46;
 }
+
+.properties{
+  justify-content: center!important;
+}
+
+.properties .nav-link{
+  color: #000;
+}
+
+.properties .nav-link.active{
+  color: #e98c46;
+  border-bottom: 4px solid #e98c46;
+}
