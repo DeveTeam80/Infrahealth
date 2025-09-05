@@ -1,0 +1,41 @@
+.customAccordion .accordion-item {
+  border: 2px solid #e98c46;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.customAccordion .accordion-button {
+  font-weight: 600;
+  background-color: #fff;
+  color: #333;
+  border: none;
+  box-shadow: none;
+}
+
+.customAccordion .accordion-button:not(.collapsed) {
+  background-color: #fff4ec; /* subtle tint */
+  color: #e98c46;
+}
+
+.customAccordion .accordion-body {
+  background: #fff;
+  color: #555;
+}
+
+form .form-label:has(+ .form-control[required])::after,
+form .form-label:has(+ .form-select[required])::after,
+form .form-label:has(+ textarea[required])::after {
+  content: " *";
+  color: red;
+}
+
+form label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-check-label {
+  font-weight: 300!important;
+}

@@ -11,7 +11,6 @@
   flex-direction: column;
   gap: 65px;
   width: 15%;
-  margin-top: 50px;
 }
 
 .counter-box {
@@ -52,7 +51,7 @@
 }
 
 .about-text {
-  width: 55%;
+  width: 40%;
 }
 
 .abt-text {
@@ -101,6 +100,14 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px 70px;
+}
+
+.careers {
+  gap: 20px; 
+}
+
+.careers .feature-card {
+  max-width: 280px;
 }
 
 .feature-card {
@@ -286,11 +293,11 @@
 }
 
 .modal-content {
-    background-color: #fff;
-    border-radius: 6px;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px 30px;
-    position: relative;
-    box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+  background-color: #fff;
+  border-radius: 6px;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }

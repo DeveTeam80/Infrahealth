@@ -192,9 +192,9 @@ export default function OperatePage() {
             <main className="container py-5 mt-4">
                 <div className="text-left mx-auto mb-5 pb-4" style={{ maxWidth: '1920px' }}>
                     <p className="section-subtitle">OUR SERVICES</p>
-                    <h1 className="section-title"><span>{operateData.intro.title}</span></h1>
-                    <h2 className="fs-4 mb-3">{operateData.intro.main}</h2>
-                    <p className="lead mt-3 text-muted">{operateData.intro.sub}</p>
+                    <h3 className="section-title"><span>{operateData.intro.title}</span></h3>
+                    <h4 className="fs-4 mb-3">{operateData.intro.main}</h4>
+                    <p className="mt-3 text-muted">{operateData.intro.sub}</p>
                 </div>
 
                 <Row>
@@ -213,7 +213,7 @@ export default function OperatePage() {
                         <div className="vstack gap-5">
                             {operateData.services.map(service => (
                                 <section key={service.id} id={service.id}>
-                                    <h2>{service.title}</h2>
+                                    <h3>{service.title}</h3>
                                     <p className="text-muted fs-5">{service.description}</p>
                                     <div className="service-card">
                                         <DetailSection details={service.details} />
@@ -221,7 +221,7 @@ export default function OperatePage() {
                                 </section>
                             ))}
                             <section id="why-infrahealth-operate">
-                                <h2>{operateData.why.title}</h2>
+                                <h3>{operateData.why.title}</h3>
                                 <div className="service-card">
                                     <DetailSection details={{ "Key Advantages": operateData.why.points }} />
                                 </div>

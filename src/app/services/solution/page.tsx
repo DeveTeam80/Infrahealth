@@ -225,9 +225,9 @@ export default function SolutionsPage() {
             <main className="container py-5 mt-4">
                 <div className="text-left mx-auto mb-5 pb-4" style={{ maxWidth: '1920px' }}>
                     <p className="section-subtitle">OUR SOLUTIONS</p>
-                    <h1 className="section-title"><span>Infra.Health</span> Solutions</h1>
+                    <h3 className="section-title"><span>Infra.Health</span> Solutions</h3>
                     {solutionsData.intro.paragraphs.map((p, i) => (
-                        <p key={i} className="lead mt-3 text-muted">{p}</p>
+                        <p key={i} className="mt-3 text-muted">{p}</p>
                     ))}
                 </div>
 
@@ -246,7 +246,7 @@ export default function SolutionsPage() {
                     <Col lg={9}>
                         <div className="vstack gap-5">
                             <section>
-                                <h2 className='mb-4'>Spectrum of Healthcare Facilities We Deliver</h2>
+                                <h3 className='mb-4'>Spectrum of Healthcare Facilities We Deliver</h3>
                                 {solutionsData.spectrum.map((category, index) => (
                                     <Row as="section" key={category.id} id={category.id} className="mb-5 interactive-section align-items-center">
                                          <Col md={5} className={index % 2 === 0 ? 'order-md-1' : 'order-md-2'}>

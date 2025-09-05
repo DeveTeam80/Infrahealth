@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Container, Row, Col, Card, Nav } from "react-bootstrap";
@@ -17,7 +17,6 @@ import { homeData, JourneyTab } from "@/data/homeData";
 export default function Home() {
   const { words, services, projects, testimonials, blogs, journeyTabs } =
     homeData;
-  // const [currentWord, setCurrentWord] = useState(0);
   const [modalShow, setModalShow] = useState(false);
   const [activeKey, setActiveKey] = useState<string>(journeyTabs[0].key);
   const activeTab: JourneyTab = journeyTabs.find(
@@ -269,7 +268,7 @@ export default function Home() {
             <Col md="12">
               <Nav
                 variant="pills"
-                className="nav-scroll gap-2"
+                className="nav-scroll"
                 activeKey={activeKey}
                 onSelect={(k) => setActiveKey(k || journeyTabs[0].key)}
               >
@@ -318,7 +317,7 @@ export default function Home() {
                   <Image
                     src={activeTab.image}
                     alt={activeTab.label}
-                    width={500}
+                    width={575}
                     height={350}
                     className="rounded shadow"
                   />

@@ -9,10 +9,8 @@ import {
   FaHandshake,
   FaLeaf,
 } from "react-icons/fa";
-import { FaRobot, FaUsers, FaHospitalUser } from "react-icons/fa";
 import "../../styles/about.css";
 import Image from "next/image";
-import { FaStar } from "react-icons/fa6";
 
 export default function AboutSection() {
   const [visibleCards, setVisibleCards] = useState<{ [key: string]: boolean }>(
@@ -43,6 +41,35 @@ export default function AboutSection() {
       <section className="about-difference">
         <Container>
           <div className="about-grid">
+              <div className="counters">
+              <div className="counter-box">
+                <div className="counter-number">
+                  <span className="counter" data-to="10" data-suffix="M SF+">
+                    10M SF+
+                  </span>
+                </div>
+                <p>Healthcare Spaces Designed & Operated</p>
+              </div>
+              <div className="counter-box">
+                <div className="counter-number">
+                  <span className="counter" data-to="100" data-suffix="+">
+                    100+
+                  </span>
+                </div>
+                <p>Multi‑Disciplinary Team</p>
+              </div>
+              <div className="counter-box">
+                <div className="counter-number">
+                  <span className="counter" data-to="5000" data-suffix="+">
+                    5000+
+                  </span>
+                </div>
+                <p>
+                  Beds Inpatient, Outpatient Medical Office & Support Facilities
+                  under Management
+                </p>
+              </div>
+            </div>
             <div className="about-images">
               <Image
                 src="/images/hero/abt-home.png"
@@ -71,14 +98,14 @@ export default function AboutSection() {
                 designing state-of-the-art facilities, we provide everything
                 under one roof.
               </p>
-              <p>
+              {/* <p>
                 We take pride in ensuring that patients receive world-class care
                 without compromise, and that future healthcare professionals are
                 equipped with the best learning environments. With over 50
                 successful projects, we are known for our deep understanding of
                 healthcare needs, timely project delivery, and uncompromising
                 quality standards.
-              </p>
+              </p> */}
               <p>
                 Now expanding globally, Infra.Health brings its expertise to
                 emerging and developed markets worldwide, powered by FDI,
@@ -175,17 +202,17 @@ export default function AboutSection() {
         <Container>
           <Row className="align-items-center">
             {/* Left Side: Icons */}
-            <Col md={5}>
+            <Col md={6}>
               <Image
                 src="/images/about.jpg"
                 alt="Healthcare Team"
-                width={500}
+                width={550}
                 height={300}
                 style={{ borderRadius: "12px" }}
               />
             </Col>
 
-            <Col md={7} className="ps-md-5 mt-4 mt-md-0">
+            <Col md={6} className="ps-md-5 mt-4 mt-md-0">
               <p className="section-subtitle">Why Choose Us</p>
               <h2 className="section-title">
                 Our <span>Core Commitments</span>
