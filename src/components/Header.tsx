@@ -1,5 +1,5 @@
 "use client";
-
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -23,9 +23,21 @@ export default function Header() {
     setCountry(e.target.value);
     console.log(e.target.value);
   };
-  const handleMouseEnter = (menu: string) => setShowMenu(menu);
-  const handleMouseLeave = () => setShowMenu(null);
 
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (menu: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setShowMenu(menu);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setShowMenu(null);
+    }, 200); // 👈 small delay prevents flicker
+  };
   useEffect(() => {
     let lastScroll = 0;
     const handleScroll = () => {
