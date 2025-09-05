@@ -176,3 +176,24 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
+
+.portfolio-section {
+  padding: 60px 20px;
+  background-color: #2c7374;
+  border-radius: 50px;
+  color: white;
+}
+
+.portfolio-section .section-subtitle {
+  color: #fff;
+}
+
+.portfolio-section .section-title {
+  color: #fff;
+  border-left: 3px solid white;
+  padding-left: 10px;
+}
+
+.portfolio-section .section-title span {
+  color: #e98c46;
+}
