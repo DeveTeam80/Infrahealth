@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Col, Container, Form, Nav, Row } from "react-bootstrap";
 import { FaSearch, FaUniversity } from "react-icons/fa";
 import {
@@ -15,6 +15,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import "../../styles/services.css";
 import "../../styles/portfolio.css";
 import "../../styles/services.css";
+// import "../../styles/home.css";
 
 // --- TYPES ---
 export interface ValuePoint {
@@ -325,7 +326,7 @@ const PropertySearch = () => {
   const [location, setLocation] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
-  const [activeLink, setActiveLink] = useState<string>("academic");
+  const [activeLink, setActiveLink] = useState<string>("transactions-advisory");
   const sectionsRef = useRef<Record<string, HTMLElement>>({});
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -341,6 +342,32 @@ const PropertySearch = () => {
     }
     return portfolioData.filter((project) => project.category === activeFilter);
   }, [activeFilter]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isClickScrolling.current) return;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveLink(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -70% 0px" }
+    );
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      sectionsRef.current[section.id] = section as HTMLElement;
+      observer.observe(section);
+    });
+
+    return () => {
+      Object.values(sectionsRef.current).forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    };
+  }, []);
 
   const handleNavLinkClick = (
     e: React.MouseEvent<HTMLElement>,
@@ -358,7 +385,7 @@ const PropertySearch = () => {
       if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
       scrollTimeout.current = setTimeout(() => {
         isClickScrolling.current = false;
-      }, 1000); // Buffer time to re-enable observer after scroll
+      }, 1000);
     }
   };
 
@@ -456,6 +483,26 @@ const PropertySearch = () => {
           </Col>
         ))}
       </Row>
+      <section className="portfolio-section mb-4">
+        <Container>
+          {/* <p className="section-subtitle">Our Portfolio</p> */}
+          <h3 className="section-title">
+            List<span> Your </span> Healthcare Properties
+          </h3>
+          <p className="mt-3">
+            Infra.Health provides a global digital listing platform where
+            hospitals, diagnostic centers, and healthcare campuses can showcase
+            their properties. Investors and operators gain access to verified,
+            due diligence–ready healthcare assets. Integrated data room and
+            valuation services ensure transparency and faster closures.
+            Cross-border visibility ensures properties attract international
+            buyers and healthcare funds.
+          </p>
+          <div className="cta-buttons text-center">
+            <div className="btn primary-btn">List Your Property</div>
+          </div>
+        </Container>
+      </section>
       <section id="value">
         <h3>{solutionsData.value.title}</h3>
         <div className="value-grid my-4">
@@ -470,6 +517,7 @@ const PropertySearch = () => {
           ))}
         </div>
       </section>
+      <h3 className="my-4">Spectrum of Healthcare Facilities We Deliver</h3>
       <Row>
         {/* Sidebar */}
         <Col lg={3} className="d-none d-lg-block">
@@ -491,9 +539,6 @@ const PropertySearch = () => {
         <Col lg={9}>
           <div className="vstack gap-5">
             <section>
-              <h3 className="mb-4">
-                Spectrum of Healthcare Facilities We Deliver
-              </h3>
               {solutionsData.spectrum.map((category, index) => (
                 <Row
                   as="section"
@@ -515,22 +560,6 @@ const PropertySearch = () => {
                   </Col>
                 </Row>
               ))}
-            </section>
-
-            {/* Value Section */}
-            <section id="value">
-              <h2>{solutionsData.value.title}</h2>
-              <div className="value-grid mt-4">
-                {solutionsData.value.points.map((point, index) => (
-                  <div key={index} className="value-card">
-                    <div className="icon">
-                      <point.icon />
-                    </div>
-                    <h4>{point.title}</h4>
-                    <p>{point.text}</p>
-                  </div>
-                ))}
-              </div>
             </section>
           </div>
         </Col>
