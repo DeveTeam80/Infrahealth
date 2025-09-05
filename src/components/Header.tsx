@@ -216,14 +216,14 @@ export default function Header() {
                               </li>
                               <li
                                 onMouseEnter={() =>
-                                  setActiveCategory("solution")
+                                  setActiveCategory("solutions")
                                 }
                                 className={
-                                  activeCategory === "solution" ? "active" : ""
+                                  activeCategory === "solutions" ? "active" : ""
                                 }
                               >
-                                <Link href="/services/solution">
-                                  <strong>Solution</strong>
+                                <Link href="/services/solutions">
+                                  <strong>Solutions</strong>
                                   <br />
                                   <small>
                                     Tailored infrastructure for healthcare
@@ -353,32 +353,32 @@ export default function Header() {
                               </ul>
                             )}
 
-                            {activeCategory === "solution" && (
+                            {activeCategory === "solutions" && (
                               <ul className="megaList">
                                 <li>
-                                  <Link href="/services/solution">
+                                  <Link href="/services/solutions">
                                     <strong>
                                       Medical Institutions & Colleges
                                     </strong>
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link href="/services/solution">
+                                  <Link href="/services/solutions">
                                     <strong>Multispecialty Hospitals</strong>
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link href="/services/solution">
+                                  <Link href="/services/solutions">
                                     <strong>Modular Hospitals</strong>
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link href="/services/solution">
+                                  <Link href="/services/solutions">
                                     <strong>Government Hospitals</strong>
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link href="/services/solution">
+                                  <Link href="/services/solutions">
                                     <strong>Facilities</strong>
                                   </Link>
                                 </li>

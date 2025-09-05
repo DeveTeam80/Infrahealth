@@ -100,7 +100,7 @@ const Footer = () => {
             <ul>
               {["Consult", "Construct", "Operate", "Solutions"].map((text, i) => (
                 <li key={i}>
-                  <Link href="#" passHref>
+                  <Link href={`/services/${text.toLowerCase()}`} passHref>
                     {text}
                   </Link>
                 </li>
