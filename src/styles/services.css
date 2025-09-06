@@ -1,4 +1,4 @@
-/* Borrowing general styles from your about.css for consistency */
+
 .section-subtitle {
     font-size: 16px;
     color: #555;
@@ -25,6 +25,25 @@ h2 {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+}
+
+/* Mobile optimization for typography */
+@media (max-width: 768px) {
+    .section-subtitle {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .section-title {
+        padding: 0 0 0 15px;
+        margin: 8px 0 15px 0;
+        font-size: 1.1rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
 }
 
 /* --- Component-Specific Styling --- */
@@ -57,6 +76,33 @@ h2 {
     font-weight: 600;
 }
 
+/* Mobile navigation adjustments */
+@media (max-width: 768px) {
+    .sidenav {
+        position: static !important;
+        top: auto;
+        padding: 0;
+        margin-bottom: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 0.5rem;
+    }
+    
+    .sidenav .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        border-right: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 6px;
+        margin-bottom: 0.25rem;
+    }
+    
+    .sidenav .nav-link.active {
+        border-right: none;
+        border-bottom-color: #3b9c9d;
+    }
+}
+
 /* Tab styling inspired by your design */
 .service-tabs .nav-link {
     border: 1px solid #dee2e6;
@@ -68,6 +114,10 @@ h2 {
     margin-bottom: 0.75rem;
     transition: all 0.2s ease-in-out;
     background-color: #fff;
+    /* Minimum touch target size */
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .service-tabs .nav-link:hover {
@@ -82,6 +132,22 @@ h2 {
     font-weight: 500;
 }
 
+/* Mobile tab adjustments */
+@media (max-width: 768px) {
+    .service-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+    }
+    
+    .service-tabs .nav-link {
+        padding: 0.6rem 1rem;
+        margin-right: 0.5rem;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+}
+
 /* Main content card styling */
 .service-card {
     background: #fff;
@@ -93,6 +159,22 @@ h2 {
 .service-card p {
     margin-bottom: 1.5rem;
     color: #555;
+}
+
+/* Mobile card adjustments */
+@media (max-width: 768px) {
+    .service-card {
+        padding: 20px 16px;
+        border-radius: 8px;
+        margin: 0 -15px; /* Full width on mobile */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    
+    .service-card p {
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
 }
 
 /* List styling for scope/benefits/deliverables */
@@ -124,6 +206,25 @@ h2 {
     flex-shrink: 0;
 }
 
+/* Mobile list adjustments */
+@media (max-width: 768px) {
+    .details-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .details-list li {
+        margin-bottom: 0.6rem;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .details-list li svg {
+        margin-right: 0.5rem;
+        font-size: 14px;
+    }
+}
+
 .category-header {
     display: flex;
     align-items: center;
@@ -134,6 +235,18 @@ h2 {
 .category-icon {
     color: #3b9c9d;
     font-size: 25px;
+}
+
+/* Mobile category header */
+@media (max-width: 768px) {
+    .category-header {
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .category-icon {
+        font-size: 20px;
+    }
 }
 
 .value-grid {
@@ -172,28 +285,163 @@ h2 {
     font-size: 0.9rem;
 }
 
+/* Mobile value grid and cards */
+@media (max-width: 768px) {
+    .value-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .value-card {
+        padding: 20px 15px;
+        border-radius: 8px;
+        /* Disable hover transform on mobile for better UX */
+        transform: none !important;
+    }
+    
+    .value-card .icon {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+    
+    .value-card h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .value-card p {
+        font-size: 0.85rem;
+        margin-bottom: 0;
+    }
+}
+
 .interactive-section .img-fluid {
     border-radius: 12px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* Mobile image adjustments */
+@media (max-width: 768px) {
+    .interactive-section .img-fluid {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+}
+
 .portfolio-section {
-  padding: 60px 20px;
-  background-color: #2c7374;
-  border-radius: 50px;
-  color: white;
+    padding: 60px 20px;
+    background-color: #2c7374;
+    border-radius: 50px;
+    color: white;
 }
 
 .portfolio-section .section-subtitle {
-  color: #fff;
+    color: #fff;
 }
 
 .portfolio-section .section-title {
-  color: #fff;
-  border-left: 3px solid white;
-  padding-left: 10px;
+    color: #fff;
+    border-left: 3px solid white;
+    padding-left: 10px;
 }
 
 .portfolio-section .section-title span {
-  color: #e98c46;
+    color: #e98c46;
+}
+
+/* Mobile portfolio section */
+@media (max-width: 768px) {
+    .portfolio-section {
+        padding: 40px 15px;
+        border-radius: 25px;
+        margin: 0 -15px; /* Full width on mobile */
+    }
+    
+    .portfolio-section .section-title {
+        padding-left: 8px;
+        border-left-width: 2px;
+    }
+}
+
+/* Additional mobile-specific utilities */
+@media (max-width: 576px) {
+    /* Extra small devices */
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    .service-tabs .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .value-card .icon {
+        font-size: 24px;
+    }
+    
+    .portfolio-section {
+        border-radius: 15px;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch devices */
+    .sidenav .nav-link:hover,
+    .service-tabs .nav-link:hover,
+    .value-card:hover {
+        background-color: initial;
+        transform: none;
+    }
+    
+    /* Ensure active states are clearly visible on touch */
+    .sidenav .nav-link.active,
+    .service-tabs .nav-link.active {
+        transform: scale(1.02);
+    }
+}
+
+/* Accessibility improvements for mobile */
+@media (max-width: 768px) {
+    /* Ensure sufficient contrast and spacing for mobile */
+    .nav-link {
+        min-height: 44px; /* iOS recommended minimum touch target */
+    }
+    
+    body {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+}
+
+/* Mobile image centering */
+@media (max-width: 768px) {
+    .interactive-section .img-fluid {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        display: block;
+        margin: 0 auto; /* Center the image horizontally */
+    }
+    
+    .interactive-section .col-md-5 {
+        text-align: center;
+        margin-bottom: 1.5rem; 
+    }
+    
+    .interactive-section .col-md-5 img {
+        max-width: calc(100% - 30px);
+        margin: 0 auto;
+    }
+}
+
+/* For extra small screens */
+@media (max-width: 576px) {
+    .interactive-section .col-md-5 img {
+        max-width: calc(100% - 20px);
+    }
 }

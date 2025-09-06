@@ -37,5 +37,96 @@ form label {
 }
 
 .form-check-label {
-  font-weight: 300!important;
+  font-weight: 300 !important;
+}
+.testimonials {
+  padding: 60px 20px;
+}
+
+.testimonials .swiper-wrapper {
+  padding: 10px;
+  /* Add extra padding to prevent border cutoff */
+  padding-right: 15px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.vertical-line {
+  width: 3px;
+  height: 40px;
+  background-color: #000;
+}
+
+.heading h2 {
+  font-size: 28px;
+  margin: 0;
+  color: #000;
+}
+
+.heading h2 span {
+  color: #3b9c9d;
+}
+
+.swiper {
+  overflow: visible; /* Change from hidden to visible */
+  padding-right: 5px; /* Add padding to accommodate border */
+}
+
+.testimonials .swiper-slide {
+  background: #fff;
+  border: 2px dashed #ccc;
+  border-radius: 15px;
+  padding: 25px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Add margin to ensure border visibility */
+  margin-right: 3px;
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 40px 15px;
+  }
+  
+  .testimonials .swiper-wrapper {
+    padding: 8px;
+    padding-right: 12px;
+  }
+  
+  .swiper {
+    padding-right: 3px;
+  }
+  
+  .testimonials .swiper-slide {
+    padding: 20px;
+    border-radius: 12px;
+    margin-right: 2px;
+  }
+  
+  .heading h2 {
+    font-size: 24px;
+  }
+  
+  .vertical-line {
+    height: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonials .swiper-slide {
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .heading h2 {
+    font-size: 20px;
+  }
 }

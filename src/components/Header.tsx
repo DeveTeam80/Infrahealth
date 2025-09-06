@@ -140,31 +140,16 @@ export default function Header() {
                   // Mobile Dropdown
                   <NavDropdown title="Services" id="services-dropdown">
                     <NavDropdown.Item as={Link} href="/services/consult">
-                      Hospital Management Consultancy
+                      Consult
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Hospital Design
+                    <NavDropdown.Item as={Link} href="/services/construct">
+                      Construct
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Project Management Consultancy
+                    <NavDropdown.Item as={Link} href="/services/operate">
+                      Operate
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Equipment Planning & Integration
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Public Private Partnership (PPP) Advisory
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Hospital ESG Advisory Services
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Hospital Green Building Consultancy
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Facility Management Consultancy
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/services/consult">
-                      Accreditation Advisory
+                    <NavDropdown.Item as={Link} href="/services/solutions">
+                      Solutions
                     </NavDropdown.Item>
                   </NavDropdown>
                 ) : (
