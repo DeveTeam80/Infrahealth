@@ -17,7 +17,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import "../../styles/home.css";
 import "../../styles/career.css";
 import Link from "next/link";
 
@@ -80,13 +79,19 @@ export default function AboutSection() {
           <Row className="align-items-center">
             {/* Left Side: Icons */}
             <Col md={5}>
-              <Image
-                src="/images/about.jpg"
-                alt="Healthcare Team"
-                width={500}
-                height={300}
-                style={{ borderRadius: "12px" }}
-              />
+              <video
+                src="/images/careers/intro.mp4"
+                width="500"
+                height="300"
+                // controls 
+                style={{ borderRadius: "12px", objectFit: "cover" }}
+                // poster="/images/about.jpg" 
+                autoPlay={true}
+                muted={true}
+                loop={true}
+              >
+                Your browser does not support the video tag.
+              </video>
             </Col>
 
             <Col md={7} className="ps-md-5 mt-4 mt-md-0">
@@ -204,11 +209,11 @@ export default function AboutSection() {
             modules={[Autoplay]}
             spaceBetween={20}
             slidesPerView={1}
-            loop
+            loop={true}
             autoplay={{ delay: 3500, disableOnInteraction: false }}
             breakpoints={{
-              768: { slidesPerView: 1 }, 
-              1024: { slidesPerView: 3 }, 
+              768: { slidesPerView: 1 },
+              1024: { slidesPerView: 3 },
             }}
           >
             {testimonials.map((t: Testimonial, i: number) => (
