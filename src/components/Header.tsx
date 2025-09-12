@@ -24,7 +24,7 @@ export default function Header() {
     console.log(e.target.value);
   };
 
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = (menu: string) => {
     if (timeoutRef.current) {
@@ -59,6 +59,10 @@ export default function Header() {
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
+  useEffect(() => {
+    setShowMenu(null);
+  }, [pathname]);
+
   return (
     <>
       <div
@@ -81,7 +85,7 @@ export default function Header() {
           <div
             className="d-flex align-items-center gap-1"
             style={{
-              border: "1px solid #e98c46",
+              border: "1px solid #b6520f",
               borderRadius: "20px",
               padding: "10px 2px 10px 12px",
               cursor: "pointer",
@@ -231,66 +235,52 @@ export default function Header() {
                           </Col>
 
                           {/* RIGHT COLUMN (Children) */}
-                          <Col md={9} className="megaChildren">
+                          <Col md={3} className="megaChildren">
                             {activeCategory === "consult" && (
                               <ul className="megaList">
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>
-                                      Hospital Management Consultancy
-                                    </strong>
+                                    Hospital Management Consultancy
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>Hospital Design</strong>
+                                    Hospital Design
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>
-                                      Project Management Consultancy
-                                    </strong>
+                                    Project Management Consultancy
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>
-                                      Equipment Planning & Integration
-                                    </strong>
+                                    Equipment Planning & Integration
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>
-                                      Public Private Partnership (PPP) Advisory
-                                    </strong>
+                                    Public Private Partnership (PPP) Advisory
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>
-                                      Hospital ESG Advisory Services
-                                    </strong>
+                                    Hospital ESG Advisory Services
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>
-                                      Hospital Green Building Consultancy
-                                    </strong>
+                                    Hospital Green Building Consultancy
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>
-                                      Facility Management Consultancy
-                                    </strong>
+                                    Facility Management Consultancy
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/consult">
-                                    <strong>Accreditation Advisory</strong>
+                                    Accreditation Advisory
                                   </Link>
                                 </li>
                               </ul>
@@ -300,24 +290,22 @@ export default function Header() {
                               <ul className="megaList">
                                 <li>
                                   <Link href="/services/construct">
-                                    <strong>
-                                      Engineering, Procurement & Construction
-                                    </strong>
+                                    Engineering, Procurement & Construction
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/construct">
-                                    <strong>Design & Build</strong>
+                                    Design & Build
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/construct">
-                                    <strong>Fitout & Retrofit</strong>
+                                    Fitout & Retrofit
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/construct">
-                                    <strong>Specialty Services</strong>
+                                    Specialty Services
                                   </Link>
                                 </li>
                               </ul>
@@ -327,24 +315,22 @@ export default function Header() {
                               <ul className="megaList">
                                 <li>
                                   <Link href="/services/operate">
-                                    <strong>Property Management</strong>
+                                    Property Management
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/operate">
-                                    <strong>
-                                      Integrated Facility Management Services
-                                    </strong>
+                                    Integrated Facility Management Services
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/operate">
-                                    <strong>Operation & Maintenance</strong>
+                                    Operation & Maintenance
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/operate">
-                                    <strong>HR Support Services</strong>
+                                    HR Support Services
                                   </Link>
                                 </li>
                               </ul>
@@ -354,34 +340,110 @@ export default function Header() {
                               <ul className="megaList">
                                 <li>
                                   <Link href="/services/solutions">
-                                    <strong>
-                                      Medical Institutions & Colleges
-                                    </strong>
+                                    Medical Institutions & Colleges
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/solutions">
-                                    <strong>Multispecialty Hospitals</strong>
+                                    Multispecialty Hospitals
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/solutions">
-                                    <strong>Modular Hospitals</strong>
+                                    Modular Hospital
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/solutions">
-                                    <strong>Government Hospitals</strong>
+                                    Government Hospitals
                                   </Link>
                                 </li>
                                 <li>
                                   <Link href="/services/solutions">
-                                    <strong>Facilities</strong>
+                                    Facilities
                                   </Link>
                                 </li>
                               </ul>
                             )}
                           </Col>
+<Col md={5} className="megaThumbnails position-relative ms-4">
+  {activeCategory === "consult" && (
+    <>
+      <Image
+        src="/images/journey/proposals.jpg"
+        alt="Consulting visual 1"
+        width={280}
+        height={180}
+        className="thumb thumb1 rounded shadow"
+      />
+      <Image
+        src="/images/journey/design-management.jpg"
+        alt="Consulting visual 2"
+        width={280}
+        height={180}
+        className="thumb thumb2 rounded shadow"
+      />
+    </>
+  )}
+
+  {activeCategory === "construct" && (
+    <>
+      <Image
+        src="/images/journey/construction.jpg"
+        alt="Construct visual 1"
+        width={280}
+        height={180}
+        className="thumb thumb1 rounded shadow"
+      />
+      <Image
+        src="/images/journey/site-survey.jpg"
+        alt="Construct visual 2"
+        width={280}
+        height={180}
+        className="thumb thumb2 rounded shadow"
+      />
+    </>
+  )}
+
+  {activeCategory === "operate" && (
+    <>
+      <Image
+        src="/images/journey/facility.jpg"
+        alt="Operate visual 1"
+        width={280}
+        height={180}
+        className="thumb thumb1 rounded shadow"
+      />
+      <Image
+        src="/images/journey/operations.jpg"
+        alt="Operate visual 2"
+        width={280}
+        height={180}
+        className="thumb thumb2 rounded shadow"
+      />
+    </>
+  )}
+
+  {activeCategory === "solutions" && (
+    <>
+      <Image
+        src="/images/services/solutions/3.jpg"
+        alt="Solutions visual 1"
+        width={280}
+        height={180}
+        className="thumb thumb1 rounded shadow"
+      />
+      <Image
+        src="/images/services/solutions/7.jpg"
+        alt="Solutions visual 2"
+        width={280}
+        height={180}
+        className="thumb thumb2 rounded shadow"
+      />
+    </>
+  )}
+</Col>
+
                         </Row>
 
                         <hr className="megaDivider" />
@@ -395,130 +457,14 @@ export default function Header() {
                 )}
 
                 {/* ---------------- Products ---------------- */}
-                {isMobile ? (
-                  <NavDropdown title="Products" id="products-nav-dropdown">
-                    <NavDropdown.Item
-                      as={Link}
-                      href="/products/"
-                    >
-                      Modular Operation Theatres
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      as={Link}
-                      href="/products/central-sterile-supply-department"
-                    >
-                      Central Sterile Supply Department
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      as={Link}
-                      href="/products/medical-gas-pipeline-systems"
-                    >
-                      Medical Gas Pipeline Systems
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      as={Link}
-                      href="/products/pneumatic-chutes"
-                    >
-                      Pneumatic Chutes
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
-                      as={Link}
-                      href="/products/hospital-furniture"
-                    >
-                      Hospital Furniture
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/products/pendants">
-                      Pendants
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} href="/products/walls">
-                      Walls
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                ) : (
-                  <div
-                    className="px-3 py-2"
-                    onMouseEnter={() => handleMouseEnter("products")}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <span className="nav-link">
-                      Products <IoMdArrowDropdown />
-                    </span>
-                    {showMenu === "products" && (
-                      <div className="megaMenu shadow p-4 bg-white">
-                        <Row>
-                          <Col>
-                            <Link href="/products/">
-                              <strong>Modular Operation Theatres</strong>
-                              <br />
-                              <small>
-                                Precision-built for aseptic excellence
-                              </small>
-                            </Link>
-                          </Col>
-                          <Col>
-                            <Link href="/products/central-sterile-supply-department">
-                              <strong>Central Sterile Supply Department</strong>
-                              <br />
-                              <small>
-                                Streamlined design for uncompromised sterility
-                              </small>
-                            </Link>
-                          </Col>
-                          <Col>
-                            <Link href="/products/medical-gas-pipeline-systems">
-                              <strong>Medical Gas Pipeline Systems</strong>
-                              <br />
-                              <small>
-                                Reliable lifelines for critical care
-                              </small>
-                            </Link>
-                          </Col>
-                          <Col>
-                            <Link href="/products/pneumatic-chutes">
-                              <strong>Pneumatic Chutes</strong>
-                              <br />
-                              <small>
-                                Fast, safe, and efficient material transport
-                              </small>
-                            </Link>
-                          </Col>
-                          <Col>
-                            <Link href="/products/medical-furniture-solutions">
-                              <strong>Hospital Furniture</strong>
-                              <br />
-                              <small>
-                                Ergonomic solutions for patient comfort and care
-                              </small>
-                            </Link>
-                          </Col>
-                          <Col>
-                            <Link href="/products/pendants">
-                              <strong>Pendants</strong>
-                              <br />
-                              <small>
-                                Optimized accessibility for critical equipment
-                              </small>
-                            </Link>
-                          </Col>
-                          <Col>
-                            <Link href="/products/walls">
-                              <strong>Walls</strong>
-                              <br />
-                              <small>
-                                Advanced finishes for infection control and
-                                durability
-                              </small>
-                            </Link>
-                          </Col>
-                        </Row>
-                        <hr className="megaDivider" />
-                        <p className="megaTagline">
-                          Engineered innovations for modern healthcare
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                <Nav.Link
+                  href="/products"
+                  className={`px-3 py-2 ${
+                    pathname === "/products" ? "active" : ""
+                  }`}
+                >
+                  Products
+                </Nav.Link>
 
                 <Nav.Link
                   href="/properties"

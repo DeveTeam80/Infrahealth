@@ -11,6 +11,8 @@ import {
 } from "react-icons/fa";
 import "../../styles/about.css";
 import Image from "next/image";
+import { FaGlobe, FaBoxes, FaHospital } from "react-icons/fa";
+import { FaBed } from "react-icons/fa6";
 
 export default function AboutSection() {
   const [visibleCards, setVisibleCards] = useState<{ [key: string]: boolean }>(
@@ -35,40 +37,40 @@ export default function AboutSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-    useEffect(() => {
-      const counters = document.querySelectorAll<HTMLElement>(".counter");
-      const runCounter = (counter: HTMLElement) => {
-        const target = +counter.getAttribute("data-to")!;
-        const suffix = counter.getAttribute("data-suffix") || "";
-        let count = 0;
-        const increment = target / 200;
-        const update = () => {
-          count += increment;
-          if (count < target) {
-            counter.textContent = Math.floor(count) + suffix;
-            requestAnimationFrame(update);
-          } else {
-            counter.textContent = target.toLocaleString() + suffix;
-          }
-        };
-        update();
+  useEffect(() => {
+    const counters = document.querySelectorAll<HTMLElement>(".counter");
+    const runCounter = (counter: HTMLElement) => {
+      const target = +counter.getAttribute("data-to")!;
+      const suffix = counter.getAttribute("data-suffix") || "";
+      let count = 0;
+      const increment = target / 200;
+      const update = () => {
+        count += increment;
+        if (count < target) {
+          counter.textContent = Math.floor(count) + suffix;
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = target.toLocaleString() + suffix;
+        }
       };
-  
-      const observer = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              runCounter(entry.target as HTMLElement);
-              obs.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-  
-      counters.forEach((counter) => observer.observe(counter));
-      return () => observer.disconnect();
-    }, []);
+      update();
+    };
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target as HTMLElement);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -76,7 +78,7 @@ export default function AboutSection() {
       <section className="about-difference">
         <Container>
           <div className="about-grid">
-              <div className="counters">
+            <div className="counters">
               <div className="counter-box">
                 <div className="counter-number">
                   <span className="counter" data-to="10" data-suffix="M SF+">
@@ -188,6 +190,56 @@ export default function AboutSection() {
               >
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
+      {/* Global Market Positioning & Expansion Strategy */}
+      <section className="global-strategy-section py-5">
+        <Container>
+          <p className="section-subtitle">Global Presence</p>
+          <h3 className="section-title mb-4">
+            Global Market Positioning & <span>Expansion Strategy</span>
+          </h3>
+          <p className="text-muted mb-5">
+            Infra.Health operates at the intersection of healthcare expertise,
+            engineering innovation, and strategic investment, offering
+            end-to-end solutions from concept to commissioning. We are not just
+            a builder — we are an advisor, financier, designer, constructor,
+            operator, and innovator — making Infra.Health the only truly
+            integrated healthcare infrastructure partner in the global market.
+          </p>
+
+          <Row className="text-center">
+            {[
+              {
+                icon: <FaGlobe className="strategy-icon" />,
+                title: "Healthcare Transaction Advisory",
+                text: "Supporting global investors with specialized healthcare deals.",
+              },
+              {
+                icon: <FaHandshake className="strategy-icon" />,
+                title: "Cross-Border PPP & FDI",
+                text: "Facilitating Public-Private Partnerships and Foreign Direct Investment.",
+              },
+              {
+                icon: <FaBed className="strategy-icon" />,
+                title: "Export of Modular Products",
+                text: "Delivering advanced modular healthcare solutions worldwide.",
+              },
+              {
+                icon: <FaHospital className="strategy-icon" />,
+                title: "International Operator Partnerships",
+                text: "Collaborating with global hospital operators to enhance healthcare delivery.",
+              },
+            ].map((item, i) => (
+              <Col md={3} sm={6} key={i} className="mb-4">
+                <div className="strategy-card p-4 h-100">
+                  <div className="mb-3" style={{color:"#b6520f"}}>{item.icon}</div>
+                  <h5 className="mb-2">{item.title}</h5>
+                  <p className="text-muted">{item.text}</p>
+                </div>
               </Col>
             ))}
           </Row>

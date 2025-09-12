@@ -12,7 +12,6 @@ import {
 import { IconType } from "react-icons";
 import { BsCheckCircleFill } from "react-icons/bs";
 
-import "../../styles/services.css";
 import "../../styles/portfolio.css";
 import "../../styles/services.css";
 // import "../../styles/home.css";
@@ -61,6 +60,7 @@ interface Project {
   title: string;
   category: string;
   subcategory: string;
+  transactionType: "buy" | "sell" | "lease"; // 👈 new field
   brief: {
     beds: string;
     config: string;
@@ -69,14 +69,15 @@ interface Project {
   imageUrl: string;
 }
 
-// --- DATA OBJECT ---
+
+
 const portfolioData: Project[] = [
-  // Data has been populated with placeholders as requested.
   {
     id: 1,
     title: "100 Bedded Cancer & Cardiac Care Hospital, Baner",
     category: "Core Clinical Infrastructure",
     subcategory: "Specialty Hospitals",
+    transactionType: "buy",
     brief: { beds: "100 Beds", config: "G+5 Floors", area: "80,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+1",
   },
@@ -86,6 +87,7 @@ const portfolioData: Project[] = [
       "1500 Bedded Hospital Dr. D Y Patil Hospital & Medical College, Pimpri",
     category: "Academic & Institutional Healthcare",
     subcategory: "Medical Colleges & Teaching Hospitals",
+    transactionType: "lease",
     brief: {
       beds: "1500 Beds",
       config: "Multi-Building Campus",
@@ -98,150 +100,156 @@ const portfolioData: Project[] = [
     title: "IVF Lab, Dr. D Y Patil Hospital",
     category: "Diagnostics & Life Sciences",
     subcategory: "Specialized Labs",
+    transactionType: "sell",
     brief: { beds: "N/A", config: "Lab Facility", area: "5,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+3",
   },
   {
     id: 4,
-    title: "Path Lab, Dr. D Y Patil Hospital",
+    title: "Cardiac Cath Lab, Dr. D Y Patil Hospital",
     category: "Diagnostics & Life Sciences",
-    subcategory: "Specialized Labs",
-    brief: { beds: "N/A", config: "Lab Facility", area: "10,000 sq.ft" },
+    subcategory: "Diagnostic Centers",
+    transactionType: "buy",
+    brief: { beds: "N/A", config: "Cath Lab", area: "3,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+4",
   },
   {
     id: 5,
-    title: "Radiology, Dr. D Y Patil Hospital",
-    category: "Diagnostics & Life Sciences",
-    subcategory: "Imaging Centres",
-    brief: { beds: "N/A", config: "Imaging Department", area: "15,000 sq.ft" },
+    title: "400 Bedded Multi-Specialty Hospital, Pune",
+    category: "Core Clinical Infrastructure",
+    subcategory: "Multi-Specialty Hospitals",
+    transactionType: "lease",
+    brief: { beds: "400 Beds", config: "G+8 Floors", area: "350,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+5",
   },
   {
     id: 6,
-    title: "150 Bedded Cancer & Modern Maternity Hospital, KDMC",
-    category: "Core Clinical Infrastructure",
-    subcategory: "Specialty Hospitals",
-    brief: { beds: "150 Beds", config: "G+7 Floors", area: "120,000 sq.ft" },
+    title: "Oncology Research Lab, Mumbai",
+    category: "Diagnostics & Life Sciences",
+    subcategory: "Research & Development Labs",
+    transactionType: "sell",
+    brief: { beds: "N/A", config: "Research Lab", area: "12,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+6",
   },
   {
     id: 7,
-    title: "Homeopathy College & Hospital, Kagal",
-    category: "Academic & Institutional Healthcare",
+    title: "Government Medical College & Hospital, Nashik",
+    category: "Public & Government Healthcare",
     subcategory: "Medical Colleges & Teaching Hospitals",
-    brief: {
-      beds: "100 Beds",
-      config: "Campus with Hostel",
-      area: "90,000 sq.ft",
-    },
+    transactionType: "lease",
+    brief: { beds: "1200 Beds", config: "Campus Facility", area: "950,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+7",
   },
   {
     id: 8,
-    title: "365 Bedded Regional Mental Hospital, Jaisingpur",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: {
-      beds: "365 Beds",
-      config: "Multiple Wards",
-      area: "250,000 sq.ft",
-    },
+    title: "Children’s Hospital, Bangalore",
+    category: "Core Clinical Infrastructure",
+    subcategory: "Specialty Hospitals",
+    transactionType: "buy",
+    brief: { beds: "200 Beds", config: "Pediatric Facility", area: "150,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+8",
   },
   {
     id: 9,
-    title: "Lokmanya Hospital, SB Road – Diagnostic Centre",
+    title: "Diagnostic Imaging Center, Pune",
     category: "Diagnostics & Life Sciences",
-    subcategory: "Imaging Centres",
-    brief: { beds: "N/A", config: "Diagnostic Center", area: "8,000 sq.ft" },
+    subcategory: "Diagnostic Centers",
+    transactionType: "sell",
+    brief: { beds: "N/A", config: "Imaging Equipment", area: "6,500 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+9",
   },
   {
     id: 10,
-    title: "CRHP Rural Hospital, Jamkhed",
-    category: "Core Clinical Infrastructure",
-    subcategory: "Multispecialty & Acute-Care Hospitals",
-    brief: { beds: "50 Beds", config: "G+2 Floors", area: "40,000 sq.ft" },
+    title: "AIIMS-Style Government Hospital, Nagpur",
+    category: "Public & Government Healthcare",
+    subcategory: "Tertiary Care Hospitals",
+    transactionType: "lease",
+    brief: { beds: "2000 Beds", config: "Mega Hospital Campus", area: "1,500,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+10",
   },
   {
     id: 11,
-    title: "Sub-District Hospital, Karjat",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "100 Beds", config: "G+3 Floors", area: "75,000 sq.ft" },
+    title: "Dental College & Hospital, Chennai",
+    category: "Academic & Institutional Healthcare",
+    subcategory: "Dental Colleges",
+    transactionType: "buy",
+    brief: { beds: "250 Beds", config: "College + Hospital", area: "300,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+11",
   },
   {
     id: 12,
-    title: "Sub-District Hospital, Jamkhed",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "100 Beds", config: "G+3 Floors", area: "75,000 sq.ft" },
+    title: "Biotech Research Park, Hyderabad",
+    category: "Diagnostics & Life Sciences",
+    subcategory: "Research & Development Labs",
+    transactionType: "sell",
+    brief: { beds: "N/A", config: "Lab Clusters", area: "500,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+12",
   },
   {
     id: 13,
-    title: "Sub-District Hospital, Mirajgaon",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "50 Beds", config: "G+2 Floors", area: "50,000 sq.ft" },
+    title: "Neuro & Trauma Care Hospital, Delhi",
+    category: "Core Clinical Infrastructure",
+    subcategory: "Specialty Hospitals",
+    transactionType: "buy",
+    brief: { beds: "300 Beds", config: "Emergency + Trauma", area: "200,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+13",
   },
   {
     id: 14,
-    title: "Sub-District Hospital, Sangamner",
+    title: "Community Health Center, Rural Maharashtra",
     category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "100 Beds", config: "G+3 Floors", area: "80,000 sq.ft" },
+    subcategory: "Primary Healthcare Centers",
+    transactionType: "lease",
+    brief: { beds: "50 Beds", config: "Basic Healthcare", area: "20,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+14",
   },
   {
     id: 15,
-    title: "Sub-District Hospital, Chakan",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "100 Beds", config: "G+3 Floors", area: "78,000 sq.ft" },
+    title: "Medical Simulation Lab, Ahmedabad",
+    category: "Academic & Institutional Healthcare",
+    subcategory: "Training & Simulation Centers",
+    transactionType: "sell",
+    brief: { beds: "N/A", config: "Simulation Lab", area: "15,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+15",
   },
   {
     id: 16,
-    title: "Sub-District Hospital, Narayangaon",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "50 Beds", config: "G+2 Floors", area: "55,000 sq.ft" },
+    title: "Women & Maternity Hospital, Jaipur",
+    category: "Core Clinical Infrastructure",
+    subcategory: "Specialty Hospitals",
+    transactionType: "buy",
+    brief: { beds: "180 Beds", config: "Obstetrics & Gynecology", area: "120,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+16",
   },
   {
     id: 17,
-    title: "Sub-District Hospital, Mangalwedha",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "50 Beds", config: "G+2 Floors", area: "52,000 sq.ft" },
+    title: "Genomics & Molecular Lab, Pune",
+    category: "Diagnostics & Life Sciences",
+    subcategory: "Specialized Labs",
+    transactionType: "sell",
+    brief: { beds: "N/A", config: "Genomics Research", area: "8,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+17",
   },
   {
     id: 18,
-    title: "Rural Hospital, Ghodegaon",
-    category: "Public & Government Healthcare",
-    subcategory: "Government Hospitals",
-    brief: { beds: "30 Beds", config: "G+1 Floor", area: "30,000 sq.ft" },
+    title: "500 Bedded Teaching Hospital, Lucknow",
+    category: "Academic & Institutional Healthcare",
+    subcategory: "Medical Colleges & Teaching Hospitals",
+    transactionType: "lease",
+    brief: { beds: "500 Beds", config: "Teaching + Hospital", area: "400,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+18",
   },
   {
     id: 19,
-    title: "350 Bedded Multi-specialty Hospital, Warje",
-    category: "Core Clinical Infrastructure",
-    subcategory: "Multispecialty & Acute-Care Hospitals",
-    brief: {
-      beds: "350 Beds",
-      config: "2B+G+10 Floors",
-      area: "300,000 sq.ft",
-    },
+    title: "Veterans Healthcare Facility, Chandigarh",
+    category: "Public & Government Healthcare",
+    subcategory: "Specialty Hospitals",
+    transactionType: "buy",
+    brief: { beds: "600 Beds", config: "Multi-Specialty", area: "450,000 sq.ft" },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+19",
   },
 ];
+
 const solutionsData: SolutionsData = {
   value: {
     title: "Why Infra.Health?",
@@ -322,7 +330,7 @@ const SpectrumList: React.FC<SpectrumListProps> = ({ items }) => (
 );
 
 const PropertySearch = () => {
-  const [activeTab, setActiveTab] = useState("sell");
+  const [activeTab, setActiveTab] = useState("buy");
   const [location, setLocation] = useState("");
   const [propertyType, setPropertyType] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
@@ -331,23 +339,41 @@ const PropertySearch = () => {
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const categories = useMemo(() => {
-    const uniqueCategories = new Set(portfolioData.map((p) => p.category));
-    return ["All", ...Array.from(uniqueCategories)];
-  }, []);
+const filteredProjects = useMemo(() => {
+  let projects = portfolioData;
 
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === "All") {
-      return portfolioData;
-    }
-    return portfolioData.filter((project) => project.category === activeFilter);
-  }, [activeFilter]);
+  // ✅ filter by transactionType (Buy / Sell / Lease tab)
+  if (activeTab) {
+    projects = projects.filter((p) => p.transactionType === activeTab);
+  }
+
+  if (activeFilter !== "All") {
+    projects = projects.filter((p) => p.category === activeFilter);
+  }
+
+  if (propertyType && propertyType !== "Asset Type") {
+    projects = projects.filter((p) => p.category === propertyType);
+  }
+
+  if (location.trim() !== "") {
+    const searchTerm = location.toLowerCase();
+    projects = projects.filter(
+      (p) =>
+        p.title.toLowerCase().includes(searchTerm) ||
+        p.brief.beds.toLowerCase().includes(searchTerm) ||
+        p.brief.area.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  return projects;
+}, [activeFilter, propertyType, location, activeTab]); // 👈 added activeTab
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isClickScrolling.current) return;
         entries.forEach((entry) => {
+          if (isClickScrolling.current) return;
           if (entry.isIntersecting) {
             setActiveLink(entry.target.id);
           }
@@ -356,8 +382,9 @@ const PropertySearch = () => {
       { rootMargin: "-30% 0px -70% 0px" }
     );
 
-    document.querySelectorAll("section[id]").forEach((section) => {
-      sectionsRef.current[section.id] = section as HTMLElement;
+    const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    sections.forEach((section) => {
+      sectionsRef.current[section.id] = section;
       observer.observe(section);
     });
 
@@ -365,7 +392,9 @@ const PropertySearch = () => {
       Object.values(sectionsRef.current).forEach((section) => {
         if (section) observer.unobserve(section);
       });
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
     };
   }, []);
 
@@ -379,10 +408,22 @@ const PropertySearch = () => {
 
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      const headerOffset = 180;
+      const elementPosition =
+        targetElement.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+
       window.history.pushState(null, "", `#${targetId}`);
 
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
       scrollTimeout.current = setTimeout(() => {
         isClickScrolling.current = false;
       }, 1000);
@@ -406,68 +447,145 @@ const PropertySearch = () => {
         </p>
       </div>
       {/* Tabs */}
-      <Nav
-        variant="tabs"
-        activeKey={activeTab}
-        onSelect={(k) => setActiveTab(k || "sell")}
-        className="properties"
-      >
-        <Nav.Item>
-          <Nav.Link eventKey="buy">Buy</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="lease">Lease</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="sell">Sell</Nav.Link>
-        </Nav.Item>
-      </Nav>
+      <Row className="justify-content-center">
+        {/* Tabs Centered */}
+        <Col md={2}></Col>
+        <Col md={7} className="d-flex justify-content-center">
+          <Nav
+            variant="tabs"
+            activeKey={activeTab}
+            onSelect={(k) => setActiveTab(k || "sell")}
+            className="properties"
+          >
+            <Nav.Item>
+              <Nav.Link eventKey="buy">Buy</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="lease">Lease</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="sell">Sell</Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Col>
 
-      {/* Search Box */}
-      <div className="border rounded p-3 d-flex align-items-center">
-        {/* Location */}
+        {/* List Your Property Button */}
+        <Col md={3} className="d-flex align-items-center justify-content-end">
+          <div
+            className="btn primary-btn"
+            onClick={(e) => handleNavLinkClick(e, "list-property-section")}
+          >
+            List Your Property
+          </div>
+        </Col>
+      </Row>
+
+      {/* Search & Filters Box */}
+      <Row className="justify-content-center">
+        <Col md={9} className="border rounded p-3">
+          {/* First Row: Search Bar */}
+          <div className="d-flex align-items-center justify-content-center mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Search upto 3 localities or landmarks"
+              className="me-2"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              style={{ maxWidth: "70%" }}
+            />
+            <button className="btn d-flex align-items-center px-4">
+              <FaSearch size={15} className="me-1" /> Search
+            </button>
+          </div>
+
+          {/* Second Row: Dropdowns */}
+          <div className="d-flex mt-2">
+            {/* Location */}
+            <Form.Select
+              className="me-2"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              style={{ maxWidth: "30%" }}
+            >
+              <option value="">India</option>
+            </Form.Select>
+
+            {/* Filters */}
+            <Form.Select
+              value={propertyType}
+              onChange={(e) => setPropertyType(e.target.value)}
+              style={{ maxWidth: "70%" }}
+            >
+              <option>Asset Type</option>
+              <option value="Core Clinical Infrastructure">
+                Core Clinical Infrastructure
+              </option>
+              <option value="Academic & Institutional Healthcare">
+                Academic & Institutional Healthcare
+              </option>
+              <option value="Diagnostics & Life Sciences">
+                Diagnostics & Life Sciences
+              </option>
+              <option value="Public & Government Healthcare">
+                Public & Government Healthcare
+              </option>
+            </Form.Select>
+          </div>
+        </Col>
+      </Row>
+
+      {/* <div className="border rounded p-3 d-flex align-items-center">
+        
         <Form.Select
           className="me-2"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          style={{ maxWidth: "100px" }}
+          style={{ maxWidth: "180px" }}
         >
           <option value="">India</option>
         </Form.Select>
 
-        {/* Filters */}
         <Form.Select
           className="me-2"
           value={propertyType}
           onChange={(e) => setPropertyType(e.target.value)}
-          style={{ maxWidth: "200px" }}
+          style={{ maxWidth: "35%" }}
         >
           <option>Asset Type</option>
-          <option value="apartment">Apartment</option>
-          <option value="villa">Villa</option>
-          <option value="office">Office</option>
+          <option value="Core Clinical Infrastructure">
+            Core Clinical Infrastructure
+          </option>
+          <option value="Academic & Institutional Healthcare">
+            Academic & Institutional Healthcare
+          </option>
+          <option value="Diagnostics & Life Sciences">
+            Diagnostics & Life Sciences
+          </option>
+          <option value="Public & Government Healthcare">
+            Public & Government Healthcare
+          </option>
         </Form.Select>
 
-        {/* Search Input */}
         <Form.Control
           type="text"
           placeholder="Search upto 3 localities or landmarks"
           className="me-2"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+          style={{ maxWidth: "35%" }}
         />
 
-        {/* Search Button */}
         <button className="btn d-flex align-items-center px-4">
-          <FaSearch className="me-2" /> Search
+          <FaSearch size={24} className="me-1" /> Search
         </button>
-      </div>
+      </div> */}
+
       <Row className="portfolio-grid mt-3">
         {filteredProjects.map((project) => (
           <Col key={project.id} md={6} lg={3} className="mb-4">
             <div className="project-card">
               <img src={project.imageUrl} alt={project.title} />
-              <div className="project-card-overlay">
+              {/* <div className="project-card-overlay">
                 <h4>{project.title}</h4>
                 <p>
                   <strong>Beds:</strong> {project.brief.beds}
@@ -478,12 +596,12 @@ const PropertySearch = () => {
                 <p>
                   <strong>Config:</strong> {project.brief.config}
                 </p>
-              </div>
+              </div> */}
             </div>
           </Col>
         ))}
       </Row>
-      <section className="portfolio-section mb-4">
+      <section id="list-property-section" className="portfolio-section mb-4">
         <Container>
           {/* <p className="section-subtitle">Our Portfolio</p> */}
           <h3 className="section-title">

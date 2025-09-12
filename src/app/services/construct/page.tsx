@@ -4,8 +4,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../../styles/services.css";
 
-// --- ICON COMPONENT ---
-// Inlining the SVG to remove the 'react-icons' dependency and fix import errors.
 const BsCheckCircleFill: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +181,7 @@ export default function ConstructPage() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (isClickScrolling.current) return; // Don't update state if scrolling from a click
+          if (isClickScrolling.current) return; 
           if (entry.isIntersecting) {
             setActiveLink(entry.target.id);
           }
@@ -208,28 +206,36 @@ export default function ConstructPage() {
     };
   }, []);
 
-  const handleNavLinkClick = (
-    e: React.MouseEvent<HTMLElement>,
-    targetId: string
-  ) => {
-    e.preventDefault();
-    isClickScrolling.current = true;
-    setActiveLink(targetId);
+const handleNavLinkClick = (
+  e: React.MouseEvent<HTMLElement>,
+  targetId: string
+) => {
+  e.preventDefault();
+  isClickScrolling.current = true;
+  setActiveLink(targetId);
 
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", `#${targetId}`);
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    const headerOffset = 180; 
+    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - headerOffset;
 
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
 
-      scrollTimeout.current = setTimeout(() => {
-        isClickScrolling.current = false;
-      }, 1000); // Buffer time for smooth scroll to finish
+    window.history.pushState(null, "", `#${targetId}`);
+
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
     }
-  };
+
+    scrollTimeout.current = setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 1000);
+  }
+};
 
   return (
     <>

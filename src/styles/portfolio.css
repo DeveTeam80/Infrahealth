@@ -1,4 +1,3 @@
-/* Borrowing general styles from your about.css for consistency */
 .section-subtitle {
     font-size: 16px;
     color: #555;
@@ -21,15 +20,6 @@
     /* Main accent teal */
 }
 
-h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-/* --- Component-Specific Styling --- */
-
-/* Styles adapted from your existing design for consistency */
 .portfolio-header {
     max-width: 1920px;
     margin: 0 auto 3rem auto;
@@ -80,7 +70,7 @@ h2 {
 }
 
 .filter-nav .nav-link:hover {
-    border-bottom-color: #e98c46;
+    border-bottom-color: #b6520f;
     /* Orange accent on hover */
 }
 

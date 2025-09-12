@@ -230,16 +230,16 @@ const SpectrumList: React.FC<SpectrumListProps> = ({ items }) => (
 
 // --- MAIN COMPONENT ---
 export default function SolutionsPage() {
-  const [activeLink, setActiveLink] = useState<string>("academic");
-  const sectionsRef = useRef<Record<string, HTMLElement>>({});
+   const [activeLink, setActiveLink] = useState<string>("epc");
+  const sectionsRef = useRef<Record<string, Element>>({});
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isClickScrolling.current) return;
         entries.forEach((entry) => {
+          if (isClickScrolling.current) return; 
           if (entry.isIntersecting) {
             setActiveLink(entry.target.id);
           }
@@ -248,8 +248,9 @@ export default function SolutionsPage() {
       { rootMargin: "-30% 0px -70% 0px" }
     );
 
-    document.querySelectorAll("section[id]").forEach((section) => {
-      sectionsRef.current[section.id] = section as HTMLElement;
+    const sections = document.querySelectorAll("section[id]");
+    sections.forEach((section) => {
+      sectionsRef.current[section.id] = section;
       observer.observe(section);
     });
 
@@ -257,29 +258,42 @@ export default function SolutionsPage() {
       Object.values(sectionsRef.current).forEach((section) => {
         if (section) observer.unobserve(section);
       });
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
     };
   }, []);
 
-  const handleNavLinkClick = (
-    e: React.MouseEvent<HTMLElement>,
-    targetId: string
-  ) => {
-    e.preventDefault();
-    isClickScrolling.current = true;
-    setActiveLink(targetId);
+const handleNavLinkClick = (
+  e: React.MouseEvent<HTMLElement>,
+  targetId: string
+) => {
+  e.preventDefault();
+  isClickScrolling.current = true;
+  setActiveLink(targetId);
 
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", `#${targetId}`);
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    const headerOffset = 180; 
+    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - headerOffset;
 
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-      scrollTimeout.current = setTimeout(() => {
-        isClickScrolling.current = false;
-      }, 1000); // Buffer time to re-enable observer after scroll
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+
+    window.history.pushState(null, "", `#${targetId}`);
+
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
     }
-  };
+
+    scrollTimeout.current = setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 1000);
+  }
+};
 
   return (
     <>

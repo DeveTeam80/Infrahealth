@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Accordion } from "react-bootstrap";
+import { Container, Row, Col, Accordion, Pagination } from "react-bootstrap";
 import "../../styles/about.css";
 import Image from "next/image";
 import {
@@ -19,6 +19,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "../../styles/career.css";
 import Link from "next/link";
+import { FaEnvelope } from "react-icons/fa6";
 
 export default function AboutSection() {
   const [visibleCards, setVisibleCards] = useState<{ [key: string]: boolean }>(
@@ -45,31 +46,41 @@ export default function AboutSection() {
 
   const buildData = [
     {
-      letter: "B",
+      image: "/images/careers/brainstorming.jpg",
       title: "Brainstorming",
       text: "We spark fresh ideas, fuel creativity, and embrace new perspectives.",
     },
     {
-      letter: "U",
+      image: "/images/careers/unity.jpg",
       title: "Unity",
       text: "We value teamwork, collaboration, and ensure every voice is heard.",
     },
     {
-      letter: "I",
+      image: "/images/careers/integrity.jpg",
       title: "Integrity",
       text: "We uphold ethics, transparency, responsibility, and trust.",
     },
     {
-      letter: "L",
+      image: "/images/careers/leadership.jpg",
       title: "Leadership",
       text: "We foster mentorship, skill growth, and lifelong learning.",
     },
     {
-      letter: "D",
+      image: "/images/careers/diversity.jpg",
       title: "Diversity",
       text: "We respect differences, share strengths, and thrive inclusively.",
     },
   ];
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  const totalPages = Math.ceil(careerData.length / itemsPerPage);
+
+  const paginatedData = careerData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <>
@@ -83,9 +94,9 @@ export default function AboutSection() {
                 src="/images/careers/intro.mp4"
                 width="500"
                 height="300"
-                // controls 
+                // controls
                 style={{ borderRadius: "12px", objectFit: "cover" }}
-                // poster="/images/about.jpg" 
+                // poster="/images/about.jpg"
                 autoPlay={true}
                 muted={true}
                 loop={true}
@@ -132,7 +143,11 @@ export default function AboutSection() {
 
           <Row className="g-3 justify-content-center">
             {buildData.map((item, index) => (
-              <Col key={index} md className="d-flex">
+              <Col
+                key={index}
+                md={index < 3 ? 4 : 6} // first 3 take 3 columns each, last 2 take 6 each
+                className="d-flex"
+              >
                 <div
                   className="p-4 rounded text-center flex-fill"
                   style={{
@@ -142,16 +157,21 @@ export default function AboutSection() {
                   <div
                     className="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle"
                     style={{
-                      width: "60px",
-                      height: "60px",
-                      backgroundColor: "#008080",
-                      color: "#fff",
-                      fontSize: "1.5rem",
-                      fontWeight: "bold",
+                      width: "120px",
+                      height: "120px",
                       boxShadow: "0 6px 16px rgba(0, 0, 0, 0.1)",
                     }}
                   >
-                    {item.letter}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: "50%",
+                      }}
+                    />
                   </div>
                   <h5>{item.title}</h5>
                   <p>{item.text}</p>
@@ -168,9 +188,8 @@ export default function AboutSection() {
           <h3 className="section-title">
             Explore <span> your </span> career with <span> Infra.health</span>
           </h3>
-
           <Row className="careers g-4">
-            {careerData.map((job: CareerItem) => (
+            {paginatedData.map((job: CareerItem) => (
               <Col key={job.sr} md={3} className="feature-card">
                 <h3>
                   <span>{job.designation}</span>
@@ -180,10 +199,6 @@ export default function AboutSection() {
                   <strong>Qualification:</strong> {job.qualification} <br />
                   <strong>Experience:</strong> {job.exp}
                 </p>
-                {/* <button
-                  type="button"
-                  className="btn btn-outline-secondary btn-sm"
-                > */}
                 <Link
                   href={`/careers/application-form?designation=${encodeURIComponent(
                     job.designation
@@ -192,9 +207,73 @@ export default function AboutSection() {
                 >
                   Apply Now
                 </Link>
-                {/* </button> */}
               </Col>
             ))}
+          </Row>
+          <Pagination className="justify-content-center mt-4 custom-pagination">
+            <Pagination.Prev
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              disabled={currentPage === 1}
+            />
+            {Array.from({ length: totalPages }, (_, i) => (
+              <Pagination.Item
+                key={i + 1}
+                active={i + 1 === currentPage}
+                onClick={() => setCurrentPage(i + 1)}
+              >
+                {i + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            />
+          </Pagination>
+          <Row className="mt-5 g-4">
+            <Col md={6}>
+              <div className="p-4 border rounded h-100 shadow-sm">
+                <h3 className="section-title mb-2">
+                  <span>Didn’t find your role?</span>
+                </h3>
+                <p className="text-muted mb-3">
+                  We are always on the lookout for talented professionals. Share
+                  your profile with us and we’ll connect when a matching role
+                  opens up.
+                </p>
+                <p>
+                  <FaEnvelope className="me-2" style={{ color: "#b6520f" }} />
+                  <a
+                    href="mailto:hr@infra.health"
+                    className="text-decoration-none"
+                    style={{ color: "#b6520f" }}
+                  >
+                    hr@infra.health
+                  </a>
+                </p>
+              </div>
+            </Col>
+            <Col md={6}>
+              <div className="p-4 border rounded h-100 shadow-sm">
+                <h3 className="section-title mb-2">
+                  <span>Internship Programme</span>
+                </h3>
+                <p className="text-muted mb-3">
+                  Kickstart your career with hands-on experience in healthcare
+                  real estate, operations, and innovation. Apply now to our
+                  internship programme.
+                </p>
+                <p>
+                  <FaEnvelope className="me-2" style={{ color: "#b6520f" }} />
+                  <a
+                    href="mailto:hr@infra.health"
+                    className="text-decoration-none"
+                    style={{ color: "#b6520f" }}
+                  >
+                    hr@infra.health
+                  </a>
+                </p>
+              </div>
+            </Col>
           </Row>
         </Container>
       </section>

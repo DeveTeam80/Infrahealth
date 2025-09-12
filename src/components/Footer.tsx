@@ -63,13 +63,25 @@ const Footer = () => {
             </p>
             <div className="social-icons">
               {[
-                FaLinkedinIn,
-                FaYoutube,
-                FaInstagram,
-                FaFacebookF,
-                FaTwitter,
-              ].map((Icon, i) => (
-                <a key={i} href="#">
+                {
+                  icon: FaFacebookF,
+                  url: "https://www.facebook.com/profile.php?viewas=100000686899395&id=61579937188150",
+                },
+                {
+                  icon: FaInstagram,
+                  url: "https://www.instagram.com/infra.healthind/",
+                },
+                {
+                  icon: FaLinkedinIn,
+                  url: "https://www.linkedin.com/company/infra-health-india/",
+                },
+                { icon: FaTwitter, url: "https://x.com/infra_healthind" },
+                {
+                  icon: FaYoutube,
+                  url: "https://www.youtube.com/@Infra.Health",
+                },
+              ].map(({ icon: Icon, url }, i) => (
+                <a key={i} href={url} target="_blank" rel="noopener noreferrer">
                   <Icon />
                 </a>
               ))}
@@ -87,9 +99,12 @@ const Footer = () => {
                 "Project Finance",
               ].map((text, i) => (
                 <li key={i}>
-<Link href={`/${text.toLowerCase().replace(/\s+/g, "-")}`} passHref>
-  {text}
-</Link>
+                  <Link
+                    href={`/${text.toLowerCase().replace(/\s+/g, "-")}`}
+                    passHref
+                  >
+                    {text}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -98,13 +113,15 @@ const Footer = () => {
           <Col xs={12} md={3} className="footer-links mb-4">
             <h4>Services</h4>
             <ul>
-              {["Consult", "Construct", "Operate", "Solutions"].map((text, i) => (
-                <li key={i}>
-                  <Link href={`/services/${text.toLowerCase()}`} passHref>
-                    {text}
-                  </Link>
-                </li>
-              ))}
+              {["Consult", "Construct", "Operate", "Solutions"].map(
+                (text, i) => (
+                  <li key={i}>
+                    <Link href={`/services/${text.toLowerCase()}`} passHref>
+                      {text}
+                    </Link>
+                  </li>
+                )
+              )}
             </ul>
           </Col>
 
@@ -124,7 +141,7 @@ const Footer = () => {
               </li>
               <li>
                 <FaPhone className="me-2" />
-                <a href="tel:+912045099895">+91 20 45099895</a> 
+                <a href="tel:+912045099895">+91 20 45099895</a>
               </li>
               <li>
                 <FaPhone className="me-2" />

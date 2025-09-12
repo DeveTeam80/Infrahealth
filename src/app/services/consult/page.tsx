@@ -210,43 +210,70 @@ const DetailSection: React.FC<DetailSectionProps> = ({ details }) => (
 );
 
 export default function ConsultPage() {
-    const [activeLink, setActiveLink] = useState<string>('management-consultancy');
-    const sectionsRef = useRef<Record<string, Element>>({});
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setActiveLink(entry.target.id);
-                    }
-                });
-            },
-            { rootMargin: '-30% 0px -70% 0px' }
-        );
-
-        const sections = document.querySelectorAll('section[id]');
-        sections.forEach(section => {
-            sectionsRef.current[section.id] = section;
-            observer.observe(section);
-        });
-
-        return () => {
-            Object.values(sectionsRef.current).forEach(section => {
-                if (section) observer.unobserve(section);
-            });
-        };
-    }, []);
-
-    const handleNavLinkClick = (e: React.MouseEvent<HTMLElement>, targetId: string) => {
-        e.preventDefault();
-        setActiveLink(targetId);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.history.pushState(null, "", `#${targetId}`);
-        }
-    };
+   const [activeLink, setActiveLink] = useState<string>("epc");
+   const sectionsRef = useRef<Record<string, Element>>({});
+   const isClickScrolling = useRef(false);
+   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+ 
+   useEffect(() => {
+     const observer = new IntersectionObserver(
+       (entries) => {
+         entries.forEach((entry) => {
+           if (isClickScrolling.current) return; 
+           if (entry.isIntersecting) {
+             setActiveLink(entry.target.id);
+           }
+         });
+       },
+       { rootMargin: "-30% 0px -70% 0px" }
+     );
+ 
+     const sections = document.querySelectorAll("section[id]");
+     sections.forEach((section) => {
+       sectionsRef.current[section.id] = section;
+       observer.observe(section);
+     });
+ 
+     return () => {
+       Object.values(sectionsRef.current).forEach((section) => {
+         if (section) observer.unobserve(section);
+       });
+       if (scrollTimeout.current) {
+         clearTimeout(scrollTimeout.current);
+       }
+     };
+   }, []);
+ 
+ const handleNavLinkClick = (
+   e: React.MouseEvent<HTMLElement>,
+   targetId: string
+ ) => {
+   e.preventDefault();
+   isClickScrolling.current = true;
+   setActiveLink(targetId);
+ 
+   const targetElement = document.getElementById(targetId);
+   if (targetElement) {
+     const headerOffset = 180; 
+     const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+     const offsetPosition = elementPosition - headerOffset;
+ 
+     window.scrollTo({
+       top: offsetPosition,
+       behavior: "smooth",
+     });
+ 
+     window.history.pushState(null, "", `#${targetId}`);
+ 
+     if (scrollTimeout.current) {
+       clearTimeout(scrollTimeout.current);
+     }
+ 
+     scrollTimeout.current = setTimeout(() => {
+       isClickScrolling.current = false;
+     }, 1000);
+   }
+ };
 
     const createTabbedSection = (service: ServiceWithTabs) => (
         <Tab.Container defaultActiveKey={service.tabs[0].eventKey}>

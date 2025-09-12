@@ -1,0 +1,109 @@
+.resources-page .nav-tabs {
+  border: none;
+  margin-bottom: 2rem;
+}
+
+.bg-danger {
+  --bs-bg-opacity: 1;
+  background-color: #b6520f !important;
+}
+
+.resources-page .nav-tabs .nav-link {
+  font-weight: 600;
+  color: #555;
+  border: none;
+  background: transparent;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.resources-page .nav-tabs .nav-link.active {
+  color: #fff;
+  background-color: #b6520f;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.resources-page .nav-tabs .nav-link:hover {
+  color: #b6520f;
+}
+
+.resources-page .card {
+  /* border: 1px solid #b6520f; */
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  max-width:850px;
+}
+
+.resources-page .card:hover {
+  transform: translateY(-5px);
+}
+
+.resources-page .card img {
+  object-fit: cover;
+}
+
+.resources-page .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.resources-page .card-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  color: #111;
+}
+
+.resources-page .card-text {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.resources-page .card .text-primary {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.resources-page .card .text-primary:hover {
+  transform: translateX(4px);
+}
+
+.resources-page .pagination .page-item .page-link {
+  color: #555;
+  border: none;
+  margin: 0 5px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.resources-page .pagination .page-item.active .page-link {
+  background-color: #b6520f; /* Brand red */
+  color: #fff;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.resources-page .pagination .page-item .page-link:hover {
+  background-color: #f1f1f1;
+}
+
+.card-rect-img {
+  height: 200px; /* pick a height that looks good */
+  object-fit: cover;
+  width: 350px;
+   border-top-right-radius: 12px;   
+  border-bottom-right-radius: 12px; 
+}
+
+.divider {
+  width: 80%;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 1rem 0 2rem;
+}
