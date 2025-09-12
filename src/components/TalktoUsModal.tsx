@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
-import { FaCircleXmark } from "react-icons/fa6";
+import { FaCircleXmark, FaXmark } from "react-icons/fa6";
 
 function TalkToUsModal({
   show,
@@ -16,7 +16,7 @@ function TalkToUsModal({
     email: "",
     city: "",
     state: "",
-    requirement: "", // renamed from speciality
+    requirement: "",
   });
 
   const handleChange = (
@@ -60,8 +60,9 @@ function TalkToUsModal({
   };
 
   return (
-    <Modal show={show} onHide={handleClose} size="lg" closeButton>
-      <Modal.Body>
+    <Modal show={show} onHide={handleClose} size="lg" centered>
+      <Modal.Body className="p-4 position-relative">
+        {/* Close Button */}
         <button
           onClick={handleClose}
           style={{
@@ -72,68 +73,83 @@ function TalkToUsModal({
             background: "transparent",
             fontSize: "1.5rem",
             cursor: "pointer",
+            color:"#b6520f"
           }}
         >
-          <FaCircleXmark />
+        <FaXmark/>
         </button>
+
         <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Label>Title</Form.Label>
-            <Form.Select
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-            >
-              <option value="Dr">Dr.</option>
-              <option value="Mr">Mr.</option>
-              <option value="Mrs">Mrs.</option>
-              <option value="Miss">Miss</option>
-            </Form.Select>
-          </Form.Group>
+          <Row className="g-3">
+            {/* Title */}
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Title</Form.Label>
+                <Form.Select
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="Dr">Dr.</option>
+                  <option value="Mr">Mr.</option>
+                  <option value="Mrs">Mrs.</option>
+                  <option value="Miss">Miss</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
 
-          <Form.Group>
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Your name"
-            />
-          </Form.Group>
+            {/* Name */}
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>Name <span style={{ color: "red" }}>*</span></Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your name"
+                  required
+                />
+              </Form.Group>
+            </Col>
 
-          <Form.Group>
-            <Form.Label>
-              Mobile <span style={{ color: "red" }}>*</span>
-            </Form.Label>
-            <Form.Control
-              type="tel"
-              name="mobile"
-              value={formData.mobile}
-              onChange={handleChange}
-              placeholder="Mobile number"
-              required
-              pattern="[0-9]{10,15}"
-            />
-          </Form.Group>
+            {/* Mobile */}
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>
+                  Mobile <span style={{ color: "red" }}>*</span>
+                </Form.Label>
+                <Form.Control
+                  type="tel"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  placeholder="Mobile number"
+                  required
+                  pattern="[0-9]{10,15}"
+                />
+              </Form.Group>
+            </Col>
 
-          <Form.Group>
-            <Form.Label>
-              Email <span style={{ color: "red" }}>*</span>
-            </Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email address"
-              required
-            />
-          </Form.Group>
+            {/* Email */}
+            <Col md={6}>
+              <Form.Group>
+                <Form.Label>
+                  Email <span style={{ color: "red" }}>*</span>
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email address"
+                  required
+                />
+              </Form.Group>
+            </Col>
 
-          {/* City & State in a Row */}
-          <Row className="mb-3">
+            {/* City */}
             <Col md={6}>
               <Form.Group>
                 <Form.Label>
@@ -149,6 +165,8 @@ function TalkToUsModal({
                 />
               </Form.Group>
             </Col>
+
+            {/* State */}
             <Col md={6}>
               <Form.Group>
                 <Form.Label>
@@ -164,38 +182,46 @@ function TalkToUsModal({
                 />
               </Form.Group>
             </Col>
+
+            {/* Requirement */}
+            <Col md={12}>
+              <Form.Group>
+                <Form.Label>
+                  Services <span style={{ color: "red" }}>*</span>
+                </Form.Label>
+                <Form.Select
+                  name="requirement"
+                  value={formData.requirement}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">-- Select Requirement --</option>
+                  <option value="Hospital infrastructure">
+                    Hospital infrastructure
+                  </option>
+                  <option value="Healthcare consulting">
+                    Healthcare consulting
+                  </option>
+                  <option value="Advisory">Advisory</option>
+                  <option value="Products">Products</option>
+                  <option value="Medical equipment">Medical equipment</option>
+                  <option value="Facility Management">Facility Management</option>
+                  <option value="Properties">Properties</option>
+                  <option value="Finance">Finance</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
           </Row>
 
-          {/* Requirement Dropdown */}
-          <Form.Group>
-            <Form.Label>
-              Services <span style={{ color: "red" }}>*</span>
-            </Form.Label>
-            <Form.Select
-              name="requirement"
-              value={formData.requirement}
-              onChange={handleChange}
-              required
+          {/* Submit */}
+          <div className="mt-4">
+            <Button
+              type="submit"
+              className="px-4"
             >
-              <option value="">-- Select Requirement --</option>
-              <option value="Hospital infrastructure">
-                Hospital infrastructure
-              </option>
-              <option value="Healthcare consulting">
-                Healthcare consulting
-              </option>
-              <option value="Advisory">Advisory</option>
-              <option value="Products">Products</option>
-              <option value="Medical equipment">Medical equipment</option>
-              <option value="Facility Management">Facility Management</option>
-              <option value="Properties">Properties</option>
-              <option value="Finance">Finance</option>
-            </Form.Select>
-          </Form.Group>
-
-          <Button className="mt-3" type="submit">
-            Submit
-          </Button>
+              Submit
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>

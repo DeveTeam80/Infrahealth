@@ -21,10 +21,12 @@
     /* Main accent teal */
 }
 
-h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.properties .nav-link {
+  /* border: 2px solid #dee2e6!important;  */
+}
+
+.properties .nav-link.active {
+  /* border-width: 2px !important;   */
 }
 
 /* Mobile optimization for typography */
@@ -125,10 +127,10 @@ h2 {
 }
 
 .service-tabs .nav-link.active {
-    background-color: #e98c46;
+    background-color: #b6520f;
     /* Brand Orange */
     color: white;
-    border-color: #e98c46;
+    border-color: #b6520f;
     font-weight: 500;
 }
 
@@ -200,7 +202,7 @@ h2 {
 }
 
 .details-list li svg {
-    color: #e98c46;
+    color: #b6520f;
     margin-right: 0.75rem;
     margin-top: 0.2rem;
     flex-shrink: 0;
@@ -250,9 +252,15 @@ h2 {
 }
 
 .value-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(2, 1fr); /* default: 2 columns */
+}
+
+@media (min-width: 1200px) {
+  .value-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+  }
 }
 
 .value-card {
@@ -346,7 +354,7 @@ h2 {
 }
 
 .portfolio-section .section-title span {
-    color: #e98c46;
+    color: #b6520f;
 }
 
 /* Mobile portfolio section */

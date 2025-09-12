@@ -11,7 +11,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { homeData, JourneyTab } from "@/data/homeData";
 
 export default function Home() {
@@ -71,7 +71,14 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="hero" id="hero">
         <div className="video-desktop">
-          <video className="hero-video" autoPlay muted loop playsInline>
+          <video
+            className="hero-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
             <source src="/images/hero/infra-banner.mp4" type="video/mp4" />
           </video>
         </div>
@@ -284,7 +291,7 @@ export default function Home() {
                       style={{
                         borderRadius: "8px",
                         fontWeight: 500,
-                        border: "1px solid #e98c46",
+                        border: "1px solid #b6520f",
                         whiteSpace: "nowrap",
                       }}
                     >
@@ -372,30 +379,42 @@ export default function Home() {
         </Container>
       </section>
       {/* PORTFOLIO */}
-      <section className="portfolio-section">
+      <section className="portfolio-section bg-light">
         <Container>
           <p className="section-subtitle">Our Portfolio</p>
           <h3 className="section-title">
             Specialized Healthcare Infrastructure <span>Solutions</span>
           </h3>
-          <Row className="justify-content-center g-4 my-4">
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            autoplay={{ delay: 3000 }}
+            breakpoints={{
+              576: { slidesPerView: 2 }, // ≥ sm
+              768: { slidesPerView: 3 }, // ≥ md
+            }}
+            className="my-4"
+          >
             {projects.map((project) => (
-              <Col key={project.id} xs={12} sm={6} md={4}>
+              <SwiperSlide key={project.id}>
                 <div className="card project-card">
                   <Image
                     src={project.image}
                     alt={project.title}
                     width={400}
                     height={300}
+                    className="img-fluid"
                   />
                   <div className="project-name">
                     <span className="ms-2">{project.title}</span>
                   </div>
                 </div>
-              </Col>
+              </SwiperSlide>
             ))}
-          </Row>
-          <div className="projects-bottom d-flex justify-content-between">
+          </Swiper>
+
+          <div className="projects-bottom d-flex justify-content-between mt-4">
             <div className="bottom-cta">
               <h3 className="section-title">
                 Let&apos;s Build Your{" "}
@@ -408,6 +427,7 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
       {/* TESTIMONIALS */}
       <section className="testimonials py-5">
         <Container>
@@ -417,7 +437,7 @@ export default function Home() {
           </h3>
           <Swiper
             modules={[Autoplay]}
-            // spaceBetween={20}
+            spaceBetween={20}
             slidesPerView={1}
             loop
             autoplay={{ delay: 3500, disableOnInteraction: false }}
@@ -474,7 +494,7 @@ export default function Home() {
             ))}
           </Row>
           <div className="explore-btn justify-content-center d-flex">
-            <Link href="#">Explore More Blogs</Link>
+            <Link href="news">Explore More Blogs</Link>
           </div>
         </Container>
       </section>

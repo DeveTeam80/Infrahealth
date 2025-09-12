@@ -35,8 +35,7 @@
 .megaList li {
   display: block;
   /* color: #666; */
-  font-size: 1em;
-}
+  font-size: 1rem;}
 
 .megaList {
   padding-left: 0.5rem;
@@ -88,7 +87,7 @@
   border-left: 3px solid transparent;
 }
 .megaParentList li.active {
-  border-left: 3px solid #e98c46; 
+  border-left: 3px solid #b6520f; 
   background: #f9f9f9;
 }
 .megaChildren .megaList {
@@ -109,14 +108,14 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #e98c46; /* brand color */
+  background-color: #b6520f; /* brand color */
   margin-right: 10px; /* spacing between bullet and text */
   flex-shrink: 0; /* prevent shrinking */
 }
 
 .sticky-header .nav-link.active {
-  color: #e98c46 !important;
-  border-bottom: 2px solid #e98c46;
+  color: #b6520f !important;
+  border-bottom: 2px solid #b6520f;
 }
 
 .modal-content {
@@ -153,3 +152,30 @@
     padding-right: 1rem !important;
   }
 }
+
+.megaThumbnails {
+  height: 220px; /* adjust based on design */
+}
+
+.megaThumbnails .thumb1 {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 50% !important;
+  height: auto;
+  z-index: 1;
+  border-radius:10px;
+}
+
+.megaThumbnails .thumb2 {
+  position: absolute !important;
+  bottom: -80px;
+  right: 35px;
+  width: 50% !important;
+  height: auto;
+  z-index: 2;
+    border-radius:10px;
+  /* transform: rotate(-2deg); */
+}
+
+

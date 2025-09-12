@@ -2,7 +2,7 @@
   --font-primary: var(--font-montserrat), sans-serif;
   --font-secondary: "Helvetica Neue", Arial, sans-serif;
   --teal: #3b9c9d;
-  --solar: #e98c46;
+  --solar: #b6520f;
   --white: #fff;
   --black: #000;
 }
@@ -36,7 +36,7 @@ a {
   text-decoration: none;
 }
 
-.btn {
+/* .btn {
   background: var(--solar);
   color: var(--white);
   padding: 12px 0 12px 0;
@@ -52,6 +52,59 @@ a {
 
 .btn:hover {
   background-color: #ffe9d7;
+  color: var(--solar);
+  border: 1px solid var(--solar);
+  cursor: pointer;
+} */
+
+.container {
+  max-width: 1200px;
+}
+
+.btn {
+  background: linear-gradient(
+    to bottom,
+    #d66b2a,
+    var(--solar)
+  ); /* base gradient */
+  color: var(--white);
+  padding: 12px 0;
+  border: 1px solid var(--solar);
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: none;
+  display: inline-block;
+  width: 150px;
+  text-align: center;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+/* Gloss overlay with smooth gradient */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.6) 0%,
+    /* bright highlight at the very top */ rgba(255, 255, 255, 0.3) 40%,
+    /* softer mid-tone */ rgba(255, 255, 255, 0) 100% /* fades smoothly */
+  );
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  pointer-events: none;
+}
+
+/* Hover effect with soft glossy feel */
+.btn:hover {
+  background: linear-gradient(to bottom, #ffe9d7, #f2b48a);
   color: var(--solar);
   border: 1px solid var(--solar);
   cursor: pointer;
@@ -77,18 +130,65 @@ a {
 }
 
 .scroll-top:hover {
-  background: #e98c46;
+  background: #b6520f;
 }
 
-.properties{
-  justify-content: center!important;
+.properties {
+  justify-content: center !important;
 }
 
-.properties .nav-link{
+.properties .nav-link {
   color: #000;
 }
 
-.properties .nav-link.active{
-  color: #e98c46;
-  border-bottom: 4px solid #e98c46;
+/* .properties .nav-tabs{
+border: 2px solid #dee2e6;
+} */
+
+.properties {
+  border: 1px solid #dee2e6; /* border around parent nav */
+  border-radius: 6px; /* optional rounded corners */
+  overflow: hidden;
+  justify-self: center;
+  border-bottom: none; /* so inner borders align neatly */
+}
+
+.properties .nav-item {
+  color: #333;
+  border-right: 1px solid #dee2e6 !important;
+  width: 80px;
+  text-align: center;
+}
+
+.properties .nav-item:last-child .nav-link {
+  border-right: none;
+}
+
+.properties .nav-link.active {
+  color: #b6520f;
+  border-bottom: 4px solid #b6520f !important;
+}
+
+.custom-pagination .page-link {
+  color: #3b9c9d; /* default text color */
+  border: 1px solid #3b9c9d;
+}
+
+.custom-pagination .page-link:hover {
+  background-color: #3b9c9d;
+  color: #fff;
+  border-color: #3b9c9d;
+}
+
+.custom-pagination .active > .page-link,
+.custom-pagination .page-link.active {
+  background-color: #3b9c9d;
+  border-color: #3b9c9d;
+  color: #fff;
+}
+
+.custom-pagination .page-item.disabled .page-link {
+  color: #ccc;
+  border-color: #ccc;
+  background-color: transparent;
 }

@@ -34,7 +34,7 @@ export interface HomeData {
   projects: Project[];
   testimonials: Testimonial[];
   blogs: Blog[];
-  journeyTabs: JourneyTab[]; 
+  journeyTabs: JourneyTab[];
 }
 
 // Export strongly-typed home data
@@ -46,21 +46,54 @@ export const homeData: HomeData = {
     "Consulting",
     "Construction",
     "Finance",
-    "Investments"
+    "Investments",
   ],
   services: [
     { img: "/images/services/1.jpg", title: "Design and Build" },
     { img: "/images/services/2.jpg", title: "Project Management Consultancy" },
-    { img: "/images/services/3.jpg", title: "Engineering Procurement Construction (EPC)" },
+    {
+      img: "/images/services/3.jpg",
+      title: "Engineering Procurement Construction (EPC)",
+    },
     { img: "/images/services/4.jpg", title: "Planning and Design" },
     { img: "/images/services/5.jpg", title: "Facility Management Services" },
-    { img: "/images/services/6.jpg", title: "Project Feasibility and Investment Advisory" },
-    { img: "/images/services/7.jpg", title: "Regulatory Compliance" }
+    {
+      img: "/images/services/6.jpg",
+      title: "Project Feasibility and Investment Advisory",
+    },
+    { img: "/images/services/7.jpg", title: "Regulatory Compliance" },
   ],
   projects: [
-    { id: 1, title: "Multispeciality & Cancer Hospital", image: "/images/projects/proj1.png" },
-    { id: 2, title: "Dr. D.Y. Patil Hospital & Research Center", image: "/images/projects/proj2.png" },
-    { id: 3, title: "Sub-district Hospital, Kopergaon", image: "/images/projects/proj3.jpg" }
+    {
+      id: 1,
+      title: "Multispeciality & Cancer Hospital",
+      image: "/images/projects/proj1.png",
+    },
+    {
+      id: 2,
+      title: "Dr. D.Y. Patil Hospital & Research Center",
+      image: "/images/projects/proj2.png",
+    },
+    {
+      id: 3,
+      title: "Sub-district Hospital, Kopergaon",
+      image: "/images/projects/proj3.jpg",
+    },
+    {
+      id: 4,
+      title: "Multispeciality & Cancer Hospital",
+      image: "/images/projects/proj1.png",
+    },
+    {
+      id: 5,
+      title: "Dr. D.Y. Patil Hospital & Research Center",
+      image: "/images/projects/proj2.png",
+    },
+    {
+      id: 6,
+      title: "Sub-district Hospital, Kopergaon",
+      image: "/images/projects/proj3.jpg",
+    },
   ],
   testimonials: [
     {
@@ -68,54 +101,66 @@ export const homeData: HomeData = {
       role: "Medical Director",
       reviews: [
         "We are incredibly impressed by Infra.Health’s ability to deliver complex healthcare projects with such precision. Their execution was seamless and highly professional.",
-        "From planning to handover, the team was proactive, collaborative, and attentive to every detail. Thank you for enabling us to deliver world-class infrastructure to our patients."
-      ]
+        "From planning to handover, the team was proactive, collaborative, and attentive to every detail. Thank you for enabling us to deliver world-class infrastructure to our patients.",
+      ],
     },
     {
       name: "Rakesh Menon",
       role: "Facility Head",
       reviews: [
         "Infra.Health truly understands the dynamics of healthcare delivery. Their team showed unmatched commitment, ensuring the project was completed on time and fully compliant.",
-        "We are especially grateful for their insights into optimizing patient flow through design. Exceptional experience!"
-      ]
+        "We are especially grateful for their insights into optimizing patient flow through design. Exceptional experience!",
+      ],
     },
     {
       name: "Dr. Anjali Verma",
       role: "Founder",
       reviews: [
         "A big thank you to the Infra.Health team for turning our vision for a modern, modular clinic into reality. The quality of work was outstanding.",
-        "Their understanding of healthcare needs and ability to deliver within tight timelines sets them apart. We look forward to more collaborations in the future."
-      ]
+        "Their understanding of healthcare needs and ability to deliver within tight timelines sets them apart. We look forward to more collaborations in the future.",
+      ],
     },
     {
       name: "Dr. Meera Kapoor",
       role: "Medical Director",
       reviews: [
         "We are incredibly impressed by Infra.Health’s ability to deliver complex healthcare projects with such precision. Their execution was seamless and highly professional.",
-        "From planning to handover, the team was proactive, collaborative, and attentive to every detail. Thank you for enabling us to deliver world-class infrastructure to our patients."
-      ]
+        "From planning to handover, the team was proactive, collaborative, and attentive to every detail. Thank you for enabling us to deliver world-class infrastructure to our patients.",
+      ],
     },
     {
       name: "Rakesh Menon",
       role: "Facility Head",
       reviews: [
         "Infra.Health truly understands the dynamics of healthcare delivery. Their team showed unmatched commitment, ensuring the project was completed on time and fully compliant.",
-        "We are especially grateful for their insights into optimizing patient flow through design. Exceptional experience!"
-      ]
+        "We are especially grateful for their insights into optimizing patient flow through design. Exceptional experience!",
+      ],
     },
     {
       name: "Dr. Anjali Verma",
       role: "Founder",
       reviews: [
         "A big thank you to the Infra.Health team for turning our vision for a modern, modular clinic into reality. The quality of work was outstanding.",
-        "Their understanding of healthcare needs and ability to deliver within tight timelines sets them apart. We look forward to more collaborations in the future."
-      ]
-    }
+        "Their understanding of healthcare needs and ability to deliver within tight timelines sets them apart. We look forward to more collaborations in the future.",
+      ],
+    },
   ],
   blogs: [
-    { img: "/images/blogs/blog1.png", title: "5 Smart Layout Trends in Modern Healthcare Facilities", link: "#" },
-    { img: "/images/blogs/blog2.png", title: "How Infrastructure Impacts Hospital Infection Rates", link: "#" },
-    { img: "/images/blogs/blog3.png", title: "Sustainable Hospital Infrastructure: Why It Matters", link: "#" }
+    {
+      img: "/images/blogs/blog1.png",
+      title: "5 Smart Layout Trends in Modern Healthcare Facilities",
+      link: "#",
+    },
+    {
+      img: "/images/blogs/blog2.png",
+      title: "How Infrastructure Impacts Hospital Infection Rates",
+      link: "#",
+    },
+    {
+      img: "/images/blogs/blog3.png",
+      title: "Sustainable Hospital Infrastructure: Why It Matters",
+      link: "#",
+    },
   ],
   journeyTabs: [
     {
@@ -166,8 +211,5 @@ export const homeData: HomeData = {
         "Once your healthcare facility is operational, Infra.Health provides end-to-end support to ensure smooth, efficient, and compliant day-to-day functioning. Our operations service focuses on optimizing processes, maintaining quality standards, and enabling hassle-free management.",
       image: "/images/journey/operations.jpg",
     },
-  ]
+  ],
 };
-
-
-

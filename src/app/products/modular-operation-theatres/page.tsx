@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import { Container, Row, Col, Nav, Modal } from "react-bootstrap";
 import { BsCheckCircleFill } from "react-icons/bs";
 import Image from "next/image";
 import "../../../styles/services.css";
-import { FaClock, FaGlobe, FaMicrochip, FaUsers } from "react-icons/fa6";
+import { FaClock, FaGlobe, FaMicrochip, FaUsers, FaXmark } from "react-icons/fa6";
 
 interface DetailItem {
   text: string;
@@ -204,7 +204,10 @@ const motData: SectionData[] = [
   },
 ];
 
-const DetailSection: React.FC<{ details: Detail[] }> = ({ details }) => (
+const DetailSection: React.FC<{
+  details: Detail[];
+  onImageClick: (src: string) => void;
+}> = ({ details, onImageClick }) => (
   <div className="detail-section">
     {details.map((detail, i) => (
       <div key={i} className="mb-4">
@@ -214,7 +217,11 @@ const DetailSection: React.FC<{ details: Detail[] }> = ({ details }) => (
           <Row xs={1} sm={2} md={3} lg={4} className="g-4">
             {(detail.items as DetailItem[]).map((item, j) => (
               <Col key={j}>
-                <div className="detail-card text-center h-100">
+                <div
+                  className="detail-card text-center h-100"
+                  style={{ cursor: item.image ? "pointer" : "default" }}
+                  onClick={() => item.image && onImageClick(item.image!)}
+                >
                   {item.image && (
                     <Image
                       src={item.image}
@@ -256,11 +263,22 @@ const DetailSection: React.FC<{ details: Detail[] }> = ({ details }) => (
 export default function MOTPage() {
   const [activeLink, setActiveLink] = useState<string>("intro");
   const sectionsRef = useRef<Record<string, Element>>({});
+  const [show, setShow] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const isClickScrolling = useRef(false);
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (img: string) => {
+    setSelectedImage(img);
+    setShow(true);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          if (isClickScrolling.current) return; 
           if (entry.isIntersecting) {
             setActiveLink(entry.target.id);
           }
@@ -279,21 +297,42 @@ export default function MOTPage() {
       Object.values(sectionsRef.current).forEach((section) => {
         if (section) observer.unobserve(section);
       });
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
     };
   }, []);
 
-  const handleNavLinkClick = (
-    e: React.MouseEvent<HTMLElement>,
-    targetId: string
-  ) => {
-    e.preventDefault();
-    setActiveLink(targetId);
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.pushState(null, "", `#${targetId}`);
+const handleNavLinkClick = (
+  e: React.MouseEvent<HTMLElement>,
+  targetId: string
+) => {
+  e.preventDefault();
+  isClickScrolling.current = true;
+  setActiveLink(targetId);
+
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    const headerOffset = 180; 
+    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth",
+    });
+
+    window.history.pushState(null, "", `#${targetId}`);
+
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
     }
-  };
+
+    scrollTimeout.current = setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 1000);
+  }
+};
 
   return (
     <main className="container py-5 mt-4">
@@ -340,7 +379,10 @@ export default function MOTPage() {
 
                 <div className="service-card">
                   {section.details && (
-                    <DetailSection details={section.details} />
+                    <DetailSection
+                      details={section.details}
+                      onImageClick={handleShow}
+                    />
                   )}
 
                   {section.points && (
@@ -362,6 +404,37 @@ export default function MOTPage() {
           </div>
         </Col>
       </Row>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        centered
+        size="lg"
+        contentClassName="bg-transparent border-0 shadow-none"
+      >
+        <FaXmark
+          onClick={handleClose}
+          style={{
+            position: "absolute",
+            top: "4px",
+            right: "20px",
+            cursor: "pointer",
+            backgroundColor: "#b6520f",
+            color:"#fff",
+            fontSize: "28px",
+            borderRadius:"50%",
+            padding:"5px"
+          }}
+        />
+        {selectedImage && (
+          <Image
+            src={selectedImage}
+            alt="Preview"
+            width={900}
+            height={600}
+            className="w-100 h-auto rounded"
+          />
+        )}
+      </Modal>
     </main>
   );
 }

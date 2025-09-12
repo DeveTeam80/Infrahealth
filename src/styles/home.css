@@ -228,7 +228,7 @@
 }
 
 .bg-danger {
-  background-color: #e98c46 !important;
+  background-color: #b6520f !important;
 }
 
 @media (max-width: 992px) {
@@ -380,7 +380,7 @@
 }
 
 /* .section-title span {
-  color: #e98c46;
+  color: #b6520f;
 } */
 
 .service-card {
@@ -442,32 +442,25 @@
 .services-slider .swiper-button-prev::after,
 .services-slider .swiper-button-next::after {
   font-size: 22px;
-  color: #e98c46;
+  color: #b6520f;
 }
 
 .portfolio-section {
   padding: 60px 20px;
-  background-color: #2c7374;
   border-radius: 50px;
-  color: white;
-}
-
-.portfolio-section .section-subtitle {
-  color: #fff;
 }
 
 .portfolio-section .section-title {
-  color: #fff;
   border-left: 3px solid white;
   padding-left: 10px;
 }
 
 .portfolio-section .section-title span {
-  color: #e98c46;
+  color: #b6520f;
 }
 
 .highlight {
-  color: #e98c46;
+  color: #b6520f;
 }
 
 .project-card {
@@ -605,13 +598,6 @@
   margin-top: auto;
 }
 
-.read-more {
-  color: #3b9c9d;
-  font-weight: 500;
-  font-size: 14px;
-  cursor: pointer;
-}
-
 .bottom img {
   height: 30px;
   object-fit: contain;
@@ -693,13 +679,13 @@ form select {
 form input:focus,
 form select:focus {
   outline: none;
-  border-color: #e98c46;
+  border-color: #b6520f;
   box-shadow: 0 0 5px #9cc7df;
 }
 
 form .btn {
   margin-top: 20px;
-  background-color: #e98c46;
+  background-color: #b6520f;
   color: white;
   border: none;
   padding: 12px;
@@ -751,7 +737,7 @@ small {
 }
 
 .read-more {
-  color: #e98c46;
+  color: #b6520f;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
@@ -763,26 +749,6 @@ small {
   color: #d17a39;
 }
 
-.explore-btn {
-  margin-top: 2rem;
-}
-
-.explore-btn a {
-  background: linear-gradient(45deg, #3b9c9d, #2c7374);
-  color: white;
-  padding: 12px 30px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-block;
-}
-
-.explore-btn a:hover {
-  background: linear-gradient(45deg, #2c7374, #1f5657);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(59, 156, 157, 0.3);
-}
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
@@ -895,7 +861,7 @@ small {
   }
   
   .read-more:hover {
-    color: #e98c46;
+    color: #b6520f;
   }
   
   /* Better touch targets */
