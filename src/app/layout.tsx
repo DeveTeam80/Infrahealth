@@ -29,6 +29,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
          <ScrollToTopButton />
+         <script src="//code.tidio.co/eazja8bemk1t8p69mhhzqrbxcr99nyeo.js" async></script>
          <Footer/>
       </body>
     </html>
