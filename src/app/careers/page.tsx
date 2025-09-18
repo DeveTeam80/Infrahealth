@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Accordion, Pagination } from "react-bootstrap";
-import "../../styles/about.css";
-import Image from "next/image";
 import {
   careerData,
   CareerItem,
@@ -47,27 +45,27 @@ export default function AboutSection() {
   const buildData = [
     {
       image: "/images/careers/brainstorming.jpg",
-      title: "Brainstorming",
+      title: "B - Brainstorming",
       text: "We spark fresh ideas, fuel creativity, and embrace new perspectives.",
     },
     {
       image: "/images/careers/unity.jpg",
-      title: "Unity",
+      title: "U - Unity",
       text: "We value teamwork, collaboration, and ensure every voice is heard.",
     },
     {
       image: "/images/careers/integrity.jpg",
-      title: "Integrity",
+      title: "I - Integrity",
       text: "We uphold ethics, transparency, responsibility, and trust.",
     },
     {
       image: "/images/careers/leadership.jpg",
-      title: "Leadership",
+      title: "L - Leadership",
       text: "We foster mentorship, skill growth, and lifelong learning.",
     },
     {
       image: "/images/careers/diversity.jpg",
-      title: "Diversity",
+      title: "D - Diversity",
       text: "We respect differences, share strengths, and thrive inclusively.",
     },
   ];

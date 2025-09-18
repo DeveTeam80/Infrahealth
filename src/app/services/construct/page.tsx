@@ -1,20 +1,15 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import { Row, Col, Nav } from "react-bootstrap";
 import "../../../styles/services.css";
-
-const BsCheckCircleFill: React.FC = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    viewBox="0 0 16 16"
-  >
-    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-  </svg>
-);
+import {
+  FaUserMd,
+  FaGlobe,
+  FaClipboardCheck,
+  FaAward,
+  FaLightbulb,
+} from "react-icons/fa";
 
 // --- TYPE DEFINITIONS ---
 interface DetailBlock {
@@ -26,11 +21,18 @@ interface ConstructService {
   title: string;
   description: string;
   details: DetailBlock;
+  image?: string;
+}
+
+interface WhyPoint {
+  title: string;
+  text: string;
+  icon: React.ComponentType<{ size?: number }>;
 }
 
 interface WhyInfraHealth {
   title: string;
-  points: string[];
+  points: WhyPoint[];
 }
 
 interface ConstructData {
@@ -56,6 +58,7 @@ const constructData: ConstructData = {
       title: "Engineering, Procurement & Construction (EPC)",
       description:
         "The EPC model ensures single-point accountability, combining engineering excellence, efficient procurement, and seamless construction delivery.",
+      image: "/images/services/construct/epc.jpg",
       details: {
         "Scope of Work": [
           "Civil and structural construction of healthcare facilities, from foundations to superstructure",
@@ -77,6 +80,7 @@ const constructData: ConstructData = {
       title: "Design & Build",
       description:
         "A fast-track, integrated delivery model where Infra.Health manages the entire project — from design concept to physical handover.",
+      image: "/images/services/construct/design.jpg",
       details: {
         "Scope of Work": [
           "Architectural, structural, interior, and MEPF design, fully integrated with execution",
@@ -97,6 +101,7 @@ const constructData: ConstructData = {
       title: "Fitout & Retrofit",
       description:
         "Hospitals must evolve and modernise without disrupting ongoing patient services. Infra.Health provides phased fitout and retrofit solutions to expand capacity, upgrade systems, and align with the latest compliance standards.",
+      image: "/images/services/construct/fitout.jpg",
       details: {
         "Scope of Work": [
           "Interior fitouts for new hospitals, including OPDs, wards, ICUs, OTs, labs, and diagnostic centres",
@@ -118,6 +123,7 @@ const constructData: ConstructData = {
       title: "Specialty Services",
       description:
         "Hospitals demand precision-engineered specialty systems that directly impact patient safety and operational efficiency. Infra.Health specialises in end-to-end delivery of critical hospital infrastructure systems.",
+      image: "/images/services/consult/equipment-installing.jpg",
       details: {
         "Scope of Work": [
           "Integrated MEPF + ELV Engineering: HVAC, power distribution, plumbing, fire safety, automation, IT, and smart hospital systems",
@@ -137,11 +143,31 @@ const constructData: ConstructData = {
   why: {
     title: "Why Infra.Health Construct?",
     points: [
-      "Healthcare-Focused Expertise: Unlike generic contractors, we build exclusively for hospitals and medical facilities.",
-      "Global Standards, Local Execution: International best practices adapted to Indian and global healthcare markets.",
-      "Turnkey Delivery: From EPC to specialty fitouts, we provide single-window accountability.",
-      "Accreditation-Ready Projects: Every facility designed and built to pass NABH, JCI, and global quality audits.",
-      "Innovation & Technology: BIM, IoT, and automation ensure smarter, faster, and safer delivery.",
+      {
+        title: "Healthcare-Focused Expertise",
+        text: "Unlike generic contractors, we build exclusively for hospitals and medical facilities.",
+        icon: FaUserMd,
+      },
+      {
+        title: "Global Standards, Local Execution",
+        text: "International best practices adapted to Indian and global healthcare markets.",
+        icon: FaGlobe,
+      },
+      {
+        title: "Turnkey Delivery",
+        text: "From EPC to specialty fitouts, we provide single-window accountability.",
+        icon: FaClipboardCheck,
+      },
+      {
+        title: "Accreditation-Ready Projects",
+        text: "Every facility designed and built to pass NABH, JCI, and global quality audits.",
+        icon: FaAward,
+      },
+      {
+        title: "Innovation & Technology",
+        text: "BIM, IoT, and automation ensure smarter, faster, and safer delivery.",
+        icon: FaLightbulb,
+      },
     ],
   },
 };
@@ -151,21 +177,37 @@ interface DetailSectionProps {
   details: DetailBlock;
 }
 
-const DetailSection: React.FC<DetailSectionProps> = ({ details }) => (
+const DetailSection: React.FC<DetailSectionProps & { image?: string }> = ({
+  details,
+  image,
+}) => (
   <Row>
     {Object.entries(details).map(([key, value]) => (
-      <Col md={12} key={key} className={"mb-3"}>
-        <h4 className="details-title">{key.replace(/_/g, " ")}:</h4>
-        <ul className="details-list">
-          {Array.isArray(value) &&
-            value.map((item: string, index: number) => (
-              <li key={index}>
-                <BsCheckCircleFill />
-                <span>{item}</span>
-              </li>
-            ))}
-        </ul>
-      </Col>
+      <React.Fragment key={key}>
+        <Col md={12} className="mb-3">
+          <h4 className="details-title">{key.replace(/_/g, " ")}:</h4>
+          <ul className="details-list">
+            {Array.isArray(value) &&
+              value.map((item: string, index: number) => (
+                <li key={index}>
+                  <span>{item}</span>
+                </li>
+              ))}
+          </ul>
+        </Col>
+
+        {/* 👇 Inject image right after Scope of Work */}
+        {key === "Scope of Work" && image && (
+          <Col md={12} className="mb-4 text-center">
+            <img
+              src={image}
+              alt="Service Illustration"
+              className="img-fluid rounded shadow-sm"
+              style={{ maxHeight: "300px", objectFit: "cover" }}
+            />
+          </Col>
+        )}
+      </React.Fragment>
     ))}
   </Row>
 );
@@ -181,7 +223,7 @@ export default function ConstructPage() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (isClickScrolling.current) return; 
+          if (isClickScrolling.current) return;
           if (entry.isIntersecting) {
             setActiveLink(entry.target.id);
           }
@@ -206,36 +248,37 @@ export default function ConstructPage() {
     };
   }, []);
 
-const handleNavLinkClick = (
-  e: React.MouseEvent<HTMLElement>,
-  targetId: string
-) => {
-  e.preventDefault();
-  isClickScrolling.current = true;
-  setActiveLink(targetId);
+  const handleNavLinkClick = (
+    e: React.MouseEvent<HTMLElement>,
+    targetId: string
+  ) => {
+    e.preventDefault();
+    isClickScrolling.current = true;
+    setActiveLink(targetId);
 
-  const targetElement = document.getElementById(targetId);
-  if (targetElement) {
-    const headerOffset = 180; 
-    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = elementPosition - headerOffset;
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const headerOffset = 180;
+      const elementPosition =
+        targetElement.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
 
-    window.history.pushState(null, "", `#${targetId}`);
+      window.history.pushState(null, "", `#${targetId}`);
 
-    if (scrollTimeout.current) {
-      clearTimeout(scrollTimeout.current);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
+      scrollTimeout.current = setTimeout(() => {
+        isClickScrolling.current = false;
+      }, 1000);
     }
-
-    scrollTimeout.current = setTimeout(() => {
-      isClickScrolling.current = false;
-    }, 1000);
-  }
-};
+  };
 
   return (
     <>
@@ -280,18 +323,27 @@ const handleNavLinkClick = (
               {constructData.services.map((service) => (
                 <section key={service.id} id={service.id}>
                   <h3>{service.title}</h3>
-                  <p className="text-muted fs-5">{service.description}</p>
+                  <p className="text-muted">{service.description}</p>
                   <div className="service-card">
-                    <DetailSection details={service.details} />
+                    <DetailSection
+                      details={service.details}
+                      image={service.image}
+                    />
                   </div>
                 </section>
               ))}
               <section id="why-infrahealth">
-                <h3>{constructData.why.title}</h3>
-                <div className="service-card">
-                  <DetailSection
-                    details={{ Points: constructData.why.points }}
-                  />
+                <h2>{constructData.why.title}</h2>
+                <div className="value-grid mt-4">
+                  {constructData.why.points.map((point, index) => (
+                    <div key={index} className="value-card">
+                      <div className="icon">
+                        <point.icon size={32} />
+                      </div>
+                      <h4>{point.title}</h4>
+                      <p>{point.text}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
             </div>

@@ -250,7 +250,7 @@ const DetailSection: React.FC<{
           <ul className="details-list">
             {(detail.items as string[]).map((item, j) => (
               <li key={j}>
-                <BsCheckCircleFill className="list-icon" /> {item}
+ {item}
               </li>
             ))}
           </ul>
@@ -377,7 +377,7 @@ const handleNavLinkClick = (
                   <p className="text-muted fs-5">{section.subtitle}</p>
                 )}
 
-                <div className="service-card">
+                <div className="service-card prod-card">
                   {section.details && (
                     <DetailSection
                       details={section.details}
@@ -386,7 +386,7 @@ const handleNavLinkClick = (
                   )}
 
                   {section.points && (
-                    <div className="value-grid mt-4" style={{ gap: "50px" }}>
+                    <div className="value-grid mt-4" style={{ gap: "50px", gridTemplateColumns: "repeat(2, 1fr)" }}>
                       {section.points.map((point, index) => (
                         <div key={index} className="value-card">
                           <div className="icon">
