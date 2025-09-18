@@ -5,6 +5,7 @@ import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../styles/services.css";
 import { FaGlobeAmericas, FaProjectDiagram } from "react-icons/fa";
 import { FaUserTie } from "react-icons/fa6";
+import { IconType } from "react-icons";
 
 // --- TYPES ---
 interface FinanceService {
@@ -12,7 +13,7 @@ interface FinanceService {
   title: string;
   description: string[];
   image?: string;
-  icon?: React.ComponentType<any>;
+ icon?: IconType;
 }
 
 interface FinanceData {
