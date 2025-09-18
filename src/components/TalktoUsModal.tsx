@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Modal, Button, Form, Row, Col } from "react-bootstrap";
-import { FaCircleXmark, FaXmark } from "react-icons/fa6";
+import { FaXmark } from "react-icons/fa6";
+import { Modal, Form, Button, Row, Col, FloatingLabel } from "react-bootstrap";
 
 function TalkToUsModal({
-  show,
-  handleClose,
+show,
+handleClose,
 }: {
   show: boolean;
   handleClose: () => void;
@@ -17,6 +17,7 @@ function TalkToUsModal({
     city: "",
     state: "",
     requirement: "",
+    message: "", // ✅ added
   });
 
   const handleChange = (
@@ -48,6 +49,7 @@ function TalkToUsModal({
           city: "",
           state: "",
           requirement: "",
+          message: "",
         });
         handleClose();
       } else {
@@ -59,172 +61,164 @@ function TalkToUsModal({
     }
   };
 
+
   return (
-    <Modal show={show} onHide={handleClose} size="lg" centered>
-      <Modal.Body className="p-4 position-relative">
-        {/* Close Button */}
-        <button
-          onClick={handleClose}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "10px",
-            border: "none",
-            background: "transparent",
-            fontSize: "1.5rem",
-            cursor: "pointer",
-            color:"#b6520f"
-          }}
-        >
-        <FaXmark/>
-        </button>
+<Modal show={show} onHide={handleClose} size="lg" centered>
+  <Modal.Body className="p-4 position-relative bg-light">
+    {/* Close Button */}
+    <button
+      onClick={handleClose}
+      style={{
+        position: "absolute",
+        top: "-10px",
+        right: "-10px",
+        border: "none",
+        background: "transparent",
+        fontSize: "1.5rem",
+        cursor: "pointer",
+        color: "#b6520f",
+      }}
+    >
+      <FaXmark />
+    </button>
 
-        <Form onSubmit={handleSubmit}>
-          <Row className="g-3">
-            {/* Title */}
-            <Col md={6}>
-              <Form.Group>
-                <Form.Label>Title</Form.Label>
-                <Form.Select
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="Dr">Dr.</option>
-                  <option value="Mr">Mr.</option>
-                  <option value="Mrs">Mrs.</option>
-                  <option value="Miss">Miss</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-
-            {/* Name */}
-            <Col md={6}>
-              <Form.Group>
-                <Form.Label>Name <span style={{ color: "red" }}>*</span></Form.Label>
-                <Form.Control
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Your name"
-                  required
-                />
-              </Form.Group>
-            </Col>
-
-            {/* Mobile */}
-            <Col md={6}>
-              <Form.Group>
-                <Form.Label>
-                  Mobile <span style={{ color: "red" }}>*</span>
-                </Form.Label>
-                <Form.Control
-                  type="tel"
-                  name="mobile"
-                  value={formData.mobile}
-                  onChange={handleChange}
-                  placeholder="Mobile number"
-                  required
-                  pattern="[0-9]{10,15}"
-                />
-              </Form.Group>
-            </Col>
-
-            {/* Email */}
-            <Col md={6}>
-              <Form.Group>
-                <Form.Label>
-                  Email <span style={{ color: "red" }}>*</span>
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Email address"
-                  required
-                />
-              </Form.Group>
-            </Col>
-
-            {/* City */}
-            <Col md={6}>
-              <Form.Group>
-                <Form.Label>
-                  City <span style={{ color: "red" }}>*</span>
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  placeholder="City"
-                  required
-                />
-              </Form.Group>
-            </Col>
-
-            {/* State */}
-            <Col md={6}>
-              <Form.Group>
-                <Form.Label>
-                  State <span style={{ color: "red" }}>*</span>
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="state"
-                  value={formData.state}
-                  onChange={handleChange}
-                  placeholder="State"
-                  required
-                />
-              </Form.Group>
-            </Col>
-
-            {/* Requirement */}
-            <Col md={12}>
-              <Form.Group>
-                <Form.Label>
-                  Services <span style={{ color: "red" }}>*</span>
-                </Form.Label>
-                <Form.Select
-                  name="requirement"
-                  value={formData.requirement}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">-- Select Requirement --</option>
-                  <option value="Hospital infrastructure">
-                    Hospital infrastructure
-                  </option>
-                  <option value="Healthcare consulting">
-                    Healthcare consulting
-                  </option>
-                  <option value="Advisory">Advisory</option>
-                  <option value="Products">Products</option>
-                  <option value="Medical equipment">Medical equipment</option>
-                  <option value="Facility Management">Facility Management</option>
-                  <option value="Properties">Properties</option>
-                  <option value="Finance">Finance</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
-
-          {/* Submit */}
-          <div className="mt-4">
-            <Button
-              type="submit"
-              className="px-4"
+    <Form onSubmit={handleSubmit}>
+      <Row className="g-3">
+        {/* Title */}
+        <Col md={6}>
+          <FloatingLabel controlId="floatingTitle" label="Title">
+            <Form.Select
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
             >
-              Submit
-            </Button>
-          </div>
-        </Form>
-      </Modal.Body>
-    </Modal>
+              <option value="Dr">Dr.</option>
+              <option value="Mr">Mr.</option>
+              <option value="Mrs">Mrs.</option>
+              <option value="Miss">Miss</option>
+            </Form.Select>
+          </FloatingLabel>
+        </Col>
+
+        {/* Name */}
+        <Col md={6}>
+          <FloatingLabel controlId="floatingName" label="Name *">
+            <Form.Control
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your name"
+              required
+            />
+          </FloatingLabel>
+        </Col>
+
+        {/* Mobile */}
+        <Col md={6}>
+          <FloatingLabel controlId="floatingMobile" label="Mobile *">
+            <Form.Control
+              type="tel"
+              name="mobile"
+              value={formData.mobile}
+              onChange={handleChange}
+              placeholder="Mobile number"
+              required
+              pattern="[0-9]{10,15}"
+            />
+          </FloatingLabel>
+        </Col>
+
+        {/* Email */}
+        <Col md={6}>
+          <FloatingLabel controlId="floatingEmail" label="Email *">
+            <Form.Control
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email address"
+              required
+            />
+          </FloatingLabel>
+        </Col>
+
+        {/* City */}
+        <Col md={6}>
+          <FloatingLabel controlId="floatingCity" label="City *">
+            <Form.Control
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              placeholder="City"
+              required
+            />
+          </FloatingLabel>
+        </Col>
+
+        {/* State */}
+        <Col md={6}>
+          <FloatingLabel controlId="floatingState" label="State *">
+            <Form.Control
+              type="text"
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              placeholder="State"
+              required
+            />
+          </FloatingLabel>
+        </Col>
+
+        {/* Requirement */}
+        <Col md={12}>
+          <FloatingLabel controlId="floatingRequirement" label="Services *">
+            <Form.Select
+              name="requirement"
+              value={formData.requirement}
+              onChange={handleChange}
+              required
+            >
+              <option value="">-- Select Requirement --</option>
+              <option value="Hospital infrastructure">Hospital infrastructure</option>
+              <option value="Healthcare consulting">Healthcare consulting</option>
+              <option value="Advisory">Advisory</option>
+              <option value="Products">Products</option>
+              <option value="Medical equipment">Medical equipment</option>
+              <option value="Facility Management">Facility Management</option>
+              <option value="Properties">Properties</option>
+              <option value="Finance">Finance</option>
+            </Form.Select>
+          </FloatingLabel>
+        </Col>
+
+        {/* Message */}
+        <Col md={12}>
+          <FloatingLabel controlId="floatingMessage" label="Message">
+            <Form.Control
+              as="textarea"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Leave your message here"
+              style={{ height: "100px" }}
+            />
+          </FloatingLabel>
+        </Col>
+      </Row>
+
+      {/* Submit */}
+      <div className="mt-4 text-center">
+        <Button type="submit" className="px-4">
+          Submit
+        </Button>
+      </div>
+    </Form>
+  </Modal.Body>
+</Modal>
+
   );
 }
 

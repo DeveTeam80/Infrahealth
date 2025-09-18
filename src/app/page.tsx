@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container, Row, Col, Card, Nav } from "react-bootstrap";
 import { FaTags, FaStore } from "react-icons/fa";
-import "../styles/home.css";
 import TalkToUsModal from "../components/TalktoUsModal";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -146,7 +145,7 @@ export default function Home() {
               <div className="counter-box">
                 <div className="counter-number">
                   <span className="counter" data-to="5000" data-suffix="+">
-                    5000+
+                    8000+
                   </span>
                 </div>
                 <p>
@@ -175,10 +174,9 @@ export default function Home() {
                 providing total life cycle real estate and facility solutions to
                 the healthcare industry in India.
               </p>
-              <br />
               <p>
                 <strong>Hospitals:</strong> Specialising in modular hospitals,
-                be it 30, 50, 70, 100 bed hospitals and EPC (Engineering,
+                be it 30, 50, 70, 100 and upto 200 beds hospitals and EPC (Engineering,
                 Procurement and Construction) for larger hospitals with higher
                 bed sizes. Get the highest quality without the multi agency
                 hassles all in one place.
@@ -196,7 +194,7 @@ export default function Home() {
                 </div>
                 <div className="projects">
                   <FaTags color="#2d8386" size={32} />
-                  <h5 className="ms-2 mb-0">50+ Projects</h5>
+                  <h5 className="ms-2 mb-0">70+ Projects</h5>
                 </div>
               </div>
               <Link href="/" className="btn">

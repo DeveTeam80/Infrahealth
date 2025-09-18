@@ -3,29 +3,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../styles/services.css";
-
-// --- CHECK ICON ---
-const BsCheckCircleFill: React.FC = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    fill="currentColor"
-    viewBox="0 0 16 16"
-  >
-    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-  </svg>
-);
+import { FaGlobeAmericas, FaProjectDiagram } from "react-icons/fa";
+import { FaUserTie } from "react-icons/fa6";
+import { IconType } from "react-icons";
 
 // --- TYPES ---
-interface DetailBlock {
-  [key: string]: string[];
-}
-
+// --- TYPES ---
 interface FinanceService {
   id: string;
   title: string;
   description: string[];
+  image?: string;
+  icon?: IconType;
 }
 
 interface FinanceData {
@@ -35,7 +24,12 @@ interface FinanceData {
     sub: string;
   };
   services: FinanceService[];
+  value?: {
+    title: string;
+    points: { title: string; text: string; icon?: IconType }[];
+  };
 }
+
 
 // --- DATA ---
 const financeData: FinanceData = {
@@ -53,6 +47,7 @@ const financeData: FinanceData = {
         "Risk-aligned structuring with milestone-based disbursements.",
         "Leveraging escrow accounts and FIDIC-style contractual frameworks to ensure fund security and transparency.",
       ],
+      image: "/images/finance/project-finance.jpg",
     },
     {
       id: "capital-equipment",
@@ -62,6 +57,7 @@ const financeData: FinanceData = {
         "Securing equipment loans at concessional rates.",
         "Integrating equipment financing with overall project funding to align with cashflows.",
       ],
+      image: "/images/finance/equipment.jpg",
     },
     {
       id: "opex-funding",
@@ -71,6 +67,7 @@ const financeData: FinanceData = {
         "Integration with facility management contracts to stabilize cashflows.",
         "Bridging finance until hospital operations reach break-even.",
       ],
+      image: "/images/finance/opex.jpg",
     },
     {
       id: "fdi-facilitation",
@@ -80,6 +77,7 @@ const financeData: FinanceData = {
         "Compliance with Indian FDI policies, healthcare sector norms, and international tax planning.",
         "Advisory on cross-border joint ventures, investor relations, and corporate governance.",
       ],
+      image: "/images/finance/fdi.jpg",
     },
     {
       id: "ppp-financing",
@@ -89,6 +87,7 @@ const financeData: FinanceData = {
         "Blending of grants, viability gap funding, and long-term debt.",
         "Risk allocation models ensuring investor security and public accessibility.",
       ],
+      image: "/images/finance/ppp.jpg",
     },
     {
       id: "global-fund",
@@ -98,8 +97,30 @@ const financeData: FinanceData = {
         "Partnerships with sovereign wealth funds, pension funds, and global healthcare investors.",
         "Deploying capital in India and emerging markets to generate sustainable, impact-driven returns.",
       ],
+      image: "/images/finance/global-fund.jpg",
     },
   ],
+
+  value: {
+    title: "Why Choose Infra.Health Finance?",
+    points: [
+      {
+        title: "Trusted Expertise",
+        text: "Decades of experience in healthcare + infrastructure financing.",
+        icon: FaUserTie, // professional expertise
+      },
+      {
+        title: "Global Networks",
+        text: "Partnerships with international banks, funds, and investors.",
+        icon: FaGlobeAmericas, // global reach
+      },
+      {
+        title: "End-to-End Support",
+        text: "From feasibility studies to post-completion cashflow stabilization.",
+        icon: FaProjectDiagram, // project lifecycle
+      },
+    ],
+  },
 };
 
 // --- HELPER COMPONENT ---
@@ -110,7 +131,6 @@ const DetailSection: React.FC<DetailSectionProps> = ({ description }) => (
   <ul className="details-list">
     {description.map((item, index) => (
       <li key={index}>
-        <BsCheckCircleFill />
         <span>{item}</span>
       </li>
     ))}
@@ -119,7 +139,9 @@ const DetailSection: React.FC<DetailSectionProps> = ({ description }) => (
 
 // --- MAIN PAGE ---
 export default function ProjectFinancePage() {
-  const [activeLink, setActiveLink] = useState<string>("project-loan-financing");
+  const [activeLink, setActiveLink] = useState<string>(
+    "project-loan-financing"
+  );
   const sectionsRef = useRef<Record<string, Element>>({});
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -179,7 +201,11 @@ export default function ProjectFinancePage() {
 
   return (
     <main className="container py-5 mt-4">
-      <div className="text-left mx-auto mb-5 pb-4" style={{ maxWidth: "1920px" }}>
+      {/* Intro */}
+      <div
+        className="text-left mx-auto mb-5 pb-4"
+        style={{ maxWidth: "1920px" }}
+      >
         <p className="section-subtitle">OUR FINANCIAL SERVICE</p>
         <h3 className="section-title">
           <span>{financeData.intro.title}</span>
@@ -208,14 +234,58 @@ export default function ProjectFinancePage() {
         {/* Content */}
         <Col lg={9}>
           <div className="vstack gap-5">
-            {financeData.services.map((service) => (
-              <section key={service.id} id={service.id}>
-                <h3>{service.title}</h3>
-                <div className="service-card">
-                  <DetailSection description={service.description} />
+            {/* Services */}
+            <section>
+              <h3 className="mb-4">Financing Solutions We Deliver</h3>
+              {financeData.services.map((service, index) => (
+                <Row
+                  as="section"
+                  key={service.id}
+                  id={service.id}
+                  className="mb-5 interactive-section align-items-center"
+                >
+                  <Col
+                    md={5}
+                    className={index % 2 === 0 ? "order-md-1" : "order-md-2"}
+                  >
+                    {service.image && (
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="img-fluid"
+                      />
+                    )}
+                  </Col>
+                  <Col
+                    md={7}
+                    className={index % 2 === 0 ? "order-md-2" : "order-md-1"}
+                  >
+                    <div className="service-card">
+                      <h4>{service.title}</h4>
+                      <DetailSection description={service.description} />
+                    </div>
+                  </Col>
+                </Row>
+              ))}
+            </section>
+
+            {/* Value section */}
+            {financeData.value && (
+              <section id="value" className="finance-val">
+                <h2>{financeData.value.title}</h2>
+                <div className="value-grid mt-4">
+                  {financeData.value.points.map((point, index) => (
+                    <div key={index} className="value-card">
+                      <div className="icon">
+                        {point.icon && <point.icon size={32} />}
+                      </div>
+                      <h4>{point.title}</h4>
+                      <p>{point.text}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
-            ))}
+            )}
           </div>
         </Col>
       </Row>

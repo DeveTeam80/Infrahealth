@@ -238,11 +238,11 @@ export default function Header() {
                           <Col md={3} className="megaChildren">
                             {activeCategory === "consult" && (
                               <ul className="megaList">
-                                <li>
+                                {/* <li>
                                   <Link href="/services/consult">
                                     Hospital Management Consultancy
                                   </Link>
-                                </li>
+                                </li> */}
                                 <li>
                                   <Link href="/services/consult">
                                     Hospital Design
@@ -370,14 +370,14 @@ export default function Header() {
   {activeCategory === "consult" && (
     <>
       <Image
-        src="/images/journey/proposals.jpg"
+        src="/images/header1.jpg"
         alt="Consulting visual 1"
         width={280}
         height={180}
         className="thumb thumb1 rounded shadow"
       />
       <Image
-        src="/images/journey/design-management.jpg"
+        src="/images/header2.jpg"
         alt="Consulting visual 2"
         width={280}
         height={180}

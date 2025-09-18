@@ -46,7 +46,7 @@ const products = [
   {
     title:
       "Digital Healthcare Solutions – HIMS, hospital automation, telemedicine platforms",
-    image: "/images/products/digital.jpg",
+    image: "/images/products/digital.webp",
     link: "",
   },
 ];

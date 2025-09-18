@@ -9,7 +9,6 @@ import {
   FaHandshake,
   FaLeaf,
 } from "react-icons/fa";
-import "../../styles/about.css";
 import Image from "next/image";
 import { FaGlobe, FaBoxes, FaHospital } from "react-icons/fa";
 import { FaBed } from "react-icons/fa6";
@@ -37,74 +36,94 @@ export default function AboutSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const counters = document.querySelectorAll<HTMLElement>(".counter");
-    const runCounter = (counter: HTMLElement) => {
-      const target = +counter.getAttribute("data-to")!;
-      const suffix = counter.getAttribute("data-suffix") || "";
-      let count = 0;
-      const increment = target / 200;
-      const update = () => {
-        count += increment;
-        if (count < target) {
-          counter.textContent = Math.floor(count) + suffix;
-          requestAnimationFrame(update);
-        } else {
-          counter.textContent = target.toLocaleString() + suffix;
-        }
-      };
-      update();
+useEffect(() => {
+  const counters = document.querySelectorAll<HTMLElement>(".counter");
+
+  const runCounter = (counter: HTMLElement) => {
+    const target = +counter.getAttribute("data-to")!;
+    const suffix = counter.getAttribute("data-suffix") || "";
+    const from = +(counter.getAttribute("data-from") || "0"); // 👈 support data-from
+    const useCommas = counter.getAttribute("data-commas") !== "false"; // 👈 support data-commas
+
+    let count = from;
+    const duration = 2000; // total animation time in ms
+    const frameRate = 60;
+    const totalFrames = Math.round((duration / 1000) * frameRate);
+    const increment = (target - from) / totalFrames;
+
+    let frame = 0;
+    const update = () => {
+      frame++;
+      count += increment;
+      if (frame < totalFrames) {
+        counter.textContent = (useCommas
+          ? Math.floor(count).toLocaleString()
+          : Math.floor(count).toString()) + suffix;
+        requestAnimationFrame(update);
+      } else {
+        counter.textContent = (useCommas
+          ? target.toLocaleString()
+          : target.toString()) + suffix;
+      }
     };
+    update();
+  };
 
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            runCounter(entry.target as HTMLElement);
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          runCounter(entry.target as HTMLElement);
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
 
-    counters.forEach((counter) => observer.observe(counter));
-    return () => observer.disconnect();
-  }, []);
+  counters.forEach((counter) => observer.observe(counter));
+  return () => observer.disconnect();
+}, []);
+
 
   return (
     <>
       {/* About */}
-      <section className="about-difference">
+      <section className="about-difference pt-0">
         <Container>
           <div className="about-grid">
             <div className="counters">
               <div className="counter-box">
                 <div className="counter-number">
-                  <span className="counter" data-to="10" data-suffix="M SF+">
-                    10M SF+
+                  <span
+                    className="counter"
+                    data-from="2000"
+                    data-to="2013"
+                    data-suffix=""
+                    data-commas="false"
+                  >
+                    2013
                   </span>
                 </div>
-                <p>Healthcare Spaces Designed & Operated</p>
+                <p>Journey Started</p>
               </div>
+
               <div className="counter-box">
                 <div className="counter-number">
-                  <span className="counter" data-to="100" data-suffix="+">
-                    100+
+                  <span className="counter" data-to="120" data-suffix="+">
+                    120+
                   </span>
                 </div>
-                <p>Multi‑Disciplinary Team</p>
+                <p>Team Members</p>
               </div>
+
               <div className="counter-box">
                 <div className="counter-number">
-                  <span className="counter" data-to="5000" data-suffix="+">
-                    5000+
+                  <span className="counter" data-to="70" data-suffix="+">
+                    70+
                   </span>
                 </div>
-                <p>
-                  Beds Inpatient, Outpatient Medical Office & Support Facilities
-                  under Management
-                </p>
+                <p>Projects Done</p>
               </div>
             </div>
             <div className="about-images">
@@ -236,7 +255,9 @@ export default function AboutSection() {
             ].map((item, i) => (
               <Col md={3} sm={6} key={i} className="mb-4">
                 <div className="strategy-card p-4 h-100">
-                  <div className="mb-3" style={{color:"#b6520f"}}>{item.icon}</div>
+                  <div className="mb-3" style={{ color: "#b6520f" }}>
+                    {item.icon}
+                  </div>
                   <h5 className="mb-2">{item.title}</h5>
                   <p className="text-muted">{item.text}</p>
                 </div>

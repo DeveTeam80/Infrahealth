@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { Container, Row, Col, Nav, Card, Pagination } from "react-bootstrap";
-import { FaArrowRight } from "react-icons/fa";
 import "../../styles/news.css";
-import "../../styles/home.css";
 import { newsData, NewsItem } from "@/data/newsData";
 import Link from "next/link";
 

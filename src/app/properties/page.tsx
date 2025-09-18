@@ -10,7 +10,6 @@ import {
   FaStethoscope,
 } from "react-icons/fa6";
 import { IconType } from "react-icons";
-import { BsCheckCircleFill } from "react-icons/bs";
 
 import "../../styles/portfolio.css";
 import "../../styles/services.css";
@@ -68,8 +67,6 @@ interface Project {
   };
   imageUrl: string;
 }
-
-
 
 const portfolioData: Project[] = [
   {
@@ -137,7 +134,11 @@ const portfolioData: Project[] = [
     category: "Public & Government Healthcare",
     subcategory: "Medical Colleges & Teaching Hospitals",
     transactionType: "lease",
-    brief: { beds: "1200 Beds", config: "Campus Facility", area: "950,000 sq.ft" },
+    brief: {
+      beds: "1200 Beds",
+      config: "Campus Facility",
+      area: "950,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+7",
   },
   {
@@ -146,7 +147,11 @@ const portfolioData: Project[] = [
     category: "Core Clinical Infrastructure",
     subcategory: "Specialty Hospitals",
     transactionType: "buy",
-    brief: { beds: "200 Beds", config: "Pediatric Facility", area: "150,000 sq.ft" },
+    brief: {
+      beds: "200 Beds",
+      config: "Pediatric Facility",
+      area: "150,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+8",
   },
   {
@@ -164,7 +169,11 @@ const portfolioData: Project[] = [
     category: "Public & Government Healthcare",
     subcategory: "Tertiary Care Hospitals",
     transactionType: "lease",
-    brief: { beds: "2000 Beds", config: "Mega Hospital Campus", area: "1,500,000 sq.ft" },
+    brief: {
+      beds: "2000 Beds",
+      config: "Mega Hospital Campus",
+      area: "1,500,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+10",
   },
   {
@@ -173,7 +182,11 @@ const portfolioData: Project[] = [
     category: "Academic & Institutional Healthcare",
     subcategory: "Dental Colleges",
     transactionType: "buy",
-    brief: { beds: "250 Beds", config: "College + Hospital", area: "300,000 sq.ft" },
+    brief: {
+      beds: "250 Beds",
+      config: "College + Hospital",
+      area: "300,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+11",
   },
   {
@@ -191,7 +204,11 @@ const portfolioData: Project[] = [
     category: "Core Clinical Infrastructure",
     subcategory: "Specialty Hospitals",
     transactionType: "buy",
-    brief: { beds: "300 Beds", config: "Emergency + Trauma", area: "200,000 sq.ft" },
+    brief: {
+      beds: "300 Beds",
+      config: "Emergency + Trauma",
+      area: "200,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+13",
   },
   {
@@ -200,7 +217,11 @@ const portfolioData: Project[] = [
     category: "Public & Government Healthcare",
     subcategory: "Primary Healthcare Centers",
     transactionType: "lease",
-    brief: { beds: "50 Beds", config: "Basic Healthcare", area: "20,000 sq.ft" },
+    brief: {
+      beds: "50 Beds",
+      config: "Basic Healthcare",
+      area: "20,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+14",
   },
   {
@@ -218,7 +239,11 @@ const portfolioData: Project[] = [
     category: "Core Clinical Infrastructure",
     subcategory: "Specialty Hospitals",
     transactionType: "buy",
-    brief: { beds: "180 Beds", config: "Obstetrics & Gynecology", area: "120,000 sq.ft" },
+    brief: {
+      beds: "180 Beds",
+      config: "Obstetrics & Gynecology",
+      area: "120,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+16",
   },
   {
@@ -236,7 +261,11 @@ const portfolioData: Project[] = [
     category: "Academic & Institutional Healthcare",
     subcategory: "Medical Colleges & Teaching Hospitals",
     transactionType: "lease",
-    brief: { beds: "500 Beds", config: "Teaching + Hospital", area: "400,000 sq.ft" },
+    brief: {
+      beds: "500 Beds",
+      config: "Teaching + Hospital",
+      area: "400,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+18",
   },
   {
@@ -245,7 +274,11 @@ const portfolioData: Project[] = [
     category: "Public & Government Healthcare",
     subcategory: "Specialty Hospitals",
     transactionType: "buy",
-    brief: { beds: "600 Beds", config: "Multi-Specialty", area: "450,000 sq.ft" },
+    brief: {
+      beds: "600 Beds",
+      config: "Multi-Specialty",
+      area: "450,000 sq.ft",
+    },
     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+19",
   },
 ];
@@ -322,7 +355,6 @@ const SpectrumList: React.FC<SpectrumListProps> = ({ items }) => (
   <ul className="details-list">
     {items.map((item, index) => (
       <li key={index}>
-        <BsCheckCircleFill className="list-icon" />
         <span>{item}</span>
       </li>
     ))}
@@ -339,35 +371,34 @@ const PropertySearch = () => {
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-const filteredProjects = useMemo(() => {
-  let projects = portfolioData;
+  const filteredProjects = useMemo(() => {
+    let projects = portfolioData;
 
-  // ✅ filter by transactionType (Buy / Sell / Lease tab)
-  if (activeTab) {
-    projects = projects.filter((p) => p.transactionType === activeTab);
-  }
+    // ✅ filter by transactionType (Buy / Sell / Lease tab)
+    if (activeTab) {
+      projects = projects.filter((p) => p.transactionType === activeTab);
+    }
 
-  if (activeFilter !== "All") {
-    projects = projects.filter((p) => p.category === activeFilter);
-  }
+    if (activeFilter !== "All") {
+      projects = projects.filter((p) => p.category === activeFilter);
+    }
 
-  if (propertyType && propertyType !== "Asset Type") {
-    projects = projects.filter((p) => p.category === propertyType);
-  }
+    if (propertyType && propertyType !== "Asset Type") {
+      projects = projects.filter((p) => p.category === propertyType);
+    }
 
-  if (location.trim() !== "") {
-    const searchTerm = location.toLowerCase();
-    projects = projects.filter(
-      (p) =>
-        p.title.toLowerCase().includes(searchTerm) ||
-        p.brief.beds.toLowerCase().includes(searchTerm) ||
-        p.brief.area.toLowerCase().includes(searchTerm)
-    );
-  }
+    if (location.trim() !== "") {
+      const searchTerm = location.toLowerCase();
+      projects = projects.filter(
+        (p) =>
+          p.title.toLowerCase().includes(searchTerm) ||
+          p.brief.beds.toLowerCase().includes(searchTerm) ||
+          p.brief.area.toLowerCase().includes(searchTerm)
+      );
+    }
 
-  return projects;
-}, [activeFilter, propertyType, location, activeTab]); // 👈 added activeTab
-
+    return projects;
+  }, [activeFilter, propertyType, location, activeTab]); // 👈 added activeTab
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -437,20 +468,18 @@ const filteredProjects = useMemo(() => {
         <h3 className="section-title">
           Unlocking Value Across <span> Global </span> Healthcare Assets
         </h3>
-        <p className="mt-3 text-muted">
+        {/* <p className="mt-3 text-muted">
           Healthcare infrastructure is not only about building and operating
           hospitals, it is also about unlocking the real estate value that
           underpins them. Infra.Health Healthcare Real Estate vertical provides
           a comprehensive international platform for healthcare operators,
           investors, and developers to transact, invest, and expand their
           healthcare asset base with confidence.
-        </p>
+        </p> */}
       </div>
       {/* Tabs */}
-      <Row className="justify-content-center">
-        {/* Tabs Centered */}
-        <Col md={2}></Col>
-        <Col md={7} className="d-flex justify-content-center">
+      <Row className="justify-content-center pt-4">
+        <Col md={6} className="d-flex justify-content-center">
           <Nav
             variant="tabs"
             activeKey={activeTab}
@@ -461,27 +490,17 @@ const filteredProjects = useMemo(() => {
               <Nav.Link eventKey="buy">Buy</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="lease">Lease</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
               <Nav.Link eventKey="sell">Sell</Nav.Link>
             </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="lease">Lease</Nav.Link>
+            </Nav.Item>
           </Nav>
-        </Col>
-
-        {/* List Your Property Button */}
-        <Col md={3} className="d-flex align-items-center justify-content-end">
-          <div
-            className="btn primary-btn"
-            onClick={(e) => handleNavLinkClick(e, "list-property-section")}
-          >
-            List Your Property
-          </div>
         </Col>
       </Row>
 
       {/* Search & Filters Box */}
-      <Row className="justify-content-center">
+      <Row className="justify-content-center pb-4">
         <Col md={9} className="border rounded p-3">
           {/* First Row: Search Bar */}
           <div className="d-flex align-items-center justify-content-center mb-3">
@@ -493,7 +512,7 @@ const filteredProjects = useMemo(() => {
               onChange={(e) => setLocation(e.target.value)}
               style={{ maxWidth: "70%" }}
             />
-            <button className="btn d-flex align-items-center px-4">
+            <button className="btn d-flex align-items-center justify-content-center">
               <FaSearch size={15} className="me-1" /> Search
             </button>
           </div>
@@ -580,6 +599,17 @@ const filteredProjects = useMemo(() => {
         </button>
       </div> */}
 
+      <Row>
+        <Col md={9}></Col>
+        <Col md={3} className="d-flex align-items-center justify-content-end">
+          <div
+            className="btn primary-btn"
+            onClick={(e) => handleNavLinkClick(e, "list-property-section")}
+          >
+            List Your Property
+          </div>
+        </Col>
+      </Row>
       <Row className="portfolio-grid mt-3">
         {filteredProjects.map((project) => (
           <Col key={project.id} md={6} lg={3} className="mb-4">
@@ -621,7 +651,7 @@ const filteredProjects = useMemo(() => {
           </div>
         </Container>
       </section>
-      <section id="value">
+      <section id="value" className="properties">
         <h3>{solutionsData.value.title}</h3>
         <div className="value-grid my-4">
           {solutionsData.value.points.map((point, index) => (

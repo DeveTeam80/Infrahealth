@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { title, name, mobile, email, city, state, speciality } = body;
+    const { title, name, mobile, email, city, state, speciality, message } = body;
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -30,6 +30,7 @@ export async function POST(req: Request) {
         <p><strong>City:</strong> ${city}</p>
         <p><strong>State:</strong> ${state}</p>
         <p><strong>Speciality:</strong> ${speciality || "N/A"}</p>
+        <p><strong>Message:</strong> ${message || "N/A"}</p>
       `,
     };
 
@@ -38,6 +39,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, msg: "✅ Email sent" });
   } catch (error) {
     console.error("Error sending email:", error);
-    return NextResponse.json({ success: false, msg: "❌ Error sending email" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, msg: "❌ Error sending email" },
+      { status: 500 }
+    );
   }
 }
