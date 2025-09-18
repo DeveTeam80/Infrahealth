@@ -8,12 +8,13 @@ import { FaUserTie } from "react-icons/fa6";
 import { IconType } from "react-icons";
 
 // --- TYPES ---
+// --- TYPES ---
 interface FinanceService {
   id: string;
   title: string;
   description: string[];
   image?: string;
- icon?: IconType;
+  icon?: IconType;
 }
 
 interface FinanceData {
@@ -25,9 +26,10 @@ interface FinanceData {
   services: FinanceService[];
   value?: {
     title: string;
-    points: { title: string; text: string; icon?: React.ComponentType<any> }[];
+    points: { title: string; text: string; icon?: IconType }[];
   };
 }
+
 
 // --- DATA ---
 const financeData: FinanceData = {
