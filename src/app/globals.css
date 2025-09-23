@@ -157,8 +157,11 @@ a {
 border: 2px solid #dee2e6;
 } */
 
+.prop-tab {
+  border: 1px solid #dee2e6;
+}
+
 .properties {
-  border: 1px solid #dee2e6; /* border around parent nav */
   border-radius: 6px; /* optional rounded corners */
   overflow: hidden;
   justify-self: center;
@@ -680,7 +683,7 @@ border: 2px solid #dee2e6;
   position: relative;
   background: #222;
   border-radius: 15px;
-  overflow: hidden;
+  overflow: hidden; /* Ensures overlay follows the curve */
   width: 100%;
   height: 230px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -693,19 +696,18 @@ border: 2px solid #dee2e6;
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: inherit; /* makes sure image also respects radius */
 }
 
 .project-card::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0; /* shorthand for top, right, bottom, left */
   background: rgba(233, 140, 70, 0.3);
   opacity: 0;
   transition: opacity 0.3s ease;
-  border-radius: 15px;
+  border-radius: inherit; /* inherit from parent */
+  pointer-events: none; /* ensures overlay doesn’t block clicks */
 }
 
 .project-card:hover {
@@ -1247,6 +1249,10 @@ small {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px 70px;
+}
+
+.construct-ft {
+  gap: 30px 50px !important;
 }
 
 /* Careers Section */
@@ -1867,3 +1873,23 @@ small {
   font-size: 2.5rem;
 }
 /* about css */
+
+/* Blog Css*/
+
+.blog-content {
+  text-align: justify;
+}
+
+.blog-content a {
+  color: var(--solar);
+}
+
+.blog-content h3 {
+  margin-bottom: 20px;
+}
+
+.blog-content h4, .blog-title {
+  padding: 0 0 0 20px;
+  border-left: 3px solid #6767672e;
+  margin: 10px 0 20px 0;
+}

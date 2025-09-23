@@ -5,7 +5,18 @@ import { Container, Row, Col, Nav, Modal } from "react-bootstrap";
 import { BsCheckCircleFill } from "react-icons/bs";
 import Image from "next/image";
 import "../../../styles/services.css";
-import { FaClock, FaGlobe, FaMicrochip, FaUsers, FaXmark } from "react-icons/fa6";
+import {
+  FaClock,
+  FaGlobe,
+  FaMicrochip,
+  FaUsers,
+  FaXmark,
+} from "react-icons/fa6";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Keyboard } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface DetailItem {
   text: string;
@@ -206,7 +217,7 @@ const motData: SectionData[] = [
 
 const DetailSection: React.FC<{
   details: Detail[];
-  onImageClick: (src: string) => void;
+  onImageClick: (images: string[], index: number) => void; // ✅ correct type
 }> = ({ details, onImageClick }) => (
   <div className="detail-section">
     {details.map((detail, i) => (
@@ -220,7 +231,15 @@ const DetailSection: React.FC<{
                 <div
                   className="detail-card text-center h-100"
                   style={{ cursor: item.image ? "pointer" : "default" }}
-                  onClick={() => item.image && onImageClick(item.image!)}
+                  onClick={() => {
+                    if (item.image) {
+                      const images = (detail.items as DetailItem[])
+                        .filter((it) => it.image)
+                        .map((it) => it.image!);
+                      const index = images.indexOf(item.image);
+                      onImageClick(images, index); // ✅ pass array + index
+                    }
+                  }}
                 >
                   {item.image && (
                     <Image
@@ -231,17 +250,7 @@ const DetailSection: React.FC<{
                       className="img-fluid rounded shadow-sm mb-2"
                     />
                   )}
-                  <p className="fw-medium">
-                    {item.text.includes("Operation Theatres") ? (
-                      <>
-                        {item.text.replace(" Operation Theatres", "")}
-                        <br />
-                        Operation Theatres
-                      </>
-                    ) : (
-                      item.text
-                    )}
-                  </p>
+                  <p className="fw-medium">{item.text}</p>
                 </div>
               </Col>
             ))}
@@ -249,9 +258,7 @@ const DetailSection: React.FC<{
         ) : (
           <ul className="details-list">
             {(detail.items as string[]).map((item, j) => (
-              <li key={j}>
- {item}
-              </li>
+              <li key={j}>{item}</li>
             ))}
           </ul>
         )}
@@ -260,25 +267,28 @@ const DetailSection: React.FC<{
   </div>
 );
 
+
 export default function MOTPage() {
   const [activeLink, setActiveLink] = useState<string>("intro");
   const sectionsRef = useRef<Record<string, Element>>({});
-  const [show, setShow] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleClose = () => setShow(false);
-  const handleShow = (img: string) => {
-    setSelectedImage(img);
-    setShow(true);
+ const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  const handleImageClick = (images: string[], index: number) => {
+    setGalleryImages(images);
+    setActiveIndex(index);
+    setIsGalleryOpen(true);
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (isClickScrolling.current) return; 
+          if (isClickScrolling.current) return;
           if (entry.isIntersecting) {
             setActiveLink(entry.target.id);
           }
@@ -303,36 +313,37 @@ export default function MOTPage() {
     };
   }, []);
 
-const handleNavLinkClick = (
-  e: React.MouseEvent<HTMLElement>,
-  targetId: string
-) => {
-  e.preventDefault();
-  isClickScrolling.current = true;
-  setActiveLink(targetId);
+  const handleNavLinkClick = (
+    e: React.MouseEvent<HTMLElement>,
+    targetId: string
+  ) => {
+    e.preventDefault();
+    isClickScrolling.current = true;
+    setActiveLink(targetId);
 
-  const targetElement = document.getElementById(targetId);
-  if (targetElement) {
-    const headerOffset = 180; 
-    const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-    const offsetPosition = elementPosition - headerOffset;
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      const headerOffset = 180;
+      const elementPosition =
+        targetElement.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
 
-    window.history.pushState(null, "", `#${targetId}`);
+      window.history.pushState(null, "", `#${targetId}`);
 
-    if (scrollTimeout.current) {
-      clearTimeout(scrollTimeout.current);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
+      scrollTimeout.current = setTimeout(() => {
+        isClickScrolling.current = false;
+      }, 1000);
     }
-
-    scrollTimeout.current = setTimeout(() => {
-      isClickScrolling.current = false;
-    }, 1000);
-  }
-};
+  };
 
   return (
     <main className="container py-5 mt-4">
@@ -381,12 +392,18 @@ const handleNavLinkClick = (
                   {section.details && (
                     <DetailSection
                       details={section.details}
-                      onImageClick={handleShow}
+                      onImageClick={handleImageClick}
                     />
                   )}
 
                   {section.points && (
-                    <div className="value-grid mt-4" style={{ gap: "50px", gridTemplateColumns: "repeat(2, 1fr)" }}>
+                    <div
+                      className="value-grid mt-4"
+                      style={{
+                        gap: "50px",
+                        gridTemplateColumns: "repeat(2, 1fr)",
+                      }}
+                    >
                       {section.points.map((point, index) => (
                         <div key={index} className="value-card">
                           <div className="icon">
@@ -404,37 +421,76 @@ const handleNavLinkClick = (
           </div>
         </Col>
       </Row>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        centered
-        size="lg"
-        contentClassName="bg-transparent border-0 shadow-none"
-      >
-        <FaXmark
-          onClick={handleClose}
+      {isGalleryOpen && (
+        <div
           style={{
-            position: "absolute",
-            top: "4px",
-            right: "20px",
-            cursor: "pointer",
-            backgroundColor: "#b6520f",
-            color:"#fff",
-            fontSize: "28px",
-            borderRadius:"50%",
-            padding:"5px"
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0,0,0,0.9)",
+            zIndex: 9999,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
-        />
-        {selectedImage && (
-          <Image
-            src={selectedImage}
-            alt="Preview"
-            width={900}
-            height={600}
-            className="w-100 h-auto rounded"
-          />
-        )}
-      </Modal>
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsGalleryOpen(false);
+          }}
+        >
+          <button
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              fontSize: "28px",
+              color: "#fff",
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              zIndex: 10000,
+            }}
+            onClick={() => setIsGalleryOpen(false)}
+          >
+            ✕
+          </button>
+
+          <Swiper
+            initialSlide={activeIndex}
+            modules={[Navigation, Pagination, Keyboard]}
+            navigation
+            pagination={{ clickable: true }}
+            keyboard={{ enabled: true }}
+            style={{ width: "90%", height: "90%" }}
+          >
+            {galleryImages.map((src, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100%",
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt={`Slide ${index}`}
+                    width={1000}
+                    height={700}
+                    style={{
+                      maxHeight: "90vh",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
     </main>
   );
 }

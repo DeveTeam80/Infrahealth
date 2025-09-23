@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Container, Row, Col, Nav, Card, Pagination } from "react-bootstrap";
 import "../../styles/news.css";
 import { newsData, NewsItem } from "@/data/newsData";
+import { blogInner } from "@/data/blogInner";
 import Link from "next/link";
 
 const TABS = ["Blogs", "Media", "Webinars", "Case Studies"] as const;
@@ -14,7 +15,35 @@ export default function ResourcesPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const cardsPerPage = 10;
-  const filteredCards: NewsItem[] = newsData[activeTab] || [];
+
+  function stripMarkdown(markdown: string) {
+  return markdown
+    .replace(/!\[.*?\]\(.*?\)/g, "") // remove images
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // convert links to just text
+    .replace(/(```[\s\S]*?```|`.*?`)/g, "") // remove code blocks and inline code
+    .replace(/[#>*_~\-]{1,6}/g, "") // remove headings, blockquotes, bold/italic/strike
+    .replace(/\n+/g, " ") // remove newlines
+    .trim();
+}
+
+const mappedBlogs = blogInner.map((blog) => {
+  const plainTitle = blog.title.replace(/<[^>]+>/g, "");
+  const plainText = stripMarkdown(blog.content);
+
+  return {
+    id: blog.slug,
+    title: plainTitle,
+    date: blog.date,
+    description: plainText.length > 150 ? plainText.slice(0, 150) + "…" : plainText,
+    image: blog.image || "/images/default-blog.jpg",
+  };
+});
+
+
+
+  const filteredCards: NewsItem[] =
+    activeTab === "Blogs" ? mappedBlogs : newsData[activeTab] || [];
+
   const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
 
   const displayedCards = filteredCards.slice(
@@ -85,7 +114,10 @@ export default function ResourcesPage() {
                         <Card.Text>{card.description}</Card.Text>
                       </Card.Body>
                       <div className="mt-auto">
-                        <Link href={"#"} className="read-more p-0">
+                        <Link
+                          href={`/news/${card.id}`}
+                          className="read-more p-0"
+                        >
                           READ MORE &raquo;
                         </Link>
                       </div>

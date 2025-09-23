@@ -14,6 +14,7 @@ interface TabDetails {
   digital_integration?: string[];
   certifications?: string[];
   stages?: string[];
+  image?: string; // optional per-tab image
 }
 
 interface ServiceTab {
@@ -94,7 +95,6 @@ const consultData: ConsultData = {
   design: {
     title: "Hospital Design",
     subtitle: "Patient-centric, sustainable, and efficient design solutions.",
-    image: "/images/services/consult/hospital-design.jpg",
     tabs: [
       {
         eventKey: "architectural",
@@ -105,6 +105,7 @@ const consultData: ConsultData = {
           deliverables: [
             "Space program, clustering matrix, schematic design, tender BOQs, GFC drawings.",
           ],
+          image: "/images/services/consult/arch-design.jpg",
         },
       },
       {
@@ -116,6 +117,7 @@ const consultData: ConsultData = {
           deliverables: [
             "Design Basis Report, structural schemes, BOQs, GFC structural drawings.",
           ],
+          image: "/images/services/consult/structural-design.jpg",
         },
       },
       {
@@ -130,6 +132,7 @@ const consultData: ConsultData = {
           deliverables: [
             "Design Basis Report, schematic designs, BOQs, GFC drawings, contractor shop drawing approvals.",
           ],
+          image: "/images/services/consult/mep-design.jpg",
         },
       },
       {
@@ -141,6 +144,7 @@ const consultData: ConsultData = {
           deliverables: [
             "Concept schemes, 3D perspectives, schematic drawings, BOQs, GFC drawings.",
           ],
+          image: "/images/services/consult/hospital-design.jpg",
         },
       },
     ],
@@ -158,37 +162,49 @@ const consultData: ConsultData = {
     ],
   },
   equipment: {
-    title: "Equipment Planning & Integration",
-    subtitle:
-      "Turnkey solutions for medical technology procurement and installation.",
-    image: "/images/services/consult/equipment-installing.jpg",
-    tabs: [
-      {
-        eventKey: "med-planning",
-        title: "Medical Equipment",
-        description:
-          "Needs-based equipment selection aligned with clinical pathways and future-proofing.",
+  title: "Equipment Planning & Integration",
+  subtitle:
+    "Turnkey solutions for medical technology procurement and installation.",
+  tabs: [
+    {
+      eventKey: "med-planning",
+      title: "Medical Equipment",
+      description:
+        "Needs-based equipment selection aligned with clinical pathways and future-proofing.",
+      details: {
+        image: "/images/services/consult/med-eqpt.jpg",
       },
-      {
-        eventKey: "equip-planning",
-        title: "Equipment Planning",
-        description:
-          "Preparation of schedules, vendor presentations, technology reports.",
+    },
+    {
+      eventKey: "equip-planning",
+      title: "Equipment Planning",
+      description:
+        "Preparation of schedules, vendor presentations, technology reports.",
+      details: {
+        image: "/images/services/consult/eqpt-planning.jpg",
       },
-      {
-        eventKey: "procurement",
-        title: "Equipment Procurement",
-        description:
-          "Vendor-neutral procurement, techno-commercial analysis, financial negotiations, demonstrations.",
+    },
+    {
+      eventKey: "procurement",
+      title: "Equipment Procurement",
+      description:
+        "Vendor-neutral procurement, techno-commercial analysis, financial negotiations, demonstrations.",
+      details: {
+        image: "/images/services/consult/procurement.jpg",
       },
-      {
-        eventKey: "installation",
-        title: "Installation & Commissioning",
-        description:
-          "Supervision of installation and validation of critical equipment (ICU, OT, Radiology, CSSD).",
+    },
+    {
+      eventKey: "installation",
+      title: "Installation & Commissioning",
+      description:
+        "Supervision of installation and validation of critical equipment (ICU, OT, Radiology, CSSD).",
+      details: {
+        image: "/images/services/consult/equipment-installing.jpg",
       },
-    ],
-  },
+    },
+  ],
+},
+
   ppp: {
     title: "Public Private Partnership (PPP) Advisory",
     subtitle:
@@ -383,47 +399,77 @@ export default function ConsultPage() {
     }
   };
 
-  const createTabbedSection = (service: ServiceWithTabs) => (
-    <Tab.Container defaultActiveKey={service.tabs[0].eventKey}>
-      <Row>
-        {/* Full-width Nav */}
-        <Col md={12}>
-          <Nav variant="pills" className="service-tabs mb-4">
-            {service.tabs.map((tab: ServiceTab) => (
-              <Nav.Item key={tab.eventKey}>
-                <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-        </Col>
+  const createTabbedSection = (service: ServiceWithTabs) => {
+    const [activeTab, setActiveTab] = useState(service.tabs[0].eventKey);
 
-        {/* Content + Image */}
-        <Col md={7}>
-          <Tab.Content className="service-card">
-            {service.tabs.map((tab: ServiceTab) => (
-              <Tab.Pane eventKey={tab.eventKey} key={tab.eventKey}>
-                <p>{tab.description}</p>
-                {tab.details && <DetailSection details={tab.details} />}
-              </Tab.Pane>
-            ))}
-          </Tab.Content>
-        </Col>
-
-        {service.image && (
+    return (
+      <Tab.Container
+        activeKey={activeTab}
+        onSelect={(k) => setActiveTab(k || service.tabs[0].eventKey)}
+      >
+        <Row>
+          {/* Tabs */}
+          <Col md={12}>
+            <Nav variant="pills" className="service-tabs mb-4">
+              {service.tabs.map((tab: ServiceTab) => (
+                <Nav.Item key={tab.eventKey}>
+                  <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
+                </Nav.Item>
+              ))}
+            </Nav>
+          </Col>
+          {/* Image that changes per active tab */}
           <Col
-            md={5}
+            md={12}
             className="d-flex align-items-center justify-content-center"
           >
-            <img
-              src={service.image}
-              alt={service.title}
-              style={{ maxWidth: "100%", height: "200px", borderRadius: "8px" }}
-            />
+            {service.tabs
+              .filter((tab) => tab.eventKey === activeTab)
+              .map((tab) =>
+                tab.details?.image ? (
+                  <img
+                    key={tab.eventKey}
+                    src={tab.details.image}
+                    alt={tab.title}
+                    className="w-100 img-fluid rounded shadow-sm"
+                    style={{
+                      objectFit: "cover",
+                      maxWidth: "100%",
+                      height: "300px",
+                    }}
+                  />
+                ) : service.image ? (
+                  <img
+                    key={tab.eventKey}
+                    src={service.image}
+                    alt={tab.title}
+                    className="w-100 img-fluid rounded shadow-sm"
+                    style={{
+                      maxWidth: "100%",
+                      height: "300px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                    }}
+                  />
+                ) : null
+              )}
           </Col>
-        )}
-      </Row>
-    </Tab.Container>
-  );
+
+          {/* Content */}
+          <Col md={12}>
+            <Tab.Content className="service-card">
+              {service.tabs.map((tab: ServiceTab) => (
+                <Tab.Pane eventKey={tab.eventKey} key={tab.eventKey}>
+                  <p>{tab.description}</p>
+                  {tab.details && <DetailSection details={tab.details} />}
+                </Tab.Pane>
+              ))}
+            </Tab.Content>
+          </Col>
+        </Row>
+      </Tab.Container>
+    );
+  };
 
   return (
     <>
@@ -534,20 +580,22 @@ export default function ConsultPage() {
                 <h3>{consultData.pmc.title}</h3>
                 <p className="text-muted fs-5">{consultData.pmc.subtitle}</p>
                 <Row className="align-items-center">
-                    {consultData.pmc.image && (
-                    <Col md={5} className="d-flex justify-content-center">
+                  {consultData.pmc.image && (
+                    <Col md={12} className="d-flex justify-content-center">
                       <img
                         src={consultData.pmc.image}
                         alt={consultData.pmc.title}
+                        className="w-100 img-fluid rounded shadow-sm"
                         style={{
                           maxWidth: "100%",
-                          height: "200px",
+                          height: "300px",
+                          objectFit: "cover",
                           borderRadius: "8px",
                         }}
                       />
                     </Col>
                   )}
-                  <Col md={7}>
+                  <Col md={12}>
                     <div className="service-card">
                       <DetailSection
                         details={{ stages: consultData.pmc.stages }}
@@ -557,33 +605,37 @@ export default function ConsultPage() {
                 </Row>
               </section>
 
- <section id="equipment-planning">
-                                <h3>{consultData.equipment.title}</h3>
-                                <p className="text-muted fs-5">{consultData.equipment.subtitle}</p>
-                                {createTabbedSection(consultData.equipment)}
-                            </section>
+              <section id="equipment-planning">
+                <h3>{consultData.equipment.title}</h3>
+                <p className="text-muted fs-5">
+                  {consultData.equipment.subtitle}
+                </p>
+                {createTabbedSection(consultData.equipment)}
+              </section>
               <section id="ppp-advisory">
                 <h3>{consultData.ppp.title}</h3>
                 <p className="text-muted fs-5">{consultData.ppp.subtitle}</p>
                 <Row className="align-items-center">
-                  <Col md={7}>
-                    <div className="service-card">
-                      <DetailSection details={consultData.ppp.details} />
-                    </div>
-                  </Col>
                   {consultData.ppp.image && (
-                    <Col md={5} className="d-flex justify-content-center">
+                    <Col md={12} className="d-flex justify-content-center">
                       <img
                         src={consultData.ppp.image}
                         alt={consultData.ppp.title}
+                        className="w-100 img-fluid rounded shadow-sm"
                         style={{
                           maxWidth: "100%",
-                          height: "200px",
+                          height: "300px",
+                          objectFit: "cover",
                           borderRadius: "8px",
                         }}
                       />
                     </Col>
                   )}
+                  <Col md={12}>
+                    <div className="service-card">
+                      <DetailSection details={consultData.ppp.details} />
+                    </div>
+                  </Col>
                 </Row>
               </section>
 
@@ -591,25 +643,26 @@ export default function ConsultPage() {
                 <h3>{consultData.esg.title}</h3>
                 <p className="text-muted fs-5">{consultData.esg.subtitle}</p>
                 <Row className="align-items-center">
-                    {consultData.esg.image && (
-                    <Col md={5} className="d-flex justify-content-center">
+                  {consultData.esg.image && (
+                    <Col md={12} className="d-flex justify-content-center">
                       <img
                         src={consultData.esg.image}
                         alt={consultData.esg.title}
+                        className="w-100 img-fluid rounded shadow-sm"
                         style={{
                           maxWidth: "100%",
-                          height: "200px",
+                          height: "300px",
+                          objectFit: "cover",
                           borderRadius: "8px",
                         }}
                       />
                     </Col>
                   )}
-                  <Col md={7}>
+                  <Col md={12}>
                     <div className="service-card">
                       <DetailSection details={consultData.esg.details} />
                     </div>
                   </Col>
-                  
                 </Row>
               </section>
 
@@ -617,24 +670,26 @@ export default function ConsultPage() {
                 <h3>{consultData.green.title}</h3>
                 <p className="text-muted fs-5">{consultData.green.subtitle}</p>
                 <Row className="align-items-center">
-                  <Col md={7}>
-                    <div className="service-card">
-                      <DetailSection details={consultData.green.details} />
-                    </div>
-                  </Col>
                   {consultData.green.image && (
-                    <Col md={5} className="d-flex justify-content-center">
+                    <Col md={12} className="d-flex justify-content-center">
                       <img
                         src={consultData.green.image}
                         alt={consultData.green.title}
+                        className="w-100 img-fluid rounded shadow-sm"
                         style={{
                           maxWidth: "100%",
-                          height: "200px",
+                          height: "300px",
+                          objectFit: "cover",
                           borderRadius: "8px",
                         }}
                       />
                     </Col>
                   )}
+                  <Col md={12}>
+                    <div className="service-card">
+                      <DetailSection details={consultData.green.details} />
+                    </div>
+                  </Col>
                 </Row>
               </section>
 
@@ -642,25 +697,26 @@ export default function ConsultPage() {
                 <h3>{consultData.ifm.title}</h3>
                 <p className="text-muted fs-5">{consultData.ifm.subtitle}</p>
                 <Row className="align-items-center">
-                     {consultData.ifm.image && (
-                    <Col md={5} className="d-flex justify-content-center">
+                  {consultData.ifm.image && (
+                    <Col md={12} className="d-flex justify-content-center">
                       <img
                         src={consultData.ifm.image}
                         alt={consultData.ifm.title}
+                        className="w-100 img-fluid rounded shadow-sm"
                         style={{
                           maxWidth: "100%",
-                          height: "200px",
+                          height: "300px",
+                          objectFit: "cover",
                           borderRadius: "8px",
                         }}
                       />
                     </Col>
                   )}
-                  <Col md={7}>
+                  <Col md={12}>
                     <div className="service-card">
                       <DetailSection details={consultData.ifm.details} />
                     </div>
                   </Col>
-                 
                 </Row>
               </section>
 

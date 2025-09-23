@@ -4,7 +4,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../../styles/services.css";
 import { IconType } from "react-icons";
-import { FaHospitalAlt, FaGlobe, FaMicrochip, FaUsers, FaHeartbeat, FaLeaf } from "react-icons/fa";
+import {
+  FaHospitalAlt,
+  FaGlobe,
+  FaMicrochip,
+  FaUsers,
+  FaHeartbeat,
+  FaLeaf,
+} from "react-icons/fa";
 
 interface WhyPoint {
   title: string;
@@ -52,7 +59,7 @@ const operateData: OperateData = {
       title: "Property Management",
       description:
         "Specialised property management solutions tailored for healthcare real estate assets.",
-        image: "/images/services/operate/property-management.jpg",
+      image: "/images/services/operate/property-management.jpg",
       details: {
         "Scope of Work": [
           "Day-to-day operations of hospital campuses, medical towers, and ancillary facilities",
@@ -73,7 +80,7 @@ const operateData: OperateData = {
       title: "Integrated Facility Management (IFM)",
       description:
         "End-to-end facility operations covering hard and soft services, enabled by technology platforms for efficiency.",
-                image: "/images/services/consult/equipment-installing.jpg",
+      image: "/images/services/consult/equipment-installing.jpg",
       details: {
         "Scope of Work": [
           "Soft Services: Housekeeping, sanitation, laundry, catering, biomedical waste management, patient transport, hospitality",
@@ -94,7 +101,7 @@ const operateData: OperateData = {
       title: "Operations & Maintenance (O&M)",
       description:
         "Hospitals run 24/7/365. Infra.Health ensures continuous performance of hospital infrastructure and critical systems through structured O&M programs.",
-                image: "/images/services/operate/maintenance.jpg",
+      image: "/images/services/operate/maintenance.jpg",
       details: {
         "Scope of Work": [
           "Preventive, predictive, and corrective maintenance protocols",
@@ -115,7 +122,7 @@ const operateData: OperateData = {
       title: "HR Support Services",
       description:
         "People are the backbone of hospitals. Infra.Health provides comprehensive HR solutions, ensuring hospitals have the right workforce at the right time.",
-                image: "/images/services/operate/hr-support.jpg",
+      image: "/images/services/operate/hr-support.jpg",
       details: {
         "Scope of Work": [
           "Recruitment & Staffing: Doctors, nurses, paramedics, and administrative staff",
@@ -133,42 +140,41 @@ const operateData: OperateData = {
       },
     },
   ],
-why: {
-  title: "Why Choose Infra.Health Operate?",
-  points: [
-    {
-      title: "Healthcare-Only Focus",
-      text: "Unlike generic FM/O&M companies, we manage only hospitals and healthcare facilities.",
-      icon: FaHospitalAlt,
-    },
-    {
-      title: "International Compliance",
-      text: "Every service aligned with NABH, JCI, ISO, OSHA, NFPA, HTM standards.",
-      icon: FaGlobe,
-    },
-    {
-      title: "Technology-Driven",
-      text: "IoT, CMMS, CAFM, and AI-enabled predictive analytics for smarter operations.",
-      icon: FaMicrochip,
-    },
-    {
-      title: "Single-Window Partner",
-      text: "Property, facility, systems, and HR under one umbrella.",
-      icon: FaUsers,
-    },
-    {
-      title: "Patient-Centric Approach",
-      text: "Services benchmarked for safety, hygiene, and patient comfort.",
-      icon: FaHeartbeat,
-    },
-    {
-      title: "Sustainability Aligned",
-      text: "ESG-compliant operations supporting carbon neutrality, energy conservation, and green healthcare initiatives.",
-      icon: FaLeaf,
-    },
-  ],
-},
-
+  why: {
+    title: "Why Choose Infra.Health Operate?",
+    points: [
+      {
+        title: "Healthcare-Only Focus",
+        text: "Unlike generic FM/O&M companies, we manage only hospitals and healthcare facilities.",
+        icon: FaHospitalAlt,
+      },
+      {
+        title: "International Compliance",
+        text: "Every service aligned with NABH, JCI, ISO, OSHA, NFPA, HTM standards.",
+        icon: FaGlobe,
+      },
+      {
+        title: "Technology-Driven",
+        text: "IoT, CMMS, CAFM, and AI-enabled predictive analytics for smarter operations.",
+        icon: FaMicrochip,
+      },
+      {
+        title: "Single-Window Partner",
+        text: "Property, facility, systems, and HR under one umbrella.",
+        icon: FaUsers,
+      },
+      {
+        title: "Patient-Centric Approach",
+        text: "Services benchmarked for safety, hygiene, and patient comfort.",
+        icon: FaHeartbeat,
+      },
+      {
+        title: "Sustainability Aligned",
+        text: "ESG-compliant operations supporting carbon neutrality, energy conservation, and green healthcare initiatives.",
+        icon: FaLeaf,
+      },
+    ],
+  },
 };
 
 // --- HELPER COMPONENT ---
@@ -328,7 +334,7 @@ export default function OperatePage() {
                 <section key={service.id} id={service.id}>
                   <h3>{service.title}</h3>
                   <p className="text-muted">{service.description}</p>
-                    <div className="service-card">
+                  <div className="service-card">
                     <DetailSection
                       details={service.details}
                       image={service.image}
@@ -336,21 +342,20 @@ export default function OperatePage() {
                   </div>
                 </section>
               ))}
-<section id="why-infrahealth-operate">
-  <h3>{operateData.why.title}</h3>
-  <div className="value-grid mt-4">
-    {operateData.why.points.map((point, index) => (
-      <div key={index} className="value-card">
-        <div className="icon">
-          <point.icon size={32} />
-        </div>
-        <h4>{point.title}</h4>
-        <p>{point.text}</p>
-      </div>
-    ))}
-  </div>
-</section>
-
+              <section id="why-infrahealth-operate">
+                <h3>{operateData.why.title}</h3>
+                <div className="value-grid mt-4">
+                  {operateData.why.points.map((point, index) => (
+                    <div key={index} className="value-card">
+                      <div className="icon">
+                        <point.icon size={32} />
+                      </div>
+                      <h4>{point.title}</h4>
+                      <p>{point.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
             </div>
           </Col>
         </Row>

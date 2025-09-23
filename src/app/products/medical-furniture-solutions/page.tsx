@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Nav, Modal } from "react-bootstrap";
-import { BsCheckCircleFill } from "react-icons/bs";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 import Image from "next/image";
 import "../../../styles/services.css";
-import { FaClock, FaGlobe, FaLeaf, FaUsers, FaXmark } from "react-icons/fa6";
+import { FaClock, FaGlobe, FaLeaf, FaUsers } from "react-icons/fa6";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Keyboard } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface DetailItem {
   text: string;
@@ -68,10 +74,7 @@ const furnitureData: SectionData[] = [
       {
         heading: "Patient Care Furniture",
         items: [
-          {
-            text: "Hospital Beds",
-            image: "/images/products/furniture/beds.jpg",
-          },
+          { text: "Hospital Beds", image: "/images/products/furniture/beds.jpg" },
           {
             text: "Bedside Lockers & Overbed Tables",
             image: "/images/products/furniture/lockers.jpg",
@@ -110,10 +113,7 @@ const furnitureData: SectionData[] = [
             text: "OT Furniture",
             image: "/images/products/furniture/ot-furniture.jpg",
           },
-          {
-            text: "ICU Furniture",
-            image: "/images/products/furniture/icu.jpg",
-          },
+          { text: "ICU Furniture", image: "/images/products/furniture/icu.jpg" },
           {
             text: "Rehabilitation & Physiotherapy Furniture",
             image: "/images/products/furniture/rehab.jpg",
@@ -162,7 +162,7 @@ const furnitureData: SectionData[] = [
 
 const DetailSection: React.FC<{
   details: Detail[];
-  onImageClick: (src: string) => void;
+  onImageClick: (images: string[], index: number) => void;
 }> = ({ details, onImageClick }) => (
   <div className="detail-section">
     {details.map((detail, i) => (
@@ -176,7 +176,13 @@ const DetailSection: React.FC<{
                 <div
                   className="detail-card text-center h-100"
                   style={{ cursor: item.image ? "pointer" : "default" }}
-                  onClick={() => item.image && onImageClick(item.image!)}
+                  onClick={() =>
+                    item.image &&
+                    onImageClick(
+                      (detail.items as DetailItem[]).map((it) => it.image!) as string[],
+                      j
+                    )
+                  }
                 >
                   {item.image && (
                     <Image
@@ -187,17 +193,7 @@ const DetailSection: React.FC<{
                       className="img-fluid rounded shadow-sm mb-2"
                     />
                   )}
-                  <p className="fw-medium">
-                    {item.text.includes("Operation Theatres") ? (
-                      <>
-                        {item.text.replace(" Operation Theatres", "")}
-                        <br />
-                        Operation Theatres
-                      </>
-                    ) : (
-                      item.text
-                    )}
-                  </p>
+                  <p className="fw-medium">{item.text}</p>
                 </div>
               </Col>
             ))}
@@ -205,9 +201,7 @@ const DetailSection: React.FC<{
         ) : (
           <ul className="details-list">
             {(detail.items as string[]).map((item, j) => (
-              <li key={j}>
-               {item}
-              </li>
+              <li key={j}>{item}</li>
             ))}
           </ul>
         )}
@@ -219,15 +213,18 @@ const DetailSection: React.FC<{
 export default function FurniturePage() {
   const [activeLink, setActiveLink] = useState<string>("intro");
   const sectionsRef = useRef<Record<string, Element>>({});
-  const [show, setShow] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleClose = () => setShow(false);
-  const handleShow = (img: string) => {
-    setSelectedImage(img);
-    setShow(true);
+  // Gallery state
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  const handleImageClick = (images: string[], index: number) => {
+    setGalleryImages(images);
+    setActiveIndex(index);
+    setIsGalleryOpen(true);
   };
 
   useEffect(() => {
@@ -338,7 +335,7 @@ export default function FurniturePage() {
                   {section.details && (
                     <DetailSection
                       details={section.details}
-                      onImageClick={handleShow}
+                      onImageClick={handleImageClick}
                     />
                   )}
 
@@ -361,37 +358,76 @@ export default function FurniturePage() {
           </div>
         </Col>
       </Row>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        centered
-        size="lg"
-        contentClassName="bg-transparent border-0 shadow-none"
-      >
-        <FaXmark
-          onClick={handleClose}
-          style={{
-            position: "absolute",
-            top: "4px",
-            right: "20px",
-            cursor: "pointer",
-            backgroundColor: "#b6520f",
-            color: "#fff",
-            fontSize: "28px",
-            borderRadius: "50%",
-            padding: "5px",
-          }}
-        />
-        {selectedImage && (
-          <Image
-            src={selectedImage}
-            alt="Preview"
-            width={900}
-            height={600}
-            className="w-100 h-auto rounded"
-          />
-        )}
-      </Modal>
+
+      {/* Swiper Lightbox */}
+      {/* Swiper Lightbox */}
+{isGalleryOpen && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "rgba(0,0,0,0.9)",
+      zIndex: 9999,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+    onClick={(e) => {
+      if (e.target === e.currentTarget) setIsGalleryOpen(false);
+    }}
+  >
+    <button
+      style={{
+        position: "absolute",
+        top: "20px",
+        right: "20px",
+        fontSize: "28px",
+        color: "#fff",
+        background: "transparent",
+        border: "none",
+        cursor: "pointer",
+        zIndex: 10000,
+      }}
+      onClick={() => setIsGalleryOpen(false)}
+    >
+      ✕
+    </button>
+
+    <Swiper
+      initialSlide={activeIndex}
+      modules={[Navigation, Pagination, Keyboard]}
+      navigation
+      pagination={{ clickable: true }}
+      keyboard={{ enabled: true }}
+      style={{ width: "90%", height: "90%" }}
+    >
+      {galleryImages.map((src, index) => (
+        <SwiperSlide key={index}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <Image
+              src={src}
+              alt={`Slide ${index}`}
+              width={1000}
+              height={700}
+              style={{ maxHeight: "90vh", maxWidth: "100%", objectFit: "contain" }}
+            />
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+)}
+
     </main>
   );
 }

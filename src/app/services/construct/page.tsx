@@ -11,7 +11,6 @@ import {
   FaLightbulb,
 } from "react-icons/fa";
 
-// --- TYPE DEFINITIONS ---
 interface DetailBlock {
   [key: string]: string[];
 }
@@ -45,7 +44,6 @@ interface ConstructData {
   why: WhyInfraHealth;
 }
 
-// --- DATA OBJECT ---
 const constructData: ConstructData = {
   intro: {
     title: "Construct",
@@ -172,7 +170,6 @@ const constructData: ConstructData = {
   },
 };
 
-// --- HELPER COMPONENT ---
 interface DetailSectionProps {
   details: DetailBlock;
 }
@@ -196,7 +193,6 @@ const DetailSection: React.FC<DetailSectionProps & { image?: string }> = ({
           </ul>
         </Col>
 
-        {/* 👇 Inject image right after Scope of Work */}
         {key === "Scope of Work" && image && (
           <Col md={12} className="mb-4 text-center">
             <img
@@ -212,7 +208,6 @@ const DetailSection: React.FC<DetailSectionProps & { image?: string }> = ({
   </Row>
 );
 
-// --- MAIN COMPONENT ---
 export default function ConstructPage() {
   const [activeLink, setActiveLink] = useState<string>("epc");
   const sectionsRef = useRef<Record<string, Element>>({});
@@ -334,9 +329,9 @@ export default function ConstructPage() {
               ))}
               <section id="why-infrahealth">
                 <h2>{constructData.why.title}</h2>
-                <div className="value-grid mt-4">
+                <div className="features construct-ft mt-4">
                   {constructData.why.points.map((point, index) => (
-                    <div key={index} className="value-card">
+                    <div key={index} className="value-card col-md-3">
                       <div className="icon">
                         <point.icon size={32} />
                       </div>
