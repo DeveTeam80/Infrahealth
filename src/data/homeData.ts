@@ -64,38 +64,113 @@ export const homeData: HomeData = {
     { img: "/images/services/7.jpg", title: "Regulatory Compliance" },
   ],
   projects: [
-    {
-      id: 1,
-      title: "Multispeciality & Cancer Hospital",
-      image: "/images/projects/proj1.png",
-    },
-    {
-      id: 2,
-      title: "Dr. D.Y. Patil Hospital & Research Center",
-      image: "/images/projects/proj2.png",
-    },
-    {
-      id: 3,
-      title: "Sub-district Hospital, Kopergaon",
-      image: "/images/projects/proj3.jpg",
-    },
-    {
-      id: 4,
-      title: "Multispeciality & Cancer Hospital",
-      image: "/images/projects/proj1.png",
-    },
-    {
-      id: 5,
-      title: "Dr. D.Y. Patil Hospital & Research Center",
-      image: "/images/projects/proj2.png",
-    },
-    {
-      id: 6,
-      title: "Sub-district Hospital, Kopergaon",
-      image: "/images/projects/proj3.jpg",
-    },
-  ],
-  testimonials: [
+  // Data has been populated with placeholders as requested.
+  // {
+  //   id: 1,
+  //   title: "100 Bedded Cancer & Cardiac Care Hospital, Baner",
+  //   image: "https://placehold.co/600x400/008080/FFFFFF?text=Project+1",
+  // },
+  // {
+  //   id: 2,
+  //   title:
+  //     "1500 Bedded Hospital Dr. D Y Patil Hospital & Medical College, Pimpri",
+  //   image: "https://placehold.co/600x400/008080/FFFFFF?text=Project+2",
+  // },
+//   {
+//     id: 3,
+//     title: "IVF Lab, Dr. D Y Patil Hospital",
+//     category: "Diagnostics & Life Sciences",
+//     subcategory: "Specialized Labs",
+//     brief: { beds: "N/A", config: "Lab Facility", area: "5,000 sq.ft" },
+//     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+3",
+//   },
+//   {
+//     id: 4,
+//     title: "Path Lab, Dr. D Y Patil Hospital",
+//     category: "Diagnostics & Life Sciences",
+//     subcategory: "Specialized Labs",
+//     brief: { beds: "N/A", config: "Lab Facility", area: "10,000 sq.ft" },
+//     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+4",
+//   },
+//   {
+//     id: 5,
+//     title: "Radiology, Dr. D Y Patil Hospital",
+//     category: "Diagnostics & Life Sciences",
+//     subcategory: "Imaging Centres",
+//     brief: { beds: "N/A", config: "Imaging Department", area: "15,000 sq.ft" },
+//     imageUrl: "https://placehold.co/600x400/008080/FFFFFF?text=Project+5",
+//   },
+  {
+    id: 6,
+    title: "150 Bedded Cancer & Modern Maternity Hospital, KDMC",
+    image: "/images/portfolio/KDMC/15.jpg",
+  },
+  // {
+  //   id: 7,
+  //   title: "Homeopathy College & Hospital, Kagal",
+  //   image: "https://placehold.co/600x400/008080/FFFFFF?text=Project+7",
+  // },
+  {
+    id: 8,
+    title: "365 Bedded Regional Mental Hospital, Jaisingpur",
+    image: "/images/portfolio/JAISINGHPUR/1_1 - Photo.jpg",
+  },
+  // {
+  //   id: 9,
+  //   title: "Lokmanya Hospital, SB Road – Diagnostic Centre",
+  //   image: "https://placehold.co/600x400/008080/FFFFFF?text=Project+9",
+  // },
+  // {
+  //   id: 10,
+  //   title: "CRHP Rural Hospital, Jamkhed",
+  //   image: "https://placehold.co/600x400/008080/FFFFFF?text=Project+10",
+  // },
+  {
+    id: 11,
+    title: "Sub-District Hospital, Karjat",
+    image: "/images/portfolio/KARJAT SDH/ABILLP_MPDC_RENDER 3.jpg",
+  },
+  {
+    id: 12,
+    title: "Sub-District Hospital, Jamkhed",
+    image: "/images/portfolio/JAMKHED SDH/ABILLP_MPDC_RENDER-4.jpg",
+  },
+  {
+    id: 13,
+    title: "Sub-District Hospital, Mirajgaon",
+    image: "/images/portfolio/MIRAJGAON SDH/2.jpg",
+  },
+  {
+    id: 14,
+    title: "Sub-District Hospital, Sangamner",
+    image: "/images/portfolio/SANGMNER SDH/7.jpg",
+  },
+  {
+    id: 15,
+    title: "Sub-District Hospital, Chakan",
+    image: "/images/portfolio/CHAKAN/1/IMG-20240711-WA0018.jpg",
+  },
+  {
+    id: 16,
+    title: "Sub-District Hospital, Narayangaon",
+    image: "/images/portfolio/NARAYANGAON/C_4 - Photo.jpg",
+  },
+  {
+    id: 17,
+    title: "Sub-District Hospital, Mangalwedha",
+    image: "/images/portfolio/MANGALWEDHA SDH/1.jpg",
+  },
+  {
+    id: 18,
+    title: "Rural Hospital, Ghodegaon",
+    image: "/images/portfolio/GHODEGAON/02_3 - Photo.jpg",
+  },
+  {
+    id: 19,
+    title: "350 Bedded Multi-specialty Hospital, Warje",
+    image: "/images/portfolio/WARJE/Picture1.jpg",
+  },
+],testimonials: [
     {
       name: "Dr. Meera Kapoor",
       role: "Medical Director",

@@ -478,13 +478,13 @@ const PropertySearch = () => {
         </p> */}
       </div>
       {/* Tabs */}
-      <Row className="justify-content-center pt-4">
+      <Row className="justify-content-center pt-4 mt-4">
         <Col md={6} className="d-flex justify-content-center">
           <Nav
             variant="tabs"
             activeKey={activeTab}
             onSelect={(k) => setActiveTab(k || "sell")}
-            className="properties"
+            className="properties prop-tab"
           >
             <Nav.Item>
               <Nav.Link eventKey="buy">Buy</Nav.Link>
@@ -600,8 +600,10 @@ const PropertySearch = () => {
       </div> */}
 
       <Row>
-        <Col md={9}></Col>
-        <Col md={3} className="d-flex align-items-center justify-content-end">
+        {/* <Col md={6}>
+        </Col> */}
+        <Col md={12} className="d-flex align-items-center justify-content-center py-4">
+        <p className="mt-3 text-muted me-2">Are you looking to list your Property?</p>
           <div
             className="btn primary-btn"
             onClick={(e) => handleNavLinkClick(e, "list-property-section")}
@@ -611,7 +613,7 @@ const PropertySearch = () => {
         </Col>
       </Row>
       <Row className="portfolio-grid mt-3">
-        {filteredProjects.map((project) => (
+        {filteredProjects.slice(0, 4).map((project) => (
           <Col key={project.id} md={6} lg={3} className="mb-4">
             <div className="project-card">
               <img src={project.imageUrl} alt={project.title} />

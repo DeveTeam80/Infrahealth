@@ -81,42 +81,42 @@ export default function Header() {
           </Link>
         </div>
 
-        <div className="d-flex align-items-center gap-3 justify-content-between justify-sm-start">
-          <div
-            className="d-flex align-items-center gap-1"
-            style={{
-              border: "1px solid #b6520f",
-              borderRadius: "20px",
-              padding: "10px 2px 10px 12px",
-              cursor: "pointer",
-            }}
-          >
-            <ReactCountryFlag
-              countryCode={country}
-              svg
-              style={{ width: "1.5em", height: "1.5em" }}
-            />
-            <select
-              className="form-select form-select-sm border-0"
-              value={country}
-              onChange={handleChange}
-            >
-              <option value="IN">India</option>
-              <option value="US">USA</option>
-              <option value="GB">UK</option>
-              <option value="AE">UAE</option>
-            </select>
-          </div>
-          <div>
-            <button
-              type="button"
-              className="btn btn-outline-secondary btn-sm"
-              onClick={() => setModalShow(true)}
-            >
-              Talk to Us
-            </button>
-          </div>
-        </div>
+<div className="d-flex align-items-center gap-3 justify-content-between justify-sm-start">
+  <div
+    className="d-flex align-items-center gap-1"
+    style={{
+      border: "1px solid #b6520f",
+      borderRadius: "20px",
+      padding: "10px 2px 10px 12px",
+      cursor: "pointer",
+    }}
+  >
+    <ReactCountryFlag
+      countryCode={country}
+      svg
+      style={{ width: "1.5em", height: "1.5em" }}
+    />
+    <select
+      className="form-select form-select-sm border-0"
+      value={country}
+      onChange={handleChange}
+    >
+      <option value="IN">India</option>
+      <option value="AE">UAE</option>
+      <option value="AF">Africa</option>
+    </select>
+  </div>
+  <div>
+    <button
+      type="button"
+      className="btn btn-outline-secondary btn-sm"
+      onClick={() => setModalShow(true)}
+    >
+      Talk to Us
+    </button>
+  </div>
+</div>
+
       </div>
 
       <header className="sticky-header">
@@ -366,84 +366,86 @@ export default function Header() {
                               </ul>
                             )}
                           </Col>
-<Col md={5} className="megaThumbnails position-relative ms-4">
-  {activeCategory === "consult" && (
-    <>
-      <Image
-        src="/images/header1.jpg"
-        alt="Consulting visual 1"
-        width={280}
-        height={180}
-        className="thumb thumb1 rounded shadow"
-      />
-      <Image
-        src="/images/header2.jpg"
-        alt="Consulting visual 2"
-        width={280}
-        height={180}
-        className="thumb thumb2 rounded shadow"
-      />
-    </>
-  )}
+                          <Col
+                            md={5}
+                            className="megaThumbnails position-relative ms-4"
+                          >
+                            {activeCategory === "consult" && (
+                              <>
+                                <Image
+                                  src="/images/header1.jpg"
+                                  alt="Consulting visual 1"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb1 rounded shadow"
+                                />
+                                <Image
+                                  src="/images/header2.jpg"
+                                  alt="Consulting visual 2"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb2 rounded shadow"
+                                />
+                              </>
+                            )}
 
-  {activeCategory === "construct" && (
-    <>
-      <Image
-        src="/images/journey/construction.jpg"
-        alt="Construct visual 1"
-        width={280}
-        height={180}
-        className="thumb thumb1 rounded shadow"
-      />
-      <Image
-        src="/images/journey/site-survey.jpg"
-        alt="Construct visual 2"
-        width={280}
-        height={180}
-        className="thumb thumb2 rounded shadow"
-      />
-    </>
-  )}
+                            {activeCategory === "construct" && (
+                              <>
+                                <Image
+                                  src="/images/journey/construction.jpg"
+                                  alt="Construct visual 1"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb1 rounded shadow"
+                                />
+                                <Image
+                                  src="/images/journey/site-survey.jpg"
+                                  alt="Construct visual 2"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb2 rounded shadow"
+                                />
+                              </>
+                            )}
 
-  {activeCategory === "operate" && (
-    <>
-      <Image
-        src="/images/journey/facility.jpg"
-        alt="Operate visual 1"
-        width={280}
-        height={180}
-        className="thumb thumb1 rounded shadow"
-      />
-      <Image
-        src="/images/journey/operations.jpg"
-        alt="Operate visual 2"
-        width={280}
-        height={180}
-        className="thumb thumb2 rounded shadow"
-      />
-    </>
-  )}
+                            {activeCategory === "operate" && (
+                              <>
+                                <Image
+                                  src="/images/journey/facility.jpg"
+                                  alt="Operate visual 1"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb1 rounded shadow"
+                                />
+                                <Image
+                                  src="/images/journey/operations.jpg"
+                                  alt="Operate visual 2"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb2 rounded shadow"
+                                />
+                              </>
+                            )}
 
-  {activeCategory === "solutions" && (
-    <>
-      <Image
-        src="/images/services/solutions/3.jpg"
-        alt="Solutions visual 1"
-        width={280}
-        height={180}
-        className="thumb thumb1 rounded shadow"
-      />
-      <Image
-        src="/images/services/solutions/7.jpg"
-        alt="Solutions visual 2"
-        width={280}
-        height={180}
-        className="thumb thumb2 rounded shadow"
-      />
-    </>
-  )}
-</Col>
-
+                            {activeCategory === "solutions" && (
+                              <>
+                                <Image
+                                  src="/images/services/solutions/3.jpg"
+                                  alt="Solutions visual 1"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb1 rounded shadow"
+                                />
+                                <Image
+                                  src="/images/services/solutions/7.jpg"
+                                  alt="Solutions visual 2"
+                                  width={280}
+                                  height={180}
+                                  className="thumb thumb2 rounded shadow"
+                                />
+                              </>
+                            )}
+                          </Col>
                         </Row>
 
                         <hr className="megaDivider" />

@@ -12,23 +12,15 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { homeData, JourneyTab } from "@/data/homeData";
+import { blogInner } from "@/data/blogInner";
 
 export default function Home() {
-  const { words, services, projects, testimonials, blogs, journeyTabs } =
-    homeData;
+  const { words, services, projects, testimonials, journeyTabs } = homeData;
   const [modalShow, setModalShow] = useState(false);
   const [activeKey, setActiveKey] = useState<string>(journeyTabs[0].key);
   const activeTab: JourneyTab = journeyTabs.find(
     (tab: JourneyTab) => tab.key === activeKey
   )!;
-
-  // useEffect(() => {
-  //   const interval = setInterval(
-  //     () => setCurrentWord((prev) => (prev + 1) % words.length),
-  //     2000
-  //   );
-  //   return () => clearInterval(interval);
-  // }, []);
 
   useEffect(() => {
     const counters = document.querySelectorAll<HTMLElement>(".counter");
@@ -144,7 +136,7 @@ export default function Home() {
               </div>
               <div className="counter-box">
                 <div className="counter-number">
-                  <span className="counter" data-to="5000" data-suffix="+">
+                  <span className="counter" data-to="8000" data-suffix="+">
                     8000+
                   </span>
                 </div>
@@ -176,10 +168,10 @@ export default function Home() {
               </p>
               <p>
                 <strong>Hospitals:</strong> Specialising in modular hospitals,
-                be it 30, 50, 70, 100 and upto 200 beds hospitals and EPC (Engineering,
-                Procurement and Construction) for larger hospitals with higher
-                bed sizes. Get the highest quality without the multi agency
-                hassles all in one place.
+                be it 30, 50, 70, 100 and upto 2000 beds hospitals and EPC
+                (Engineering, Procurement and Construction) for larger hospitals
+                with higher bed sizes. Get the highest quality without the multi
+                agency hassles all in one place.
                 <br />
                 <br />
                 <strong>Medical Colleges and Institutes:</strong> Thorough
@@ -197,7 +189,7 @@ export default function Home() {
                   <h5 className="ms-2 mb-0">70+ Projects</h5>
                 </div>
               </div>
-              <Link href="/" className="btn">
+              <Link href="/about" className="btn">
                 Know More
               </Link>
             </div>
@@ -420,7 +412,9 @@ export default function Home() {
               </h3>
             </div>
             <div className="cta-buttons">
-              <div className="btn primary-btn">View All Projects</div>
+              <a href="/portfolio">
+                <div className="btn primary-btn">View All Projects</div>
+              </a>
             </div>
           </div>
         </Container>
@@ -463,6 +457,7 @@ export default function Home() {
         </Container>
       </section>
       {/* BLOGS */}
+      {/* BLOGS */}
       <section className="media-buzz py-5">
         <Container>
           <p className="section-subtitle">Our Blogs</p>
@@ -470,29 +465,56 @@ export default function Home() {
             Check out <span>Our latest Blogs</span>
           </h2>
           <Row className="justify-content-center g-4">
-            {blogs.map((blog, i) => (
-              <Col key={i} xs={12} md={6} lg={4}>
-                <Card className="blog-card h-100 border-0 shadow-sm">
-                  <Image
-                    src={blog.img}
-                    alt={blog.title}
-                    width={400}
-                    height={350}
-                  />
-                  <Card.Body className="card-content">
-                    <Card.Title as="h3" className="h6">
-                      {blog.title}
-                    </Card.Title>
-                    <Link href={blog.link} className="read-more p-0">
-                      READ MORE &raquo;
-                    </Link>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+            {blogInner.map((blog) => {
+              // Strip HTML tags from title
+              const plainTitle = blog.title.replace(/<[^>]+>/g, "");
+
+              // Optional: get first 100 chars of content (strip markdown/HTML)
+              const plainContent = blog.content
+                .replace(/<[^>]+>/g, "") // remove HTML
+                .replace(/!\[.*?\]\(.*?\)/g, "") // remove images
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // remove links
+                .replace(/(```[\s\S]*?```|`.*?`)/g, "") // remove code blocks
+                .replace(/[#>*_~\-]{1,6}/g, "") // remove markdown syntax
+                .replace(/\n+/g, " ")
+                .trim();
+
+              return (
+                <Col key={blog.slug} xs={12} md={6} lg={4}>
+                  <Card className="blog-card h-100 border-0 shadow-sm">
+                    <Image
+                      src={blog.image}
+                      alt={plainTitle}
+                      width={400}
+                      height={350}
+                    />
+                    <Card.Body className="card-content d-flex flex-column">
+                      <Card.Title as="h3" className="h6">
+                        {plainTitle}
+                      </Card.Title>
+
+                      <Card.Text className="text-muted small mb-3">
+                        {plainContent.length > 150
+                          ? plainContent.slice(0, 150) + "…"
+                          : plainContent}
+                      </Card.Text>
+
+                      <div className="mt-auto">
+                        <Link
+                          href={`/news/${blog.slug}`}
+                          className="read-more p-0"
+                        >
+                          READ MORE &raquo;
+                        </Link>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
           </Row>
-          <div className="explore-btn justify-content-center d-flex">
-            <Link href="news">Explore More Blogs</Link>
+          <div className="explore-btn justify-content-center d-flex mt-4">
+            <Link href="/news">Explore More Blogs</Link>
           </div>
         </Container>
       </section>
