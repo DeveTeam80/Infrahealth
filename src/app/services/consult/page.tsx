@@ -14,7 +14,7 @@ interface TabDetails {
   digital_integration?: string[];
   certifications?: string[];
   stages?: string[];
-  image?: string; // optional per-tab image
+  image?: string;
 }
 
 interface ServiceTab {
@@ -162,48 +162,48 @@ const consultData: ConsultData = {
     ],
   },
   equipment: {
-  title: "Equipment Planning & Integration",
-  subtitle:
-    "Turnkey solutions for medical technology procurement and installation.",
-  tabs: [
-    {
-      eventKey: "med-planning",
-      title: "Medical Equipment",
-      description:
-        "Needs-based equipment selection aligned with clinical pathways and future-proofing.",
-      details: {
-        image: "/images/services/consult/med-eqpt.jpg",
+    title: "Equipment Planning & Integration",
+    subtitle:
+      "Turnkey solutions for medical technology procurement and installation.",
+    tabs: [
+      {
+        eventKey: "med-planning",
+        title: "Medical Equipment",
+        description:
+          "Needs-based equipment selection aligned with clinical pathways and future-proofing.",
+        details: {
+          image: "/images/services/consult/med-eqpt.jpg",
+        },
       },
-    },
-    {
-      eventKey: "equip-planning",
-      title: "Equipment Planning",
-      description:
-        "Preparation of schedules, vendor presentations, technology reports.",
-      details: {
-        image: "/images/services/consult/eqpt-planning.jpg",
+      {
+        eventKey: "equip-planning",
+        title: "Equipment Planning",
+        description:
+          "Preparation of schedules, vendor presentations, technology reports.",
+        details: {
+          image: "/images/services/consult/eqpt-planning.jpg",
+        },
       },
-    },
-    {
-      eventKey: "procurement",
-      title: "Equipment Procurement",
-      description:
-        "Vendor-neutral procurement, techno-commercial analysis, financial negotiations, demonstrations.",
-      details: {
-        image: "/images/services/consult/procurement.jpg",
+      {
+        eventKey: "procurement",
+        title: "Equipment Procurement",
+        description:
+          "Vendor-neutral procurement, techno-commercial analysis, financial negotiations, demonstrations.",
+        details: {
+          image: "/images/services/consult/procurement.jpg",
+        },
       },
-    },
-    {
-      eventKey: "installation",
-      title: "Installation & Commissioning",
-      description:
-        "Supervision of installation and validation of critical equipment (ICU, OT, Radiology, CSSD).",
-      details: {
-        image: "/images/services/consult/equipment-installing.jpg",
+      {
+        eventKey: "installation",
+        title: "Installation & Commissioning",
+        description:
+          "Supervision of installation and validation of critical equipment (ICU, OT, Radiology, CSSD).",
+        details: {
+          image: "/images/services/consult/equipment-installing.jpg",
+        },
       },
-    },
-  ],
-},
+    ],
+  },
 
   ppp: {
     title: "Public Private Partnership (PPP) Advisory",
@@ -399,7 +399,83 @@ export default function ConsultPage() {
     }
   };
 
-  const createTabbedSection = (service: ServiceWithTabs) => {
+  // const createTabbedSection = (service: ServiceWithTabs) => {
+  //   const [activeTab, setActiveTab] = useState(service.tabs[0].eventKey);
+
+  //   return (
+  //     <Tab.Container
+  //       activeKey={activeTab}
+  //       onSelect={(k) => setActiveTab(k || service.tabs[0].eventKey)}
+  //     >
+  //       <Row>
+  //         {/* Tabs */}
+  //         <Col md={12}>
+  //           <Nav variant="pills" className="service-tabs mb-4">
+  //             {service.tabs.map((tab: ServiceTab) => (
+  //               <Nav.Item key={tab.eventKey}>
+  //                 <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
+  //               </Nav.Item>
+  //             ))}
+  //           </Nav>
+  //         </Col>
+  //         {/* Image that changes per active tab */}
+  //         <Col
+  //           md={12}
+  //           className="d-flex align-items-center justify-content-center"
+  //         >
+  //           {service.tabs
+  //             .filter((tab) => tab.eventKey === activeTab)
+  //             .map((tab) =>
+  //               tab.details?.image ? (
+  //                 <img
+  //                   key={tab.eventKey}
+  //                   src={tab.details.image}
+  //                   alt={tab.title}
+  //                   className="w-100 img-fluid rounded shadow-sm"
+  //                   style={{
+  //                     objectFit: "cover",
+  //                     maxWidth: "100%",
+  //                     height: "300px",
+  //                   }}
+  //                 />
+  //               ) : service.image ? (
+  //                 <img
+  //                   key={tab.eventKey}
+  //                   src={service.image}
+  //                   alt={tab.title}
+  //                   className="w-100 img-fluid rounded shadow-sm"
+  //                   style={{
+  //                     maxWidth: "100%",
+  //                     height: "300px",
+  //                     objectFit: "cover",
+  //                     borderRadius: "8px",
+  //                   }}
+  //                 />
+  //               ) : null
+  //             )}
+  //         </Col>
+
+  //         {/* Content */}
+  //         <Col md={12}>
+  //           <Tab.Content className="service-card">
+  //             {service.tabs.map((tab: ServiceTab) => (
+  //               <Tab.Pane eventKey={tab.eventKey} key={tab.eventKey}>
+  //                 <p>{tab.description}</p>
+  //                 {tab.details && <DetailSection details={tab.details} />}
+  //               </Tab.Pane>
+  //             ))}
+  //           </Tab.Content>
+  //         </Col>
+  //       </Row>
+  //     </Tab.Container>
+  //   );
+  // };
+
+  interface TabbedSectionProps {
+    service: ServiceWithTabs;
+  }
+
+  const TabbedSection: React.FC<TabbedSectionProps> = ({ service }) => {
     const [activeTab, setActiveTab] = useState(service.tabs[0].eventKey);
 
     return (
@@ -418,6 +494,7 @@ export default function ConsultPage() {
               ))}
             </Nav>
           </Col>
+
           {/* Image that changes per active tab */}
           <Col
             md={12}
@@ -573,7 +650,7 @@ export default function ConsultPage() {
               <section id="hospital-design">
                 <h3>{consultData.design.title}</h3>
                 <p className="text-muted fs-5">{consultData.design.subtitle}</p>
-                {createTabbedSection(consultData.design)}
+                <TabbedSection service={consultData.design} />
               </section>
 
               <section id="pmc">
@@ -610,7 +687,7 @@ export default function ConsultPage() {
                 <p className="text-muted fs-5">
                   {consultData.equipment.subtitle}
                 </p>
-                {createTabbedSection(consultData.equipment)}
+                <TabbedSection service={consultData.equipment} />
               </section>
               <section id="ppp-advisory">
                 <h3>{consultData.ppp.title}</h3>
