@@ -181,8 +181,8 @@ const DetailSection: React.FC<DetailSectionProps & { image?: string }> = ({
   <Row>
     {Object.entries(details).map(([key, value]) => (
       <React.Fragment key={key}>
-        <Col md={12} className="mb-3">
-          <h4 className="details-title">{key.replace(/_/g, " ")}:</h4>
+        <Col md={12}>
+          <h4 className="details-title mt-4">{key.replace(/_/g, " ")}:</h4>
           <ul className="details-list">
             {Array.isArray(value) &&
               value.map((item: string, index: number) => (
@@ -194,7 +194,7 @@ const DetailSection: React.FC<DetailSectionProps & { image?: string }> = ({
         </Col>
 
         {key === "Scope of Work" && image && (
-          <Col md={12} className="mb-4 text-center">
+          <Col md={12} className="text-center">
             <img
               src={image}
               alt="Service Illustration"
@@ -279,7 +279,7 @@ export default function ConstructPage() {
     <>
       <main className="container py-5 mt-4">
         <div
-          className="text-left mx-auto mb-5 pb-4"
+          className="text-left mx-auto pb-4"
           style={{ maxWidth: "1920px" }}
         >
           <p className="section-subtitle">OUR SERVICES</p>
@@ -314,12 +314,12 @@ export default function ConstructPage() {
           </Col>
 
           <Col lg={9}>
-            <div className="vstack gap-5">
+            <div className="vstack gap-1">
               {constructData.services.map((service) => (
                 <section key={service.id} id={service.id}>
                   <h3>{service.title}</h3>
                   <p className="text-muted">{service.description}</p>
-                  <div className="service-card">
+                  <div className="service-card consult-card">
                     <DetailSection
                       details={service.details}
                       image={service.image}

@@ -203,7 +203,7 @@ export default function ProjectFinancePage() {
     <main className="container py-5 mt-4">
       {/* Intro */}
       <div
-        className="text-left mx-auto mb-5 pb-4"
+        className="text-left mx-auto pb-4"
         style={{ maxWidth: "1920px" }}
       >
         <p className="section-subtitle">OUR FINANCIAL SERVICE</p>
@@ -233,16 +233,16 @@ export default function ProjectFinancePage() {
 
         {/* Content */}
         <Col lg={9}>
-          <div className="vstack gap-5">
             {/* Services */}
+          <div className="vstack gap-1">
             <section>
-              <h3 className="mb-4">Financing Solutions We Deliver</h3>
+              <h3>Financing Solutions We Deliver</h3>
               {financeData.services.map((service, index) => (
                 <Row
                   as="section"
                   key={service.id}
                   id={service.id}
-                  className="mb-5 interactive-section align-items-center"
+                  className="interactive-section align-items-center"
                 >
                   <Col
                     md={5}

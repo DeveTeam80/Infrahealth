@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Nav, Modal } from "react-bootstrap";
-import { BsCheckCircleFill } from "react-icons/bs";
+import { Row, Col, Nav } from "react-bootstrap";
 import Image from "next/image";
 import "../../../styles/services.css";
 import {
@@ -43,6 +42,48 @@ interface SectionData {
 }
 
 const motData: SectionData[] = [
+  {
+    id: "types",
+    title: "Types of Modular OTs",
+    details: [
+      {
+        items: [
+          {
+            text: "General Surgery Operation Theatres",
+            image: "/images/products/ots/1.jpg",
+          },
+          {
+            text: "Hybrid Operation Theatres",
+            image: "/images/products/ots/2.jpg",
+          },
+          {
+            text: "Cardiac Operation Theatres",
+            image: "/images/products/ots/3.jpg",
+          },
+          {
+            text: "Oncology Surgery Operation Theatres",
+            image: "/images/products/ots/4.jpg",
+          },
+          {
+            text: "Neurosurgery Operation Theatres",
+            image: "/images/products/ots/5.jpg",
+          },
+          {
+            text: "Orthopaedic Operation Theatres",
+            image: "/images/products/ots/6.jpg",
+          },
+          {
+            text: "Robotic Surgery Operation Theatres",
+            image: "/images/products/ots/7.jpg",
+          },
+          {
+            text: "Emergency & Trauma Operation Theatres",
+            image: "/images/products/ots/8.jpg",
+          },
+        ],
+      },
+    ],
+  },
   {
     id: "intro",
     title: "Modular Operating Theatres (MOTs) by Infra.Health",
@@ -109,48 +150,6 @@ const motData: SectionData[] = [
           "HTM 03-01 (UK healthcare technical standards).",
           "NFPA 99 (International fire and safety standards).",
           "Ensures accreditation readiness for hospitals across India, Middle East, Africa, Europe, and Asia-Pacific.",
-        ],
-      },
-    ],
-  },
-  {
-    id: "types",
-    title: "Types of Modular OTs",
-    details: [
-      {
-        items: [
-          {
-            text: "General Surgery Operation Theatres",
-            image: "/images/products/ots/1.jpg",
-          },
-          {
-            text: "Hybrid Operation Theatres",
-            image: "/images/products/ots/2.jpg",
-          },
-          {
-            text: "Cardiac Operation Theatres",
-            image: "/images/products/ots/3.jpg",
-          },
-          {
-            text: "Oncology Surgery Operation Theatres",
-            image: "/images/products/ots/4.jpg",
-          },
-          {
-            text: "Neurosurgery Operation Theatres",
-            image: "/images/products/ots/5.jpg",
-          },
-          {
-            text: "Orthopaedic Operation Theatres",
-            image: "/images/products/ots/6.jpg",
-          },
-          {
-            text: "Robotic Surgery Operation Theatres",
-            image: "/images/products/ots/7.jpg",
-          },
-          {
-            text: "Emergency & Trauma Operation Theatres",
-            image: "/images/products/ots/8.jpg",
-          },
         ],
       },
     ],
@@ -267,14 +266,13 @@ const DetailSection: React.FC<{
   </div>
 );
 
-
 export default function MOTPage() {
   const [activeLink, setActiveLink] = useState<string>("intro");
   const sectionsRef = useRef<Record<string, Element>>({});
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
- const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
@@ -347,18 +345,24 @@ export default function MOTPage() {
 
   return (
     <main className="container py-5 mt-4">
-      <div
-        className="text-left mx-auto mb-5 pb-4"
-        style={{ maxWidth: "1920px" }}
-      >
-        <p className="section-subtitle">OUR SOLUTIONS</p>
-        <h3 className="section-title">
-          Modular <span>Operating Theatres</span> (MOTs)
-        </h3>
-        <p className="mt-3 text-muted">
-          Transforming surgical environments into future-ready ecosystems with
-          speed, safety, and global compliance.
-        </p>
+      <div className="mx-auto mb-5 pb-4" style={{ maxWidth: "1920px" }}>
+        <div className="d-flex justify-content-between align-items-center flex-wrap">
+          <div>
+            <p className="section-subtitle">OUR SOLUTIONS</p>
+            <h3 className="section-title">
+              Modular <span>Operating Theatres</span> (MOTs)
+            </h3>
+            <p className="mt-3 text-muted">
+              Transforming surgical environments into future-ready ecosystems
+              with speed, safety, and global compliance.
+            </p>
+          </div>
+          <div className="cta-buttons">
+            <a href="/products">
+              <div className="btn primary-btn" style={{width: "auto", padding: "12px"}}>Explore Our Products</div>
+            </a>
+          </div>
+        </div>
       </div>
 
       <Row>
@@ -380,7 +384,7 @@ export default function MOTPage() {
 
         {/* Content Sections */}
         <Col lg={9}>
-          <div className="vstack gap-5">
+          <div className="vstack gap-1">
             {motData.map((section) => (
               <section id={section.id} key={section.id}>
                 <h2>{section.title}</h2>

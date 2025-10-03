@@ -11,7 +11,7 @@ export const blogInner: BlogDetail[] = [
     slug: "key-elements-of-patient-centric-hospital-design",
     title: `Key Elements of <span class="highlight">Patient-Centric</span> Hospital Design`,
     date: "22nd Sept, 2025",
-    image: "/images/services/consult/arch-design.jpg",
+    image: "/images/blogs/blog-1.png",
     content: `
 #### Introduction
 Patient experience is very important in today’s healthcare because it affects patient retention rates and healthcare results, patient experience is crucial to modern healthcare. If a patient has a favorable experience, they will return to the same hospital for future care. Increased patient satisfaction fosters loyalty and confidence. As a quality measure, patient experience is making the market more competitive. While happy people pick hospitals that have provided them with good care, patients who have a bad experience in the hospital are less inclined to return. Future revenue increases as a result of improved patient experiences.  
@@ -21,7 +21,7 @@ In order to prevent illnesses, promote well-being, and lay the groundwork for hi
 
 
 #### The Significance of Patient-Centric Design
-Patients should be the focus of hospital designs. Better health outcomes result from this since it increases patient participation and satisfaction and matches care to each patient's unique requirements. Relationships between patients and providers can improve, and care plans can be created efficiently. Instead of feeling like passive recipients, patients feel empowered. Patient-centered designs reduce expenses and improve operational efficiency. Workflows become more efficient and optimized. Patients' varied demands are first identified through [medical Planning and Consulting](/consultancy), and designs are then created to meet those needs. After that, patients receive individualized treatment. In a hospital that prioritizes its patients, the environment serves more as a therapeutic instrument. Natural light, greenery, calming hues, and peaceful settings help patients feel less stressed and recuperate more quickly. In a patient-centered hospital, waiting areas are constructed to hold more people, signage is appropriately placed for ease of navigation, and accessible facilities are offered for those with disabilities. 
+Patients should be the focus of hospital designs. Better health outcomes result from this since it increases patient participation and satisfaction and matches care to each patient's unique requirements. Relationships between patients and providers can improve, and care plans can be created efficiently. Instead of feeling like passive recipients, patients feel empowered. Patient-centered designs reduce expenses and improve operational efficiency. Workflows become more efficient and optimized. Patients' varied demands are first identified through [medical Planning and Consulting](/services/consult), and designs are then created to meet those needs. After that, patients receive individualized treatment. In a hospital that prioritizes its patients, the environment serves more as a therapeutic instrument. Natural light, greenery, calming hues, and peaceful settings help patients feel less stressed and recuperate more quickly. In a patient-centered hospital, waiting areas are constructed to hold more people, signage is appropriately placed for ease of navigation, and accessible facilities are offered for those with disabilities. 
 
 These hospitals take into account the needs of their employees in addition to their patients. Critical equipment can be accessed quickly thanks to well-planned ergonomic spaces. It directly enhances the results for patients. A hospital that was created with the needs of its employees and patients in mind promotes efficiency, empathy, and a positive culture. As a result, a healthcare ecosystem where patients feel appreciated is created. A hospital with patient-centered design, accessible layouts, and easy-to-find directions.
 
@@ -61,7 +61,7 @@ A patient-centric design is essential, not optional. A well-designed hospital th
     title:
       `Transforming Surgical Precision and Efficiency with <span class="highlight">Advanced Modular Operation Theatres</span>`,
     date: "25th Sept, 2025",
-    image: "/images/products/mot.jpg",
+    image: "/images/blogs/blog-2.png",
     content: `
 #### Introduction  
 Advanced modular operation theaters (MOTs) are now a crucial component for the [best hospital infrastructure services provider](/), as the way procedures are performed has changed significantly in recent years. Traditional operating rooms are unchanging and unadaptable. They frequently have trouble adhering to ventilation requirements, technology integration, and infection control measures that are always evolving. In contrast, MOTs are constructed with prefabricated panels composed of non-porous materials coated with antimicrobials to reduce microbial load and particle shedding. These structures adhere to international standards like ASHRAE 170, HTM 03-01, and NABH. Laminar airflow, HEPA filtration, and hourly controlled air changes are how they guarantee air purity. By lowering the risk of surgical site infections (SSIs) and facilitating consistent performance across specialties, a precise design improves surgical safety.
@@ -113,7 +113,7 @@ Infra.Health’s modular theatres have shown their value in emergencies and remo
     slug: "net-zero-hospitals-dream-or-next-standard",
     title: `<span class="highlight">Net-Zero Hospitals</span>: A Dream or the Next Standard?`,
     date: "27th Sept, 2025",
-    image: "/images/services/consult/igbc.jpg",
+    image: "/images/blogs/blog-3.png",
     content: `
 Hospitals save many lives, but they are among the most carbon-intensive and resource-intensive structures. A hospital that aims to balance greenhouse gas emissions is known as a net-zero hospital. This is accomplished by optimizing the utilization of renewable energy sources and lowering energy usage. These hospitals' supply chains are optimized to lessen their negative environmental effects. The [best healthcare infrastructure services provider](/) helps hospitals go green by using smart technologies and sustainable practices.
 A balance is reached when the hospital's overall greenhouse gas emissions match the amount of greenhouse gases it removes from the atmosphere. This maintains the health of the earth and improves public health. 

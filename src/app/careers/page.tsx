@@ -139,44 +139,41 @@ export default function AboutSection() {
             Why work at<span> Infra.health?</span>
           </h3>
 
-          <Row className="g-3 justify-content-center">
-            {buildData.map((item, index) => (
-              <Col
-                key={index}
-                md={index < 3 ? 4 : 6} // first 3 take 3 columns each, last 2 take 6 each
-                className="d-flex"
-              >
-                <div
-                  className="p-4 rounded text-center flex-fill"
-                  style={{
-                    boxShadow: "0 6px 16px rgba(0, 0, 0, 0.1)",
-                  }}
-                >
-                  <div
-                    className="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle"
-                    style={{
-                      width: "120px",
-                      height: "120px",
-                      boxShadow: "0 6px 16px rgba(0, 0, 0, 0.1)",
-                    }}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                        borderRadius: "50%",
-                      }}
-                    />
-                  </div>
-                  <h5>{item.title}</h5>
-                  <p>{item.text}</p>
-                </div>
-              </Col>
-            ))}
-          </Row>
+<Row className="row-cols-1 row-cols-md-5 g-4">
+  {buildData.map((item, index) => (
+    <Col key={index} className="d-flex">
+      <div
+        className="p-4 rounded text-center flex-fill"
+        style={{
+          boxShadow: "0 6px 16px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <div
+          className="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle"
+          style={{
+            width: "120px",
+            height: "120px",
+            boxShadow: "0 6px 16px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <img
+            src={item.image}
+            alt={item.title}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
+        <h5>{item.title}</h5>
+        <p>{item.text}</p>
+      </div>
+    </Col>
+  ))}
+</Row>
+
         </Container>
       </section>
       {/* Openings */}

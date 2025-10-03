@@ -282,7 +282,7 @@ const handleNavLinkClick = (
     <>
       <div className="container py-5 mt-4">
         <div
-          className="text-left mx-auto mb-5 pb-4"
+          className="text-left mx-auto pb-4"
           style={{ maxWidth: "1920px" }}
         >
           <p className="section-subtitle">OUR SOLUTIONS</p>
@@ -320,9 +320,9 @@ const handleNavLinkClick = (
           </Col>
 
           <Col lg={9}>
-            <div className="vstack gap-5">
+            <div className="vstack gap-1">
               <section>
-                <h3 className="mb-4">
+                <h3>
                   Spectrum of Healthcare Facilities We Deliver
                 </h3>
                 {solutionsData.spectrum.map((category, index) => (
@@ -330,7 +330,7 @@ const handleNavLinkClick = (
                     as="section"
                     key={category.id}
                     id={category.id}
-                    className="mb-5 interactive-section align-items-center"
+                    className="interactive-section align-items-center"
                   >
                     <Col
                       md={5}
@@ -346,7 +346,7 @@ const handleNavLinkClick = (
                       md={7}
                       className={index % 2 === 0 ? "order-md-2" : "order-md-1"}
                     >
-                      <div className="service-card">
+                      <div className="service-card consult-card">
                         <div className="category-header">
                           <category.icon className="category-icon" />
                           <h4>{category.title}</h4>
