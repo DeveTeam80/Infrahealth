@@ -12,11 +12,23 @@ import {
 import Image from "next/image";
 import { FaGlobe, FaBoxes, FaHospital } from "react-icons/fa";
 import { FaBed } from "react-icons/fa6";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 export default function AboutSection() {
   const [visibleCards, setVisibleCards] = useState<{ [key: string]: boolean }>(
     {}
   );
+
+  const images = [
+    "/images/about/1.jpeg",
+    "/images/about/2.jpeg",
+    "/images/about/3.jpg",
+    "/images/about/4.jpg",
+    "/images/about/5.jpg",
+    "/images/about/6.jpg",
+    "/images/about/7.jpg",
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -306,50 +318,64 @@ useEffect(() => {
       </section>
 
       {/* Core Commitments */}
-      <section className="py-5 who-we-are-section">
-        <Container>
-          <Row className="align-items-center">
-            {/* Left Side: Icons */}
-            <Col md={6}>
-              <Image
-                src="/images/about.jpg"
-                alt="Healthcare Team"
-                width={550}
-                height={300}
-                style={{ borderRadius: "12px" }}
-              />
-            </Col>
+       <section className="py-5 who-we-are-section">
+      <Container>
+        <Row className="align-items-center">
+          {/* Left Side: Swiper Slider */}
+          <Col md={6}>
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 2500, disableOnInteraction: false }}
+              loop={true}
+              slidesPerView={1}
+              spaceBetween={20}
+              className="rounded overflow-hidden d-flex"
+            >
+              {images.map((src, idx) => (
+                <SwiperSlide key={idx}>
+                  <Image
+                    src={src}
+                    alt={`About ${idx + 1}`}
+                    width={550}
+                    height={300}
+                    style={{ borderRadius: "12px", objectFit: "cover" }}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </Col>
 
-            <Col md={6} className="ps-md-5 mt-4 mt-md-0">
-              <p className="section-subtitle">Why Choose Us</p>
-              <h2 className="section-title">
-                Our <span>Core Commitments</span>
-              </h2>
-              <ul className="mt-3 core-ul">
-                <li>
-                  Deliver innovative solutions using <strong>AI</strong>,
-                  modular construction, and digital twin technology
-                </li>
-                <li>
-                  Focus on green buildings, <strong>LEED-certified</strong>
-                  energy-efficient medical facilities
-                </li>
-                <li>
-                  Ensure <strong>360° delivery</strong> with a collaborative
-                  team of experts from different disciplines
-                </li>
-                <li>
-                  No compromise in <strong>quality</strong> and standards
-                </li>
-                <li>
-                  Enhance <strong>patient experience</strong> and healthcare
-                  outcomes
-                </li>
-              </ul>
-            </Col>
-          </Row>
-        </Container>
-      </section>
+          {/* Right Side: Commitments */}
+          <Col md={6} className="ps-md-5 mt-4 mt-md-0">
+            <p className="section-subtitle">Why Choose Us</p>
+            <h2 className="section-title">
+              Our <span>Core Commitments</span>
+            </h2>
+            <ul className="mt-3 core-ul">
+              <li>
+                Deliver innovative solutions using <strong>AI</strong>,
+                modular construction, and digital twin technology
+              </li>
+              <li>
+                Focus on green buildings, <strong>LEED-certified</strong>{" "}
+                energy-efficient medical facilities
+              </li>
+              <li>
+                Ensure <strong>360° delivery</strong> with a collaborative
+                team of experts from different disciplines
+              </li>
+              <li>
+                No compromise in <strong>quality</strong> and standards
+              </li>
+              <li>
+                Enhance <strong>patient experience</strong> and healthcare
+                outcomes
+              </li>
+            </ul>
+          </Col>
+        </Row>
+      </Container>
+    </section>
       {/* Core Values */}
       <section className="core-values">
         <Container>

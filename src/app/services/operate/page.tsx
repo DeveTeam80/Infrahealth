@@ -189,9 +189,9 @@ const DetailSection: React.FC<DetailSectionProps & { image?: string }> = ({
   <Row>
     {Object.entries(details).map(([key, value]) => (
       <React.Fragment key={key}>
-        <Col md={12} className="mb-3">
+        <Col md={12} className="">
           <h4 className="details-title">{key.replace(/_/g, " ")}:</h4>
-          <ul className="details-list">
+          <ul className="details-list mb-0">
             {Array.isArray(value) &&
               value.map((item: string, index: number) => (
                 <li key={index}>
@@ -201,7 +201,6 @@ const DetailSection: React.FC<DetailSectionProps & { image?: string }> = ({
           </ul>
         </Col>
 
-        {/* 👇 Inject image right after Scope of Work */}
         {key === "Scope of Work" && image && (
           <Col md={12} className="mb-4 text-center">
             <img
@@ -289,7 +288,7 @@ export default function OperatePage() {
     <>
       <main className="container py-5 mt-4">
         <div
-          className="text-left mx-auto mb-5 pb-4"
+          className="text-left mx-auto pb-4"
           style={{ maxWidth: "1920px" }}
         >
           <p className="section-subtitle">OUR SERVICES</p>
@@ -329,12 +328,12 @@ export default function OperatePage() {
           </Col>
 
           <Col lg={9}>
-            <div className="vstack gap-5">
+            <div className="vstack gap-1">
               {operateData.services.map((service) => (
                 <section key={service.id} id={service.id}>
                   <h3>{service.title}</h3>
                   <p className="text-muted">{service.description}</p>
-                  <div className="service-card">
+                  <div className="service-card consult-card">
                     <DetailSection
                       details={service.details}
                       image={service.image}

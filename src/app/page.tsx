@@ -168,7 +168,7 @@ export default function Home() {
               </p>
               <p>
                 <strong>Hospitals:</strong> Specialising in modular hospitals,
-                be it 30, 50, 70, 100 and upto 2000 beds hospitals and EPC
+                be it 30, 50, 70, 100 upto 2000 beds hospitals and EPC
                 (Engineering, Procurement and Construction) for larger hospitals
                 with higher bed sizes. Get the highest quality without the multi
                 agency hassles all in one place.
@@ -351,7 +351,7 @@ export default function Home() {
             >
               {services.map((service, idx) => (
                 <SwiperSlide key={idx}>
-                  <div className="service-card">
+                  <div className="service-swiper-card">
                     <Image
                       src={service.img}
                       alt={service.title}
@@ -412,9 +412,9 @@ export default function Home() {
               </h3>
             </div>
             <div className="cta-buttons">
-              <a href="/portfolio">
+              <Link href="/portfolio">
                 <div className="btn primary-btn">View All Projects</div>
-              </a>
+              </Link>
             </div>
           </div>
         </Container>
@@ -457,7 +457,6 @@ export default function Home() {
         </Container>
       </section>
       {/* BLOGS */}
-      {/* BLOGS */}
       <section className="media-buzz py-5">
         <Container>
           <p className="section-subtitle">Our Blogs</p>
@@ -466,45 +465,28 @@ export default function Home() {
           </h2>
           <Row className="justify-content-center g-4">
             {blogInner.map((blog) => {
-              // Strip HTML tags from title
               const plainTitle = blog.title.replace(/<[^>]+>/g, "");
-
-              // Optional: get first 100 chars of content (strip markdown/HTML)
-              const plainContent = blog.content
-                .replace(/<[^>]+>/g, "") // remove HTML
-                .replace(/!\[.*?\]\(.*?\)/g, "") // remove images
-                .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // remove links
-                .replace(/(```[\s\S]*?```|`.*?`)/g, "") // remove code blocks
-                .replace(/[#>*_~\-]{1,6}/g, "") // remove markdown syntax
-                .replace(/\n+/g, " ")
-                .trim();
 
               return (
                 <Col key={blog.slug} xs={12} md={6} lg={4}>
-                  <Card className="blog-card h-100 border-0 shadow-sm">
-                    <Image
-                      src={blog.image}
-                      alt={plainTitle}
-                      width={400}
-                      height={350}
-                    />
-                    <Card.Body className="card-content d-flex flex-column">
-                      <Card.Title as="h3" className="h6">
+                  <Card className="blog-card h-100 border-0">
+                    <div className="blog-card-image-wrapper">
+                      <Image
+                        src={blog.image}
+                        alt={plainTitle}
+                        width={400}
+                        height={300}
+                        className="blog-card-image"
+                      />
+                    </div>
+                    <Card.Body className="card-content d-flex flex-column justify-content-between">
+                      <Card.Title as="h3" className="blog-card-title">
                         {plainTitle}
                       </Card.Title>
-
-                      <Card.Text className="text-muted small mb-3">
-                        {plainContent.length > 150
-                          ? plainContent.slice(0, 150) + "…"
-                          : plainContent}
-                      </Card.Text>
-
-                      <div className="mt-auto">
-                        <Link
-                          href={`/news/${blog.slug}`}
-                          className="read-more p-0"
-                        >
-                          READ MORE &raquo;
+                      <div className="mt-3 text-end">
+                        <Link href={`/news/${blog.slug}`} className="read-more">
+                          <span className="read-more-text">Read More</span>
+                          <span className="read-more-arrow">&raquo;</span>
                         </Link>
                       </div>
                     </Card.Body>
@@ -513,8 +495,10 @@ export default function Home() {
               );
             })}
           </Row>
-          <div className="explore-btn justify-content-center d-flex mt-4">
-            <Link href="/news">Explore More Blogs</Link>
+          <div className="justify-content-center d-flex mt-4">
+            <Link href="/news" className="btn btn-outline-primary" style={{width: "auto", padding: "12px"}}>
+              Explore More Blogs
+            </Link>
           </div>
         </Container>
       </section>

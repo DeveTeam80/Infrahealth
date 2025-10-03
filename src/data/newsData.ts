@@ -21,7 +21,7 @@ export const newsData: NewsData = {
       id: "blog-1",
       title: "Delivering Sustainable Healthcare Infrastructure in India",
       date: "September 1, 2025",
-      image: "images/blogs/blog1.png",
+      image: "images/blogs/blog-1.png",
       description:
         "How Infra.Health is advancing sustainability across hospital design and operations with green building practices.",
     },
@@ -29,7 +29,7 @@ export const newsData: NewsData = {
       id: "blog-2",
       title: "Designing Patient-Centric Hospitals: Key Considerations",
       date: "September 3, 2025",
-      image: "images/blogs/blog2.png",
+      image: "images/blogs/blog-2.png",
       description:
         "Exploring design principles that center on patient safety, comfort, workflow efficiency, and regulatory compliance.",
     },
@@ -37,7 +37,7 @@ export const newsData: NewsData = {
       id: "blog-3",
       title: "Modular Construction: Faster Hospital Setups",
       date: "September 5, 2025",
-      image: "images/blogs/blog3.png",
+      image: "images/blogs/blog-3.png",
       description:
         "The benefits of modular and prefabricated healthcare infrastructure in reducing project timelines and costs.",
     },

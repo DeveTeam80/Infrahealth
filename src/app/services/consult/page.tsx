@@ -311,11 +311,11 @@ interface DetailSectionProps {
 const DetailSection: React.FC<DetailSectionProps> = ({ details }) => (
   <Row>
     {/* Left side: text list */}
-    <Col md={12} className="mb-3">
+    <Col md={12}>
       {Object.entries(details).map(
         ([key, value]) =>
           key !== "image" && ( // skip image key
-            <div key={key} className="mb-4">
+            <div key={key}>
               <h4 className="details-title">{key.replace(/_/g, " ")}:</h4>
               <ul className="details-list">
                 {Array.isArray(value) &&
@@ -457,7 +457,7 @@ export default function ConsultPage() {
 
   //         {/* Content */}
   //         <Col md={12}>
-  //           <Tab.Content className="service-card">
+  //           <Tab.Content className="service-card consult-card">
   //             {service.tabs.map((tab: ServiceTab) => (
   //               <Tab.Pane eventKey={tab.eventKey} key={tab.eventKey}>
   //                 <p>{tab.description}</p>
@@ -534,7 +534,7 @@ export default function ConsultPage() {
 
           {/* Content */}
           <Col md={12}>
-            <Tab.Content className="service-card">
+            <Tab.Content className="service-card consult-card">
               {service.tabs.map((tab: ServiceTab) => (
                 <Tab.Pane eventKey={tab.eventKey} key={tab.eventKey}>
                   <p>{tab.description}</p>
@@ -552,7 +552,7 @@ export default function ConsultPage() {
     <>
       <main className="container py-5 mt-4">
         <div
-          className="text-left mx-auto mb-5 pb-4"
+          className="text-left mx-auto pb-4"
           style={{ maxWidth: "1920px" }}
         >
           <p className="section-subtitle">OUR SERVICES</p>
@@ -640,7 +640,7 @@ export default function ConsultPage() {
           </Col>
 
           <Col lg={9}>
-            <div className="vstack gap-5">
+            <div className="vstack gap-1">
               {/* <section id="management-consultancy">
                                 <h3>{consultData.management.title}</h3>
                                 <p className="text-muted fs-5">{consultData.management.subtitle}</p>
@@ -673,7 +673,7 @@ export default function ConsultPage() {
                     </Col>
                   )}
                   <Col md={12}>
-                    <div className="service-card">
+                    <div className="service-card consult-card">
                       <DetailSection
                         details={{ stages: consultData.pmc.stages }}
                       />
@@ -709,7 +709,7 @@ export default function ConsultPage() {
                     </Col>
                   )}
                   <Col md={12}>
-                    <div className="service-card">
+                    <div className="service-card consult-card">
                       <DetailSection details={consultData.ppp.details} />
                     </div>
                   </Col>
@@ -736,7 +736,7 @@ export default function ConsultPage() {
                     </Col>
                   )}
                   <Col md={12}>
-                    <div className="service-card">
+                    <div className="service-card consult-card">
                       <DetailSection details={consultData.esg.details} />
                     </div>
                   </Col>
@@ -763,7 +763,7 @@ export default function ConsultPage() {
                     </Col>
                   )}
                   <Col md={12}>
-                    <div className="service-card">
+                    <div className="service-card consult-card">
                       <DetailSection details={consultData.green.details} />
                     </div>
                   </Col>
@@ -790,7 +790,7 @@ export default function ConsultPage() {
                     </Col>
                   )}
                   <Col md={12}>
-                    <div className="service-card">
+                    <div className="service-card consult-card">
                       <DetailSection details={consultData.ifm.details} />
                     </div>
                   </Col>
@@ -802,7 +802,7 @@ export default function ConsultPage() {
                 <p className="text-muted">
                   {consultData.accreditation.subtitle}
                 </p>
-                <div className="service-card mt-3">
+                <div className="service-card consult-card mt-3">
                   <DetailSection details={consultData.accreditation.details} />
                 </div>
               </section>
