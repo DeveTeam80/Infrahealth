@@ -412,9 +412,9 @@ export default function Home() {
               </h3>
             </div>
             <div className="cta-buttons">
-              <a href="/portfolio">
+              <Link href="/portfolio">
                 <div className="btn primary-btn">View All Projects</div>
-              </a>
+              </Link>
             </div>
           </div>
         </Container>
