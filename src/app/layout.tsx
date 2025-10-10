@@ -6,11 +6,42 @@ import "./globals.css"
 import Header from "@/components/Header"
 import ScrollToTopButton from "@/components/ScrolltoTop"
 import Footer from "@/components/Footer"
+import { siteConfig } from "@/lib/seo-config"
+
 
 export const metadata: Metadata = {
-  title: "Infra.Health",
-  description: "Healthcare Infrastructure Solutions",
+  metadataBase: new URL(siteConfig.siteUrl),
+  title: {
+    default: 'Infra.Health - Best Healthcare Infrastructure Service Provider',
+    template: '%s | Infra.Health',
+  },
+  description: 'Best healthcare infrastructure service provider offering EPC solutions, medical equipment, and hospital planning.',
+  keywords: ['Best Healthcare infrastructure service provider', 'Medical planning & consulting'],
+  applicationName: 'Infra.Health',
+  authors: [{ name: 'Infra.Health' }],
+  creator: 'Infra.Health',
+  publisher: 'Infra.Health',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: siteConfig.siteUrl,
+  },
 }
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
