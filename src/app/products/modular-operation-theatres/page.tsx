@@ -1,22 +1,19 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col, Nav } from "react-bootstrap";
 import Image from "next/image";
 import "../../../styles/services.css";
-import {
-  FaClock,
-  FaGlobe,
-  FaMicrochip,
-  FaUsers,
-  FaXmark,
-} from "react-icons/fa6";
+import { FaClock, FaGlobe, FaMicrochip, FaUsers } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+// ---------------------
+// DATA TYPES
+// ---------------------
 interface DetailItem {
   text: string;
   image?: string;
@@ -41,6 +38,9 @@ interface SectionData {
   points?: Point[];
 }
 
+// ---------------------
+// DATA
+// ---------------------
 const motData: SectionData[] = [
   {
     id: "types",
@@ -214,10 +214,16 @@ const motData: SectionData[] = [
   },
 ];
 
-const DetailSection: React.FC<{
+// ---------------------
+// DETAIL SECTION COMPONENT
+// ---------------------
+const DetailSection = ({
+  details,
+  onImageClick,
+}: {
   details: Detail[];
-  onImageClick: (images: string[], index: number) => void; // ✅ correct type
-}> = ({ details, onImageClick }) => (
+  onImageClick: (images: string[], index: number) => void;
+}) => (
   <div className="detail-section">
     {details.map((detail, i) => (
       <div key={i} className="mb-4">
@@ -225,34 +231,35 @@ const DetailSection: React.FC<{
 
         {typeof detail.items[0] === "object" ? (
           <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-            {(detail.items as DetailItem[]).map((item, j) => (
-              <Col key={j}>
-                <div
-                  className="detail-card text-center h-100"
-                  style={{ cursor: item.image ? "pointer" : "default" }}
-                  onClick={() => {
-                    if (item.image) {
-                      const images = (detail.items as DetailItem[])
-                        .filter((it) => it.image)
-                        .map((it) => it.image!);
-                      const index = images.indexOf(item.image);
-                      onImageClick(images, index); // ✅ pass array + index
+            {(detail.items as DetailItem[]).map((item, j) => {
+              const images = (detail.items as DetailItem[])
+                .filter((it) => it.image)
+                .map((it) => it.image!);
+              const index = images.indexOf(item.image || "");
+
+              return (
+                <Col key={j}>
+                  <div
+                    className="detail-card text-center h-100"
+                    style={{ cursor: item.image ? "pointer" : "default" }}
+                    onClick={() =>
+                      item.image ? onImageClick(images, index) : null
                     }
-                  }}
-                >
-                  {item.image && (
-                    <Image
-                      src={item.image}
-                      alt={item.text}
-                      width={250}
-                      height={160}
-                      className="img-fluid rounded shadow-sm mb-2"
-                    />
-                  )}
-                  <p className="fw-medium">{item.text}</p>
-                </div>
-              </Col>
-            ))}
+                  >
+                    {item.image && (
+                      <Image
+                        src={item.image}
+                        alt={item.text}
+                        width={250}
+                        height={160}
+                        className="img-fluid rounded shadow-sm mb-2"
+                      />
+                    )}
+                    <p className="fw-medium">{item.text}</p>
+                  </div>
+                </Col>
+              );
+            })}
           </Row>
         ) : (
           <ul className="details-list">
@@ -266,12 +273,36 @@ const DetailSection: React.FC<{
   </div>
 );
 
+// ---------------------
+// MAIN PAGE
+// ---------------------
 export default function MOTPage() {
-  const [activeLink, setActiveLink] = useState<string>("intro");
-  const sectionsRef = useRef<Record<string, Element>>({});
-  const isClickScrolling = useRef(false);
-  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sectionIds = motData.map((s) => s.id);
 
+  const getInitial = () => {
+    if (typeof window === "undefined") return sectionIds[0];
+    const hash = window.location.hash.replace("#", "");
+    return sectionIds.includes(hash) ? hash : sectionIds[0];
+  };
+
+  const [activeSection, setActiveSection] = useState<string>(getInitial);
+
+  // Update hash when tab changes
+  useEffect(() => {
+    window.history.pushState(null, "", `#${activeSection}`);
+  }, [activeSection]);
+
+  // Back/forward button support
+  useEffect(() => {
+    const handler = () => {
+      const hash = window.location.hash.replace("#", "");
+      setActiveSection(sectionIds.includes(hash) ? hash : sectionIds[0]);
+    };
+    window.addEventListener("popstate", handler);
+    return () => window.removeEventListener("popstate", handler);
+  }, []);
+
+  // Lightbox state
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryImages, setGalleryImages] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -282,99 +313,29 @@ export default function MOTPage() {
     setIsGalleryOpen(true);
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (isClickScrolling.current) return;
-          if (entry.isIntersecting) {
-            setActiveLink(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-30% 0px -70% 0px" }
-    );
-
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => {
-      sectionsRef.current[section.id] = section;
-      observer.observe(section);
-    });
-
-    return () => {
-      Object.values(sectionsRef.current).forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-    };
-  }, []);
-
-  const handleNavLinkClick = (
-    e: React.MouseEvent<HTMLElement>,
-    targetId: string
-  ) => {
-    e.preventDefault();
-    isClickScrolling.current = true;
-    setActiveLink(targetId);
-
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const headerOffset = 180;
-      const elementPosition =
-        targetElement.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-
-      window.history.pushState(null, "", `#${targetId}`);
-
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-
-      scrollTimeout.current = setTimeout(() => {
-        isClickScrolling.current = false;
-      }, 1000);
-    }
-  };
-
   return (
     <main className="container py-5 mt-4">
+      {/* HEADER */}
       <div className="mx-auto mb-5 pb-4" style={{ maxWidth: "1920px" }}>
-        <div className="d-flex justify-content-between align-items-center flex-wrap">
-          <div>
-            <p className="section-subtitle">OUR SOLUTIONS</p>
-            <h3 className="section-title">
-              Modular <span>Operating Theatres</span> (MOTs)
-            </h3>
-            <p className="mt-3 text-muted">
-              Transforming surgical environments into future-ready ecosystems
-              with speed, safety, and global compliance.
-            </p>
-          </div>
-          <div className="cta-buttons">
-            <a href="/products">
-              <div className="btn primary-btn" style={{width: "auto", padding: "12px"}}>Explore Our Products</div>
-            </a>
-          </div>
-        </div>
+        <p className="section-subtitle">OUR SOLUTIONS</p>
+        <h3 className="section-title">
+          Modular <span>Operating Theatres</span> (MOTs)
+        </h3>
+        <p className="mt-3 text-muted">
+          Transforming surgical environments with speed, precision & global
+          compliance.
+        </p>
       </div>
 
       <Row>
-        {/* Side Navigation */}
+        {/* Side Tabs */}
         <Col lg={3} className="d-none d-lg-block">
           <Nav className="flex-column sticky-top sidenav">
             {motData.map((section) => (
               <Nav.Link
                 key={section.id}
-                href={`#${section.id}`}
-                onClick={(e) => handleNavLinkClick(e, section.id)}
-                className={activeLink === section.id ? "active" : ""}
+                onClick={() => setActiveSection(section.id)}
+                className={activeSection === section.id ? "active" : ""}
               >
                 {section.title}
               </Nav.Link>
@@ -382,79 +343,64 @@ export default function MOTPage() {
           </Nav>
         </Col>
 
-        {/* Content Sections */}
+        {/* Tab Content */}
         <Col lg={9}>
           <div className="vstack gap-1">
-            {motData.map((section) => (
-              <section id={section.id} key={section.id}>
-                <h2>{section.title}</h2>
-                {section.subtitle && (
-                  <p className="text-muted fs-5">{section.subtitle}</p>
-                )}
+            {motData.map(
+              (section) =>
+                activeSection === section.id && (
+                  <section id={section.id} key={section.id}>
+                    <h2>{section.title}</h2>
 
-                <div className="service-card prod-card">
-                  {section.details && (
-                    <DetailSection
-                      details={section.details}
-                      onImageClick={handleImageClick}
-                    />
-                  )}
+                    {section.subtitle && (
+                      <p className="text-muted fs-5">{section.subtitle}</p>
+                    )}
 
-                  {section.points && (
-                    <div
-                      className="value-grid mt-4"
-                      style={{
-                        gap: "50px",
-                        gridTemplateColumns: "repeat(2, 1fr)",
-                      }}
-                    >
-                      {section.points.map((point, index) => (
-                        <div key={index} className="value-card">
-                          <div className="icon">
-                            <point.icon size={32} />
-                          </div>
-                          <h4>{point.title}</h4>
-                          <p>{point.text}</p>
+                    <div className="service-card prod-card">
+                      {section.details && (
+                        <DetailSection
+                          details={section.details}
+                          onImageClick={handleImageClick}
+                        />
+                      )}
+
+                      {section.points && (
+                        <div
+                          className="value-grid mt-4"
+                          style={{
+                            gap: "40px",
+                            gridTemplateColumns: "repeat(2,1fr)",
+                          }}
+                        >
+                          {section.points.map((point, index) => (
+                            <div key={index} className="value-card">
+                              <div className="icon">
+                                <point.icon size={32} />
+                              </div>
+                              <h4>{point.title}</h4>
+                              <p>{point.text}</p>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      )}
                     </div>
-                  )}
-                </div>
-              </section>
-            ))}
+                  </section>
+                )
+            )}
           </div>
         </Col>
       </Row>
+
+      {/* Lightbox */}
       {isGalleryOpen && (
         <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0,0,0,0.9)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setIsGalleryOpen(false);
-          }}
+          className="lightbox-overlay"
+          onClick={(e) =>
+            e.target === e.currentTarget && setIsGalleryOpen(false)
+          }
         >
           <button
-            style={{
-              position: "absolute",
-              top: "20px",
-              right: "20px",
-              fontSize: "28px",
-              color: "#fff",
-              background: "transparent",
-              border: "none",
-              cursor: "pointer",
-              zIndex: 10000,
-            }}
+            className="lightbox-close"
             onClick={() => setIsGalleryOpen(false)}
           >
             ✕
@@ -470,14 +416,7 @@ export default function MOTPage() {
           >
             {galleryImages.map((src, index) => (
               <SwiperSlide key={index}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100%",
-                  }}
-                >
+                <div className="lightbox-center">
                   <Image
                     src={src}
                     alt={`Slide ${index}`}

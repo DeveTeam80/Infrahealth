@@ -214,137 +214,121 @@ export default function ConstructPage() {
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (isClickScrolling.current) return;
-          if (entry.isIntersecting) {
-            setActiveLink(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-30% 0px -70% 0px" }
-    );
+    const sections = [...constructData.services.map(s => s.id), "why-infrahealth"];
 
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => {
-      sectionsRef.current[section.id] = section;
-      observer.observe(section);
-    });
-
-    return () => {
-      Object.values(sectionsRef.current).forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-    };
-  }, []);
-
-  const handleNavLinkClick = (
-    e: React.MouseEvent<HTMLElement>,
-    targetId: string
-  ) => {
-    e.preventDefault();
-    isClickScrolling.current = true;
-    setActiveLink(targetId);
-
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const headerOffset = 180;
-      const elementPosition =
-        targetElement.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-
-      window.history.pushState(null, "", `#${targetId}`);
-
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-
-      scrollTimeout.current = setTimeout(() => {
-        isClickScrolling.current = false;
-      }, 1000);
-    }
+  const getInitial = () => {
+    if (typeof window === "undefined") return sections[0];
+    const hash = window.location.hash.replace("#", "");
+    return sections.includes(hash) ? hash : sections[0];
   };
 
-  return (
-    <>
-      <main className="container py-5 mt-4">
-        <div
-          className="text-left mx-auto pb-4"
-          style={{ maxWidth: "1920px" }}
-        >
-          <p className="section-subtitle">OUR SERVICES</p>
-          <h3 className="section-title">
-            <span>{constructData.intro.title}</span>
-          </h3>
-          <h4 className="fs-4 mb-3">{constructData.intro.main}</h4>
-          <p className="mt-3 text-muted">{constructData.intro.sub}</p>
-        </div>
+  const [activeSection, setActiveSection] = useState<string>(getInitial);
 
-        <Row>
-          <Col lg={3} className="d-none d-lg-block">
-            <Nav className="flex-column sticky-top sidenav">
-              {constructData.services.map((service) => (
-                <Nav.Link
-                  key={service.id}
-                  href={`#${service.id}`}
-                  onClick={(e) => handleNavLinkClick(e, service.id)}
-                  className={activeLink === service.id ? "active" : ""}
-                >
-                  {service.title}
-                </Nav.Link>
-              ))}
-              <Nav.Link
-                href="#why-infrahealth"
-                onClick={(e) => handleNavLinkClick(e, "why-infrahealth")}
-                className={activeLink === "why-infrahealth" ? "active" : ""}
-              >
-                Why Infra.Health?
-              </Nav.Link>
-            </Nav>
-          </Col>
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.history.pushState(null, "", `#${activeSection}`);
+  }, [activeSection]);
 
-          <Col lg={9}>
-            <div className="vstack gap-1">
-              {constructData.services.map((service) => (
-                <section key={service.id} id={service.id}>
-                  <h3>{service.title}</h3>
-                  <p className="text-muted">{service.description}</p>
-                  <div className="service-card consult-card">
-                    <DetailSection
-                      details={service.details}
-                      image={service.image}
-                    />
-                  </div>
-                </section>
-              ))}
-              <section id="why-infrahealth">
-                <h2>{constructData.why.title}</h2>
-                <div className="features construct-ft mt-4">
-                  {constructData.why.points.map((point, index) => (
-                    <div key={index} className="value-card col-md-3">
-                      <div className="icon">
-                        <point.icon size={32} />
-                      </div>
-                      <h4>{point.title}</h4>
-                      <p>{point.text}</p>
-                    </div>
-                  ))}
+  useEffect(() => {
+    const onPop = () => {
+      const hash = window.location.hash.replace("#", "");
+      setActiveSection(sections.includes(hash) ? hash : sections[0]);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+useEffect(() => {
+  const onPop = () => {
+    const hash = window.location.hash.replace("#", "");
+    setActiveSection(sections.includes(hash) ? hash : sections[0]);
+  };
+  window.addEventListener("popstate", onPop);
+  return () => window.removeEventListener("popstate", onPop);
+}, []);
+
+
+return (
+  <main className="container py-5 mt-4">
+    {/* INTRO SECTION */}
+    <div className="text-left mx-auto pb-4" style={{ maxWidth: "1920px" }}>
+      <p className="section-subtitle">OUR SERVICES</p>
+      <h3 className="section-title">
+        <span>{constructData.intro.title}</span>
+      </h3>
+      <h4 className="fs-4 mb-3">{constructData.intro.main}</h4>
+      <p className="mt-3 text-muted">{constructData.intro.sub}</p>
+    </div>
+
+    <Row>
+      {/* LEFT NAVIGATION */}
+      <Col lg={3} className="d-none d-lg-block">
+        <Nav className="flex-column sticky-top sidenav">
+
+          {constructData.services.map((service) => (
+            <Nav.Link
+              key={service.id}
+              onClick={() => setActiveSection(service.id)}
+              className={activeSection === service.id ? "active" : ""}
+            >
+              {service.title}
+            </Nav.Link>
+          ))}
+
+          <Nav.Link
+            onClick={() => setActiveSection("why-infrahealth")}
+            className={activeSection === "why-infrahealth" ? "active" : ""}
+          >
+            Why Infra.Health?
+          </Nav.Link>
+
+        </Nav>
+      </Col>
+
+      {/* RIGHT CONTENT */}
+      <Col lg={9}>
+        <div className="vstack gap-1">
+
+          {/* SERVICES SECTION (TABS) */}
+          {constructData.services.map((service) =>
+            activeSection === service.id ? (
+              <section key={service.id}>
+                <h3>{service.title}</h3>
+                <p className="text-muted">{service.description}</p>
+
+                <div className="service-card consult-card">
+                  <DetailSection
+                    details={service.details}
+                    image={service.image}
+                  />
                 </div>
               </section>
-            </div>
-          </Col>
-        </Row>
-      </main>
-    </>
-  );
+            ) : null
+          )}
+
+          {/* WHY INFRAHEALTH SECTION */}
+          {activeSection === "why-infrahealth" && (
+            <section>
+              <h2>{constructData.why.title}</h2>
+
+              <div className="features construct-ft mt-4">
+                {constructData.why.points.map((point, index) => (
+                  <div key={index} className="value-card col-md-3">
+                    <div className="icon">
+                      <point.icon size={32} />
+                    </div>
+                    <h4>{point.title}</h4>
+                    <p>{point.text}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+        </div>
+      </Col>
+    </Row>
+  </main>
+);
+
 }
