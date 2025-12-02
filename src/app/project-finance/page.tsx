@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Row, Col, Nav } from "react-bootstrap";
 import "../../styles/services.css";
 import { FaGlobeAmericas, FaProjectDiagram } from "react-icons/fa";
 import { FaUserTie } from "react-icons/fa6";
 import { IconType } from "react-icons";
 
-// --- TYPES ---
-// --- TYPES ---
+// TYPES
 interface FinanceService {
   id: string;
   title: string;
@@ -24,14 +23,13 @@ interface FinanceData {
     sub: string;
   };
   services: FinanceService[];
-  value?: {
+  value: {
     title: string;
     points: { title: string; text: string; icon?: IconType }[];
   };
 }
 
-
-// --- DATA ---
+// DATA
 const financeData: FinanceData = {
   intro: {
     title: "Project Finance",
@@ -100,34 +98,30 @@ const financeData: FinanceData = {
       image: "/images/finance/global-fund.jpg",
     },
   ],
-
   value: {
     title: "Why Choose Infra.Health Finance?",
     points: [
       {
         title: "Trusted Expertise",
         text: "Decades of experience in healthcare + infrastructure financing.",
-        icon: FaUserTie, // professional expertise
+        icon: FaUserTie,
       },
       {
         title: "Global Networks",
         text: "Partnerships with international banks, funds, and investors.",
-        icon: FaGlobeAmericas, // global reach
+        icon: FaGlobeAmericas,
       },
       {
         title: "End-to-End Support",
         text: "From feasibility studies to post-completion cashflow stabilization.",
-        icon: FaProjectDiagram, // project lifecycle
+        icon: FaProjectDiagram,
       },
     ],
   },
 };
 
-// --- HELPER COMPONENT ---
-interface DetailSectionProps {
-  description: string[];
-}
-const DetailSection: React.FC<DetailSectionProps> = ({ description }) => (
+// DETAIL COMPONENT
+const DetailSection = ({ description }: { description: string[] }) => (
   <ul className="details-list">
     {description.map((item, index) => (
       <li key={index}>
@@ -137,75 +131,38 @@ const DetailSection: React.FC<DetailSectionProps> = ({ description }) => (
   </ul>
 );
 
-// --- MAIN PAGE ---
+// MAIN COMPONENT — TAB-STYLE
 export default function ProjectFinancePage() {
-  const [activeLink, setActiveLink] = useState<string>(
-    "project-loan-financing"
-  );
-  const sectionsRef = useRef<Record<string, Element>>({});
-  const isClickScrolling = useRef(false);
-  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sections = [...financeData.services.map((s) => s.id), "why-finance"];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (isClickScrolling.current) return;
-          if (entry.isIntersecting) {
-            setActiveLink(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-30% 0px -70% 0px" }
-    );
-
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => {
-      sectionsRef.current[section.id] = section;
-      observer.observe(section);
-    });
-
-    return () => {
-      Object.values(sectionsRef.current).forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-    };
-  }, []);
-
-  const handleNavLinkClick = (
-    e: React.MouseEvent<HTMLElement>,
-    targetId: string
-  ) => {
-    e.preventDefault();
-    isClickScrolling.current = true;
-    setActiveLink(targetId);
-
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      const headerOffset = 180;
-      const elementPosition =
-        targetElement.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-      window.history.pushState(null, "", `#${targetId}`);
-
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-      scrollTimeout.current = setTimeout(
-        () => (isClickScrolling.current = false),
-        1000
-      );
-    }
+  const getInitial = () => {
+    if (typeof window === "undefined") return sections[0];
+    const hash = window.location.hash.replace("#", "");
+    return sections.includes(hash) ? hash : sections[0];
   };
+
+  const [activeSection, setActiveSection] = useState<string>(getInitial);
+
+  // Update hash on tab switch
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.history.pushState(null, "", `#${activeSection}`);
+  }, [activeSection]);
+
+  // Support browser back/forward navigation
+  useEffect(() => {
+    const onPop = () => {
+      const hash = window.location.hash.replace("#", "");
+      setActiveSection(sections.includes(hash) ? hash : sections[0]);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   return (
     <main className="container py-5 mt-4">
-      {/* Intro */}
-      <div
-        className="text-left mx-auto pb-4"
-        style={{ maxWidth: "1920px" }}
-      >
+      {/* INTRO */}
+      <div className="text-left mx-auto pb-4" style={{ maxWidth: "1920px" }}>
         <p className="section-subtitle">OUR FINANCIAL SERVICE</p>
         <h3 className="section-title">
           <span>{financeData.intro.title}</span>
@@ -215,63 +172,62 @@ export default function ProjectFinancePage() {
       </div>
 
       <Row>
-        {/* Sidebar */}
+        {/* SIDEBAR TABS */}
         <Col lg={3} className="d-none d-lg-block">
           <Nav className="flex-column sticky-top sidenav">
             {financeData.services.map((service) => (
               <Nav.Link
                 key={service.id}
                 href={`#${service.id}`}
-                className={activeLink === service.id ? "active" : ""}
-                onClick={(e) => handleNavLinkClick(e, service.id)}
+                className={activeSection === service.id ? "active" : ""}
+                onClick={() => setActiveSection(service.id)}
               >
                 {service.title}
               </Nav.Link>
             ))}
+
+            {/* VALUE TAB */}
+            <Nav.Link
+              href="#why-finance"
+              className={activeSection === "why-finance" ? "active" : ""}
+              onClick={() => setActiveSection("why-finance")}
+            >
+              Why Choose Infra.Health Finance?
+            </Nav.Link>
           </Nav>
         </Col>
 
-        {/* Content */}
+        {/* CONTENT AREA */}
         <Col lg={9}>
-            {/* Services */}
-          <div className="vstack gap-1">
-            <section>
-              <h3>Financing Solutions We Deliver</h3>
-              {financeData.services.map((service, index) => (
-                <Row
-                  as="section"
-                  key={service.id}
-                  id={service.id}
-                  className="interactive-section align-items-center"
-                >
-                  <Col
-                    md={5}
-                    className={index % 2 === 0 ? "order-md-1" : "order-md-2"}
-                  >
-                    {service.image && (
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="img-fluid"
-                      />
-                    )}
-                  </Col>
-                  <Col
-                    md={7}
-                    className={index % 2 === 0 ? "order-md-2" : "order-md-1"}
-                  >
-                    <div className="service-card">
-                      <h4>{service.title}</h4>
-                      <DetailSection description={service.description} />
-                    </div>
-                  </Col>
-                </Row>
-              ))}
-            </section>
+          <div className="vstack gap-4">
+            {/* SERVICE SECTIONS */}
+            {financeData.services.map((service) =>
+              activeSection === service.id ? (
+                <section key={service.id}>
+                  <Row className="align-items-center">
+                    <Col md={5}>
+                      {service.image && (
+                        <img
+                          src={service.image}
+                          alt={service.title}
+                          className="img-fluid rounded shadow-sm"
+                        />
+                      )}
+                    </Col>
+                    <Col md={7}>
+                      <div className="service-card">
+                        <h3>{service.title}</h3>
+                        <DetailSection description={service.description} />
+                      </div>
+                    </Col>
+                  </Row>
+                </section>
+              ) : null
+            )}
 
-            {/* Value section */}
-            {financeData.value && (
-              <section id="value" className="finance-val">
+            {/* VALUE SECTION */}
+            {activeSection === "why-finance" && (
+              <section id="why-finance">
                 <h2>{financeData.value.title}</h2>
                 <div className="value-grid mt-4">
                   {financeData.value.points.map((point, index) => (

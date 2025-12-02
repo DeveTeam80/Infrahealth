@@ -468,17 +468,17 @@ const PropertySearch = () => {
         <h3 className="section-title">
           Unlocking Value Across <span> Global </span> Healthcare Assets
         </h3>
-        {/* <p className="mt-3 text-muted">
+        <p className="mt-3 text-muted">
           Healthcare infrastructure is not only about building and operating
           hospitals, it is also about unlocking the real estate value that
           underpins them. Infra.Health Healthcare Real Estate vertical provides
           a comprehensive international platform for healthcare operators,
           investors, and developers to transact, invest, and expand their
           healthcare asset base with confidence.
-        </p> */}
+        </p>
       </div>
       {/* Tabs */}
-      <Row className="justify-content-center pt-4 mt-4">
+      {/* <Row className="justify-content-center pt-4 mt-4">
         <Col md={6} className="d-flex justify-content-center">
           <Nav
             variant="tabs"
@@ -497,12 +497,11 @@ const PropertySearch = () => {
             </Nav.Item>
           </Nav>
         </Col>
-      </Row>
+      </Row> */}
 
       {/* Search & Filters Box */}
-      <Row className="justify-content-center pb-4">
+      {/* <Row className="justify-content-center pb-4">
         <Col md={9} className="border rounded p-3">
-          {/* First Row: Search Bar */}
           <div className="d-flex align-items-center justify-content-center mb-3">
             <Form.Control
               type="text"
@@ -517,9 +516,7 @@ const PropertySearch = () => {
             </button>
           </div>
 
-          {/* Second Row: Dropdowns */}
           <div className="d-flex mt-2">
-            {/* Location */}
             <Form.Select
               className="me-2"
               value={location}
@@ -528,8 +525,6 @@ const PropertySearch = () => {
             >
               <option value="">India</option>
             </Form.Select>
-
-            {/* Filters */}
             <Form.Select
               value={propertyType}
               onChange={(e) => setPropertyType(e.target.value)}
@@ -551,59 +546,18 @@ const PropertySearch = () => {
             </Form.Select>
           </div>
         </Col>
-      </Row>
+      </Row> */}
 
-      {/* <div className="border rounded p-3 d-flex align-items-center">
-        
-        <Form.Select
-          className="me-2"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          style={{ maxWidth: "180px" }}
-        >
-          <option value="">India</option>
-        </Form.Select>
-
-        <Form.Select
-          className="me-2"
-          value={propertyType}
-          onChange={(e) => setPropertyType(e.target.value)}
-          style={{ maxWidth: "35%" }}
-        >
-          <option>Asset Type</option>
-          <option value="Core Clinical Infrastructure">
-            Core Clinical Infrastructure
-          </option>
-          <option value="Academic & Institutional Healthcare">
-            Academic & Institutional Healthcare
-          </option>
-          <option value="Diagnostics & Life Sciences">
-            Diagnostics & Life Sciences
-          </option>
-          <option value="Public & Government Healthcare">
-            Public & Government Healthcare
-          </option>
-        </Form.Select>
-
-        <Form.Control
-          type="text"
-          placeholder="Search upto 3 localities or landmarks"
-          className="me-2"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          style={{ maxWidth: "35%" }}
-        />
-
-        <button className="btn d-flex align-items-center px-4">
-          <FaSearch size={24} className="me-1" /> Search
-        </button>
-      </div> */}
-
-      <Row>
+      {/* <Row> */}
         {/* <Col md={6}>
         </Col> */}
-        <Col md={12} className="d-flex align-items-center justify-content-center py-4">
-        <p className="mt-3 text-muted me-2">Are you looking to list your Property?</p>
+        {/* <Col
+          md={12}
+          className="d-flex align-items-center justify-content-center py-4"
+        >
+          <p className="mt-3 text-muted me-2">
+            Are you looking to list your Property?
+          </p>
           <div
             className="btn primary-btn"
             onClick={(e) => handleNavLinkClick(e, "list-property-section")}
@@ -611,28 +565,16 @@ const PropertySearch = () => {
             List Your Property
           </div>
         </Col>
-      </Row>
-      <Row className="portfolio-grid mt-3">
+      </Row> */}
+      {/* <Row className="portfolio-grid mt-3">
         {filteredProjects.slice(0, 4).map((project) => (
           <Col key={project.id} md={6} lg={3} className="mb-4">
             <div className="project-card">
               <img src={project.imageUrl} alt={project.title} />
-              {/* <div className="project-card-overlay">
-                <h4>{project.title}</h4>
-                <p>
-                  <strong>Beds:</strong> {project.brief.beds}
-                </p>
-                <p>
-                  <strong>Area:</strong> {project.brief.area}
-                </p>
-                <p>
-                  <strong>Config:</strong> {project.brief.config}
-                </p>
-              </div> */}
             </div>
           </Col>
         ))}
-      </Row>
+      </Row> */}
       <section id="list-property-section" className="portfolio-section mb-4">
         <Container>
           {/* <p className="section-subtitle">Our Portfolio</p> */}
@@ -669,32 +611,15 @@ const PropertySearch = () => {
       </section>
       <h3 className="my-4">Spectrum of Healthcare Facilities We Deliver</h3>
       <Row>
-        {/* Sidebar */}
-        <Col lg={3} className="d-none d-lg-block">
-          <Nav className="flex-column sticky-top sidenav">
-            {solutionsData.spectrum.map((category) => (
-              <Nav.Link
-                key={category.id}
-                href={`#${category.id}`}
-                onClick={(e) => handleNavLinkClick(e, category.id)}
-                className={activeLink === category.id ? "active" : ""}
-              >
-                {category.title}
-              </Nav.Link>
-            ))}
-          </Nav>
-        </Col>
-
         {/* Main Content */}
-        <Col lg={9}>
+        <Col lg={12}>
           <div className="vstack gap-5">
-            <section>
+            <section className="d-flex">
               {solutionsData.spectrum.map((category, index) => (
                 <Row
-                  as="section"
                   key={category.id}
                   id={category.id}
-                  className="mb-5 interactive-section align-items-center"
+                  className="mb-5 interactive-section align-items-center d-flex"
                 >
                   <Col
                     md={12}
