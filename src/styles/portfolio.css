@@ -169,3 +169,80 @@
 .project-card:hover p {
     transform: translateY(0);
 }
+/* Horizontal Counter Section for Portfolio */
+.portfolio-counters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 30px;
+  margin: 50px 0 40px;
+  padding: 40px 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.portfolio-counter-box {
+  flex: 1;
+  text-align: center;
+  padding: 0 15px;
+  border-right: 1px solid #6767672e;
+}
+
+.portfolio-counter-box:last-child {
+  border-right: none;
+}
+
+.portfolio-counter-box .counter-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #008080; /* Teal - matches your brand color */
+  margin-bottom: 10px;
+}
+
+.portfolio-counter-box p {
+  font-size: 0.95rem;
+  margin: 5px 0 0;
+  color: #444;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .portfolio-counters {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .portfolio-counter-box {
+    flex: 1 1 calc(33.333% - 20px);
+    border-right: none;
+    border-bottom: 1px solid #6767672e;
+    padding-bottom: 20px;
+  }
+  
+  .portfolio-counter-box:nth-child(3n) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .portfolio-counters {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .portfolio-counter-box {
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid #6767672e;
+    padding-bottom: 20px;
+  }
+  
+  .portfolio-counter-box:last-child {
+    border-bottom: none;
+  }
+  
+  .portfolio-counter-box .counter-number {
+    font-size: 2rem;
+  }
+}

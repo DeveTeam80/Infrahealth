@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react"; // Added useEffect here
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import "../../styles/portfolio.css";
 import { NewsItem, portfolioData } from "@/data/portfolioData";
@@ -21,6 +21,42 @@ export default function PortfolioPage() {
     return portfolioData.filter((project) => project.category === activeFilter);
   }, [activeFilter]);
 
+  // Counter animation effect
+  useEffect(() => {
+    const counters = document.querySelectorAll<HTMLElement>(".counter");
+    const runCounter = (counter: HTMLElement) => {
+      const target = +counter.getAttribute("data-to")!;
+      const suffix = counter.getAttribute("data-suffix") || "";
+      let count = 0;
+      const increment = target / 200;
+      const update = () => {
+        count += increment;
+        if (count < target) {
+          counter.textContent = Math.floor(count) + suffix;
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = target.toLocaleString() + suffix;
+        }
+      };
+      update();
+    };
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target as HTMLElement);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    counters.forEach((counter) => observer.observe(counter));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="container py-5 mt-4">
       <div className="portfolio-header">
@@ -31,6 +67,46 @@ export default function PortfolioPage() {
         <p className="mt-3 text-muted">
           Our portfolio reflects a diverse range of healthcare projects across India—spanning academic institutions, public hospitals, specialty centres, and multispecialty hospitals.
         </p>
+      </div>
+
+      {/* HORIZONTAL COUNTER SECTION */}
+      <div className="portfolio-counters">
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="50" data-suffix="+">50+</span>
+          </div>
+          <p>Hospital Projects</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="200" data-suffix="+">200+</span>
+          </div>
+          <p>Modular Operation Theatres</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="9000" data-suffix="+">9000+</span>
+          </div>
+          <p>Beds</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="1000" data-suffix="+">1000+</span>
+          </div>
+          <p>ICU Beds</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="12" data-suffix="M+">12M+</span>
+          </div>
+          <p>SQ.FT Healthcare spaces planned, designed & built.</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="14" data-suffix="+">14+</span>
+          </div>
+          <p>Hospital Projects ongoing worldwide</p>
+        </div>
       </div>
 
       <Nav
@@ -79,4 +155,3 @@ export default function PortfolioPage() {
     </main>
   );
 }
-
