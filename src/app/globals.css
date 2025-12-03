@@ -599,7 +599,7 @@ border: 2px solid #dee2e6;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  height: -webkit-fill-available;
+  height: auto; 
 }
 
 .service-swiper-card img {
@@ -607,6 +607,13 @@ border: 2px solid #dee2e6;
   height: 320px;
   object-fit: cover;
   display: block;
+}
+/* Safari-specific fix if needed */
+@supports (-webkit-appearance: none) {
+  .service-swiper-card {
+    min-height: 320px;
+    max-height: 320px;
+  }
 }
 
 .prod-card{
