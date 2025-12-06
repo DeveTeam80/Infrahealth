@@ -549,9 +549,9 @@ const PropertySearch = () => {
       </Row> */}
 
       {/* <Row> */}
-        {/* <Col md={6}>
+      {/* <Col md={6}>
         </Col> */}
-        {/* <Col
+      {/* <Col
           md={12}
           className="d-flex align-items-center justify-content-center py-4"
         >
@@ -590,11 +590,12 @@ const PropertySearch = () => {
             Cross-border visibility ensures properties attract international
             buyers and healthcare funds.
           </p>
-          <div className="cta-buttons text-center">
-            <div className="btn primary-btn">List Your Property</div>
-          </div>
         </Container>
+
       </section>
+      <div className="cta-buttons text-center pb-5">
+        <div className="btn primary-btn">List Your Property</div>
+      </div>
       <section id="value" className="properties">
         <h3>{solutionsData.value.title}</h3>
         <div className="value-grid my-4">
