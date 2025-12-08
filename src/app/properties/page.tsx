@@ -361,6 +361,17 @@ const SpectrumList: React.FC<SpectrumListProps> = ({ items }) => (
   </ul>
 );
 
+// DETAIL COMPONENT
+const DetailSection = ({ description }: { description: string[] }) => (
+  <ul className="details-list">
+    {description.map((item, index) => (
+      <li key={index}>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+);
+
 const PropertySearch = () => {
   const [activeTab, setActiveTab] = useState("buy");
   const [location, setLocation] = useState("");
@@ -460,6 +471,15 @@ const PropertySearch = () => {
       }, 1000);
     }
   };
+  const sections = [...solutionsData.spectrum.map((s) => s.id), "why-finance"];
+
+  const getInitial = () => {
+    if (typeof window === "undefined") return sections[0];
+    const hash = window.location.hash.replace("#", "");
+    return sections.includes(hash) ? hash : sections[0];
+  };
+
+  const [activeSection, setActiveSection] = useState<string>(getInitial);
 
   return (
     <Container className="mt-4">
@@ -591,7 +611,6 @@ const PropertySearch = () => {
             buyers and healthcare funds.
           </p>
         </Container>
-
       </section>
       <div className="cta-buttons text-center pb-5">
         <div className="btn primary-btn">List Your Property</div>
@@ -612,31 +631,39 @@ const PropertySearch = () => {
       </section>
       <h3 className="my-4">Spectrum of Healthcare Facilities We Deliver</h3>
       <Row>
-        {/* Main Content */}
-        <Col lg={12}>
-          <div className="vstack gap-5">
-            <section className="d-flex">
-              {solutionsData.spectrum.map((category, index) => (
-                <Row
-                  key={category.id}
-                  id={category.id}
-                  className="mb-5 interactive-section align-items-center d-flex"
-                >
-                  <Col
-                    md={12}
-                    className={index % 2 === 0 ? "order-md-2" : "order-md-1"}
-                  >
-                    <div className="service-card">
-                      <div className="category-header">
-                        <category.icon className="category-icon" />
-                        <h4>{category.title}</h4>
+        <Col lg={3} className="d-none d-lg-block">
+          <Nav className="flex-column sticky-top sidenav">
+            {solutionsData.spectrum.map((service) => (
+              <Nav.Link
+                key={service.id}
+                href={`#${service.id}`}
+                className={activeSection === service.id ? "active" : ""}
+                onClick={() => setActiveSection(service.id)}
+              >
+                {service.title}
+              </Nav.Link>
+            ))}
+          </Nav>
+        </Col>
+
+        {/* CONTENT AREA */}
+        <Col lg={9}>
+          <div className="vstack gap-4">
+            {/* SERVICE SECTIONS */}
+            {solutionsData.spectrum.map((service) =>
+              activeSection === service.id ? (
+                <section key={service.id}>
+                  <Row className="align-items-center">
+                    <Col md={12}>
+                      <div className="service-card">
+                        <h3>{service.title}</h3>
+                        <DetailSection description={service.points} />
                       </div>
-                      <SpectrumList items={category.points} />
-                    </div>
-                  </Col>
-                </Row>
-              ))}
-            </section>
+                    </Col>
+                  </Row>
+                </section>
+              ) : null
+            )}
           </div>
         </Col>
       </Row>

@@ -65,7 +65,9 @@ export default function PortfolioPage() {
           Infra.Health <span>Portfolio</span>
         </h3>
         <p className="mt-3 text-muted">
-          Our portfolio reflects a diverse range of healthcare projects across India—spanning academic institutions, public hospitals, specialty centres, and multispecialty hospitals.
+          Our portfolio reflects a diverse range of healthcare projects across
+          India, spanning academic institutions, public hospitals, specialty
+          centres, and multispecialty hospitals.
         </p>
       </div>
 
@@ -73,39 +75,51 @@ export default function PortfolioPage() {
       <div className="portfolio-counters">
         <div className="portfolio-counter-box">
           <div className="counter-number">
-            <span className="counter" data-to="50" data-suffix="+">50+</span>
+            <span className="counter" data-to="50" data-suffix="+">
+              50+
+            </span>
           </div>
           <p>Hospital Projects</p>
         </div>
         <div className="portfolio-counter-box">
           <div className="counter-number">
-            <span className="counter" data-to="200" data-suffix="+">200+</span>
-          </div>
-          <p>Modular Operation Theatres</p>
-        </div>
-        <div className="portfolio-counter-box">
-          <div className="counter-number">
-            <span className="counter" data-to="9000" data-suffix="+">9000+</span>
-          </div>
-          <p>Beds</p>
-        </div>
-        <div className="portfolio-counter-box">
-          <div className="counter-number">
-            <span className="counter" data-to="1000" data-suffix="+">1000+</span>
-          </div>
-          <p>ICU Beds</p>
-        </div>
-        <div className="portfolio-counter-box">
-          <div className="counter-number">
-            <span className="counter" data-to="12" data-suffix="M+">12M+</span>
+            <span className="counter" data-to="12" data-suffix="M+">
+              12M+
+            </span>
           </div>
           <p>SQ.FT Healthcare spaces planned, designed & built.</p>
         </div>
         <div className="portfolio-counter-box">
           <div className="counter-number">
-            <span className="counter" data-to="14" data-suffix="+">14+</span>
+            <span className="counter" data-to="14" data-suffix="+">
+              14+
+            </span>
           </div>
           <p>Hospital Projects ongoing worldwide</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="9000" data-suffix="+">
+              9000+
+            </span>
+          </div>
+          <p>Beds</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="1000" data-suffix="+">
+              1000+
+            </span>
+          </div>
+          <p>ICU Beds</p>
+        </div>
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="200" data-suffix="+">
+              200+
+            </span>
+          </div>
+          <p>Modular Operation Theatres</p>
         </div>
       </div>
 
@@ -143,7 +157,8 @@ export default function PortfolioPage() {
                   )}
                   {project.projectBrief.buildingConfiguration && (
                     <p>
-                      <strong>Config:</strong> {project.projectBrief.buildingConfiguration}
+                      <strong>Config:</strong>{" "}
+                      {project.projectBrief.buildingConfiguration}
                     </p>
                   )}
                 </div>
