@@ -149,7 +149,6 @@ export default function ProjectFinancePage() {
     window.history.pushState(null, "", `#${activeSection}`);
   }, [activeSection]);
 
-  // Support browser back/forward navigation
   useEffect(() => {
     const onPop = () => {
       const hash = window.location.hash.replace("#", "");
@@ -205,7 +204,7 @@ export default function ProjectFinancePage() {
               activeSection === service.id ? (
                 <section key={service.id}>
                   <Row className="align-items-center">
-                    <Col md={5}>
+                    <Col md={6}>
                       {service.image && (
                         <img
                           src={service.image}
@@ -214,7 +213,7 @@ export default function ProjectFinancePage() {
                         />
                       )}
                     </Col>
-                    <Col md={7}>
+                    <Col md={12}>
                       <div className="service-card">
                         <h3>{service.title}</h3>
                         <DetailSection description={service.description} />
