@@ -79,7 +79,8 @@ a {
   font-size: 16px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25),
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.25),
     /* outer shadow */ inset 0 2px 4px rgba(255, 255, 255, 0.4),
     /* inner highlight */ inset 0 -2px 4px rgba(0, 0, 0, 0.2); /* inner depth */
   transition: all 0.3s ease;
@@ -109,7 +110,8 @@ a {
   background: linear-gradient(to bottom, #ffd7b0 0%, #e88b48 100%);
   color: #6b2a00;
   border: 1px solid #c55c1e;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3),
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.3),
     inset 0 2px 4px rgba(255, 255, 255, 0.5),
     inset 0 -2px 4px rgba(0, 0, 0, 0.25);
 }
@@ -117,7 +119,8 @@ a {
 /* Pressed state */
 .btn:active {
   background: linear-gradient(to bottom, #d66b2a 0%, #f7b97d 100%);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset,
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2) inset,
     inset 0 1px 2px rgba(255, 255, 255, 0.4);
   transform: translateY(2px);
 }
@@ -493,7 +496,7 @@ border: 2px solid #dee2e6;
   } */
   .counters {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     /* flex-direction: row; */
   }
   .counter-number,
@@ -599,7 +602,7 @@ border: 2px solid #dee2e6;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  height: auto; 
+  height: auto;
 }
 
 .service-swiper-card img {
@@ -616,12 +619,12 @@ border: 2px solid #dee2e6;
   }
 }
 
-.prod-card{
-  padding: 0px 22px!important;
+.prod-card {
+  padding: 0px 22px !important;
 }
 
-.consult-card{
-  padding: 10px 22px!important;
+.consult-card {
+  padding: 10px 22px !important;
 }
 
 .prod-card img {
@@ -971,14 +974,14 @@ small {
 
 .blog-card-image-wrapper {
   width: 100%;
-  display: flex;              /* center the image */
-  justify-content: center;    /* horizontal center */
-  align-items: center;        /* vertical align if needed */
+  display: flex; /* center the image */
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical align if needed */
 }
 
 .blog-card-image {
-  width: 80%;                 /* only 80% of card width */
-  height: auto;               /* keep natural aspect ratio */
+  width: 80%; /* only 80% of card width */
+  height: auto; /* keep natural aspect ratio */
   object-fit: cover;
   /* border-radius: 8px;         optional rounding */
   transition: transform 0.3s ease;
@@ -990,7 +993,7 @@ small {
 
 .card-content {
   background-color: #3b9c9d;
-  width: 100%;                /* full width */
+  width: 100%; /* full width */
   padding: 1rem;
 }
 
@@ -1019,7 +1022,7 @@ small {
   text-decoration: underline;
 }
 
-.who-we-are-section .swiper-wrapper{
+.who-we-are-section .swiper-wrapper {
   display: flex;
 }
 
@@ -1298,7 +1301,9 @@ small {
   border-radius: 10px;
   padding: 30px 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border-bottom: 4px solid #3b9c9d;
   text-align: center;
 }
@@ -1365,7 +1370,9 @@ small {
   padding: 35px 28px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -1426,7 +1433,9 @@ small {
   padding: 28px 22px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   opacity: 0;
   transform: translateY(20px);
 }
@@ -1767,7 +1776,7 @@ small {
 
   /* About highlights */
   .about-highlights {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 15px;
     margin: 15px 0;
   }
@@ -1791,7 +1800,7 @@ small {
   }
 
   .counters {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 15px;
   }
 
@@ -1890,7 +1899,9 @@ small {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .global-strategy-section .strategy-card:hover {
@@ -1917,7 +1928,8 @@ small {
   margin-bottom: 20px;
 }
 
-.blog-content h4, .blog-title {
+.blog-content h4,
+.blog-title {
   padding: 0 0 0 20px;
   border-left: 3px solid #6767672e;
   margin: 10px 0 20px 0;

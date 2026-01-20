@@ -81,15 +81,6 @@ export default function Home() {
             />
           </video>
         </div>
-        {/* <div className="hero-content">
-          <h3 className="subheading">One‑Stop Solution for</h3>
-          <h3 className="d-flex justify-space-evenly">
-            <span>Healthcare </span>{" "}
-            <span className="rotating-wrapper">
-              <span className="rotating-text"> {words[currentWord]}</span>
-            </span>
-          </h3>
-        </div> */}
         <div className="hero-bottom-box" aria-hidden="false">
           <Row className="d-flex align-items-center w-100">
             <Col md={10} className="cta-text">
@@ -120,16 +111,16 @@ export default function Home() {
             <div className="counters">
               <div className="counter-box">
                 <div className="counter-number">
-                  <span className="counter" data-to="10" data-suffix="M SF+">
-                    10M SF+
+                  <span className="counter" data-to="18" data-suffix="M SF+">
+                    18M SF+
                   </span>
                 </div>
                 <p>Healthcare Spaces Designed & Operated</p>
               </div>
               <div className="counter-box">
                 <div className="counter-number">
-                  <span className="counter" data-to="100" data-suffix="+">
-                    100+
+                  <span className="counter" data-to="120" data-suffix="+">
+                    120+
                   </span>
                 </div>
                 <p>Multi‑Disciplinary Team</p>
@@ -202,7 +193,7 @@ export default function Home() {
           <Row className="align-items-start justify-content-between">
             <p className="section-subtitle">Why Choose Us</p>
             <h3 className="section-title mb-4">
-              From Concept to Care <span>Building Health,</span> Brick by Brick
+              From Concept to Care, Global Healthcare<span> Infrastructre Solutions</span>
             </h3>
             <Col lg={7} md={12} className="mb-4">
               <div className="why-image">
