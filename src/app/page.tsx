@@ -199,7 +199,8 @@ export default function Home() {
           <Row className="align-items-start justify-content-between">
             <p className="section-subtitle">Why Choose Us</p>
             <h3 className="section-title mb-4">
-              From Concept to Care, Global Healthcare<span> Infrastructre Solutions</span>
+              From Concept to Care, Global Healthcare
+              <span> Infrastructre Solutions</span>
             </h3>
             <Col lg={7} md={12} className="mb-4">
               <div className="why-image">
@@ -377,7 +378,7 @@ export default function Home() {
         <Container>
           <p className="section-subtitle text-black">Our Portfolio</p>
           <h3 className="section-title text-black">
-            Specialized Healthcare Infrastructure <span>Solutions</span>
+            Specialized Healthcare Infrastructure<span>Solutions</span>
           </h3>
           <Swiper
             modules={[Autoplay]}
