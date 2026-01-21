@@ -10,14 +10,14 @@ import {
   FaLeaf,
 } from "react-icons/fa";
 import Image from "next/image";
-import { FaGlobe, FaBoxes, FaHospital } from "react-icons/fa";
+import { FaGlobe, FaHospital } from "react-icons/fa";
 import { FaBed } from "react-icons/fa6";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
 export default function AboutSection() {
   const [visibleCards, setVisibleCards] = useState<{ [key: string]: boolean }>(
-    {}
+    {},
   );
 
   const images = [
@@ -33,7 +33,7 @@ export default function AboutSection() {
   useEffect(() => {
     const handleScroll = () => {
       const elements = document.querySelectorAll<HTMLElement>(
-        `.${"scrollReveal"}`
+        `.${"scrollReveal"}`,
       );
       elements.forEach((el, i) => {
         const rect = el.getBoundingClientRect();
@@ -48,55 +48,54 @@ export default function AboutSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-useEffect(() => {
-  const counters = document.querySelectorAll<HTMLElement>(".counter");
+  useEffect(() => {
+    const counters = document.querySelectorAll<HTMLElement>(".counter");
 
-  const runCounter = (counter: HTMLElement) => {
-    const target = +counter.getAttribute("data-to")!;
-    const suffix = counter.getAttribute("data-suffix") || "";
-    const from = +(counter.getAttribute("data-from") || "0"); // 👈 support data-from
-    const useCommas = counter.getAttribute("data-commas") !== "false"; // 👈 support data-commas
+    const runCounter = (counter: HTMLElement) => {
+      const target = +counter.getAttribute("data-to")!;
+      const suffix = counter.getAttribute("data-suffix") || "";
+      const from = +(counter.getAttribute("data-from") || "0"); // 👈 support data-from
+      const useCommas = counter.getAttribute("data-commas") !== "false"; // 👈 support data-commas
 
-    let count = from;
-    const duration = 2000; // total animation time in ms
-    const frameRate = 60;
-    const totalFrames = Math.round((duration / 1000) * frameRate);
-    const increment = (target - from) / totalFrames;
+      let count = from;
+      const duration = 2000; // total animation time in ms
+      const frameRate = 60;
+      const totalFrames = Math.round((duration / 1000) * frameRate);
+      const increment = (target - from) / totalFrames;
 
-    let frame = 0;
-    const update = () => {
-      frame++;
-      count += increment;
-      if (frame < totalFrames) {
-        counter.textContent = (useCommas
-          ? Math.floor(count).toLocaleString()
-          : Math.floor(count).toString()) + suffix;
-        requestAnimationFrame(update);
-      } else {
-        counter.textContent = (useCommas
-          ? target.toLocaleString()
-          : target.toString()) + suffix;
-      }
-    };
-    update();
-  };
-
-  const observer = new IntersectionObserver(
-    (entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          runCounter(entry.target as HTMLElement);
-          obs.unobserve(entry.target);
+      let frame = 0;
+      const update = () => {
+        frame++;
+        count += increment;
+        if (frame < totalFrames) {
+          counter.textContent =
+            (useCommas
+              ? Math.floor(count).toLocaleString()
+              : Math.floor(count).toString()) + suffix;
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent =
+            (useCommas ? target.toLocaleString() : target.toString()) + suffix;
         }
-      });
-    },
-    { threshold: 0.5 }
-  );
+      };
+      update();
+    };
 
-  counters.forEach((counter) => observer.observe(counter));
-  return () => observer.disconnect();
-}, []);
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target as HTMLElement);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
 
+    counters.forEach((counter) => observer.observe(counter));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -318,64 +317,64 @@ useEffect(() => {
       </section>
 
       {/* Core Commitments */}
-       <section className="py-5 who-we-are-section">
-      <Container>
-        <Row className="align-items-center">
-          {/* Left Side: Swiper Slider */}
-          <Col md={6}>
-            <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 2500, disableOnInteraction: false }}
-              loop={true}
-              slidesPerView={1}
-              spaceBetween={20}
-              className="rounded overflow-hidden d-flex"
-            >
-              {images.map((src, idx) => (
-                <SwiperSlide key={idx}>
-                  <Image
-                    src={src}
-                    alt={`About ${idx + 1}`}
-                    width={550}
-                    height={300}
-                    style={{ borderRadius: "12px", objectFit: "cover" }}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </Col>
+      <section className="py-5 who-we-are-section">
+        <Container>
+          <Row className="align-items-center">
+            {/* Left Side: Swiper Slider */}
+            <Col md={6}>
+              <Swiper
+                modules={[Autoplay]}
+                autoplay={{ delay: 2500, disableOnInteraction: false }}
+                loop={true}
+                slidesPerView={1}
+                spaceBetween={20}
+                className="rounded overflow-hidden d-flex"
+              >
+                {images.map((src, idx) => (
+                  <SwiperSlide key={idx}>
+                    <Image
+                      src={src}
+                      alt={`About ${idx + 1}`}
+                      width={550}
+                      height={300}
+                      style={{ borderRadius: "12px", objectFit: "cover" }}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </Col>
 
-          {/* Right Side: Commitments */}
-          <Col md={6} className="ps-md-5 mt-4 mt-md-0">
-            <p className="section-subtitle">Why Choose Us</p>
-            <h2 className="section-title">
-              Our <span>Core Commitments</span>
-            </h2>
-            <ul className="mt-3 core-ul">
-              <li>
-                Deliver innovative solutions using <strong>AI</strong>,
-                modular construction, and digital twin technology
-              </li>
-              <li>
-                Focus on green buildings, <strong>LEED-certified</strong>{" "}
-                energy-efficient medical facilities
-              </li>
-              <li>
-                Ensure <strong>360° delivery</strong> with a collaborative
-                team of experts from different disciplines
-              </li>
-              <li>
-                No compromise in <strong>quality</strong> and standards
-              </li>
-              <li>
-                Enhance <strong>patient experience</strong> and healthcare
-                outcomes
-              </li>
-            </ul>
-          </Col>
-        </Row>
-      </Container>
-    </section>
+            {/* Right Side: Commitments */}
+            <Col md={6} className="ps-md-5 mt-4 mt-md-0">
+              <p className="section-subtitle">Why Choose Us</p>
+              <h2 className="section-title">
+                Our <span>Core Commitments</span>
+              </h2>
+              <ul className="mt-3 core-ul">
+                <li>
+                  Deliver innovative solutions using <strong>AI</strong>,
+                  modular construction, and digital twin technology
+                </li>
+                <li>
+                  Focus on green buildings, <strong>LEED-certified</strong>{" "}
+                  energy-efficient medical facilities
+                </li>
+                <li>
+                  Ensure <strong>360° delivery</strong> with a collaborative
+                  team of experts from different disciplines
+                </li>
+                <li>
+                  No compromise in <strong>quality</strong> and standards
+                </li>
+                <li>
+                  Enhance <strong>patient experience</strong> and healthcare
+                  outcomes
+                </li>
+              </ul>
+            </Col>
+          </Row>
+        </Container>
+      </section>
       {/* Core Values */}
       <section className="core-values">
         <Container>

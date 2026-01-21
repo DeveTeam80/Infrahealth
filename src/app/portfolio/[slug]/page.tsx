@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Container, Row, Col, Card, Badge } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import Image from "next/image";
 import { FaBuilding, FaRulerCombined, FaBed } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -49,7 +49,7 @@ export default function PortfolioDetailsPage({
                   alt={title}
                   className="img-fluid rounded mb-4"
                   onClick={() => openGallery(0)}
-                  style={{ cursor: "pointer", width:"100%" }}
+                  style={{ cursor: "pointer", width: "100%" }}
                 />
               )}
 
@@ -121,7 +121,9 @@ export default function PortfolioDetailsPage({
                   <div className="row justify-content-center">
                     {services.map((service: string, idx: number) => {
                       const colClass =
-                        services.length === 3 || services.length === 5 || services.length === 6
+                        services.length === 3 ||
+                        services.length === 5 ||
+                        services.length === 6
                           ? "col-md-4 col-sm-6"
                           : "col-md-3 col-sm-6";
 

@@ -10,7 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, Pagination } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { homeData, JourneyTab } from "@/data/homeData";
 import { blogInner } from "@/data/blogInner";
 import JourneyAccordion from "@/components/JourneyAccordion";

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react"; // Added useEffect here
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import { Row, Col, Nav } from "react-bootstrap";
 import "../../styles/portfolio.css";
 import { NewsItem, portfolioData } from "@/data/portfolioData";
 
@@ -50,7 +50,7 @@ export default function PortfolioPage() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     counters.forEach((counter) => observer.observe(counter));
@@ -72,67 +72,67 @@ export default function PortfolioPage() {
       </div>
 
       {/* HORIZONTAL COUNTER SECTION */}
-    <div className="portfolio-counters">
-  {/* Row 1: Hospital Projects */}
-  <div className="portfolio-counter-box">
-    <div className="counter-number">
-      <span className="counter" data-to="70" data-suffix="+">
-        70+
-      </span>
-    </div>
-    <p>Hospital Projects</p>
-  </div>
+      <div className="portfolio-counters">
+        {/* Row 1: Hospital Projects */}
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="70" data-suffix="+">
+              70+
+            </span>
+          </div>
+          <p>Hospital Projects</p>
+        </div>
 
-  {/* Row 2: SQ.FT Healthcare Spaces */}
-  <div className="portfolio-counter-box">
-    <div className="counter-number">
-      <span className="counter" data-to="18" data-suffix="M+">
-        18M+
-      </span>
-    </div>
-    <p>SQ.FT Healthcare spaces planned, designed & built.</p>
-  </div>
+        {/* Row 2: SQ.FT Healthcare Spaces */}
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="18" data-suffix="M+">
+              18M+
+            </span>
+          </div>
+          <p>SQ.FT Healthcare spaces planned, designed & built.</p>
+        </div>
 
-  {/* Row 3: Ongoing Projects */}
-  <div className="portfolio-counter-box">
-    <div className="counter-number">
-      <span className="counter" data-to="14" data-suffix="+">
-        14+
-      </span>
-    </div>
-    <p>Hospital Projects ongoing worldwide</p>
-  </div>
+        {/* Row 3: Ongoing Projects */}
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="14" data-suffix="+">
+              14+
+            </span>
+          </div>
+          <p>Hospital Projects ongoing worldwide</p>
+        </div>
 
-  {/* Row 4: Total Beds */}
-  <div className="portfolio-counter-box">
-    <div className="counter-number">
-      <span className="counter" data-to="13500" data-suffix="+">
-        13500+
-      </span>
-    </div>
-    <p>Beds</p>
-  </div>
+        {/* Row 4: Total Beds */}
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="13500" data-suffix="+">
+              13500+
+            </span>
+          </div>
+          <p>Beds</p>
+        </div>
 
-  {/* Row 5: ICU Beds */}
-  <div className="portfolio-counter-box">
-    <div className="counter-number">
-      <span className="counter" data-to="2450" data-suffix="+">
-        2450+
-      </span>
-    </div>
-    <p>ICU Beds</p>
-  </div>
+        {/* Row 5: ICU Beds */}
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="2450" data-suffix="+">
+              2450+
+            </span>
+          </div>
+          <p>ICU Beds</p>
+        </div>
 
-  {/* Row 6: Modular OTs */}
-  <div className="portfolio-counter-box">
-    <div className="counter-number">
-      <span className="counter" data-to="280" data-suffix="+">
-        280+
-      </span>
-    </div>
-    <p>Modular Operation Theatres</p>
-  </div>
-</div>
+        {/* Row 6: Modular OTs */}
+        <div className="portfolio-counter-box">
+          <div className="counter-number">
+            <span className="counter" data-to="280" data-suffix="+">
+              280+
+            </span>
+          </div>
+          <p>Modular Operation Theatres</p>
+        </div>
+      </div>
 
       <Nav
         className="filter-nav"

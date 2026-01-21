@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Nav } from "react-bootstrap";
 import {
   FaUniversity,
   FaFlask,
@@ -318,7 +318,7 @@ export default function SolutionsPage() {
                     </Col>
                   </Row>
                 </section>
-              ) : null
+              ) : null,
             )}
 
             {/* VALUE SECTION */}

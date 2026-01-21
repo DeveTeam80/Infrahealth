@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Col, Container, Form, Nav, Row } from "react-bootstrap";
-import { FaSearch, FaUniversity } from "react-icons/fa";
+import { Col, Container, Nav, Row } from "react-bootstrap";
+import { FaUniversity } from "react-icons/fa";
 import {
   FaChartLine,
   FaGlobe,

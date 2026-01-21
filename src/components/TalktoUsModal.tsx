@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { Modal, Form, Button, Row, Col, FloatingLabel } from "react-bootstrap";
-import Select, { MultiValue } from "react-select";
+import Select from "react-select";
 
 /* ===========================
    GROUPED OPTIONS
@@ -277,6 +277,7 @@ function TalkToUsModal({
                     onChange={(values) =>
                       setFormData((prev) => ({
                         ...prev,
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         requirement: values as any,
                       }))
                     }

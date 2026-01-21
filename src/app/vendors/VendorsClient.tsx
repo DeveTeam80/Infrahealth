@@ -2,16 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import "../../styles/services.css";
-import {
-  Card,
-  Col,
-  Container,
-  Form,
-  Row,
-  Alert,
-  Spinner,
-} from "react-bootstrap";
-import { FaUpload } from "react-icons/fa6";
+import { Card, Col, Container, Form, Row, Alert } from "react-bootstrap";
 import "../../styles/career.css";
 
 // --- MAIN COMPONENT ---
