@@ -4,7 +4,7 @@
 }
 
 .nav {
-    justify-content: space-around;
+  gap: 0.5rem;
 }
 
 .megaMenu {
@@ -35,7 +35,8 @@
 .megaList li {
   display: block;
   /* color: #666; */
-  font-size: 1rem;}
+  font-size: 1rem;
+}
 
 .megaList {
   padding-left: 0.5rem;
@@ -46,11 +47,14 @@
   padding-top: 0.5rem;
 }
 
-.megaList li a, .megaParentList li a strong, .megaMenu a strong{
+.megaList li a,
+.megaParentList li a strong,
+.megaMenu a strong {
   color: #222;
 }
 
-.megaParentList li a small, .megaMenu a small{
+.megaParentList li a small,
+.megaMenu a small {
   color: #666;
 }
 
@@ -68,6 +72,13 @@
   transition: transform 0.3s ease-in-out;
   background: #f8f9fa;
 }
+
+@media (max-width: 768) {
+  .top-bar {
+    display: none !important;
+  }
+}
+
 .top-bar.hide {
   transform: translateY(-100%);
 }
@@ -80,14 +91,13 @@
   height: 100%;
 }
 
-
 .megaParentList li {
   padding: 12px 10px;
   cursor: pointer;
   border-left: 3px solid transparent;
 }
 .megaParentList li.active {
-  border-left: 3px solid #b6520f; 
+  border-left: 3px solid #b6520f;
   background: #f9f9f9;
 }
 .megaChildren .megaList {
@@ -119,21 +129,20 @@
 }
 
 .modal-content {
-    background-color: #fff;
-    border-radius: 6px;
-    max-width: 750px;
-    margin: 40px auto;
-    padding: 20px 30px;
-    position: relative;
-    box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+  background-color: #fff;
+  border-radius: 6px;
+  max-width: 750px;
+  margin: 40px auto;
+  padding: 20px 30px;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
-
 @media (max-width: 991px) {
-  .top-bar .justify-content-between{
-    width:100%;
+  .top-bar .justify-content-between {
+    width: 100%;
   }
-  .top-bar .logo{
+  .top-bar .logo {
     display: none !important;
   }
   .dropdown-menu {
@@ -145,7 +154,7 @@
     color: #666;
     font-size: 0.875em;
   }
-  .dropdown-toggle{
+  .dropdown-toggle {
     padding-top: 0.5rem !important;
     padding-bottom: 0.5rem !important;
     padding-left: 1rem !important;
@@ -164,7 +173,7 @@
   width: 50% !important;
   height: auto;
   z-index: 1;
-  border-radius:10px;
+  border-radius: 10px;
 }
 
 .megaThumbnails .thumb2 {
@@ -174,8 +183,6 @@
   width: 50% !important;
   height: auto;
   z-index: 2;
-    border-radius:10px;
+  border-radius: 10px;
   /* transform: rotate(-2deg); */
 }
-
-

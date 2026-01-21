@@ -1,26 +1,29 @@
-import type { Metadata } from "next"
-import { Montserrat } from "next/font/google"
-import Script from "next/script"
-import 'bootstrap/dist/css/bootstrap.min.css'
-import "./globals.css"
-import Header from "@/components/Header"
-import ScrollToTopButton from "@/components/ScrolltoTop"
-import Footer from "@/components/Footer"
-import { siteConfig } from "@/lib/seo-config"
-
+import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
+import Script from "next/script";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./globals.css";
+import Header from "@/components/Header";
+import ScrollToTopButton from "@/components/ScrolltoTop";
+import Footer from "@/components/Footer";
+import { siteConfig } from "@/lib/seo-config";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: 'Infra.Health - Best Healthcare Infrastructure Service Provider',
-    template: '%s | Infra.Health',
+    default: "Infra.Health - Best Healthcare Infrastructure Service Provider",
+    template: "%s | Infra.Health",
   },
-  description: 'Best healthcare infrastructure service provider offering EPC solutions, medical equipment, and hospital planning.',
-  keywords: ['Best Healthcare infrastructure service provider', 'Medical planning & consulting'],
-  applicationName: 'Infra.Health',
-  authors: [{ name: 'Infra.Health' }],
-  creator: 'Infra.Health',
-  publisher: 'Infra.Health',
+  description:
+    "Best healthcare infrastructure service provider offering EPC solutions, medical equipment, and hospital planning.",
+  keywords: [
+    "Best Healthcare infrastructure service provider",
+    "Medical planning & consulting",
+  ],
+  applicationName: "Infra.Health",
+  authors: [{ name: "Infra.Health" }],
+  creator: "Infra.Health",
+  publisher: "Infra.Health",
   formatDetection: {
     email: false,
     address: false,
@@ -32,27 +35,26 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   alternates: {
     canonical: siteConfig.siteUrl,
   },
-}
-
+};
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
-  weight: ["400", "500", "600", "700"], 
-})
+  weight: ["400", "500", "600", "700"],
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -78,8 +80,8 @@ export default function RootLayout({
           src="//code.tidio.co/eazja8bemk1t8p69mhhzqrbxcr99nyeo.js"
           async
         />
-        <Footer/>
+        <Footer />
       </body>
     </html>
-  )
+  );
 }

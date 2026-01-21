@@ -13,13 +13,15 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import { homeData, JourneyTab } from "@/data/homeData";
 import { blogInner } from "@/data/blogInner";
+import JourneyAccordion from "@/components/JourneyAccordion";
+import "../styles/services.css";
 
 export default function Home() {
   const { words, services, projects, testimonials, journeyTabs } = homeData;
   const [modalShow, setModalShow] = useState(false);
   const [activeKey, setActiveKey] = useState<string>(journeyTabs[0].key);
   const activeTab: JourneyTab = journeyTabs.find(
-    (tab: JourneyTab) => tab.key === activeKey
+    (tab: JourneyTab) => tab.key === activeKey,
   )!;
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     counters.forEach((counter) => observer.observe(counter));
@@ -74,11 +76,15 @@ export default function Home() {
           </video>
         </div>
         <div className="video-mobile">
-          <video className="hero-video" autoPlay muted loop playsInline>
-            <source
-              src="/images/hero/infra-health-mobile.mp4"
-              type="video/mp4"
-            />
+          <video
+            className="hero-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/images/hero/infra-banner.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="hero-bottom-box" aria-hidden="false">
@@ -127,8 +133,8 @@ export default function Home() {
               </div>
               <div className="counter-box">
                 <div className="counter-number">
-                  <span className="counter" data-to="8000" data-suffix="+">
-                    8000+
+                  <span className="counter" data-to="13500" data-suffix="+">
+                    13500+
                   </span>
                 </div>
                 <p>
@@ -251,38 +257,45 @@ export default function Home() {
             </h3>
           </Row>
 
-          {/* Tabs */}
-          <Row className="justify-content-center mb-5">
-            <Col md="12">
-              <Nav
-                variant="pills"
-                className="nav-scroll"
-                activeKey={activeKey}
-                onSelect={(k) => setActiveKey(k || journeyTabs[0].key)}
-              >
-                {journeyTabs.map((tab) => (
-                  <Nav.Item key={tab.key} className="flex-shrink-0">
-                    <Nav.Link
-                      eventKey={tab.key}
-                      className={
-                        activeKey === tab.key
-                          ? "bg-danger text-white"
-                          : "bg-white text-dark"
-                      }
-                      style={{
-                        borderRadius: "8px",
-                        fontWeight: 500,
-                        border: "1px solid #b6520f",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {tab.label}
-                    </Nav.Link>
-                  </Nav.Item>
-                ))}
-              </Nav>
-            </Col>
-          </Row>
+          {/* DESKTOP TABS */}
+          <div className="d-none d-lg-block">
+            <Row className="justify-content-center mb-5">
+              <Col md="12">
+                <Nav
+                  variant="pills"
+                  className="nav-scroll"
+                  activeKey={activeKey}
+                  onSelect={(k) => setActiveKey(k || journeyTabs[0].key)}
+                >
+                  {journeyTabs.map((tab) => (
+                    <Nav.Item key={tab.key} className="flex-shrink-0">
+                      <Nav.Link
+                        eventKey={tab.key}
+                        className={
+                          activeKey === tab.key
+                            ? "bg-danger text-white"
+                            : "bg-white text-dark"
+                        }
+                        style={{
+                          borderRadius: "8px",
+                          fontWeight: 500,
+                          border: "1px solid #b6520f",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {tab.label}
+                      </Nav.Link>
+                    </Nav.Item>
+                  ))}
+                </Nav>
+              </Col>
+            </Row>
+          </div>
+
+          {/* MOBILE ACCORDION */}
+          <div className="d-block d-lg-none mb-5">
+            <JourneyAccordion tabs={journeyTabs} />
+          </div>
 
           {/* Content */}
           <Row className="align-items-center">
@@ -362,8 +375,8 @@ export default function Home() {
       {/* PORTFOLIO */}
       <section className="portfolio-section bg-light">
         <Container>
-          <p className="section-subtitle">Our Portfolio</p>
-          <h3 className="section-title">
+          <p className="section-subtitle text-black">Our Portfolio</p>
+          <h3 className="section-title text-black">
             Specialized Healthcare Infrastructure <span>Solutions</span>
           </h3>
           <Swiper
@@ -397,7 +410,7 @@ export default function Home() {
 
           <div className="projects-bottom d-flex justify-content-between mt-4">
             <div className="bottom-cta">
-              <h3 className="section-title">
+              <h3 className="section-title text-black">
                 Let&apos;s Build Your{" "}
                 <span className="highlight">Dream Healthcare Facility</span>
               </h3>
@@ -487,7 +500,11 @@ export default function Home() {
             })}
           </Row>
           <div className="justify-content-center d-flex mt-4">
-            <Link href="/news" className="btn btn-outline-primary" style={{width: "auto", padding: "12px"}}>
+            <Link
+              href="/news"
+              className="btn btn-outline-primary"
+              style={{ width: "auto", padding: "12px" }}
+            >
               Explore More Blogs
             </Link>
           </div>

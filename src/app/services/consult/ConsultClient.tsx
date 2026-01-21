@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Nav, Tab } from "react-bootstrap";
 import "../../../styles/services.css";
+import MobileAccordion from "@/components/hospitalMobileAccordion";
 
 // Type definitions
 interface TabDetails {
@@ -62,22 +63,23 @@ const consultData: ConsultData = {
     title: "Hospital Design",
     subtitle: "Patient-centric, sustainable, and efficient design solutions.",
     tabs: [
-      {
-        eventKey: "architectural",
-        title: "Architectural Design",
-        description:
-          "From space programming to master planning, delivering functional and aesthetic healthcare environments.",
-        details: {
-          deliverables: [
-            "Space program, clustering matrix, schematic design, tender BOQs, GFC drawings.",
-          ],
-          image: "/images/services/consult/arch-design.jpg",
-        },
-      },
+      // {
+      //   eventKey: "architectural",
+      //   title: "Architectural Design",
+      //   description:
+      //     "From space programming to master planning, delivering functional and aesthetic healthcare environments.",
+      //   details: {
+      //     deliverables: [
+      //       "Space program, clustering matrix, schematic design, tender BOQs, GFC drawings.",
+      //     ],
+      //     image: "/images/services/consult/arch-design.jpg",
+      //   },
+      // },
       {
         eventKey: "structural",
         title: "Structural Design",
-        description: "Robust structural frameworks tailored to healthcare needs.",
+        description:
+          "Robust structural frameworks tailored to healthcare needs.",
         details: {
           deliverables: [
             "Design Basis Report, structural schemes, BOQs, GFC structural drawings.",
@@ -88,7 +90,8 @@ const consultData: ConsultData = {
       {
         eventKey: "mep",
         title: "MEP Design",
-        description: "Comprehensive mechanical, electrical & plumbing solutions.",
+        description:
+          "Comprehensive mechanical, electrical & plumbing solutions.",
         details: {
           systems_covered: [
             "Electrical, plumbing, HVAC, fire safety, IT, networking, BMS, low-voltage systems.",
@@ -102,7 +105,8 @@ const consultData: ConsultData = {
       {
         eventKey: "interior",
         title: "Interior Design",
-        description: "Healing interiors balancing aesthetics with technical precision.",
+        description:
+          "Healing interiors balancing aesthetics with technical precision.",
         details: {
           deliverables: [
             "Concept schemes, 3D perspectives, schematic drawings, BOQs, GFC drawings.",
@@ -130,18 +134,10 @@ const consultData: ConsultData = {
       "Turnkey solutions for medical technology procurement and installation.",
     tabs: [
       {
-        eventKey: "med-planning",
-        title: "Medical Equipment",
-        description:
-          "Needs-based equipment selection aligned with clinical pathways and future-proofing.",
-        details: {
-          image: "/images/services/consult/med-eqpt.jpg",
-        },
-      },
-      {
         eventKey: "equip-planning",
         title: "Equipment Planning",
-        description: "Preparation of schedules, vendor presentations, technology reports.",
+        description:
+          "Preparation of schedules, vendor presentations, technology reports.",
         details: {
           image: "/images/services/consult/eqpt-planning.jpg",
         },
@@ -287,7 +283,7 @@ const DetailSection: React.FC<DetailSectionProps> = ({ details }) => (
                   ))}
               </ul>
             </div>
-          )
+          ),
       )}
     </Col>
   </Row>
@@ -305,58 +301,77 @@ const TabbedSection: React.FC<TabbedSectionProps> = ({ service }) => {
     setActiveTab(service.tabs[0].eventKey);
   }, [service]);
 
+  const designAccordionItems = consultData.design.tabs.map((tab) => ({
+    key: tab.eventKey,
+    header: tab.title,
+    body: (
+      <>
+        <img src={tab.details?.image} className="w-100 mb-3" />
+        <p>{tab.description}</p>
+        {tab.details && <DetailSection details={tab.details} />}
+      </>
+    ),
+  }));
+
   return (
-    <Tab.Container
-      activeKey={activeTab}
-      onSelect={(k) => setActiveTab((k as string) || service.tabs[0].eventKey)}
-    >
-      <Row>
-        <Col md={12}>
-          <Nav variant="pills" className="service-tabs mb-4">
-            {service.tabs.map((tab: ServiceTab) => (
-              <Nav.Item key={tab.eventKey}>
-                <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-        </Col>
+    <>
+      {/* DESKTOP TABS */}
+      <div className="d-none d-lg-block">
+        <Tab.Container
+          activeKey={activeTab}
+          onSelect={(k) =>
+            setActiveTab((k as string) || service.tabs[0].eventKey)
+          }
+        >
+          <Row>
+            <Col md={12}>
+              <Nav variant="pills" className="service-tabs mb-4">
+                {service.tabs.map((tab) => (
+                  <Nav.Item key={tab.eventKey}>
+                    <Nav.Link eventKey={tab.eventKey}>{tab.title}</Nav.Link>
+                  </Nav.Item>
+                ))}
+              </Nav>
+            </Col>
 
-        <Col md={12} className="d-flex align-items-center justify-content-center">
-          {service.tabs
-            .filter((tab) => tab.eventKey === activeTab)
-            .map((tab) =>
-              tab.details?.image ? (
-                <img
-                  key={tab.eventKey}
-                  src={tab.details.image}
-                  alt={tab.title}
-                  className="w-100 img-fluid rounded shadow-sm"
-                  style={{ objectFit: "cover", maxWidth: "100%", height: "300px" }}
-                />
-              ) : service.image ? (
-                <img
-                  key={tab.eventKey}
-                  src={service.image}
-                  alt={tab.title}
-                  className="w-100 img-fluid rounded shadow-sm"
-                  style={{ maxWidth: "100%", height: "300px", objectFit: "cover", borderRadius: "8px" }}
-                />
-              ) : null
-            )}
-        </Col>
+            <Col md={12} className="text-center">
+              {service.tabs
+                .filter((tab) => tab.eventKey === activeTab)
+                .map((tab) =>
+                  tab.details?.image ? (
+                    <img
+                      key={tab.eventKey}
+                      src={tab.details.image}
+                      alt={tab.title}
+                      className="w-100 img-fluid rounded shadow-sm"
+                      style={{
+                        height: "300px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ) : null,
+                )}
+            </Col>
 
-        <Col md={12}>
-          <Tab.Content className="service-card consult-card">
-            {service.tabs.map((tab: ServiceTab) => (
-              <Tab.Pane eventKey={tab.eventKey} key={tab.eventKey}>
-                <p>{tab.description}</p>
-                {tab.details && <DetailSection details={tab.details} />}
-              </Tab.Pane>
-            ))}
-          </Tab.Content>
-        </Col>
-      </Row>
-    </Tab.Container>
+            <Col md={12}>
+              <Tab.Content className="service-card consult-card">
+                {service.tabs.map((tab) => (
+                  <Tab.Pane eventKey={tab.eventKey} key={tab.eventKey}>
+                    <p>{tab.description}</p>
+                    {tab.details && <DetailSection details={tab.details} />}
+                  </Tab.Pane>
+                ))}
+              </Tab.Content>
+            </Col>
+          </Row>
+        </Tab.Container>
+      </div>
+
+      {/* MOBILE ACCORDION */}
+      <div className="d-block d-lg-none">
+        <MobileAccordion tabs={service.tabs} />
+      </div>
+    </>
   );
 };
 
@@ -435,7 +450,9 @@ export default function ConsultClient() {
 
               <Nav.Link
                 onClick={() => setActiveSection("equipment-planning")}
-                className={activeSection === "equipment-planning" ? "active" : ""}
+                className={
+                  activeSection === "equipment-planning" ? "active" : ""
+                }
               >
                 Equipment Planning
               </Nav.Link>
@@ -484,7 +501,9 @@ export default function ConsultClient() {
               {activeSection === "hospital-design" && (
                 <section>
                   <h3>{consultData.design.title}</h3>
-                  <p className="text-muted fs-5">{consultData.design.subtitle}</p>
+                  <p className="text-muted fs-5">
+                    {consultData.design.subtitle}
+                  </p>
                   <TabbedSection service={consultData.design} />
                 </section>
               )}
@@ -500,13 +519,20 @@ export default function ConsultClient() {
                           src={consultData.pmc.image}
                           alt={consultData.pmc.title}
                           className="w-100 img-fluid rounded shadow-sm"
-                          style={{ maxWidth: "100%", height: "300px", objectFit: "cover", borderRadius: "8px" }}
+                          style={{
+                            maxWidth: "100%",
+                            height: "300px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                          }}
                         />
                       </Col>
                     )}
                     <Col md={12}>
                       <div className="service-card consult-card">
-                        <DetailSection details={{ stages: consultData.pmc.stages }} />
+                        <DetailSection
+                          details={{ stages: consultData.pmc.stages }}
+                        />
                       </div>
                     </Col>
                   </Row>
@@ -516,7 +542,9 @@ export default function ConsultClient() {
               {activeSection === "equipment-planning" && (
                 <section>
                   <h3>{consultData.equipment.title}</h3>
-                  <p className="text-muted fs-5">{consultData.equipment.subtitle}</p>
+                  <p className="text-muted fs-5">
+                    {consultData.equipment.subtitle}
+                  </p>
                   <TabbedSection service={consultData.equipment} />
                 </section>
               )}
@@ -532,7 +560,12 @@ export default function ConsultClient() {
                           src={consultData.ppp.image}
                           alt={consultData.ppp.title}
                           className="w-100 img-fluid rounded shadow-sm"
-                          style={{ maxWidth: "100%", height: "300px", objectFit: "cover", borderRadius: "8px" }}
+                          style={{
+                            maxWidth: "100%",
+                            height: "300px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                          }}
                         />
                       </Col>
                     )}
@@ -556,7 +589,12 @@ export default function ConsultClient() {
                           src={consultData.esg.image}
                           alt={consultData.esg.title}
                           className="w-100 img-fluid rounded shadow-sm"
-                          style={{ maxWidth: "100%", height: "300px", objectFit: "cover", borderRadius: "8px" }}
+                          style={{
+                            maxWidth: "100%",
+                            height: "300px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                          }}
                         />
                       </Col>
                     )}
@@ -572,7 +610,9 @@ export default function ConsultClient() {
               {activeSection === "green-building" && (
                 <section>
                   <h3>{consultData.green.title}</h3>
-                  <p className="text-muted fs-5">{consultData.green.subtitle}</p>
+                  <p className="text-muted fs-5">
+                    {consultData.green.subtitle}
+                  </p>
                   <Row className="align-items-center">
                     {consultData.green.image && (
                       <Col md={12} className="d-flex justify-content-center">
@@ -580,7 +620,12 @@ export default function ConsultClient() {
                           src={consultData.green.image}
                           alt={consultData.green.title}
                           className="w-100 img-fluid rounded shadow-sm"
-                          style={{ maxWidth: "100%", height: "300px", objectFit: "cover", borderRadius: "8px" }}
+                          style={{
+                            maxWidth: "100%",
+                            height: "300px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                          }}
                         />
                       </Col>
                     )}
@@ -604,7 +649,12 @@ export default function ConsultClient() {
                           src={consultData.ifm.image}
                           alt={consultData.ifm.title}
                           className="w-100 img-fluid rounded shadow-sm"
-                          style={{ maxWidth: "100%", height: "300px", objectFit: "cover", borderRadius: "8px" }}
+                          style={{
+                            maxWidth: "100%",
+                            height: "300px",
+                            objectFit: "cover",
+                            borderRadius: "8px",
+                          }}
                         />
                       </Col>
                     )}
@@ -620,9 +670,13 @@ export default function ConsultClient() {
               {activeSection === "accreditation-advisory" && (
                 <section>
                   <h3>{consultData.accreditation.title}</h3>
-                  <p className="text-muted">{consultData.accreditation.subtitle}</p>
+                  <p className="text-muted">
+                    {consultData.accreditation.subtitle}
+                  </p>
                   <div className="service-card consult-card mt-3">
-                    <DetailSection details={consultData.accreditation.details} />
+                    <DetailSection
+                      details={consultData.accreditation.details}
+                    />
                   </div>
                 </section>
               )}

@@ -38,7 +38,7 @@ export default function VendorsClient() {
           }
         });
       },
-      { rootMargin: "-30% 0px -70% 0px" }
+      { rootMargin: "-30% 0px -70% 0px" },
     );
 
     const sections = document.querySelectorAll("section[id]");
@@ -94,7 +94,7 @@ export default function VendorsClient() {
     try {
       // Collect checkbox values for categories
       const categoryCheckboxes = form.querySelectorAll(
-        'input[name="categories"]:checked'
+        'input[name="categories"]:checked',
       ) as NodeListOf<HTMLInputElement>;
       categoryCheckboxes.forEach((checkbox) => {
         formData.append("categories", checkbox.value);
@@ -286,6 +286,66 @@ export default function VendorsClient() {
                         </Col>
                       </Row>
 
+                      {/* DOCUMENT UPLOADS */}
+                      <Row className="mb-4">
+                        {/* Company Profile */}
+                        <Col md={12}>
+                          <Form.Group controlId="companyProfile">
+                            <Form.Label>Company Profile</Form.Label>
+                            <Form.Control
+                              type="file"
+                              name="companyProfile"
+                              accept=".pdf,.doc,.docx"
+                              required
+                            />
+                            <Form.Text className="text-muted">
+                              PDF or DOC format. Max size 5MB.
+                            </Form.Text>
+                            <Form.Control.Feedback type="invalid">
+                              Please upload company profile.
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+
+                        {/* Turnover Certificate */}
+                        <Col md={12} className="mt-3">
+                          <Form.Group controlId="turnoverCertificate">
+                            <Form.Label>Turnover Certificate</Form.Label>
+                            <Form.Control
+                              type="file"
+                              name="turnoverCertificate"
+                              accept=".pdf,.jpg,.jpeg,.png"
+                              required
+                            />
+                            <Form.Text className="text-muted">
+                              PDF or image. Max size 5MB.
+                            </Form.Text>
+                            <Form.Control.Feedback type="invalid">
+                              Please upload turnover certificate.
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+
+                        {/* ISO Certificate */}
+                        <Col md={12} className="mt-3">
+                          <Form.Group controlId="isoCertificate">
+                            <Form.Label>ISO Certificate</Form.Label>
+                            <Form.Control
+                              type="file"
+                              name="isoCertificate"
+                              accept=".pdf,.jpg,.jpeg,.png"
+                              required
+                            />
+                            <Form.Text className="text-muted">
+                              PDF or image. Max size 5MB.
+                            </Form.Text>
+                            <Form.Control.Feedback type="invalid">
+                              Please upload ISO certificate.
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                      </Row>
+
                       {/* Describe You + Industry */}
                       <Row className="mb-3">
                         <Col md={12}>
@@ -293,29 +353,17 @@ export default function VendorsClient() {
                             <Form.Label>What describes you best?</Form.Label>
                             <Form.Select name="describeYou" required>
                               <option value="">Choose one</option>
-                              <option value="general-contractor">
-                                General Contractor
-                              </option>
-                              <option value="fixtures-factory">
-                                Fixtures Factory
-                              </option>
-                              <option value="material-supplier">
-                                Material Supplier
-                              </option>
-                              <option value="agency">Agency</option>
-                              <option value="turnkey-labour">
-                                Turnkey Labour Contractor
-                              </option>
-                              <option value="branding-factory">
-                                Branding Factory
-                              </option>
+                              <option value="OEM">OEM</option>
+                              <option value="Supliers">Supliers </option>
+                              <option value="Consultant">Consultant</option>
+                              <option value="Contractors">Contractors</option>
                             </Form.Select>
                             <Form.Control.Feedback type="invalid">
                               Please select an option.
                             </Form.Control.Feedback>
                           </Form.Group>
                         </Col>
-                        <Col md={12}>
+                        {/* <Col md={12}>
                           <Form.Group controlId="industry">
                             <Form.Label>Industry</Form.Label>
                             <Form.Select name="industry" required>
@@ -328,7 +376,7 @@ export default function VendorsClient() {
                               Please select your industry.
                             </Form.Control.Feedback>
                           </Form.Group>
-                        </Col>
+                        </Col> */}
                       </Row>
 
                       {/* Acceptance */}

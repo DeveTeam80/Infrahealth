@@ -81,8 +81,8 @@ export default function Header() {
           </Link>
         </div>
 
-<div className="d-flex align-items-center gap-3 justify-content-between justify-sm-start">
-  <div
+        <div className="d-flex align-items-center gap-3 justify-content-between justify-sm-start">
+          {/* <div
     className="d-flex align-items-center gap-1"
     style={{
       border: "1px solid #b6520f",
@@ -105,18 +105,17 @@ export default function Header() {
       <option value="AE">UAE</option>
       <option value="AF">Africa</option>
     </select>
-  </div>
-  <div>
-    <button
-      type="button"
-      className="btn btn-outline-secondary btn-sm"
-      onClick={() => setModalShow(true)}
-    >
-      Talk to Us
-    </button>
-  </div>
-</div>
-
+  </div> */}
+          <div>
+            <button
+              type="button"
+              className="btn btn-outline-secondary btn-sm"
+              onClick={() => setModalShow(true)}
+            >
+              Talk to Us
+            </button>
+          </div>
+        </div>
       </div>
 
       <header className="sticky-header">
@@ -499,7 +498,7 @@ export default function Header() {
                     >
                       {path.charAt(0).toUpperCase() + path.slice(1)}
                     </Nav.Link>
-                  )
+                  ),
                 )}
               </Nav>
             </Navbar.Collapse>

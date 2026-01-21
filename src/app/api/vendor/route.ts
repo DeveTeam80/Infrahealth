@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
-    
+
     // Extract form fields
     const companyName = formData.get("companyName") as string;
     const address = formData.get("address") as string;
@@ -15,24 +15,24 @@ export async function POST(req: Request) {
     const established = formData.get("established") as string;
     const entityType = formData.get("entityType") as string;
     const cin = formData.get("cin") as string;
-    
+
     const contactName = formData.get("contactName") as string;
     const contactDesignation = formData.get("contactDesignation") as string;
     const contactEmail = formData.get("contactEmail") as string;
     const contactMobile = formData.get("contactMobile") as string;
     const alternateContact = formData.get("alternateContact") as string;
-    
+
     const categories = formData.getAll("categories") as string[];
     const offerings = formData.get("offerings") as string;
     const certifications = formData.get("certifications") as string;
     const locations = formData.get("locations") as string;
     const capacity = formData.get("capacity") as string;
-    
+
     const yearsHealthcare = formData.get("yearsHealthcare") as string;
     const clients = formData.get("clients") as string;
     const projects = formData.get("projects") as string;
     const geography = formData.get("geography") as string;
-    
+
     const leadtime = formData.get("leadtime") as string;
     const gst = formData.get("gst") as string;
     const bank = formData.get("bank") as string;
@@ -67,6 +67,14 @@ export async function POST(req: Request) {
       }
     }
 
+    function generateApplicationId() {
+      const year = new Date().getFullYear();
+      const random = Math.floor(100000 + Math.random() * 900000);
+      return `IH-VENDOR-${year}-${random}`;
+    }
+
+    const applicationId = generateApplicationId();
+
     const mailOptions = {
       from: process.env.SMTP_FROM,
       to: process.env.SMTP_TO,
@@ -78,6 +86,10 @@ export async function POST(req: Request) {
             New Vendor Partnership Application
           </h2>
           
+<h3 style="color:#28a745; margin-top:10px;">
+  Application ID: ${applicationId}
+</h3>
+
           <h3 style="color: #007bff; margin-top: 30px;">Company Information</h3>
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Company Name:</td><td style="padding: 8px; border: 1px solid #ddd;">${companyName}</td></tr>
@@ -122,6 +134,7 @@ export async function POST(req: Request) {
             <tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Bank Details:</td><td style="padding: 8px; border: 1px solid #ddd;">${bank || "N/A"}</td></tr>
           </table>
 
+
           <p style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-left: 4px solid #007bff;">
             <strong>Note:</strong> This vendor has agreed to all terms & policies and confirmed the accuracy of provided information.
           </p>
@@ -132,16 +145,19 @@ export async function POST(req: Request) {
 
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ 
-      success: true, 
-      message: "✅ Vendor partnership application submitted successfully!" 
+    return NextResponse.json({
+      success: true,
+      applicationId,
+      message: `✅ Application submitted successfully! Your Application ID is ${applicationId}`,
     });
-
   } catch (error) {
     console.error("Error processing vendor application:", error);
-    return NextResponse.json({ 
-      success: false, 
-      message: "❌ Error processing application. Please try again." 
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        message: "❌ Error processing application. Please try again.",
+      },
+      { status: 500 },
+    );
   }
 }

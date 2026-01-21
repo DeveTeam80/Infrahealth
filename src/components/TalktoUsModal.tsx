@@ -1,6 +1,98 @@
+"use client";
+
 import React, { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import { Modal, Form, Button, Row, Col, FloatingLabel } from "react-bootstrap";
+import Select, { MultiValue } from "react-select";
+
+/* ===========================
+   GROUPED OPTIONS
+=========================== */
+const GROUPED_OPTIONS = [
+  {
+    label: "Consult",
+    options: [
+      { value: "hospital-design", label: "Hospital Design" },
+      {
+        value: "project-management-consultancy",
+        label: "Project Management Consultancy",
+      },
+      {
+        value: "equipment-planning-integration",
+        label: "Equipment Planning & Integration",
+      },
+      {
+        value: "ppp-advisory",
+        label: "Public Private Partnership (PPP) Advisory",
+      },
+      {
+        value: "hospital-esg-advisory",
+        label: "Hospital ESG Advisory Services",
+      },
+      {
+        value: "green-building-consultancy",
+        label: "Hospital Green Building Consultancy",
+      },
+      {
+        value: "facility-management-consultancy",
+        label: "Facility Management Consultancy",
+      },
+      {
+        value: "accreditation-advisory",
+        label: "Accreditation Advisory",
+      },
+    ],
+  },
+
+  {
+    label: "Construct",
+    options: [
+      {
+        value: "engineering-procurement-construction",
+        label: "Engineering, Procurement & Construction",
+      },
+      {
+        value: "design-build",
+        label: "Design & Build",
+      },
+      {
+        value: "fitout-retrofit",
+        label: "Fitout & Retrofit",
+      },
+      {
+        value: "specialty-services",
+        label: "Specialty Services",
+      },
+    ],
+  },
+
+  {
+    label: "Operate",
+    options: [
+      {
+        value: "property-management",
+        label: "Property Management",
+      },
+      {
+        value: "integrated-facility-management",
+        label: "Integrated Facility Management Services",
+      },
+      {
+        value: "operation-maintenance",
+        label: "Operation & Maintenance",
+      },
+      {
+        value: "hr-support-services",
+        label: "HR Support Services",
+      },
+    ],
+  },
+];
+
+type OptionType = {
+  value: string;
+  label: string;
+};
 
 function TalkToUsModal({
   show,
@@ -16,7 +108,7 @@ function TalkToUsModal({
     email: "",
     city: "",
     state: "",
-    requirement: "",
+    requirement: [] as OptionType[],
     solution: "",
     message: "",
   });
@@ -24,24 +116,34 @@ function TalkToUsModal({
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /* ===========================
+     SUBMIT
+  =========================== */
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const payload = {
+      ...formData,
+      requirement: formData.requirement.map((i) => i.value).join(", "),
+    };
 
     try {
       const res = await fetch("/api/talktoUs", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
         alert("✅ Form submitted successfully!");
+
         setFormData({
           title: "Dr",
           name: "",
@@ -49,24 +151,25 @@ function TalkToUsModal({
           email: "",
           city: "",
           state: "",
-          requirement: "",
+          requirement: [],
           solution: "",
           message: "",
         });
+
         handleClose();
       } else {
         alert("Something went wrong. Please try again.");
       }
     } catch (err) {
-      console.error("Error submitting form:", err);
-      alert(" Server error. Please try again later.");
+      console.error(err);
+      alert("Server error");
     }
   };
 
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered>
       <Modal.Body className="p-4 position-relative bg-light">
-        {/* Close Button */}
+        {/* CLOSE BUTTON */}
         <button
           onClick={handleClose}
           style={{
@@ -76,8 +179,8 @@ function TalkToUsModal({
             border: "none",
             background: "transparent",
             fontSize: "1.5rem",
-            cursor: "pointer",
             color: "#b6520f",
+            cursor: "pointer",
           }}
         >
           <FaXmark />
@@ -85,14 +188,13 @@ function TalkToUsModal({
 
         <Form onSubmit={handleSubmit}>
           <Row className="g-3">
-            {/* Title */}
+            {/* TITLE */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingTitle" label="Title">
+              <FloatingLabel label="Title">
                 <Form.Select
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
-                  required
                 >
                   <option value="Dr">Dr.</option>
                   <option value="Mr">Mr.</option>
@@ -102,107 +204,93 @@ function TalkToUsModal({
               </FloatingLabel>
             </Col>
 
-            {/* Name */}
+            {/* NAME */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingName" label="Name *">
+              <FloatingLabel label="Name *">
                 <Form.Control
-                  type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Your name"
                   required
                 />
               </FloatingLabel>
             </Col>
 
-            {/* Mobile */}
+            {/* MOBILE */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingMobile" label="Mobile *">
+              <FloatingLabel label="Mobile *">
                 <Form.Control
-                  type="tel"
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleChange}
-                  placeholder="Mobile number"
                   required
-                  pattern="[0-9]{10,15}"
                 />
               </FloatingLabel>
             </Col>
 
-            {/* Email */}
+            {/* EMAIL */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingEmail" label="Email *">
+              <FloatingLabel label="Email *">
                 <Form.Control
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="Email address"
                   required
                 />
               </FloatingLabel>
             </Col>
 
-            {/* City */}
+            {/* CITY */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingCity" label="City *">
+              <FloatingLabel label="City *">
                 <Form.Control
-                  type="text"
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  placeholder="City"
                   required
                 />
               </FloatingLabel>
             </Col>
 
-            {/* State */}
+            {/* STATE */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingState" label="State *">
+              <FloatingLabel label="State *">
                 <Form.Control
-                  type="text"
                   name="state"
                   value={formData.state}
                   onChange={handleChange}
-                  placeholder="State"
                   required
                 />
               </FloatingLabel>
             </Col>
 
-            {/* Requirement */}
+            {/* ✅ GROUPED MULTISELECT */}
             <Col md={12}>
-              <FloatingLabel controlId="floatingRequirement" label="Services *">
-                <Form.Select
-                  name="requirement"
-                  value={formData.requirement}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">-- Select Requirement --</option>
-                  <option value="Hospital infrastructure">
-                    Hospital infrastructure
-                  </option>
-                  <option value="Healthcare consulting">
-                    Healthcare consulting
-                  </option>
-                  <option value="Advisory">Advisory</option>
-                  <option value="Products">Products</option>
-                  <option value="Medical equipment">Medical equipment</option>
-                  <option value="Facility Management">
-                    Facility Management
-                  </option>
-                  <option value="Properties">Properties</option>
-                  <option value="Finance">Finance</option>
-                </Form.Select>
+              <FloatingLabel label="Services *">
+                <div style={{ marginTop: "8px" }}>
+                  <Select
+                    isMulti
+                    options={GROUPED_OPTIONS}
+                    value={formData.requirement}
+                    className="service-select"
+                    onChange={(values) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        requirement: values as any,
+                      }))
+                    }
+                    placeholder="Select services"
+                    closeMenuOnSelect={false}
+                    classNamePrefix="react-select"
+                  />
+                </div>
               </FloatingLabel>
             </Col>
 
+            {/* SOLUTION */}
             <Col md={12}>
-              <FloatingLabel controlId="floatingSolution" label="Solutions *">
+              <FloatingLabel label="Solutions *">
                 <Form.Select
                   name="solution"
                   value={formData.solution}
@@ -225,23 +313,22 @@ function TalkToUsModal({
               </FloatingLabel>
             </Col>
 
-            {/* Message */}
+            {/* MESSAGE */}
             <Col md={12}>
-              <FloatingLabel controlId="floatingMessage" label="Message">
+              <FloatingLabel label="Message">
                 <Form.Control
                   as="textarea"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Leave your message here"
                   style={{ height: "100px" }}
                 />
               </FloatingLabel>
             </Col>
           </Row>
 
-          {/* Submit */}
-          <div className="mt-4 text-center">
+          {/* SUBMIT */}
+          <div className="text-center mt-4">
             <Button type="submit" className="px-4">
               Submit
             </Button>

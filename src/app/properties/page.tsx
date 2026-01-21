@@ -13,6 +13,7 @@ import { IconType } from "react-icons";
 
 import "../../styles/portfolio.css";
 import "../../styles/services.css";
+import ListPropertyModal from "@/components/listPropertyModal";
 // import "../../styles/home.css";
 
 // --- TYPES ---
@@ -378,6 +379,8 @@ const PropertySearch = () => {
   const [propertyType, setPropertyType] = useState("");
   const [activeFilter, setActiveFilter] = useState("All");
   const [activeLink, setActiveLink] = useState<string>("transactions-advisory");
+  const [modalShow, setModalShow] = useState(false);
+
   const sectionsRef = useRef<Record<string, HTMLElement>>({});
   const isClickScrolling = useRef(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -404,7 +407,7 @@ const PropertySearch = () => {
         (p) =>
           p.title.toLowerCase().includes(searchTerm) ||
           p.brief.beds.toLowerCase().includes(searchTerm) ||
-          p.brief.area.toLowerCase().includes(searchTerm)
+          p.brief.area.toLowerCase().includes(searchTerm),
       );
     }
 
@@ -421,7 +424,7 @@ const PropertySearch = () => {
           }
         });
       },
-      { rootMargin: "-30% 0px -70% 0px" }
+      { rootMargin: "-30% 0px -70% 0px" },
     );
 
     const sections = document.querySelectorAll<HTMLElement>("section[id]");
@@ -442,7 +445,7 @@ const PropertySearch = () => {
 
   const handleNavLinkClick = (
     e: React.MouseEvent<HTMLElement>,
-    targetId: string
+    targetId: string,
   ) => {
     e.preventDefault();
     isClickScrolling.current = true;
@@ -613,7 +616,9 @@ const PropertySearch = () => {
         </Container>
       </section>
       <div className="cta-buttons text-center pb-5">
-        <div className="btn primary-btn">List Your Property</div>
+        <button className="btn primary-btn" onClick={() => setModalShow(true)}>
+          List Your Property
+        </button>
       </div>
       <section id="value" className="properties">
         <h3>{solutionsData.value.title}</h3>
@@ -662,11 +667,15 @@ const PropertySearch = () => {
                     </Col>
                   </Row>
                 </section>
-              ) : null
+              ) : null,
             )}
           </div>
         </Col>
       </Row>
+      <ListPropertyModal
+        show={modalShow}
+        handleClose={() => setModalShow(false)}
+      />
     </Container>
   );
 };

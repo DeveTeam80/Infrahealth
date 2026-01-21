@@ -44,7 +44,6 @@
 
 /* --- Component-Specific Styling --- */
 
-
 /* Left Side Sticky Navigation */
 .sidenav {
   top: 6rem; /* Adjust for header */
@@ -82,7 +81,6 @@
   border-right-color: #3b9c9d; /* keep your accent */
   font-weight: 600;
 }
-
 
 /* Mobile navigation adjustments */
 @media (max-width: 768px) {
@@ -272,8 +270,7 @@
 
 .properties .value-grid {
   grid-template-columns: repeat(4, 1fr); /* default: 2 columns */
-} 
-
+}
 
 @media (max-width: 1200px) {
   .value-grid {
@@ -286,7 +283,9 @@
   border-radius: 10px;
   padding: 30px 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   border-bottom: 4px solid #3b9c9d;
   text-align: center;
 }
@@ -466,4 +465,34 @@
   .interactive-section .col-md-5 img {
     max-width: calc(100% - 20px);
   }
+}
+.design-mobile-accordion .accordion-header {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: #f6f7f9;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0b2c3d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.design-mobile-accordion .accordion-header.active {
+  background: #009688 !important;
+  color: #fff;
+}
+
+.design-mobile-accordion .accordion-body {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+}
+
+.design-mobile-accordion .icon {
+  font-size: 22px;
+  font-weight: bold;
 }
