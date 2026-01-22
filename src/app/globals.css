@@ -1954,7 +1954,7 @@ small {
 
 .property-tabs {
   display: flex;
-  border: 1px solid #e3e3e3;
+  justify-content: space-around;
   border-radius: 4px;
   overflow: hidden;
 }
@@ -1967,18 +1967,19 @@ small {
 .property-tab {
   flex: 1;
   padding: 12px 10px;
-  background: #f5f5f5;
+  /* background: #f5f5f5; */
   border: none;
   border-right: 1px solid #ddd;
   font-weight: 500;
   cursor: pointer;
   position: relative;
+  background: gainsboro;
+  color: black;
+  margin-right: 0.5rem;
 }
 
 .property-tabs.secondary .property-tab {
   border: 1px solid #ddd;
-  background: #f8f8f8;
-  border-radius: 3px;
 }
 
 .property-tab:last-child {
@@ -1987,7 +1988,7 @@ small {
 
 .property-tab.active {
   background: #009688 !important;
-  color: #fff;
+  color: #fff !important;
 }
 
 .property-divider {

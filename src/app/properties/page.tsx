@@ -616,7 +616,10 @@ const PropertySearch = () => {
         </Container>
       </section>
       <div className="cta-buttons text-center pb-5">
-        <button className="btn primary-btn" onClick={() => setModalShow(true)}>
+        <button
+          className="btn primary-btn w-25"
+          onClick={() => setModalShow(true)}
+        >
           List Your Property
         </button>
       </div>

@@ -1,7 +1,16 @@
+"use client";
+
 import React, { useState } from "react";
-import { FaXmark } from "react-icons/fa6";
-import { Modal, Form, Button, Row, Col, FloatingLabel } from "react-bootstrap";
-import { FaTrash } from "react-icons/fa";
+import { FaXmark, FaTrash } from "react-icons/fa6";
+import {
+  Modal,
+  Form,
+  Button,
+  Row,
+  Col,
+  FloatingLabel,
+  Alert,
+} from "react-bootstrap";
 
 function ListPropertyModal({
   show,
@@ -10,30 +19,18 @@ function ListPropertyModal({
   show: boolean;
   handleClose: () => void;
 }) {
-  const [propertyType, setPropertyType] = useState<
-    "Clinics" | "Hospital" | "Medical institute"
-  >("Clinics");
+  // --- States ---
+  const [validated, setValidated] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    show: boolean;
+    type: "success" | "danger";
+    message: string;
+  }>({ show: false, type: "success", message: "" });
 
-  const [adType, setAdType] = useState<"Rent" | "Resale" | "infrastructure">(
-    "Rent",
-  );
-
+  const [propertyType, setPropertyType] = useState("Clinics");
+  const [adType, setAdType] = useState("Rent");
   const [files, setFiles] = useState<File[]>([]);
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-
-    const selectedFiles = Array.from(e.target.files);
-
-    // append instead of replace
-    setFiles((prev) => [...prev, ...selectedFiles]);
-
-    // reset input so same file can be re-selected
-    e.target.value = "";
-  };
-
-  const removeFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
-  };
 
   const [formData, setFormData] = useState({
     name: "",
@@ -42,13 +39,10 @@ function ListPropertyModal({
     city: "",
     area: "",
     state: "",
-    requirement: "",
-    solution: "",
     message: "",
-    propertyType: "",
-    adType: "",
   });
 
+  // --- Handlers ---
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -58,34 +52,60 @@ function ListPropertyModal({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const selectedFiles = Array.from(e.target.files);
+    setFiles((prev) => [...prev, ...selectedFiles]);
+    e.target.value = ""; // Reset input
+  };
+
+  const removeFile = (index: number) => {
+    setFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      e.stopPropagation();
+      setValidated(true);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus({ show: false, type: "success", message: "" });
 
     try {
       const formPayload = new FormData();
 
-      // text fields
+      // Append text fields
       Object.entries(formData).forEach(([key, value]) => {
         formPayload.append(key, value);
       });
 
-      // property values
+      // Append custom tab values
       formPayload.append("propertyType", propertyType);
       formPayload.append("adType", adType);
 
-      // files
+      // Append multiple files
       files.forEach((file) => {
         formPayload.append("files", file);
       });
 
-      const res = await fetch("/api/talktoUs", {
+      const res = await fetch("/api/listProperty", {
         method: "POST",
         body: formPayload,
       });
 
       if (res.ok) {
-        alert("✅ Form submitted successfully!");
+        setSubmitStatus({
+          show: true,
+          type: "success",
+          message: "✅ Property listed successfully!",
+        });
 
+        // Reset Form
         setFormData({
           name: "",
           mobile: "",
@@ -93,37 +113,44 @@ function ListPropertyModal({
           city: "",
           area: "",
           state: "",
-          requirement: "",
-          solution: "",
           message: "",
-          propertyType: "",
-          adType: "",
         });
-
         setFiles([]);
-        handleClose();
+        setValidated(false);
+
+        // Optional: Close modal after delay
+        setTimeout(() => {
+          handleClose();
+          setSubmitStatus({ ...submitStatus, show: false });
+        }, 2000);
       } else {
-        alert("Something went wrong. Please try again.");
+        throw new Error("Failed to submit form");
       }
     } catch (err) {
-      console.error("Upload error:", err);
-      alert("Server error. Please try again later.");
+      setSubmitStatus({
+        show: true,
+        type: "danger",
+        message: "❌ Server error. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <Modal show={show} onHide={handleClose} size="lg" centered>
       <Modal.Body className="p-4 position-relative bg-light">
-        {/* Close Button */}
         <button
+          type="button"
           onClick={handleClose}
           style={{
             position: "absolute",
-            top: "-10px",
-            right: "-10px",
+            top: "10px",
+            right: "10px",
             border: "none",
             background: "transparent",
             fontSize: "1.5rem",
+            zIndex: 10,
             cursor: "pointer",
             color: "#b6520f",
           }}
@@ -131,54 +158,68 @@ function ListPropertyModal({
           <FaXmark />
         </button>
 
-        <Form onSubmit={handleSubmit}>
+        <h4 className="mb-4 fw-bold">List Your Property</h4>
+
+        {submitStatus.show && (
+          <div
+            className="position-absolute top-50 start-50 translate-middle"
+            style={{ zIndex: 9999, width: "90%", maxWidth: "400px" }}
+          >
+            <Alert
+              variant={submitStatus.type}
+              dismissible
+              onClose={() => setSubmitStatus({ ...submitStatus, show: false })}
+              className="shadow-lg text-center fw-bold"
+            >
+              {submitStatus.message}
+            </Alert>
+          </div>
+        )}
+
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Row className="g-3">
-            {/* Name */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingName" label="Name *">
+              <FloatingLabel label="Full Name *">
                 <Form.Control
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Your name"
+                  placeholder="Name"
                   required
                 />
               </FloatingLabel>
             </Col>
 
-            {/* Mobile */}
             <Col md={6}>
-              <FloatingLabel controlId="floatingMobile" label="Mobile *">
+              <FloatingLabel label="Mobile Number *">
                 <Form.Control
                   type="tel"
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleChange}
-                  placeholder="Mobile number"
+                  placeholder="Mobile"
                   required
                   pattern="[0-9]{10,15}"
                 />
               </FloatingLabel>
             </Col>
 
-            {/* Email */}
-            <Col md={6}>
-              <FloatingLabel controlId="floatingEmail" label="Email *">
+            <Col md={12}>
+              <FloatingLabel label="Email Address *">
                 <Form.Control
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="Email address"
+                  placeholder="Email"
                   required
                 />
               </FloatingLabel>
             </Col>
 
-            {/* City */}
-            <Col md={6}>
-              <FloatingLabel controlId="floatingCity" label="City *">
+            <Col md={4}>
+              <FloatingLabel label="City *">
                 <Form.Control
                   type="text"
                   name="city"
@@ -190,9 +231,8 @@ function ListPropertyModal({
               </FloatingLabel>
             </Col>
 
-            {/* area */}
-            <Col md={6}>
-              <FloatingLabel controlId="floatingState" label="State *">
+            <Col md={4}>
+              <FloatingLabel label="Area/Locality *">
                 <Form.Control
                   type="text"
                   name="area"
@@ -203,27 +243,50 @@ function ListPropertyModal({
                 />
               </FloatingLabel>
             </Col>
+
+            <Col md={4}>
+              <FloatingLabel label="State *">
+                <Form.Control
+                  type="text"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  placeholder="State"
+                  required
+                />
+              </FloatingLabel>
+            </Col>
+
+            <Col md={12}>
+              <FloatingLabel label="Additional Message (Optional)">
+                <Form.Control
+                  as="textarea"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Message"
+                  style={{ height: "100px" }}
+                />
+              </FloatingLabel>
+            </Col>
           </Row>
 
           {/* ATTACH FILES */}
-          <Col md={12} className="mt-4">
+          <div className="mt-4">
             <Form.Group controlId="attachFiles">
               <Form.Label className="fw-semibold">
-                Attach Photos / Upload Documents
+                Attach Photos / Documents
               </Form.Label>
-
               <Form.Control
                 type="file"
                 multiple
                 accept=".jpg,.jpeg,.png,.pdf,.doc,.docx"
                 onChange={handleFileChange}
               />
-
-              <small className="text-muted">
-                Supported formats: JPG, PNG, PDF, DOC, DOCX
+              <small className="text-muted d-block mt-1">
+                Max file size: 5MB per file.
               </small>
 
-              {/* FILE PREVIEW LIST */}
               {files.length > 0 && (
                 <div className="mt-3">
                   {files.map((file, index) => (
@@ -232,11 +295,10 @@ function ListPropertyModal({
                       className="d-flex align-items-center justify-content-between border rounded px-3 py-2 mb-2 bg-white"
                     >
                       <span className="small text-truncate">{file.name}</span>
-
                       <button
                         type="button"
                         onClick={() => removeFile(index)}
-                        className="property-form-trash "
+                        className="property-form-trash"
                         title="Remove"
                       >
                         <FaTrash />
@@ -246,53 +308,50 @@ function ListPropertyModal({
                 </div>
               )}
             </Form.Group>
-          </Col>
+          </div>
 
-          {/* PROPERTY TYPE */}
-          <Col md={12} className="mt-3">
-            <div className="property-box">
-              <p className="property-title">Property type</p>
-
-              <div className="property-tabs">
-                {["Clinics", "Hospital", "Medical institutes"].map((type) => (
-                  <Button
-                    type="button"
-                    key={type}
-                    className={`property-tab ${
-                      propertyType === type ? "active" : ""
-                    }`}
-                    onClick={() => setPropertyType(type as typeof propertyType)}
-                  >
-                    {type}
-                  </Button>
-                ))}
-              </div>
-
-              <div className="property-divider" />
-
-              <p className="property-title mt-3">Select Property Ad Type</p>
-
-              <div className="property-tabs secondary">
-                {["Rent", "Resale", "Infrastructure"].map((type) => (
-                  <Button
-                    type="button"
-                    key={type}
-                    className={`property-tab ${
-                      adType === type ? "active" : ""
-                    }`}
-                    onClick={() => setAdType(type as typeof adType)}
-                  >
-                    {type}
-                  </Button>
-                ))}
-              </div>
+          {/* PROPERTY SELECTION BOXES WITH PREVIOUS CLASSES */}
+          <div className="property-box mt-4">
+            <p className="property-title">Property type</p>
+            <div className="property-tabs">
+              {["Clinics", "Hospital", "Medical institutes"].map((type) => (
+                <button
+                  type="button"
+                  key={type}
+                  className={`property-tab ${
+                    propertyType === type ? "active" : ""
+                  }`}
+                  onClick={() => setPropertyType(type)}
+                >
+                  {type}
+                </button>
+              ))}
             </div>
-          </Col>
 
-          {/* Submit */}
+            <div className="property-divider" />
+
+            <p className="property-title mt-3">Select Property Ad Type</p>
+            <div className="property-tabs secondary">
+              {["Rent", "Resale", "Infrastructure"].map((type) => (
+                <button
+                  type="button"
+                  key={type}
+                  className={`property-tab ${adType === type ? "active" : ""}`}
+                  onClick={() => setAdType(type)}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="mt-4 text-center">
-            <Button type="submit" className="px-4">
-              Submit
+            <Button
+              type="submit"
+              className="btn-primary px-5 py-2 fw-bold w-50"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Property Details"}
             </Button>
           </div>
         </Form>
