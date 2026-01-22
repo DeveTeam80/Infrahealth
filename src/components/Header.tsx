@@ -73,11 +73,11 @@ export default function Header() {
         <div className="d-flex align-items-center gap-2 logo">
           <Link href="/" passHref>
             <Image
-              // src="/images/logo/logoinfra.png"
-              src="/images/logo/infralogo.png"
+              src="/images/logo/logoinfra.png"
               alt="Infra.Health"
               width={218}
               height={60}
+              style={{ objectFit: "contain" }}
             />
           </Link>
         </div>
@@ -128,11 +128,11 @@ export default function Header() {
           <Container>
             <Navbar.Brand as={Link} href="/" className="d-lg-none">
               <Image
-                // src="/images/logo/logoinfra.png"
-                src="/images/logo/infalogo.png"
+                src="/images/logo/logoinfra.png"
                 alt="Infra.Health"
                 width={140}
                 height={40}
+                style={{ objectFit: "contain" }}
               />
             </Navbar.Brand>
 
