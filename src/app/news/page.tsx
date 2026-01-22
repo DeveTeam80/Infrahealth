@@ -43,8 +43,8 @@ export default function ResourcesPage() {
   });
 
   const filteredCards: NewsItem[] =
-    activeTab === "Blogs" ? mappedBlogs : newsData[activeTab] || [];
-
+    // activeTab === "Blogs" ? mappedBlogs : newsData[activeTab] || [];
+    activeTab === "Blogs" ? mappedBlogs : [];
   const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
 
   const displayedCards = filteredCards.slice(
@@ -55,7 +55,8 @@ export default function ResourcesPage() {
   const mobileSections = TABS.map((tab) => ({
     key: tab,
     title: tab,
-    items: tab === "Blogs" ? mappedBlogs : newsData[tab] || [],
+    // items: tab === "Blogs" ? mappedBlogs : newsData[tab] || [],
+    items: tab === "Blogs" ? mappedBlogs : [],
   }));
 
   return (
@@ -97,50 +98,56 @@ export default function ResourcesPage() {
 
         {/* Cards */}
         <div className="d-flex flex-column align-items-center justify-content-center w-100 d-none d-lg-block">
-          {displayedCards.map((card, index) => (
-            <div key={card.id} className="w-100">
-              <Col
-                md={10}
-                className="mx-auto mb-4 d-flex justify-content-start"
-              >
-                <Card className="h-100 border-0">
-                  <Row className="g-0 h-100">
-                    <Col md={5}>
-                      <Card.Img
-                        src={card.image}
-                        alt={card.title}
-                        className="card-rect-img rounded-start"
-                      />
-                    </Col>
-                    <Col md={7} className="d-flex flex-column p-4">
-                      <Card.Body className="p-0 flex-grow-1">
-                        <Card.Title className="fw-bold">
-                          {card.title}
-                        </Card.Title>
-                        <Card.Text className="text-muted small">
-                          {card.date}
-                        </Card.Text>
-                        <Card.Text>{card.description}</Card.Text>
-                      </Card.Body>
-                      <div className="mt-auto">
-                        <Link
-                          href={`/news/${card.id}`}
-                          className="read-more p-0"
-                        >
-                          READ MORE &raquo;
-                        </Link>
-                      </div>
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
+          {displayedCards.length > 0 ? (
+            displayedCards.map((card, index) => (
+              <div key={card.id} className="w-100">
+                <Col
+                  md={10}
+                  className="mx-auto mb-4 d-flex justify-content-start"
+                >
+                  <Card className="h-100 border-0">
+                    <Row className="g-0 h-100">
+                      <Col md={5}>
+                        <Card.Img
+                          src={card.image}
+                          alt={card.title}
+                          className="card-rect-img rounded-start"
+                        />
+                      </Col>
+                      <Col md={7} className="d-flex flex-column p-4">
+                        <Card.Body className="p-0 flex-grow-1">
+                          <Card.Title className="fw-bold">
+                            {card.title}
+                          </Card.Title>
+                          <Card.Text className="text-muted small">
+                            {card.date}
+                          </Card.Text>
+                          <Card.Text>{card.description}</Card.Text>
+                        </Card.Body>
+                        <div className="mt-auto">
+                          <Link
+                            href={`/news/${card.id}`}
+                            className="read-more p-0"
+                          >
+                            READ MORE &raquo;
+                          </Link>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
 
-              {/* Divider only if not the last card */}
-              {index < displayedCards.length - 1 && (
-                <div className="divider mx-auto"></div>
-              )}
-            </div>
-          ))}
+                {/* Divider only if not the last card */}
+                {index < displayedCards.length - 1 && (
+                  <div className="divider mx-auto"></div>
+                )}
+              </div>
+            ))
+          ) : (
+            <h3 className="text-center py-4 text-gray-500">
+              No records available at this time.
+            </h3>
+          )}
         </div>
 
         {/* MOBILE */}

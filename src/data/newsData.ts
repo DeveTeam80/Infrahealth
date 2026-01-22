@@ -131,7 +131,8 @@ export const newsData: NewsData = {
     },
     {
       id: "blog-15",
-      title: "Green Building Certifications in Healthcare: What You Should Know",
+      title:
+        "Green Building Certifications in Healthcare: What You Should Know",
       date: "October 9, 2025",
       image: "images/blogs/blog3.png",
       description:

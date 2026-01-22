@@ -192,6 +192,17 @@ export default function VendorsClient() {
                       </Col>
                     </Row>
 
+                    <Form.Group className="mb-3" controlId="describeYou">
+                      <Form.Label>What describes you best?</Form.Label>
+                      <Form.Select name="describeYou" required>
+                        <option value="">Choose one</option>
+                        <option value="OEM">OEM</option>
+                        <option value="Suppliers">Suppliers</option>
+                        <option value="Consultant">Consultant</option>
+                        <option value="Contractors">Contractors</option>
+                      </Form.Select>
+                    </Form.Group>
+
                     <hr />
                     <h5 className="mb-3">Documents (Max 5MB each)</h5>
 
@@ -201,7 +212,6 @@ export default function VendorsClient() {
                         name="companyProfile"
                         type="file"
                         accept=".pdf,.doc,.docx"
-                        required
                       />
                     </Form.Group>
 
@@ -214,7 +224,6 @@ export default function VendorsClient() {
                         name="turnoverCertificate"
                         type="file"
                         accept=".pdf,.jpg,.jpeg,.png"
-                        required
                       />
                     </Form.Group>
 
@@ -224,19 +233,7 @@ export default function VendorsClient() {
                         name="isoCertificate"
                         type="file"
                         accept=".pdf,.jpg,.jpeg,.png"
-                        required
                       />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="describeYou">
-                      <Form.Label>What describes you best?</Form.Label>
-                      <Form.Select name="describeYou" required>
-                        <option value="">Choose one</option>
-                        <option value="OEM">OEM</option>
-                        <option value="Suppliers">Suppliers</option>
-                        <option value="Consultant">Consultant</option>
-                        <option value="Contractors">Contractors</option>
-                      </Form.Select>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
