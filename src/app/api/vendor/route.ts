@@ -51,7 +51,7 @@ export async function POST(req: Request) {
     // 4. Prepare Email Content
     const mailOptions = {
       from: process.env.SMTP_FROM,
-      to: process.env.SMTP_TO,
+      to: process.env.VENDOR_SMTP_TO,
       replyTo: email,
       subject: `New Vendor Application: ${companyName}`,
       html: `

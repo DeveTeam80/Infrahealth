@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
-    
+
     // Extract form fields
     const fullname = formData.get("fullname") as string;
     const dob = formData.get("dob") as string;
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     if (!fullname || !email || !contact || !role) {
       return NextResponse.json(
         { success: false, msg: "❌ Missing required fields" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
 
     const mailOptions = {
       from: process.env.SMTP_FROM,
-      to: process.env.SMTP_TO,
+      to: process.env.CAREERS_SMTP_TO,
       replyTo: email,
       subject: `New Job Application - ${role} - ${fullname}`,
       attachments,
@@ -109,17 +109,25 @@ export async function POST(req: Request) {
             <tr><td style="padding: 8px; font-weight: bold;">Certifications:</td><td style="padding: 8px;">${certifications || "N/A"}</td></tr>
           </table>
 
-          ${motivation ? `
+          ${
+            motivation
+              ? `
             <h3 style="color: #007bff; margin-top: 30px;">Motivation</h3>
             <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
               <p style="margin: 0; line-height: 1.6;">${motivation}</p>
             </div>
-          ` : ""}
+          `
+              : ""
+          }
 
-          ${linkedin ? `
+          ${
+            linkedin
+              ? `
             <h3 style="color: #007bff; margin-top: 30px;">LinkedIn Profile</h3>
             <p><a href="${linkedin}" target="_blank">${linkedin}</a></p>
-          ` : ""}
+          `
+              : ""
+          }
 
           <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;">
           <p style="color: #666; font-size: 14px;">
@@ -134,16 +142,18 @@ export async function POST(req: Request) {
 
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json({ 
-      success: true, 
-      msg: "✅ Application submitted successfully! We will get back to you soon." 
+    return NextResponse.json({
+      success: true,
+      msg: "✅ Application submitted successfully! We will get back to you soon.",
     });
-    
   } catch (error) {
     console.error("Error sending application email:", error);
-    return NextResponse.json({ 
-      success: false, 
-      msg: "❌ Error submitting application. Please try again." 
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        success: false,
+        msg: "❌ Error submitting application. Please try again.",
+      },
+      { status: 500 },
+    );
   }
 }

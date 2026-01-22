@@ -5,22 +5,22 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { 
-      title, 
-      name, 
-      mobile, 
-      email, 
-      city, 
-      state, 
-      requirement, 
-      solution, 
-      message 
+    const {
+      title,
+      name,
+      mobile,
+      email,
+      city,
+      state,
+      requirement,
+      solution,
+      message,
     } = body;
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
-      secure: false, 
+      secure: false,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
     const mailOptions = {
       from: process.env.SMTP_FROM,
-      to: process.env.SMTP_TO,
+      to: process.env.TALKTOUS_SMTP_TO,
       replyTo: email,
       subject: `New Inquiry from ${name}`,
       html: `
@@ -52,12 +52,11 @@ export async function POST(req: Request) {
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ success: true, msg: "Email sent successfully" });
-
   } catch (error) {
     console.error("Error sending email:", error);
     return NextResponse.json(
       { success: false, msg: "Error sending email" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

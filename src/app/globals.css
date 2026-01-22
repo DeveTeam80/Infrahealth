@@ -2018,3 +2018,24 @@ small {
   border: none;
   color: red;
 }
+.value-grid {
+  display: grid;
+  gap: 20px; /* Space between cards */
+
+  /* Default: Mobile (Small Screen) - 1 Column */
+  grid-template-columns: repeat(1, 1fr) !important;
+}
+
+/* Medium Screen - 3 Columns */
+@media (min-width: 768px) {
+  .value-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Large Screen - 4 Columns */
+@media (min-width: 1024px) {
+  .value-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}

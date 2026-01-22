@@ -255,7 +255,7 @@ function ListPropertyModal({
 
               <div className="property-tabs">
                 {["Clinics", "Hospital", "Medical institutes"].map((type) => (
-                  <button
+                  <Button
                     type="button"
                     key={type}
                     className={`property-tab ${
@@ -264,7 +264,7 @@ function ListPropertyModal({
                     onClick={() => setPropertyType(type as typeof propertyType)}
                   >
                     {type}
-                  </button>
+                  </Button>
                 ))}
               </div>
 
@@ -274,7 +274,7 @@ function ListPropertyModal({
 
               <div className="property-tabs secondary">
                 {["Rent", "Resale", "Infrastructure"].map((type) => (
-                  <button
+                  <Button
                     type="button"
                     key={type}
                     className={`property-tab ${
@@ -283,7 +283,7 @@ function ListPropertyModal({
                     onClick={() => setAdType(type as typeof adType)}
                   >
                     {type}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>

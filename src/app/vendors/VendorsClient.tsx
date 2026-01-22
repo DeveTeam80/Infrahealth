@@ -1,7 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, Col, Container, Form, Row, Alert } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Alert,
+  Button,
+} from "react-bootstrap";
 import "../../styles/services.css";
 import "../../styles/career.css";
 
@@ -54,7 +62,7 @@ export default function VendorsClient() {
       });
 
       const result = await response.json();
-
+      console.log(result);
       if (response.ok && result.success) {
         setSubmitStatus({
           show: true,
@@ -106,22 +114,20 @@ export default function VendorsClient() {
                 </p>
               </div>
             </Col>
-
+            {submitStatus.show && (
+              <Alert
+                variant={submitStatus.type}
+                className="mb-4 "
+                dismissible
+                onClose={() =>
+                  setSubmitStatus({ ...submitStatus, show: false })
+                }
+              >
+                {submitStatus.message}
+              </Alert>
+            )}
             {/* RIGHT CONTENT: FORM */}
             <Col lg={6}>
-              {submitStatus.show && (
-                <Alert
-                  variant={submitStatus.type}
-                  className="mb-4"
-                  dismissible
-                  onClose={() =>
-                    setSubmitStatus({ ...submitStatus, show: false })
-                  }
-                >
-                  {submitStatus.message}
-                </Alert>
-              )}
-
               <Card className="shadow rounded-4 border-0 p-4">
                 <Card.Body>
                   <h3 className="mb-4 text-center">Vendor Application Form</h3>
@@ -242,13 +248,13 @@ export default function VendorsClient() {
                     </Form.Group>
 
                     <div className="text-center">
-                      <button
+                      <Button
                         type="submit"
-                        className="btn btn-primary px-5"
+                        className="btn btn-primary px-5 w-75"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? "Submitting..." : "Submit Application"}
-                      </button>
+                      </Button>
                     </div>
                   </Form>
                 </Card.Body>
